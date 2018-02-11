@@ -1,0 +1,22 @@
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter05/linux-headers.html
+#
+
+pushd $LFS/sources/untarred/linux-*
+# -------------------------------------------
+
+make mrproper
+lfs_log "make mrproper returned $?"
+
+make INSTALL_HDR_PATH=dest headers_install
+lfs_log "make INSTALL_HDR_PATH returned $?"
+
+cp -rv dest/include/* /tools/include
+lfs_log "cp returned $?"
+
+
+# -------------------------------------------
+popd
+
+# mv $LFS/sources/linux-4.4.2{,.done.05.06}
