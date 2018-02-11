@@ -3,10 +3,10 @@
 
 # Used to create partitions. ADAPT MANUALLY!!!
 #
-lfs_partition_device=sdb
-lfs_boot_partition_nr=1
-lfs_root_partition_nr=2
-lfs_swap_partition_nr=3
+export lfs_partition_device=sdb
+export lfs_boot_partition_nr=1
+export lfs_root_partition_nr=2
+export lfs_swap_partition_nr=3
 
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter02/aboutlfs.html
 #
@@ -27,11 +27,14 @@ lfs_log_() {
 # printf "%s: %-25s %s\n" "$(date +'%Y-%m-%d %H:%M:%S')" ${BASH_SOURCE[1]} "$text" >> $lfs_root/log
   printf "%s: %-25s %s\n" "$(date +'%Y-%m-%d %H:%M:%S')" $script_file      "$text" >> $lfs_root/log
 }
+export -f lfs_log_
 
 lfs_log() {
   local text="$1"
   lfs_log_ "${BASH_SOURCE[1]}" "$text"
 }
+export -f lfs_log
+
 
 lfs_run_step() {
   local step_name=$1
@@ -45,7 +48,7 @@ lfs_run_step() {
   lfs_log_ $script_name "doing step   : $step_name, id=$(id)"
 
   local start_time=$SECONDS
-  if source $lfs_root/steps/$step_name; then
+  if $lfs_root/steps/$step_name; then
     touch $lfs_root/done/$step_name
     local diff_time=$(( $SECONDS - $start_time ))
     lfs_log_ $script_name "step $step_name done, took $diff_time seconds"
@@ -54,4 +57,17 @@ lfs_run_step() {
     exit
   fi
 }
+export -f lfs_run_step
 
+lfs_trap_err_handler() {
+  local line=$1
+  local script_name=${BASH_SOURCE[1]}
+  lfs_log_ $script_name "trapped error at line $line"
+  exit 1
+}
+export -f lfs_trap_err_handler
+
+lfs_trap_err() {
+  trap 'lfs_trap_err_handler $LINENO' ERR
+}
+export -f lfs_trap_err

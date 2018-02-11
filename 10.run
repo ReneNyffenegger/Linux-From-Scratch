@@ -14,10 +14,13 @@ lfs_run_step create-LFS-tools-directory
 lfs_run_step add-lfs-user
 lfs_run_step set-up-environment
 
+
 # Switch User to lfs
 
 if [[ "$USER" != "lfs" ]]; then
   lfs_log "$USER != lfs, switching to lfs"
+  chmod 777 log
+  trap - ERR
   sudo su - lfs 
 else
   lfs_log "$USER == lfs, not switching to lfs"

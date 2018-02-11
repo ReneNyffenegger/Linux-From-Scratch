@@ -1,0 +1,46 @@
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter05/glibc.html
+#
+# TODO: There is also a glibc patch. Does it have to be applied somehow?
+
+lfs_trap_err
+
+pushd $LFS/sources/untarred/glibc-*
+# -------------------------------------
+
+mkdir -v build
+cd       build 
+
+../configure                             \
+      --prefix=/tools                    \
+      --host=$LFS_TGT                    \
+      --build=$(../scripts/config.guess) \
+      --enable-kernel=3.2                \
+      --with-headers=/tools/include      \
+      libc_cv_forced_unwind=yes          \
+      libc_cv_c_cleanup=yes
+
+
+# lfs_log "configure returned $?"
+
+make
+make install
+
+#
+# Sanity check
+# Does compiling and linking actually work?
+#
+
+echo 'int main(){}' > dummy.c
+$LFS_TGT-gcc dummy.c
+
+# TODO: Expected output: Requesting program interpreter: /tools/lib64/ld-linux-x86-64.so.2
+lfs_log "$(readelf -l a.out | grep ': /tools')"
+
+rm -v dummy.c a.out
+
+# -------------------------------------
+popd
+
+# mv $LFS/sources/glibc-2.23{,.done.05.07}
