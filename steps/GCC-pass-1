@@ -2,6 +2,7 @@
 #
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter05/gcc-pass1.html
 
+lfs_trap_err
 
 pushd $LFS/sources/untarred/gcc-*
 

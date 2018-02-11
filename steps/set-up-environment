@@ -19,6 +19,9 @@
 #
 #  TODO: Changed $HOME to /home/lfs
 #
+#  TODO: lfs_trap_err ?
+#
+
 cat > /tmp/bash_profile <<EOF
 exec env -i HOME=/home/lfs TERM=$TERM PS1='\u:\w\$ ' /bin/bash
 EOF

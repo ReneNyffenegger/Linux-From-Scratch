@@ -1,5 +1,7 @@
 # vi: ft=sh
 
+lfs_trap_err
+
 pushd $LFS/sources
 mkdir untarred
 

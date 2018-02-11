@@ -3,6 +3,8 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter05/binutils-pass1.html
 #
 
+lfs_trap_err
+
 pushd $LFS/sources/untarred/binutils-*
 lfs_log "PWD=$PWD"
 

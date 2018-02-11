@@ -3,6 +3,8 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter05/linux-headers.html
 #
 
+lfs_trap_err
+
 pushd $LFS/sources/untarred/linux-*
 # -------------------------------------------
 

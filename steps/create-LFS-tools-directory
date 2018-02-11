@@ -13,6 +13,8 @@
 #  2) use toolchain to build other essential tools
 #
 
+lfs_trap_err
+
 lfs_log "Creating directory $LFS/tools"
 
 sudo mkdir -pv $LFS/tools

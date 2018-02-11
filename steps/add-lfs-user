@@ -5,6 +5,8 @@
 
 # Create group lfs if it not already exists
 
+lfs_trap_err
+
 if ! grep -q '^lfs:' /etc/group ; then
    sudo groupadd lfs
    lfs_log "group lfs created"

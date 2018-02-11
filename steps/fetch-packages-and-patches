@@ -3,6 +3,7 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter03/introduction.html
 #
 
+lfs_trap_err
 
 
 mkdir -pv $LFS/sources
