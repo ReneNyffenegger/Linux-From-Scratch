@@ -1,0 +1,44 @@
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter05/binutils-pass2.html
+#
+
+lfs_trap_err
+
+pushd $LFS/sources/untarred
+lfs_log "Trying to remove binutils-* in $PWD"
+
+rm -rf binutils-*
+cd ..
+
+lfs_log "Trying to tar xf binutils-* in $PWD"
+tar xf binutils-* -C untarred
+
+
+lfs_log "LFS=$LFS LFS_TGT=$LFS_TGT PATH=$PATH PWD=$PWD"
+
+cd untarred/binutils-*
+
+mkdir -v build
+cd       build
+
+CC=$LFS_TGT-gcc                \
+AR=$LFS_TGT-ar                 \
+RANLIB=$LFS_TGT-ranlib         \
+../configure                   \
+    --prefix=/tools            \
+    --disable-nls              \
+    --disable-werror           \
+    --with-lib-path=/tools/lib \
+    --with-sysroot
+
+make
+make install
+
+make -C ld clean
+make -C ld LIB_PATH=/usr/lib:/lib
+cp -v ld/ld-new /tools/bin
+
+popd
+
+exit 0
