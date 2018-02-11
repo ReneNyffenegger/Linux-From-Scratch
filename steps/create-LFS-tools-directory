@@ -1,0 +1,19 @@
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter04/creatingtoolsdir.html
+#
+# $LFS/tools will contain a minimal Linux system that is just capable to
+# build the final (Linux from scratch) system.
+#
+# This minimal Linux system is under $LFS/tools to keep it seperate from the «real»
+# Linux built in chapter 6.
+#
+# There are two steps in building this minimal system:
+#  1) build toolchain (assember, compiler....)
+#  2) use toolchain to build other essential tools
+#
+
+lfs_log "Creating directory $LFS/tools"
+
+sudo mkdir -pv $LFS/tools
+sudo ln    -sv $LFS/tools /

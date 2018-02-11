@@ -37,5 +37,3 @@ else
    lfs_log "md5 sums not ok: $md5sum"
    return 1
 fi
-
-# . $lfs_script_dir/diff_time t0 ${BASH_SOURCE[0]}

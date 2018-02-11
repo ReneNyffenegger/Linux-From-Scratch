@@ -35,7 +35,6 @@ lfs_log() {
 
 lfs_run_step() {
   local step_name=$1
-
   local script_name=${BASH_SOURCE[1]}
 
   if [[ -f $lfs_root/done/$step_name ]]; then
@@ -45,11 +44,13 @@ lfs_run_step() {
 
   lfs_log_ $script_name "doing step $step_name"
 
+  local start_time=$SECONDS
   if source $lfs_root/steps/$step_name; then
     touch $lfs_root/done/$step_name
-    lfs_log_ $script_name "$step_name done"
+    local diff_time=$(( $SECONDS - $start_time ))
+    lfs_log_ $script_name "step $step_name done, took $diff_time seconds"
   else
-    lfs_log_ $script_name "$step_name failed"
+    lfs_log_ $script_name "step $step_name failed"
     exit
   fi
 }

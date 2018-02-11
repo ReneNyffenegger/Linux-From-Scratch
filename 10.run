@@ -4,3 +4,4 @@
 . ./lfs-env
 
 lfs_run_step fetch-packages-and-patches
+lfs_run_step create-LFS-tools-directory
