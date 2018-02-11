@@ -1,0 +1,13 @@
+# vi: ft=sh
+
+pushd $LFS/sources
+mkdir untarred
+
+for tar in *.tar.xz *.tar.bz2 *.tar.xz; do
+    lfs_log "untar $tar"
+    tar xf $tar -C untarred
+done
+
+popd
+
+return 0

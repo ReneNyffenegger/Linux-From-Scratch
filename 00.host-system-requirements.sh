@@ -8,7 +8,7 @@ export LC_ALL=C
 
 
 MYSH=$(readlink -f /bin/sh)
-#q echo "/bin/sh -> $MYSH"
+
 echo $MYSH | grep -q bash || echo "ERROR: /bin/sh does not point to bash, it points to $MYSH"
 unset MYSH
 

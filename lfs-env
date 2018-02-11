@@ -38,11 +38,11 @@ lfs_run_step() {
   local script_name=${BASH_SOURCE[1]}
 
   if [[ -f $lfs_root/done/$step_name ]]; then
-    lfs_log_ $script_name "$step_name already done"
+    lfs_log_ $script_name "already done: $step_name"
     return
   fi
 
-  lfs_log_ $script_name "doing step $step_name"
+  lfs_log_ $script_name "doing step   : $step_name, id=$(id)"
 
   local start_time=$SECONDS
   if source $lfs_root/steps/$step_name; then

@@ -1,0 +1,11 @@
+# vi: set ft=sh
+
+echo PWD=$PWD
+
+
+
+. ./lfs-env
+
+lfs_run_step untar
+# lfs_run_step binutils-pass-1
+

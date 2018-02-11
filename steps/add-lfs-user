@@ -1,0 +1,42 @@
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter04/addinguser.html
+#
+
+# Create group lfs if it not already exists
+
+if ! grep -q '^lfs:' /etc/group ; then
+   sudo groupadd lfs
+   lfs_log "group lfs created"
+else
+   lfs_log "group lfs already exists"
+fi
+
+
+# Create user lfs, adding to group lfs (if it not already exists)
+
+if ! id lfs >/dev/null 2>&1 ; then
+  sudo useradd  -s /bin/bash -g lfs -m -k /dev/null lfs
+
+  # Change password for lfs to pw
+  echo 'lfs:pw' | sudo chpasswd
+  lfs_log "user lfs created"
+else
+  lfs_log "user lfs already exists"
+fi
+
+sudo chown -v lfs $LFS/tools
+sudo chown -v lfs $LFS/sources
+
+chmod 755 ./lfs-env
+chmod 777 log
+
+
+# TODO: Postboned for later: sudo su lfs <<INIT_ENV
+# TODO: Postboned for later: export LFS=$LFS
+# TODO: Postboned for later: export lfs_script_dir=$lfs_script_dir
+# TODO: Postboned for later: export lfs_log_file=$lfs_log_file
+# TODO: Postboned for later: . ./02.run-as-lfs
+# TODO: Postboned for later: INIT_ENV
+
+

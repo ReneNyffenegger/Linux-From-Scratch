@@ -1,0 +1,44 @@
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter04/settingenvironment.html
+#
+
+# The exec env -i.../bin/bash command replaces the running shell with a new one
+# with a completely empty environment, except for the HOME, TERM, and PS1
+# variables. This ensures that no unwanted and potentially hazardous
+# environment variables from the host system leak into the build environment.
+# The technique used here achieves the goal of ensuring a clean environment.
+
+# cat > bash_profile.tmp << "EOF"
+# exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash
+# EOF
+# 
+# sudo mv bash_profile.tmp ~lfs/.bash_profile
+# sudo chown -v lfs ~lfs/.bash_profile
+
+#
+#  TODO: Changed $HOME to /home/lfs
+#
+cat > /tmp/bash_profile <<EOF
+exec env -i HOME=/home/lfs TERM=$TERM PS1='\u:\w\$ ' /bin/bash
+EOF
+sudo cp /tmp/bash_profile ~lfs/.bash_profile
+
+lfs_log "Going to write ~/.bashrc, LFS=$LFS, lfs_root=$lfs_root"
+cat > /tmp/bashrc <<EOF
+set +h
+umask 022
+export LFS=$LFS
+# export lfs_script_dir=$lfs_script_dir
+# export lfs_log_file=$lfs_log_file
+LC_ALL=POSIX
+export LFS_TGT=$(uname -m)-lfs-linux-gnu
+export PATH=/tools/bin:/bin:/usr/bin
+export MAKEFLAGS='-j 2'                        # http://www.linuxfromscratch.org/lfs/view/stable/chapter04/aboutsbus.html
+# export LFS LC_ALL LFS_TGT PATH
+# cd $LFS
+cd $lfs_root
+. 20.run-as-lfs
+EOF
+
+sudo cp /tmp/bashrc ~lfs/.bashrc

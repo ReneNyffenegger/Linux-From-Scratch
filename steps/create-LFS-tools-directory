@@ -17,3 +17,5 @@ lfs_log "Creating directory $LFS/tools"
 
 sudo mkdir -pv $LFS/tools
 sudo ln    -sv $LFS/tools /
+
+return 0
