@@ -1,0 +1,56 @@
+# vim: ft=sh
+#
+
+# Used to create partitions. ADAPT MANUALLY!!!
+#
+lfs_partition_device=sdb
+lfs_boot_partition_nr=1
+lfs_root_partition_nr=2
+lfs_swap_partition_nr=3
+
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter02/aboutlfs.html
+#
+
+export LFS=$(realpath $PWD/mnt-lfs)
+export LFS_TGT=$(uname -m)-lfs-linux-gnu
+
+# 
+#
+export lfs_root=$(realpath $PWD)
+
+# Functions
+#
+
+lfs_log_() {
+  local script_file=$(basename "$1")
+  local text="$2"
+# printf "%s: %-25s %s\n" "$(date +'%Y-%m-%d %H:%M:%S')" ${BASH_SOURCE[1]} "$text" >> $lfs_root/log
+  printf "%s: %-25s %s\n" "$(date +'%Y-%m-%d %H:%M:%S')" $script_file      "$text" >> $lfs_root/log
+}
+
+lfs_log() {
+  local text="$1"
+  lfs_log_ "${BASH_SOURCE[1]}" "$text"
+}
+
+lfs_run_step() {
+  local step_name=$1
+
+  local script_name=${BASH_SOURCE[1]}
+
+  if [[ -f $lfs_root/done/$step_name ]]; then
+    lfs_log_ $script_name "$step_name already done"
+    return
+  fi
+
+  lfs_log_ $script_name "doing step $step_name"
+
+  if source $lfs_root/steps/$step_name; then
+    touch $lfs_root/done/$step_name
+    lfs_log_ $script_name "$step_name done"
+  else
+    lfs_log_ $script_name "$step_name failed"
+    exit
+  fi
+}
+

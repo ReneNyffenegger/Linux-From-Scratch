@@ -1,0 +1,6 @@
+# vi: set ft=sh
+#
+
+. ./lfs-env
+
+lfs_run_step fetch-packages-and-patches

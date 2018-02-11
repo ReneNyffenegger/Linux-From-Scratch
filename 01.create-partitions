@@ -1,0 +1,34 @@
+# vi: set ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/development/chapter02/creatingpartition.html
+
+. ./lfs-env
+
+memory_size_kb=$(cat /proc/meminfo | grep '^MemTotal:' | awk '{print $2}')
+memory_size_mb=$(( $memory_size_kb / 1024 ))
+
+sudo dd bs=1024 count=$((1024 * 25 )) if=/dev/zero of=/dev/$lfs_partition_device
+
+sudo parted /dev/$lfs_partition_device -s mklabel gpt
+
+sudo parted -s /dev/$lfs_partition_device         \
+   mkpart lfs_boot_partition ext4     1MiB 100MiB \
+   mkpart lfs_root_partition ext4   100MiB  10GiB \
+   mkpart lfs_swap_partition ext4    10GiB $(( 10*1024 + 2*$memory_size_mb ))MiB \
+   print
+
+
+#
+# Create filesystems on new partitions
+#
+# http://www.linuxfromscratch.org/lfs/view/development/chapter02/creatingfilesystem.html
+#
+#  use -v for verbose output in mkfs
+#  -F: don't ask, just create
+#
+sleep 0.1  # Take a brief nap in order to prevent »The file /dev/... does not exist and no size was specified.«
+#
+#
+sudo mkfs -F -t ext4 /dev/${lfs_partition_device}${lfs_boot_partition_nr}
+sudo mkfs -F -t ext4 /dev/${lfs_partition_device}${lfs_boot_partition_nr}
+sudo mkswap          /dev/${lfs_partition_device}3
