@@ -1,0 +1,23 @@
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter05/gettext.html
+#
+
+lfs_trap_err
+
+pushd $LFS/sources/untarred/gettext-*
+
+cd gettext-tools
+EMACS="no" ./configure --prefix=/tools --disable-shared
+
+make -C gnulib-lib
+make -C intl pluralx.c
+make -C src msgfmt
+make -C src msgmerge
+make -C src xgettext
+
+cp -v src/{msgfmt,msgmerge,xgettext} /tools/bin
+
+popd
+
+exit 0

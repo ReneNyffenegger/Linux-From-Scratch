@@ -23,3 +23,4 @@ lfs_run_step diffutils
 lfs_run_step file
 lfs_run_step findutils
 lfs_run_step gawk
+lfs_run_step gettext
