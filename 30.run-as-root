@@ -1,3 +1,5 @@
 . ./lfs-env
 
 lfs_log "Started 30.run-as-root id=$(id)"
+
+lfs_run_step prep-virt-kfs

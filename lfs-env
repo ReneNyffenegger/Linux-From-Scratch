@@ -58,7 +58,7 @@ lfs_run_step() {
   if $lfs_root/steps/$step_name; then
     touch $lfs_root/done/$step_name
     local diff_time=$(( $SECONDS - $start_time ))
-    lfs_log_ $script_name "step $step_name done, took $diff_time seconds"
+    lfs_log_ $script_name "step $step_name done, took $diff_time seconds, mount LFS used: $(df | grep $LFS | awk '{ print $5 }')"
   else
     lfs_log_ $script_name "step $step_name failed"
     exit
