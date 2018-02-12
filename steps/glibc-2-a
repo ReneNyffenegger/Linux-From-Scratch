@@ -1,0 +1,49 @@
+#
+# vim: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/glibc.html
+
+lfs_trap_err
+
+pushd /sources/untarred
+rm -rf glibc-*
+
+cd /sources
+
+tar xf glibc-*.tar.xz -C untarred
+
+cd untarred/glibc-*
+
+lfs_log "PWD=$PWD, does ../../glibc-*-fhs-1.patch exist?"
+patch -Np1 -i ../../glibc-*-fhs-1.patch
+
+ln -sfv /tools/lib/gcc /usr/lib
+
+rm -f /usr/include/limits.h
+
+
+
+mkdir -v build
+cd       build
+
+CC="gcc -isystem $GCC_INCDIR -isystem /usr/include" \
+../configure --prefix=/usr                          \
+             --disable-werror                       \
+             --enable-kernel=3.2                    \
+             --enable-stack-protector=strong        \
+             libc_cv_slibdir=/lib                   
+#            libc_cv_ctors_header=yes
+
+# TODO
+#   libc_cv_ctors_header=yes addeed because of ../configure error
+#     checking whether to use .ctors/.dtors header and trailer... configure: error: missing __attribute__ ((constructor)) support
+#   See http://archive.linuxfromscratch.org/mail-archives/lfs-dev/2011-August/064956.html
+
+
+unset GCC_INCDIR
+
+make
+
+popd
+
+return 0

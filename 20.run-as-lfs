@@ -2,6 +2,8 @@
 
 . ./lfs-env
 
+lfs_trap_err
+
 lfs_run_step untar
 lfs_run_step binutils-pass-1
 lfs_run_step GCC-pass-1
@@ -38,4 +40,8 @@ lfs_run_step xz
 lfs_run_step stripping
 
 lfs_log "exiting from 20.run-as-lfs to become a user in sudo group"
-exit
+
+# TODO: not so nice a solution
+touch go-on-with-30
+
+exit 0

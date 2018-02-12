@@ -3,6 +3,8 @@
 
 . ./lfs-env
 
+lfs_trap_err
+
 if  mount | grep -q $LFS ; then
   lfs_log "$LFS is mounted, OK"
 else
@@ -37,10 +39,16 @@ else
   lfs_log "$USER == lfs, not switching to lfs"
 fi
 
-lfs_log "changing ownership $LFS/tools"
+if [[ -f go-on-with-30 ]]; then
+   lfs_log "go-on-with-30 found"
+   lfs_log "changing ownership $LFS/tools"
 
-sudo chown -R root:root $LFS/tools
+   sudo chown -R root:root $LFS/tools
 
 # TODO http://www.linuxfromscratch.org/lfs/view/stable/chapter05/toolchaintechnotes.html
 
-sudo ./30.run-as-root
+   sudo ./30.run-as-root
+
+else
+  lfs_log "go-on-with 30 not found"
+fi

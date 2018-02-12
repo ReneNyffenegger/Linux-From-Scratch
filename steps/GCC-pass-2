@@ -18,12 +18,10 @@ tar xf gcc-* -C untarred
 cd untarred/gcc-*
 # ------------------------------
 
-cp -pr ../mpfr-* ./mpfr
-cp -pr ../gmp-*  ./gmp
-cp -pr ../mpc-*  ./mpc
 
 cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
   `dirname $($LFS_TGT-gcc -print-libgcc-file-name)`/include-fixed/limits.h
+
 
 for file in gcc/config/{linux,i386/linux{,64}}.h
 do
@@ -38,6 +36,7 @@ do
   touch $file.orig
 done
 
+
 case $(uname -m) in
   x86_64)
     sed -e '/m64=/s/lib64/lib/' \
@@ -45,8 +44,15 @@ case $(uname -m) in
   ;;
 esac
 
+
+cp -pr ../mpfr-* ./mpfr
+cp -pr ../gmp-*  ./gmp
+cp -pr ../mpc-*  ./mpc
+
+
 mkdir -v  build
 cd        build
+
 
 CC=$LFS_TGT-gcc                                    \
 CXX=$LFS_TGT-g++                                   \

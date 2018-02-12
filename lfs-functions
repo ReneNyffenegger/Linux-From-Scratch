@@ -37,7 +37,7 @@ lfs_run_step() {
     lfs_log_ $script_name "step $step_name done, took $diff_time seconds"
   else
     lfs_log_ $script_name "step $step_name failed"
-    exit
+    exit 1
   fi
 }
 export -f lfs_run_step

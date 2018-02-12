@@ -12,6 +12,13 @@ pushd $LFS/sources/untarred/glibc-*
 mkdir -v build
 cd       build 
 
+#
+#  TODO
+#    added libc_cv_ctors_header=yes
+#  because of 
+#    missing __attribute__ ((constructor)) support
+#
+
 ../configure                             \
       --prefix=/tools                    \
       --host=$LFS_TGT                    \
@@ -19,10 +26,11 @@ cd       build
       --enable-kernel=3.2                \
       --with-headers=/tools/include      \
       libc_cv_forced_unwind=yes          \
-      libc_cv_c_cleanup=yes
+      libc_cv_c_cleanup=yes              \
+      libc_cv_ctors_header=yes
 
 
-# lfs_log "configure returned $?"
+
 
 make
 make install

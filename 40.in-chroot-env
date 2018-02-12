@@ -9,4 +9,6 @@ lfs_run_step create-dirs
 lfs_run_step essential-files-symlinks
 lfs_run_step Linux-API-headers-2
 lfs_run_step man-pages
+lfs_run_step glibc-2-a
+lfs_run_step glibc-2-b
 

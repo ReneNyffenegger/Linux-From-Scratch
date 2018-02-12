@@ -1,0 +1,22 @@
+#
+# vim: ft=sh
+
+lfs_trap_err
+
+
+pushd /sources/untarred/glibc-*
+
+cd build
+
+# TODO if [ ${RUN_TESTS_CHAPTER_6-NO} == "YES" ]; then
+  make check
+
+  cat *test-result
+
+  grep -v OK$ *.out
+# TODO fi
+
+# ------------------------------------
+popd
+
+return 0
