@@ -19,3 +19,6 @@ lfs_run_step bash
 lfs_run_step bison
 lfs_run_step bzip2
 lfs_run_step coreutils
+lfs_run_step diffutils
+lfs_run_step file
+lfs_run_step findutils
