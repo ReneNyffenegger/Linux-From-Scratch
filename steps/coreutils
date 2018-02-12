@@ -1,0 +1,27 @@
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter05/coreutils.html
+#
+
+lfs_trap_err
+
+pushd $LFS/sources/untarred/coreutils-*
+
+# TODO:
+#  FORCE_UNSAFE_CONFIGURE set because run as root (instead of user lfs)
+#  Should be removed when user lfs runs the script
+# FORCE_UNSAFE_CONFIGURE=1 ./configure --prefix=/tools --enable-install-program=hostname
+./configure --prefix=/tools --enable-install-program=hostname
+
+make
+
+if [ ${RUN_TESTS_CHAPTER_5-NO} == "YES" ]; then
+  lfs_log "make check"
+  make RUN_EXPENSIVE_TESTS=yes check
+fi
+
+make install
+
+popd
+
+exit 0
