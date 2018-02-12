@@ -26,3 +26,4 @@ lfs_run_step gawk
 lfs_run_step gettext
 lfs_run_step grep
 lfs_run_step gzip
+lfs_run_step m4
