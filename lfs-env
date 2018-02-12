@@ -1,6 +1,13 @@
 # vim: ft=sh
 #
 
+#
+# TODO
+#   Propbably, a
+#     set -a
+#   is warranted (it automatically exports each variable and function that is created or modified)
+#
+
 # Used to create partitions. ADAPT MANUALLY!!!
 #
 export lfs_partition_device=sdb
