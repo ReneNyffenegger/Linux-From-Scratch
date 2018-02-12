@@ -1,0 +1,15 @@
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter05/bzip2.html
+#
+
+lfs_trap_err
+
+pushd $LFS/sources/untarred/bzip2-*
+
+make
+make PREFIX=/tools install
+
+popd
+
+exit 0

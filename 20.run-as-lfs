@@ -17,3 +17,4 @@ lfs_run_step check
 lfs_run_step ncurses
 lfs_run_step bash
 lfs_run_step bison
+lfs_run_step bzip2
