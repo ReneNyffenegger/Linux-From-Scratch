@@ -1,0 +1,3 @@
+. ./lfs-env
+
+lfs_log "Started 30.run-as-root id=$(id)"

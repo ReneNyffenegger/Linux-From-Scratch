@@ -21,7 +21,7 @@ if [[ "$USER" != "lfs" ]]; then
   lfs_log "$USER != lfs, switching to lfs"
   chmod 777 log
   trap - ERR
-  sudo su - lfs 
+  sudo su - lfs  # Runs   20.run-as-lfs ..
 else
   lfs_log "$USER == lfs, not switching to lfs"
 fi
@@ -31,3 +31,5 @@ lfs_log "changing ownership $LFS/tools"
 sudo chown -R root:root $LFS/tools
 
 # TODO http://www.linuxfromscratch.org/lfs/view/stable/chapter05/toolchaintechnotes.html
+
+sudo ./30.run-as-root
