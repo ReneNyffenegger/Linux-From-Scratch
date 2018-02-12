@@ -1,0 +1,12 @@
+#
+# vim: ft=sh
+
+lfs_trap_err
+
+pushd /sources/untarred/man-pages-*
+
+make install
+
+popd
+
+exit 0
