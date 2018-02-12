@@ -23,10 +23,10 @@ export LFS_TGT=$(uname -m)-lfs-linux-gnu
 
 # 
 #
-export lfs_root=$(realpath $PWD)
+# 2018-02-12 export lfs_root=$(realpath $PWD)
+export lfs_root=$LFS/lfs
 
 # Functions
 #
 
 . ./lfs-functions
-

@@ -16,11 +16,6 @@ else
 fi
 
 
-#
-#  Allow lfs to write into done directory.
-#  TODO: is this the correct place to do that?
-#
-chmod 777 done
 
 lfs_run_step fetch-packages-and-patches
 lfs_run_step create-LFS-tools-directory

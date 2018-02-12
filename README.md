@@ -4,24 +4,33 @@ Scripts for Linux From Scratch (LFS)
 
 ## Setting environment
 
-`env`: File to be sourced by original user and lfs user. Sets among others the `$LFS` variable
+`lfs-env`: Sets among others the `$LFS` variable. Is sourced by `10.run` and `20.run-as-lfs` etc.
 
 ## Host System Requirements
 
 Check if requirements are met:
 
-    . ./00.host-system-requirements.sh
+    ./00.host-system-requirements.sh
 
 
 ## Creating partitions
 
-    . ./01.create-partitions
+    ./01.create-partitions
 
 ## Mount LFS partition
 
-    . ./02.mount-lfs-partition
+    ./02.mount-lfs-partition
+
+`02.mount-lfs-partition` is called by `./01.create-partitions`. So, immediatly afeter executing `./01.create-partitions`, there should be no need
+to mount it explicitely. But this script might be used after rebooting the system, for example.
+
+## copy script files etc
+
+     ./03.copy-files-to-LFS
 
 ## Start executing the steps
+
+     ./10.run
 
 # TODO
 

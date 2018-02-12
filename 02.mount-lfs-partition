@@ -3,7 +3,17 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter02/mounting.html
 #
 
-# rm -rf mnt-lfs
-[[ ! -d $LFS ]] && mkdir $LFS
+if [[ ! -d $LFS ]];then
+    echo "mkdir $LFS"
+    mkdir $LFS
+fi
+
 sudo mount /dev/${lfs_partition_device}${lfs_root_partition_nr} $LFS
 sudo chown $USER:$USER $LFS
+
+# ? if [[ $(ls $LFS) != 'lost+found' ]]; then
+# ?    echo "ls $LFS is $(ls $LFS) !!!"
+# ?    exit 1
+# ? fi
+
+exit 0

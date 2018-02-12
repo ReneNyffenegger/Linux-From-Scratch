@@ -6,7 +6,11 @@
 lfs_trap_err
 
 
-mkdir -pv $LFS/sources
+if [[ ! -d $LFS/sources ]]; then
+    lfs_log "$LFS/sources does not exist. Creating"
+    mkdir -pv $LFS/sources
+
+fi
 chmod -v a+wt $LFS/sources
 
 
@@ -15,26 +19,39 @@ lfs_log "downloading sources"
 wget -nc http://www.linuxfromscratch.org/lfs/view/stable/wget-list  -O$LFS/sources/wget-list
 wget -nc http://www.linuxfromscratch.org/lfs/view/stable/md5sums    -O$LFS/sources/md5sums
 
-#
-#   TODO: add --progress=TYPE or --show-progress to wget?
-#
-wget --input-file=wget-list --continue --directory-prefix=$LFS/sources -o wget-sources.log
 
+#
+#    2018-02-12: Downloading from multiprecision causes 500 Internal Server Error!
+#
+sed -i s@http://www.multiprecision.org/mpc/download/mpc-1.0.3.tar.gz@https://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz@ $LFS/sources/wget-list
+
+
+#
+#   TQ84: added --show-progress
+#
+wget --input-file=$LFS/sources/wget-list --show-progress --continue --directory-prefix=$LFS/sources -o $LFS/sources/wget-sources.log
+
+#
+#  TODO: pushd could be made at the start of the script
+#
 pushd $LFS/sources
 
-   if [[ ! -f mpc-1.0.3.tar.gz ]]; then # { 2018-02-11 mpc... apparently causes 500 Internal Server Error
-     lfs_log "mpc-*.tar.gz not found, downloading from ftp.gnu.org"
-     wget https://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz
-   fi
+   lfs_log "should be in sources directory, PWD=$PWD"
+
+#  if [[ ! -f mpc-1.0.3.tar.gz ]]; then # { 2018-02-11 mpc... apparently causes 500 Internal Server Error
+#    lfs_log "mpc-*.tar.gz not found, downloading from ftp.gnu.org"
+#    wget https://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz
+#  fi
    
    local md5sum=$(md5sum -c md5sums)
 
-popd
 
 if echo $md5sums | grep -v ': OK$' > /dev/null; then
    lfs_log "md5 sums seems ok"
-   return 0
+   exit 0
 else
    lfs_log "md5 sums not ok: $md5sum"
-   return 1
+   exit 1
 fi
+
+popd
