@@ -1,0 +1,17 @@
+# vim: ft=sh
+#
+
+lfs_trap_err
+
+pushd /sources/untarred/linux-*
+
+make mrproper
+
+make INSTALL_HDR_PATH=dest headers_install
+
+find dest/include \( -name .install -o -name ..install.cmd \) -delete
+cp -rv dest/include/* /usr/include
+
+popd
+
+exit

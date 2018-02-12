@@ -7,4 +7,5 @@ lfs_log "Entered chroot env, id=$(id), ls / -> $(ls /)"
 
 lfs_run_step create-dirs
 lfs_run_step essential-files-symlinks
+lfs_run_step Linux-API-headers-2
 
