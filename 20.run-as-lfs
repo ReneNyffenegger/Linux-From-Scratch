@@ -36,3 +36,6 @@ lfs_run_step texinfo
 lfs_run_step util-linux
 lfs_run_step xz
 lfs_run_step stripping
+
+lfs_log "exiting from 20.run-as-lfs to become a user in sudo group"
+exit

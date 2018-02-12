@@ -26,4 +26,8 @@ else
   lfs_log "$USER == lfs, not switching to lfs"
 fi
 
+lfs_log "changing ownership $LFS/tools"
+
+sudo chown -R root:root $LFS/tools
+
 # TODO http://www.linuxfromscratch.org/lfs/view/stable/chapter05/toolchaintechnotes.html
