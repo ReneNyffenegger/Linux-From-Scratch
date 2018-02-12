@@ -22,4 +22,6 @@ fi
 
 make install
 
+popd
+
 exit 0

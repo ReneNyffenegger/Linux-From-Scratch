@@ -1,0 +1,25 @@
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter05/ncurses.html
+#
+
+lfs_trap_err
+
+pushd $LFS/sources/untarred/ncurses-*
+
+sed -i s/mawk// configure
+
+./configure --prefix=/tools \
+            --with-shared   \
+            --without-debug \
+            --without-ada   \
+            --enable-widec  \
+            --enable-overwrite
+
+make
+make install
+
+
+popd
+
+exit 0
