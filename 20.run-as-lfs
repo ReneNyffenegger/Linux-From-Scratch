@@ -28,3 +28,5 @@ lfs_run_step grep
 lfs_run_step gzip
 lfs_run_step m4
 lfs_run_step make
+lfs_run_step patch
+lfs_run_step perl
