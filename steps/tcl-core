@@ -1,0 +1,35 @@
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter05/tcl.html
+#
+
+lfs_trap_err
+
+pushd $LFS/sources/untarred/tcl*
+# ------------------------------------
+
+cd unix
+./configure --prefix=/tools
+
+make
+
+
+
+# TODO RUN_TESTS_CHAPTER_5 defined somewhere?
+if [ ${RUN_TESTS_CHAPTER_5-NO} == "YES" ]; then
+
+  lfs_log "Making Test"
+  TZ=UTC make test
+fi
+
+make install
+
+chmod -v u+w /tools/lib/libtcl*.so
+
+make install-private-headers
+
+ln -sv tclsh8.6 /tools/bin/tclsh
+
+popd
+
+exit 0
