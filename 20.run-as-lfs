@@ -32,3 +32,4 @@ lfs_run_step patch
 lfs_run_step perl
 lfs_run_step sed
 lfs_run_step tar
+lfs_run_step texinfo
