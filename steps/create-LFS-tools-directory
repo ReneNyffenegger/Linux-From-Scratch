@@ -18,6 +18,12 @@ lfs_trap_err
 lfs_log "Creating directory $LFS/tools"
 
 sudo mkdir -pv $LFS/tools
-sudo ln    -sv $LFS/tools /
 
-return 0
+if [[ $(readlink /tools ) != "$LFS/tools" ]]; then
+  lfs_log "create symlink for /tools"
+  sudo ln    -sv $LFS/tools /
+else
+  lfs_log "symlink for tools already created"
+fi
+
+exit 0
