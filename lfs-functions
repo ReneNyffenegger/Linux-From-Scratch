@@ -1,0 +1,55 @@
+# vim: ft=sh
+#
+
+lfs_log_() {
+  local script_file=$(basename "$1")
+  local text="$2"
+# printf "%s: %-25s %s\n" "$(date +'%Y-%m-%d %H:%M:%S')" ${BASH_SOURCE[1]} "$text" >> $lfs_root/log
+  printf "%s: %-25s %s\n" "$(date +'%Y-%m-%d %H:%M:%S')" $script_file      "$text" >> $lfs_root/log
+}
+export -f lfs_log_
+
+lfs_log() {
+  local text="$1"
+  lfs_log_ "${BASH_SOURCE[1]}" "$text"
+}
+export -f lfs_log
+
+
+lfs_run_step() {
+  local step_name=$1
+  local script_name=${BASH_SOURCE[1]}
+
+  if [[ -f $lfs_root/done/$step_name ]]; then
+    lfs_log_ $script_name "already done: $step_name"
+    return
+  fi
+
+  lfs_log_ $script_name "doing step   : $step_name, id=$(id)"
+
+  local start_time=$SECONDS
+  if $lfs_root/steps/$step_name; then
+    touch $lfs_root/done/$step_name
+    local diff_time=$(( $SECONDS - $start_time ))
+ #
+ #  TODO cannot determine used disk amount because LFS is not defined in chroot environment:
+ #  lfs_log_ $script_name "step $step_name done, took $diff_time seconds, mount LFS used: $(df | grep $LFS | awk '{ print $5 }')"
+  else
+    lfs_log_ $script_name "step $step_name failed"
+    exit
+  fi
+}
+export -f lfs_run_step
+
+lfs_trap_err_handler() {
+  local line=$1
+  local script_name=${BASH_SOURCE[1]}
+  lfs_log_ $script_name "trapped error at line $line"
+  exit 1
+}
+export -f lfs_trap_err_handler
+
+lfs_trap_err() {
+  trap 'lfs_trap_err_handler $LINENO' ERR
+}
+export -f lfs_trap_err

@@ -1,0 +1,16 @@
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter06/chroot.html
+
+lfs_trap_err
+
+
+chroot "$LFS" /tools/bin/env -i                           \
+    HOME=/root                                            \
+    TERM="$TERM"                                          \
+    PS1='\u:\w\$ '                                        \
+    PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin         \
+    lfs_root=/lfs                                         \
+    /tools/bin/bash --login +h -c /lfs/40.in-chroot-env
+
+exit 0

@@ -22,3 +22,9 @@ Check if requirements are met:
     . ./02.mount-lfs-partition
 
 ## Start executing the steps
+
+# TODO
+
+## Deploying LFS on multiple systems
+
+  <a href='http://www.linuxfromscratch.org/lfs/view/stable/chapter06/pkgmgt.html'>http://www.linuxfromscratch.org/lfs/view/stable/chapter06/pkgmgt.html</a>:  Configuration files that may need to be updated include: /etc/hosts, /etc/fstab, /etc/passwd, /etc/group, /etc/shadow, /etc/ld.so.conf, /etc/sysconfig/rc.site, /etc/sysconfig/network, and /etc/sysconfig/ifconfig.eth0.

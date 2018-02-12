@@ -1,5 +1,25 @@
+# vim: ft=sh
+#
+
 . ./lfs-env
 
 lfs_log "Started 30.run-as-root id=$(id)"
 
 lfs_run_step prep-virt-kfs
+
+
+
+if [[ ! -d $LFS/lfs ]];then
+  lfs_log "$LFS/lfs does not exist, creationg"
+  mkdir $LFS/log
+fi
+
+# if [[ ! -d $LFS/lfs/log ]];then
+#   lfs_log "$LFS/lfs/log does not exist, creationg"
+#   mkdir $LFS/log
+# fi
+
+cp lfs-functions    $LFS/lfs
+cp 40.in-chroot-env $LFS/lfs
+
+lfs_run_step enter-chroot-env
