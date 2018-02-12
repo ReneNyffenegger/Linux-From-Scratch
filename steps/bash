@@ -1,0 +1,25 @@
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter05/bash.html
+#
+
+lfs_trap_err
+
+pushd $LFS/sources/untarred/bash-*
+
+./configure --prefix=/tools --without-bash-malloc
+
+make
+
+if [ ${RUN_TESTS_CHAPTER_5-NO} == "YES" ]; then
+  lfs_log "make tests"
+  make tests
+fi
+
+make install
+
+ln -sv bash /tools/bin/sh
+
+popd
+
+exit 0
