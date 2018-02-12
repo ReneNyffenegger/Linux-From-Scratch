@@ -6,10 +6,10 @@ pushd $LFS/sources
 mkdir untarred
 
 for tar in *.tar.xz *.tar.bz2 *.tar.xz *.tar.gz; do
-    lfs_log "untar $tar"
+#   lfs_log "untar $tar"
     tar xf $tar -C untarred
 done
 
 popd
 
-return 0
+exit 0

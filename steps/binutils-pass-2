@@ -22,6 +22,8 @@ cd untarred/binutils-*
 mkdir -v build
 cd       build
 
+lfs_log "calling ../configure in $PWD"
+
 CC=$LFS_TGT-gcc                \
 AR=$LFS_TGT-ar                 \
 RANLIB=$LFS_TGT-ranlib         \

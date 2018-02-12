@@ -6,18 +6,34 @@
 
 lfs_trap_err
 
-pushd $LFS/sources/untarred/glibc-*
-# -------------------------------------
+# pushd $LFS/sources/untarred/glibc-*
+  pushd $LFS/sources/untarred
+  rm -rf glibc-*
+  cd ..
+  lfs_log "tar xf glibc-* in $PWD"
+  tar xf glibc-*.tar.xz -C untarred
+  cd untarred/glibc-*
 
 mkdir -v build
 cd       build 
 
 #
-#  TODO
-#    added libc_cv_ctors_header=yes
+#  TODO TQ84
+#    adding libc_cv_ctors_header=yes
 #  because of 
 #    missing __attribute__ ((constructor)) support
+#  ?
 #
+
+# ../configure                             \
+#       --prefix=/tools                    \
+#       --host=$LFS_TGT                    \
+#       --build=$(../scripts/config.guess) \
+#       --enable-kernel=3.2                \
+#       --with-headers=/tools/include      \
+#       libc_cv_forced_unwind=yes          \
+#       libc_cv_c_cleanup=yes              \
+#       libc_cv_ctors_header=yes
 
 ../configure                             \
       --prefix=/tools                    \
@@ -26,9 +42,7 @@ cd       build
       --enable-kernel=3.2                \
       --with-headers=/tools/include      \
       libc_cv_forced_unwind=yes          \
-      libc_cv_c_cleanup=yes              \
       libc_cv_ctors_header=yes
-
 
 
 
@@ -44,11 +58,9 @@ echo 'int main(){}' > dummy.c
 $LFS_TGT-gcc dummy.c
 
 # TODO: Expected output: Requesting program interpreter: /tools/lib64/ld-linux-x86-64.so.2
-lfs_log "$(readelf -l a.out | grep ': /tools')"
+readelf_out=$(readelf -l a.out | grep ': /tools')
+lfs_log "readelf_out=$readelf_out"
 
 rm -v dummy.c a.out
 
-# -------------------------------------
 popd
-
-# mv $LFS/sources/glibc-2.23{,.done.05.07}

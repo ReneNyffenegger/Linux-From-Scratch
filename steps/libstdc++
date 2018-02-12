@@ -6,9 +6,17 @@
 lfs_trap_err
 
 pushd $LFS/sources/untarred
-# tar xf gcc-5.3.0.tar.bz2
-cd gcc-*
-# -------------------------------------
+
+# 2018-02-12 Apparently, gcc-* is already used in step GCC-pass-1
+
+lfs_log "rm -rf gcc-* in $PWD"
+rm -rf gcc-*
+
+cd ..
+lfs_log "tar xf gcc-* -C untarred in $PWD"
+tar xf gcc-* -C untarred
+
+cd untarred/gcc-*
 
 mkdir -v build
 cd       build
@@ -27,6 +35,6 @@ lfs_log "PWD=$PWD LFS_TGT=$LFS_TGT LFS=$LFS"
 make
 make install
 
-
 popd
-# mv $LFS/sources/gcc-5.3.0{,.done.05.08}
+
+exit 0

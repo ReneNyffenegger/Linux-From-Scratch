@@ -27,7 +27,6 @@ lfs_run_step set-up-environment
 
 if [[ "$USER" != "lfs" ]]; then
   lfs_log "$USER != lfs, switching to lfs"
-  chmod 777 log
   trap - ERR
   sudo su - lfs  # Runs   20.run-as-lfs ..
 else

@@ -43,7 +43,7 @@ pushd $LFS/sources
 #    wget https://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz
 #  fi
    
-   local md5sum=$(md5sum -c md5sums)
+   md5sum=$(md5sum -c md5sums)
 
 
 if echo $md5sums | grep -v ': OK$' > /dev/null; then

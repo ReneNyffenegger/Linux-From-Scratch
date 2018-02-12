@@ -22,6 +22,8 @@
 #  TODO: lfs_trap_err ?
 #
 
+lfs_trap_err
+
 cat > /tmp/bash_profile <<EOF
 exec env -i HOME=/home/lfs TERM=$TERM PS1='\u:\w\$ ' /bin/bash
 EOF
@@ -32,16 +34,17 @@ cat > /tmp/bashrc <<EOF
 set +h
 umask 022
 export LFS=$LFS
-# export lfs_script_dir=$lfs_script_dir
-# export lfs_log_file=$lfs_log_file
+export lfs_root=$lfs_root
+export lfs_partition_device=$lfs_partition_device
+export lfs_root_partition_nr=$lfs_root_partition_nr
 LC_ALL=POSIX
 export LFS_TGT=$(uname -m)-lfs-linux-gnu
 export PATH=/tools/bin:/bin:/usr/bin
 export MAKEFLAGS='-j 2'                        # http://www.linuxfromscratch.org/lfs/view/stable/chapter04/aboutsbus.html
-# export LFS LC_ALL LFS_TGT PATH
-# cd $LFS
 cd $lfs_root
-. 20.run-as-lfs
+$lfs_root/20.run-as-lfs
 EOF
 
 sudo cp /tmp/bashrc ~lfs/.bashrc
+
+exit 0

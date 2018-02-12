@@ -4,7 +4,14 @@
 
 lfs_trap_err
 
-pushd $LFS/sources/untarred/gcc-*
+# pushd $LFS/sources/untarred/gcc-*
+  pushd $LFS/sources/untarred
+  rm -rf gcc-*
+  cd ..
+  lfs_log "tar xf gcc-* in $PWD"
+  tar xf gcc-*.tar.xz -C untarred
+  cd untarred/gcc-*
+
 
 lfs_log "LFS=$LFS LFS_TGT=$LFS_TGT PATH=$PATH"
 
@@ -65,13 +72,10 @@ cd       build
     --disable-libstdcxx                            \
     --enable-languages=c,c++
 
-lfs_log "configure returned $?"
 
 make
-lfs_log "make returned $?"
-
 make install
-lfs_log "make install returned $?"
 
-# -------------------------------------
 popd
+
+exit 0

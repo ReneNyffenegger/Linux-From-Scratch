@@ -29,4 +29,11 @@ export lfs_root=$LFS/lfs
 # Functions
 #
 
-. ./lfs-functions
+if [[ -f $lfs_root/lfs-functions ]]; then
+  . $lfs_root/lfs-functions
+elif [[ -f ./lfs-functions ]]; then
+  . ./lfs-functions
+else
+  echo "lfs functions not found"
+  exit 1
+fi

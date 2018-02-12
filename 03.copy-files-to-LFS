@@ -3,13 +3,17 @@
 . ./lfs-env
 
 if [[ ! -d $lfs_root ]]; then
-  lfs_log "lfs_root ($lfs_root) does not exist, creating"
+  echo "lfs_root ($lfs_root) does not exist, creating"
   mkdir $lfs_root
   mkdir $lfs_root/done
   mkdir $lfs_root/steps
+  touch $lfs_root/log
 fi
 
+# cp lfs-env          $lfs_root
 cp lfs-functions    $lfs_root
+cp 20.run-as-lfs    $lfs_root
+cp 30.run-as-root   $lfs_root
 cp 40.in-chroot-env $lfs_root
 cp steps/*          $lfs_root/steps
-chmod -R 777        $lfs_root
+sudo chmod -R 777   $lfs_root

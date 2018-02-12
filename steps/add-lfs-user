@@ -27,11 +27,10 @@ else
   lfs_log "user lfs already exists"
 fi
 
-sudo chown -v lfs $LFS/tools
-sudo chown -v lfs $LFS/sources
+# 2018-02-12 sudo chown -v lfs $LFS/tools
+# 2018-02-12 sudo chown -v lfs $LFS/sources
 
-chmod 755 ./lfs-env
-chmod 777 log
+# 2018-02-12 chmod 755 ./lfs-env
 
 
 # TODO: Postboned for later: sudo su lfs <<INIT_ENV
@@ -41,4 +40,4 @@ chmod 777 log
 # TODO: Postboned for later: . ./02.run-as-lfs
 # TODO: Postboned for later: INIT_ENV
 
-
+exit 0

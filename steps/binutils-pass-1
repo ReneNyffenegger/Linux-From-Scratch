@@ -6,22 +6,13 @@
 lfs_trap_err
 
 pushd $LFS/sources/untarred/binutils-*
-lfs_log "PWD=$PWD"
 
 
-# --------------------------------------
-
-#
-#   Note, directory build will be removed
-#   in 05.09-binutils-pass-2
-#
 
 mkdir -v build
-lfs_log "mkdir returned $?"
-
 cd       build
-lfs_log "cd returned $?"
 
+lfs_log "calling configure, PWD=$PWD"
 
 ../configure --prefix=/tools            \
              --with-sysroot=$LFS        \
@@ -30,22 +21,20 @@ lfs_log "cd returned $?"
              --disable-nls              \
              --disable-werror
 
-lfs_log "configure returned $?"
 
 make
-lfs_log "make returned $?"
 
 case $(uname -m) in
   x86_64) mkdir -v /tools/lib && ln -sv lib /tools/lib64 ;;
 esac
 
+lfs_log "ls -ld /tools/lib:   $(ls -ld /tools/lib)"
+lfs_log "ls -ld /tools/lib64: $(ls -ld /tools/lib64)"
+lfs_log "which $LFS_TGT-ld: $(which $LFS_TGT-ld)"
+
 make install
-lfs_log "make install returned $?"
 
 # TODO
 #  Check if /tools/lib or /tools/bin was populated with make install
 
-# --------------------------------------
 popd
-
-# mv $LFS/sources/binutils-2.26{,.done.05.04}

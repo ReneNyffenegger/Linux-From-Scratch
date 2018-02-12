@@ -1,6 +1,6 @@
 # vi: set ft=sh
 
-. ./lfs-env
+. $lfs_root/lfs-functions
 
 lfs_trap_err
 

@@ -4,8 +4,7 @@
 lfs_log_() {
   local script_file=$(basename "$1")
   local text="$2"
-# printf "%s: %-25s %s\n" "$(date +'%Y-%m-%d %H:%M:%S')" ${BASH_SOURCE[1]} "$text" >> $lfs_root/log
-  printf "%s: %-25s %s\n" "$(date +'%Y-%m-%d %H:%M:%S')" $script_file      "$text" >> $lfs_root/log
+  printf "%s: %-29s %s\n" "$(date +'%Y-%m-%d %H:%M:%S')" $script_file      "$text" >> $lfs_root/log
 }
 export -f lfs_log_
 
@@ -31,10 +30,12 @@ lfs_run_step() {
   if $lfs_root/steps/$step_name; then
     touch $lfs_root/done/$step_name
     local diff_time=$(( $SECONDS - $start_time ))
+
+    local space_free=$(df | grep "/dev/$lfs_partition_device$lfs_root_partition_nr" | awk '{ print $5 }')
  #
  #  TODO cannot determine used disk amount because LFS is not defined in chroot environment:
  #  lfs_log_ $script_name "step $step_name done, took $diff_time seconds, mount LFS used: $(df | grep $LFS | awk '{ print $5 }')"
-    lfs_log_ $script_name "step $step_name done, took $diff_time seconds"
+    lfs_log_ $script_name "step $step_name done, took $diff_time seconds, mount LFS used: $space_free (Command is df | grep \"/dev/$lfs_partition_device$lfs_root_partition_nr\""
   else
     lfs_log_ $script_name "step $step_name failed"
     exit 1

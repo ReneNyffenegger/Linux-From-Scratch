@@ -3,6 +3,11 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter02/mounting.html
 #
 
+if [[ -z $LFS ]]; then
+  echo LFS is empty !!!
+  exit 1
+fi
+
 if [[ ! -d $LFS ]];then
     echo "mkdir $LFS"
     mkdir $LFS
