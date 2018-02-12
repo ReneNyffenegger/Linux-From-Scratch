@@ -34,3 +34,4 @@ lfs_run_step sed
 lfs_run_step tar
 lfs_run_step texinfo
 lfs_run_step util-linux
+lfs_run_step xz
