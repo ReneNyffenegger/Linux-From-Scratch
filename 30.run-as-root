@@ -10,8 +10,10 @@ lfs_run_step prep-virt-kfs
 
 
 if [[ ! -d $LFS/lfs ]];then
-  lfs_log "$LFS/lfs does not exist, creationg"
-  mkdir $LFS/log
+  lfs_log "$LFS/lfs does not exist, creating"
+  mkdir $LFS/lfs
+  mkdir $LFS/lfs/done
+  mkdir $LFS/lfs/steps
 fi
 
 # if [[ ! -d $LFS/lfs/log ]];then
@@ -21,5 +23,15 @@ fi
 
 cp lfs-functions    $LFS/lfs
 cp 40.in-chroot-env $LFS/lfs
+cp steps/*          $LFS/lfs/steps
+chmod 755           $LFS/lfs/steps/*
 
-lfs_run_step enter-chroot-env
+# TODO lfs_run_step enter-chroot-env
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter06/chroot.html
+chroot "$LFS" /tools/bin/env -i                           \
+    HOME=/root                                            \
+    TERM="$TERM"                                          \
+    PS1='\u:\w\$ '                                        \
+    PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin         \
+    lfs_root=/lfs                                         \
+    /tools/bin/bash --login +h -c /lfs/40.in-chroot-env
