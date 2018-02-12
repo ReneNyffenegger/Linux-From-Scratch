@@ -1,0 +1,30 @@
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter05/expect.html
+#
+
+
+lfs_trap_err
+
+pushd $LFS/sources/untarred/expect*
+# ------------------------------------
+
+cp -v configure{,.orig}
+sed 's:/usr/local/bin:/bin:' configure.orig > configure
+
+./configure --prefix=/tools       \
+            --with-tcl=/tools/lib \
+            --with-tclinclude=/tools/include
+
+make
+if [ ${RUN_TESTS_CHAPTER_5-NO} == "YES" ]; then
+  lfs_log "make test"
+  make test
+fi
+
+make SCRIPTS="" install
+
+# ------------------------------------
+popd
+
+exit 0
