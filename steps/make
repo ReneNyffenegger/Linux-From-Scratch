@@ -1,0 +1,24 @@
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter05/make.html
+#
+
+lfs_trap_err
+
+
+pushd $LFS/sources/untarred/make-*
+
+./configure --prefix=/tools --without-guile
+
+make
+
+if [ ${RUN_TESTS_CHAPTER_5-NO} == "YES" ]; then
+  lfs_log "make check"
+  make check
+fi
+
+make install
+
+popd
+
+exit 0
