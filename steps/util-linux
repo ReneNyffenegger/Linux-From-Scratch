@@ -1,0 +1,23 @@
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter05/util-linux.html
+#
+
+lfs_trap_err
+
+
+pushd $LFS/sources/untarred/util-linux-*
+
+./configure --prefix=/tools                \
+            --without-python               \
+            --disable-makeinstall-chown    \
+            --without-systemdsystemunitdir \
+            --without-ncurses              \
+            PKG_CONFIG=""
+
+make
+make install
+
+popd
+
+exit 0
