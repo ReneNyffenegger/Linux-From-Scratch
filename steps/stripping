@@ -1,0 +1,18 @@
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter05/stripping.html
+#
+
+# TODO: This   lfs_trap_err  causes this step to fail
+
+
+# ------------------------------------
+
+lfs_log         "strip-debug"
+strip          --strip-debug     /tools/lib/*
+lfs_log         "strip-unneeded"
+/usr/bin/strip --strip-unneeded /tools/{,s}bin/*
+
+rm -rf /tools/{,share}/{info,man,doc}
+
+exit 0
