@@ -12,3 +12,5 @@ lfs_run_step binutils-pass-2
 lfs_run_step GCC-pass-2
 lfs_run_step tcl-core
 lfs_run_step expect
+lfs_run_step DejaGNU
+lfs_run_step check

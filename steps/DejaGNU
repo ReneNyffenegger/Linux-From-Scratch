@@ -1,0 +1,23 @@
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter05/dejagnu.html
+#
+
+lfs_trap_err
+
+pushd $LFS/sources/untarred/dejagnu-*
+
+
+./configure --prefix=/tools
+
+make install
+
+if [ ${RUN_TESTS_CHAPTER_5-NO} == "YES" ]; then
+  lfs_log "make check"
+  make check
+fi
+
+
+popd
+
+exit 0

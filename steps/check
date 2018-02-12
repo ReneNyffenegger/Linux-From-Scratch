@@ -1,0 +1,25 @@
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter05/check.html
+#
+
+
+pushd $LFS/sources/untarred/check-*
+
+PKG_CONFIG= ./configure --prefix=/tools
+
+# TODO
+# in make check, it seems to hang after the line
+#   check running suite(s) servant
+# was printed. Yet, after a long time, it proceeds. 
+
+make
+
+if [ ${RUN_TESTS_CHAPTER_5-NO} == "YES" ]; then
+  lfs_log "make check"
+  make check
+fi
+
+make install
+
+exit 0
