@@ -23,7 +23,7 @@ if [[ -d $LFS/tools ]]; then
 fi
 
 sudo mkdir -pv $LFS/tools
-sudo chmod 777 $LFS/tools
+# sudo chmod 777 $LFS/tools
 
 if [[ $(readlink /tools ) != "$LFS/tools" ]]; then
   lfs_log "create symlink for /tools"
@@ -32,7 +32,7 @@ else
   lfs_log "symlink for tools already created"
 fi
 
-lfs_log "ls -ld /tools: $(ls -ld /tools)"
+lfs_log "ls -ld /tools:     $(ls -ld /tools)"
 lfs_log "ls -ld $LFS/tools: $(ls -ld $LFS/tools)"
 
 exit 0

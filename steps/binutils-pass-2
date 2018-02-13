@@ -5,24 +5,24 @@
 
 lfs_trap_err
 
+#  TODO: as soon as everything compiles, this untar hack should not be necessary anymore
+# pushd $LFS/sources/untarred/binutils-*
 pushd $LFS/sources/untarred
-lfs_log "Trying to remove binutils-* in $PWD"
+lfs_log "Trying to remove binutils-*, PWD=$PWD"
 
 rm -rf binutils-*
 cd ..
 
-lfs_log "Trying to tar xf binutils-* in $PWD"
+lfs_log "Trying to tar xf binutils-*, PWD=$PWD"
 tar xf binutils-* -C untarred
 
-
-lfs_log "LFS=$LFS LFS_TGT=$LFS_TGT PATH=$PATH PWD=$PWD"
 
 cd untarred/binutils-*
 
 mkdir -v build
 cd       build
 
-lfs_log "calling ../configure in $PWD"
+lfs_log "calling ../configure, PWD=$PWD"
 
 CC=$LFS_TGT-gcc                \
 AR=$LFS_TGT-ar                 \

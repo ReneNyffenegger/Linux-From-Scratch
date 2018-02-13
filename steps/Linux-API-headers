@@ -12,18 +12,13 @@ make mrproper
 make INSTALL_HDR_PATH=dest headers_install
 
 #
-# TODO, Apparently, the /tools/include directory must
-# be manually created
+# Apparently, the /tools/include directory was
+# created when GCC was built.
 #
-mkdir /tools/include
+#    mkdir /tools/include
 
 cp -rv dest/include/* /tools/include
 
 popd
-
-# if [[ -d /tools/include ]]; then
-#    lfs_log "/tools/include does not exist"
-#    return 1
-# fi
 
 exit 0

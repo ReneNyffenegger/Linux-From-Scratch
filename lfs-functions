@@ -35,7 +35,7 @@ lfs_run_step() {
  #
  #  TODO cannot determine used disk amount because LFS is not defined in chroot environment:
  #  lfs_log_ $script_name "step $step_name done, took $diff_time seconds, mount LFS used: $(df | grep $LFS | awk '{ print $5 }')"
-    lfs_log_ $script_name "step $step_name done, took $diff_time seconds, mount LFS used: $space_free (Command is df | grep \"/dev/$lfs_partition_device$lfs_root_partition_nr\""
+    lfs_log_ $script_name "step $step_name done, took $diff_time seconds, mount LFS used: $space_free"
   else
     lfs_log_ $script_name "step $step_name failed"
     exit 1

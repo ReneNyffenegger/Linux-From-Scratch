@@ -17,6 +17,8 @@ lfs_trap_err
 mkdir -v build
 cd       build 
 
+lfs_log "calling ../configure, PWD=$PWD"
+
 #
 #  TODO TQ84
 #    adding libc_cv_ctors_header=yes
@@ -45,8 +47,14 @@ cd       build
       libc_cv_ctors_header=yes
 
 
+lfs_log "calling make, MAKEFLAGS=$MAKEFLAGS"
 
 make
+#
+# TODO or make -j1, because might fail when made in parallel?
+#
+# make -j1
+
 make install
 
 #
@@ -54,13 +62,21 @@ make install
 # Does compiling and linking actually work?
 #
 
+lfs_log "which $LFS_TGT-gcc: $(which $LFS_TGT-gcc)"
+
 echo 'int main(){}' > dummy.c
 $LFS_TGT-gcc dummy.c
 
 # TODO: Expected output: Requesting program interpreter: /tools/lib64/ld-linux-x86-64.so.2
 readelf_out=$(readelf -l a.out | grep ': /tools')
-lfs_log "readelf_out=$readelf_out"
+
+if [[ "$readelf_out" != '      [Requesting program interpreter: /tools/lib64/ld-linux-x86-64.so.2]' ]]; then
+  lfs_log "readelf_out=$readelf_out"
+  exit 1
+fi
 
 rm -v dummy.c a.out
 
 popd
+
+exit 0

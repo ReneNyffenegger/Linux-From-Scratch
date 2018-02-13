@@ -1,0 +1,21 @@
+# vi: set ft=sh
+#
+. ./lfs-env
+
+sudo rm /tools
+
+if [[ -z $LFS ]]; then
+   echo "\$LFS is not set"
+else
+  echo "removing $LFS/tools"
+  sudo rm -rf $LFS/tools
+fi
+
+sudo userdel  lfs
+# sudo groupdel lfs
+
+sudo rm -rf /home/lfs
+
+echo TODO: should /bin/sh be pointed back to bash
+
+#q sudo umount $LFS

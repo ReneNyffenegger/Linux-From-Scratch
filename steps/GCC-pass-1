@@ -4,6 +4,9 @@
 
 lfs_trap_err
 
+# TODO: This rm gcc-* untar thingy can be replaced
+# with the single following line when evertying compiles
+# ok finally.
 # pushd $LFS/sources/untarred/gcc-*
   pushd $LFS/sources/untarred
   rm -rf gcc-*
@@ -49,6 +52,9 @@ esac
 mkdir -v build
 cd       build
 
+lfs_log "calling configure, PWD=$PWD"
+
+
 ../configure                                       \
     --target=$LFS_TGT                              \
     --prefix=/tools                                \
@@ -72,9 +78,10 @@ cd       build
     --disable-libstdcxx                            \
     --enable-languages=c,c++
 
-
 make
 make install
+
+lfs_log "which $TGT_LFS-gcc: $which($TGT_LFS-gcc)"
 
 popd
 

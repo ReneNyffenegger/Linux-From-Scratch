@@ -18,9 +18,6 @@
 
 #
 #  TODO: Changed $HOME to /home/lfs
-#
-#  TODO: lfs_trap_err ?
-#
 
 lfs_trap_err
 
@@ -29,7 +26,7 @@ exec env -i HOME=/home/lfs TERM=$TERM PS1='\u:\w\$ ' /bin/bash
 EOF
 sudo cp /tmp/bash_profile ~lfs/.bash_profile
 
-lfs_log "Going to write ~/.bashrc, LFS=$LFS, lfs_root=$lfs_root"
+lfs_log "Going to write ~/.bashrc, LFS=$LFS, lfs_root=$lfs_root, lfs_partition_device=$lfs_partition_device, lfs_root_partition_nr=$lfs_root_partition_nr"
 cat > /tmp/bashrc <<EOF
 set +h
 umask 022
@@ -37,10 +34,10 @@ export LFS=$LFS
 export lfs_root=$lfs_root
 export lfs_partition_device=$lfs_partition_device
 export lfs_root_partition_nr=$lfs_root_partition_nr
-LC_ALL=POSIX
+export LC_ALL=POSIX
 export LFS_TGT=$(uname -m)-lfs-linux-gnu
 export PATH=/tools/bin:/bin:/usr/bin
-export MAKEFLAGS='-j 2'                        # http://www.linuxfromscratch.org/lfs/view/stable/chapter04/aboutsbus.html
+# export MAKEFLAGS='-j 2'                        # http://www.linuxfromscratch.org/lfs/view/stable/chapter04/aboutsbus.html / # TODO should I enalbe it. See also steps/glibc (make -j1)
 cd $lfs_root
 $lfs_root/20.run-as-lfs
 EOF

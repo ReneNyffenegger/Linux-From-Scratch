@@ -21,7 +21,7 @@ cd untarred/gcc-*
 mkdir -v build
 cd       build
 
-lfs_log "PWD=$PWD LFS_TGT=$LFS_TGT LFS=$LFS"
+lfs_log "calling ../libstdc++-v3/configure, PWD=$PWD"
 
 ../libstdc++-v3/configure           \
     --host=$LFS_TGT                 \
