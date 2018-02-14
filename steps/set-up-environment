@@ -25,6 +25,7 @@ cat > /tmp/bash_profile <<EOF
 exec env -i HOME=/home/lfs TERM=$TERM PS1='\u:\w\$ ' /bin/bash
 EOF
 sudo cp /tmp/bash_profile ~lfs/.bash_profile
+sudo chown lfs:lfs        ~lfs/.bash_profile
 
 lfs_log "Going to write ~/.bashrc, LFS=$LFS, lfs_root=$lfs_root, lfs_partition_device=$lfs_partition_device, lfs_root_partition_nr=$lfs_root_partition_nr"
 cat > /tmp/bashrc <<EOF
@@ -43,5 +44,6 @@ $lfs_root/20.run-as-lfs
 EOF
 
 sudo cp /tmp/bashrc ~lfs/.bashrc
+sudo chown lfs:lfs  ~lfs/.bashrc
 
 exit 0

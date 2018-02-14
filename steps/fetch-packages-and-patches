@@ -16,8 +16,16 @@ chmod -v a+wt $LFS/sources
 
 lfs_log "downloading sources"
 
-wget -nc http://www.linuxfromscratch.org/lfs/view/stable/wget-list  -O$LFS/sources/wget-list
-wget -nc http://www.linuxfromscratch.org/lfs/view/stable/md5sums    -O$LFS/sources/md5sums
+if [[ ! -f $LFS/sources/wget-list ]]; then
+  wget -nc http://www.linuxfromscratch.org/lfs/view/stable/wget-list  -O$LFS/sources/wget-list
+else
+  lfs_log "wget-list apparently already downloaded"
+fi
+if [[ ! -f $LFS/sources/md5sums ]]; then
+  wget -nc http://www.linuxfromscratch.org/lfs/view/stable/md5sums    -O$LFS/sources/md5sums
+else
+  lfs_log "md5sums apparently already downloaded"
+fi
 
 
 #
@@ -29,7 +37,7 @@ sed -i s@http://www.multiprecision.org/mpc/download/mpc-1.0.3.tar.gz@https://ftp
 #
 #   TQ84: added --show-progress
 #
-wget --input-file=$LFS/sources/wget-list --show-progress --continue --directory-prefix=$LFS/sources -o $LFS/sources/wget-sources.log
+wget --input-file=$LFS/sources/wget-list -nc --show-progress --continue --directory-prefix=$LFS/sources -o $LFS/sources/wget-sources.log
 
 #
 #  TODO: pushd could be made at the start of the script

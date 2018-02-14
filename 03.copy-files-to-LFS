@@ -2,6 +2,7 @@
 
 . ./lfs-env
 
+
 if [[ ! -d $lfs_root ]]; then
   echo "lfs_root ($lfs_root) does not exist, creating"
   mkdir $lfs_root
@@ -16,4 +17,6 @@ cp 20.run-as-lfs    $lfs_root
 cp 30.run-as-root   $lfs_root
 cp 40.in-chroot-env $lfs_root
 cp steps/*          $lfs_root/steps
+# sudo chmod -R 777   $lfs_root
 sudo chmod -R 777   $lfs_root
+# sudo chmod 755 ../Linux-From-Scratch/
