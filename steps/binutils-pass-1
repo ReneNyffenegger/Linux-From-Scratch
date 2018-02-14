@@ -21,7 +21,7 @@ cd untarred/binutils-*
 mkdir -v build
 cd       build
 
-lfs_log "calling configure, PWD=$PWD"
+lfs_log "calling configure, PWD=$PWD, LFS=$LFS, LFS_TGT=$LFS_TGT"
 
 ../configure --prefix=/tools            \
              --with-sysroot=$LFS        \
