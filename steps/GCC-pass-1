@@ -8,12 +8,12 @@ lfs_trap_err
 # with the single following line when evertying compiles
 # ok finally.
 # pushd $LFS/sources/untarred/gcc-*
-  pushd $LFS/sources/untarred
-  rm -rf gcc-*
-  cd ..
-  lfs_log "tar xf gcc-* in $PWD"
-  tar xf gcc-*.tar.xz -C untarred
-  cd untarred/gcc-*
+pushd $LFS/sources/untarred
+rm -rf gcc-*
+cd ..
+lfs_log "tar xf gcc-* in $PWD"
+tar xf gcc-*.tar.xz -C untarred
+cd untarred/gcc-*
 
 
 lfs_log "LFS=$LFS LFS_TGT=$LFS_TGT PATH=$PATH"
@@ -81,7 +81,16 @@ lfs_log "calling configure, PWD=$PWD"
 make
 make install
 
-lfs_log "which $TGT_LFS-gcc: $which($TGT_LFS-gcc)"
+lfs_log "which $LFS_TGT-gcc: $(which $LFS_TGT-gcc)"
+
+# Create a simple test program
+printf "#include <stdio.h>\nint main(){printf(\"hello world\");}" | $LFS_TGT-gcc -xc -
+
+# Execute test program
+if [[ $(./a.out) != 'hello world' ]]; then
+  lfs_log "./a.out did not return hello world"
+  exit 1
+fi
 
 popd
 
