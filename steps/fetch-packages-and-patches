@@ -2,6 +2,9 @@
 #
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter03/introduction.html
 #
+# TODO
+#   There are optional packages at
+#     http://www.linuxfromscratch.org/lfs/view/stable/chapter03/patches.html
 
 lfs_trap_err
 

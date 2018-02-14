@@ -27,8 +27,7 @@ cp -rp ../mpfr-* ./mpfr
 cp -rp ../gmp-*  ./gmp
 cp -rp ../mpc-*  ./mpc
 
-for file in gcc/config/{linux,i386/linux{,64}}.h;
-#  $(find gcc/config -name linux64.h -o -name linux.h -o -name sysv4.h)
+for file in gcc/config/{linux,i386/linux{,64}}.h
 do
   cp -uv $file{,.orig}
   sed -e 's@/lib\(64\)\?\(32\)\?/ld@/tools&@g' \
@@ -53,7 +52,6 @@ mkdir -v build
 cd       build
 
 lfs_log "calling configure, PWD=$PWD"
-
 
 ../configure                                       \
     --target=$LFS_TGT                              \
@@ -82,6 +80,9 @@ make
 make install
 
 lfs_log "which $LFS_TGT-gcc: $(which $LFS_TGT-gcc)"
+
+lfs_log "readelf -l /tools/bin/$LFS_TGT-gcc | grep interpreter: $(readelf -l /tools/bin/$LFS_TGT-gcc | grep interpreter)"
+lfs_log "gcc -print-prog-name=ld: $(realpath $(/tools/bin/$LFS_TGT-gcc -print-prog-name=ld))"
 
 # Create a simple test program
 printf "#include <stdio.h>\nint main(){printf(\"hello world\");}" | $LFS_TGT-gcc -xc -

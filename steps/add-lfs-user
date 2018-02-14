@@ -32,12 +32,4 @@ sudo chown -v lfs $LFS/sources
 
 # 2018-02-12 chmod 755 ./lfs-env
 
-
-# TODO: Postboned for later: sudo su lfs <<INIT_ENV
-# TODO: Postboned for later: export LFS=$LFS
-# TODO: Postboned for later: export lfs_script_dir=$lfs_script_dir
-# TODO: Postboned for later: export lfs_log_file=$lfs_log_file
-# TODO: Postboned for later: . ./02.run-as-lfs
-# TODO: Postboned for later: INIT_ENV
-
 exit 0

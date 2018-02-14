@@ -14,7 +14,7 @@ tar xf glibc-*.tar.xz -C untarred
 
 cd untarred/glibc-*
 
-lfs_log "PWD=$PWD, does ../../glibc-*-fhs-1.patch exist?"
+lfs_log "Apply patch. PWD=$PWD, does ../../glibc-*-fhs-1.patch exist?"
 patch -Np1 -i ../../glibc-*-fhs-1.patch
 
 ln -sfv /tools/lib/gcc /usr/lib

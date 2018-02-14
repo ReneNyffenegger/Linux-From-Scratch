@@ -44,6 +44,9 @@ lfs_log "before make install: which $LFS_TGT-ld: $(which $LFS_TGT-ld)"
 make install
 lfs_log "after  make install: which $LFS_TGT-ld: $(which $LFS_TGT-ld)"
 
+lfs_log "readelf ... $(readelf -l            $LFS_TGT-ld | grep interpreter)"
+lfs_log "readelf ... $(readelf -l /tools/bin/$LFS_TGT-ld | grep interpreter)"
+
 # TODO
 #  Check if /tools/lib or /tools/bin was populated with make install
 

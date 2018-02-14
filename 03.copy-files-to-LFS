@@ -9,6 +9,8 @@ if [[ ! -d $lfs_root ]]; then
   mkdir $lfs_root/done
   mkdir $lfs_root/steps
   touch $lfs_root/log
+  sudo chown -R lfs:lfs $lfs_root
+# sudo chmod 755 $LFS/sources
 fi
 
 # cp lfs-env          $lfs_root
@@ -18,6 +20,10 @@ cp 30.run-as-root   $lfs_root
 cp 40.in-chroot-env $lfs_root
 cp steps/*          $lfs_root/steps
 # sudo chmod -R 777   $lfs_root
-sudo chmod -R 777   $lfs_root
-chmod -R 666 $LFS/sources
+
+# if [[ -d $LFS/sources ]]; then
+#   sudo chown -R lfs:lfs $LFS/sources
+#   sudo chmod 755 $LFS/sources
+#   sudo chmod 644 $LFS/sources/*
+# fi
 chmod 755 ../Linux-From-Scratch/

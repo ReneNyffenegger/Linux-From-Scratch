@@ -8,8 +8,6 @@ lfs_trap_err
 if  mount | grep -q $LFS ; then
   lfs_log "$LFS is mounted, OK"
 else
-# TODO: Should proably mount LFS here...
-#
   lfs_log "$LFS is not mounted."
   echo    "$LFS is not mounted !!!"
   exit 1
