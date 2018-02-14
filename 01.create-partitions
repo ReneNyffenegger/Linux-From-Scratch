@@ -9,6 +9,18 @@
 #
 echo_or_sudo=sudo
 
+check_if_mounted() {
+  if mount | grep /dev/$lfs_partition_device$1 > /dev/null ; then
+     echo Error: /dev/$lfs_partition_device$1 is already mounted
+     exit -1
+  fi
+}
+
+check_if_mounted $lfs_boot_partition_nr
+check_if_mounted $lfs_root_partition_nr
+check_if_mounted $lfs_swap_partition_nr
+
+
 memory_size_kb=$(cat /proc/meminfo | grep '^MemTotal:' | awk '{print $2}')
 memory_size_mb=$(( $memory_size_kb / 1024 ))
 
