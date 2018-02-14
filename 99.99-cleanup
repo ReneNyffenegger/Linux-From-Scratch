@@ -16,6 +16,6 @@ sudo userdel  lfs
 
 sudo rm -rf /home/lfs
 
-echo TODO: should /bin/sh be pointed back to bash
+echo TODO: should /bin/sh be pointed back to dash on Ubuntu?
 
-#q sudo umount $LFS
+sudo umount $LFS
