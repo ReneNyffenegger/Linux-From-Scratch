@@ -1,0 +1,21 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/mpc.html
+#
+
+lfs_trap_err
+
+cd /sources/untarred/mpc-*
+
+./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/mpc-1.0.3
+
+make
+# make html
+
+make check
+
+make install
+# make install-html

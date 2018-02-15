@@ -1,0 +1,56 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/binutils.html
+#
+
+lfs_trap_err
+
+# Verify if PTYs are working
+expect_gotten=$(expect -c "spawn ls")
+
+if [[ $expect_gotten != 'spawn ls' ]]; then
+  lfs_log "expect_gotten = $expect_gotten, exiting"
+  exit -1
+fi
+
+cd /sources/untarred
+
+rm -rf binutils-*
+cd ..
+tar xf binutils-* -C untarred
+
+cd /sources/untarred/binutils-*
+
+mkdir build
+cd    build
+
+
+lfs_log "calling configure"
+
+../configure --prefix=/usr       \
+             --enable-gold       \
+             --enable-ld=default \
+             --enable-plugins    \
+             --enable-shared     \
+             --disable-werror    \
+             --with-system-zlib
+
+lfs_log "configure finished"
+
+
+trap - ERR # Temporarily untrapping because ../configure will complain about missing bison
+lsf_log "calling make"
+
+make tooldir=/usr
+
+lsf_log "made"
+lfs_trap_err
+
+trap - ERR # Temporarily untrapping because debug_msg.sh fails
+make -k check
+lfs_trap_err
+
+trap - ERR # Temporarily untrapping because bison is not found, but is apparently not so terrible
+make tooldir=/usr install
+lfs_trap_err

@@ -1,0 +1,150 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/gcc.html
+#
+
+lfs_trap_err
+
+cd /sources/untarred/
+lfs_log "rm -rf gcc-*, PWD=$PWD"
+rm -rf gcc-*
+cd ..
+lfs_log "tar xf gcc-*.tar.xz, PWD=$PWD"
+tar xf gcc-*.tar.xz -C untarred
+cd untarred/gcc-*
+
+
+
+case $(uname -m) in
+  x86_64)
+    sed -e '/m64=/s/lib64/lib/' \
+        -i.orig gcc/config/i386/t-linux64
+  ;;
+esac
+
+
+# Remove symlink that was created in steps/glibc-2-a (?)
+lfs_log "before deletion of symlink ls -ld /usr/lib/gcc = $(ls -ld /usr/lib/gcc)"
+#q rm -f /usr/lib/gcc
+lfs_log "after  deletion of symlink ls -ld /usr/lib/gcc = $(ls -ld /usr/lib/gcc)"
+
+
+
+
+
+mkdir -v build
+cd       build
+
+
+
+lfs_log "executing ../configure"
+SED=sed                               \
+../configure --prefix=/usr            \
+             --enable-languages=c,c++ \
+             --disable-multilib       \
+             --disable-bootstrap      \
+             --with-system-zlib
+
+lfs_log "executing make"
+make
+
+lfs_log "executing ulimit -s 32768"
+ulimit -s 32768
+
+lfs_log "TODO / TQ84 skipping make check -k, for once"
+#q lfs_log "executing make check"
+#q make -j1 -k check
+#q
+#qlfs_log "executing ../contrib/test_summary"
+#q../contrib/test_summary
+
+lfs_log "executing make install"
+make install
+
+
+# Mandated by FHS (http://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s09.html) for historical reasons.
+ln -sv ../usr/bin/cpp /lib
+
+# Allow gcc to be called with cc
+ln -sv gcc /usr/bin/cc
+
+install -v -dm755 /usr/lib/bfd-plugins
+ln -sfv ../../libexec/gcc/$(gcc -dumpmachine)/7.2.0/liblto_plugin.so \
+        /usr/lib/bfd-plugins/
+
+
+#
+# TODO: similar thing also in adjust toolchain
+#
+echo 'int main(){}' > dummy.c
+cc dummy.c -v -Wl,--verbose &> dummy.log
+readelf_grepped=$( readelf -l a.out | grep ': /lib' )
+
+if [[ $readelf_grepped != '      [Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]' ]]; then
+  lfs_log "readelf_out = $readelf_out, exiting"
+  exit -1
+fi
+
+# TODO Similar thing also in adjust-toolchain
+dummy_grepped_1=$( grep -o '/usr/lib/.*/crt1.*succeeded' dummy.log )
+dummy_grepped_i=$( grep -o '/usr/lib/.*/crti.*succeeded' dummy.log )
+dummy_grepped_n=$( grep -o '/usr/lib/.*/crtn.*succeeded' dummy.log )
+
+if [[ $dummy_grepped_1 != '/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/../../../../lib/crt1.o succeeded' ]]; then
+   lfs_log "dummy_grepped_1 = $dummy_grepped_1, exiting"
+   exit 1
+fi
+if [[ $dummy_grepped_i != '/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/../../../../lib/crti.o succeeded' ]]; then
+   lfs_log "dummy_grepped_i = $dummy_grepped_i, exiting"
+   exit 1
+fi
+if [[ $dummy_grepped_n != '/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/../../../../lib/crtn.o succeeded' ]]; then
+   lfs_log "dummy_grepped_n = $dummy_grepped_n, exiting"
+   exit 1
+fi
+
+headers=$(grep -B4 '^ /usr/include' dummy.log)
+
+if [[ $headers != '#include <...> search starts here:
+ /usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/include
+ /usr/local/include
+ /usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/include-fixed
+ /usr/include'
+]]; then
+
+   lfs_log "headers=$headers, exiting"
+   exit -1
+fi
+
+search_dirs=$(grep 'SEARCH.*/usr/lib' dummy.log |sed 's|; |\n|g')
+if [[ $search_dirs != 'SEARCH_DIR("/usr/x86_64-pc-linux-gnu/lib64")
+SEARCH_DIR("/usr/local/lib64")
+SEARCH_DIR("/lib64")
+SEARCH_DIR("/usr/lib64")
+SEARCH_DIR("/usr/x86_64-pc-linux-gnu/lib")
+SEARCH_DIR("/usr/local/lib")
+SEARCH_DIR("/lib")
+SEARCH_DIR("/usr/lib");'  ]]; then
+
+  lfs_log "search_dirs = $search_dirs, exiting"
+  exit -1
+fi
+
+libc_used=$(grep "/lib.*/libc.so.6 " dummy.log)
+
+if [[ $libc_used != "attempt to open /lib/libc.so.6 succeeded" ]]; then
+  lfs_log "libc_used = $libc_used, exiting"
+  exit -1
+fi
+
+found=$(grep found dummy.log)
+if [[ $found != 'found ld-linux-x86-64.so.2 at /lib/ld-linux-x86-64.so.2' ]]; then
+    lfs_log "found=$found, exiting"
+    eixt -1
+fi
+
+rm -v dummy.c a.out dummy.log
+
+mkdir -pv /usr/share/gdb/auto-load/usr/lib
+mv -v /usr/lib/*gdb.py /usr/share/gdb/auto-load/usr/lib

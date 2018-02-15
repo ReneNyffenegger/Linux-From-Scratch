@@ -1,0 +1,40 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/gmp.html
+#
+
+lfs_trap_err
+
+cd /sources/untarred/gmp-*
+
+#
+# If running on 32 bit only?
+#
+# ABI=32 ./configure ...
+
+
+
+./configure --prefix=/usr    \
+            --enable-cxx     \
+            --disable-static \
+            --docdir=/usr/share/doc/gmp-6.1.2
+
+
+
+make
+# make html
+
+make check 2>&1 | tee gmp-check-log
+
+total=$( awk '/# PASS:/{total+=$3} ; END{print total}' gmp-check-log )
+
+if [[ $total != '190' ]]; then
+  lfs_log "total = $total, exiting"
+  exit -1
+fi
+
+lfs_log "total=$total"
+
+make install
+# make install-html

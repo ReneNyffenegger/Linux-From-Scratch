@@ -1,0 +1,18 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/pkg-config.html
+#
+
+lfs_trap_err
+
+cd /sources/untarred/pkg-config-*
+
+./configure --prefix=/usr              \
+            --with-internal-glib       \
+            --disable-host-tool        \
+            --docdir=/usr/share/doc/pkg-config-0.29.2
+
+make
+make check
+make install

@@ -1,0 +1,15 @@
+#
+# vi: ft=sh
+#
+#  libtool
+#
+
+lfs_trap_err
+
+cd /sources/untarred/libtool-*
+
+./configure --prefix=/usr
+
+make
+make check
+make install

@@ -6,15 +6,20 @@
 lfs_trap_err
 
 pushd /sources/untarred
+lfs_log "rm -rf glibc-*, PWD=$PWD"
 rm -rf glibc-*
 cd ..
+lfs_log "untarring glibc-*.tar.xz, PWD=$PWD"
 tar xf glibc-*.tar.xz -C untarred
 cd untarred/glibc-*
 
 lfs_log "Apply patch. PWD=$PWD, does ../../glibc-*-fhs-1.patch exist?"
 patch -Np1 -i ../../glibc-*-fhs-1.patch
 
+# Create symlink. This will apparently be deleted again in steps/installation-gcc
+lfs_log "before symlink ls -ld /usr/lib/gcc = $(ls -ld /usr/lib/gcc)"
 ln -sfv /tools/lib/gcc /usr/lib
+lfs_log "after  symlink ls -ld /usr/lib/gcc = $(ls -ld /usr/lib/gcc)"
 
 
 case $(uname -m) in

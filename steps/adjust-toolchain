@@ -11,6 +11,7 @@ lfs_log "adjusting toolchain, PWD=$PWD"
 
 
 
+lfs_log "TQ84 dumpsec into $(dirname $(gcc --print-libgcc-file-name)/specs)"
 gcc -dumpspecs | sed -e 's@/tools@@g'                   \
     -e '/\*startfile_prefix_spec:/{n;s@.*@/usr/lib/ @}' \
     -e '/\*cpp:/{n;s@$@ -isystem /usr/include@}' >      \

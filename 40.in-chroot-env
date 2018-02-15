@@ -23,5 +23,46 @@ lfs_run_step glibc-2-b
 lfs_run_step glibc-2-c-install
 lfs_run_step glibc-2-d-configuring
 lfs_run_step glibc-2-d-configuring
-lfs_run_step backup-tools
+lfs_run_step adjust-toolchain-backup-tools
 lfs_run_step adjust-toolchain
+lfs_run_step installation-zlib
+lfs_run_step installation-file
+lfs_run_step installation-readline
+lfs_run_step installation-m4
+lfs_run_step installation-bc
+lfs_run_step installation-binutils
+lfs_run_step installation-gmp
+lfs_run_step installation-mpfr
+lfs_run_step installation-mpc
+lfs_run_step installation-gcc
+lfs_run_step installation-bzip2
+lfs_run_step installation-pkg-config
+lfs_run_step installation-ncurses
+lfs_run_step installation-attr
+lfs_run_step installation-acl
+lfs_run_step installation-libcap
+lfs_run_step installation-sed
+lfs_run_step installation-shadow
+lfs_run_step installation-psmisc
+lfs_run_step installation-iana-etc
+lfs_run_step installation-bison
+lfs_run_step installation-flex
+lfs_run_step installation-grep
+lfs_run_step installation-bash
+lfs_run_step installation-libtool
+lfs_run_step installation-gdbm
+lfs_run_step installation-gperf
+lfs_run_step installation-expat
+lfs_run_step installation-inetutils
+lfs_run_step installation-perl
+lfs_run_step installation-xml-parser
+lfs_run_step installation-intltool
+lfs_run_step installation-autoconf
+lfs_run_step installation-automake
+lfs_run_step installation-automake
+
+# lfs_untar_and_cd lfs_run_step installation-xz
+# lfs_untar_and_cd lfs_run_step installation-kmod
+# lfs_untar_and_cd lfs_run_step installation-gettext
+# lfs_untar_and_cd lfs_run_step installation-procps-ng
+# lfs_untar_and_cd lfs_run_step installation-e2fsprogs

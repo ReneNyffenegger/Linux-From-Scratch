@@ -1,0 +1,9 @@
+lfs_trap_err
+
+cd /sources/untarred/file-*
+
+./configure --prefix=/usr
+
+make
+make check
+make install

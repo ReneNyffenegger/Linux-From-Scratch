@@ -1,0 +1,31 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/bash.html
+#
+
+lfs_trap_err
+
+cd /sources/untarred/bash-*
+
+patch -Np1 -i ../../bash-4.4-upstream_fixes-1.patch
+
+./configure --prefix=/usr                       \
+            --docdir=/usr/share/doc/bash-4.4    \
+            --without-bash-malloc               \
+            --with-installed-readline
+
+make
+
+chown -Rv nobody .
+
+su nobody -s /bin/bash -c "PATH=$PATH make tests"
+
+make install
+
+mv -vf /usr/bin/bash /bin
+
+#
+lfs_log "TQ84: does /bin/bash really need to be exec'd"
+#
+# exec /bin/bash --login +h

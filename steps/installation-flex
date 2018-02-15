@@ -1,0 +1,22 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/flex.html
+#
+
+lfs_trap_err
+
+cd /sources/untarred/flex-*
+
+sed -i "/math.h/a #include <malloc.h>" src/flexdef.h
+
+HELP2MAN=/tools/bin/true \
+./configure --prefix=/usr --docdir=/usr/share/doc/flex-2.6.4
+
+
+make
+make check
+make install
+
+ln -sv flex /usr/bin/lex
+

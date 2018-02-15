@@ -55,3 +55,26 @@ lfs_trap_err() {
   trap 'lfs_trap_err_handler $LINENO' ERR
 }
 export -f lfs_trap_err
+
+lfs_untar_and_cd() {
+  local tar_pattern=$1
+  local script_name=${BASH_SOURCE[1]}
+  lfs_log_ $script_name "lfs_untar_and_cd, tar_pattern=$tar_pattern"
+
+  cd /sources
+  if [[ -d untarred/$tar_pattern-* ]]; then
+    lfs_log_ $script_name "lfs_untar_and_cd, untarred untarred/$tar_pattern exists, removing it"
+    rm -rf untarred/$tar_pattern-*
+  fi
+
+  tar xv $tar_pattern-* -C untarred
+  cd untarred/$tar_pattern-*
+
+}
+lfs_cd_untarred() {
+  local tar_pattern=$1
+  local script_name=${BASH_SOURCE[1]}
+
+  fs_log_ $script_name "lfs_cd_untarred: cd'ing into /sources/untarred/$tar_pattern-*"
+  cd /sources/untarred/$tar_patten-*
+}

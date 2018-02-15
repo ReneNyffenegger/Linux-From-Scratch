@@ -1,0 +1,20 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/automake.html
+#
+
+lfs_trap_err
+
+cd /sources/untarred/automake-*
+
+
+./configure --prefix=/usr --docdir=/usr/share/doc/automake-1.15.1
+
+
+make
+
+sed -i "s:./configure:LEXLIB=/usr/lib/libfl.a &:" t/lex-{clean,depend}-cxx.sh
+make -j4 check
+
+make install
