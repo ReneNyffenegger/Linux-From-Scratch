@@ -1,0 +1,92 @@
+#
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter06/adjusting.html
+
+lfs_trap_err
+
+pushd /lfs
+
+lfs_log "adjusting toolchain, PWD=$PWD"
+
+
+
+gcc -dumpspecs | sed -e 's@/tools@@g'                   \
+    -e '/\*startfile_prefix_spec:/{n;s@.*@/usr/lib/ @}' \
+    -e '/\*cpp:/{n;s@$@ -isystem /usr/include@}' >      \
+    `dirname $(gcc --print-libgcc-file-name)`/specs
+
+# Expected output for following commands is something like
+#   [Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]
+# Note, the dynamic linker is prefixed with /lib
+echo 'int main(){}' > dummy.c
+lfs_log "going to compile dummy.ch"
+cc dummy.c -v -Wl,--verbose &> dummy.log
+
+readelf_grepped=$(readelf -l a.out | grep ': /lib')
+lfs_log "readelf grepped: $readelf_grepped"
+
+if [[ $readelf_grepped != '      [Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]' ]]; then
+  lfs_log "readelf grepped is not what it was expected to be";
+  exit 1
+fi
+
+
+dummy_grepped_1=$( grep -o '/usr/lib/.*/crt1.*succeeded' dummy.log )
+dummy_grepped_i=$( grep -o '/usr/lib/.*/crti.*succeeded' dummy.log )
+dummy_grepped_n=$( grep -o '/usr/lib/.*/crtn.*succeeded' dummy.log )
+
+if [[ $dummy_grepped_1 != '/usr/lib/../lib/crt1.o succeeded' ]]; then
+   lfs_log "dummy_grepped_1 = $dummy_grepped_1, exiting"
+   exit 1
+fi
+if [[ $dummy_grepped_i != '/usr/lib/../lib/crti.o succeeded' ]]; then
+   lfs_log "dummy_grepped_i = $dummy_grepped_i, exiting"
+   exit 1
+fi
+if [[ $dummy_grepped_n != '/usr/lib/../lib/crtn.o succeeded' ]]; then
+   lfs_log "dummy_grepped_n = $dummy_grepped_n, exiting"
+   exit 1
+fi
+
+header_files=$(grep -B1 '^ /usr/include' dummy.log)
+
+if [[ $header_files != '#include <...> search starts here:
+ /usr/include' ]] ; then
+
+   lfs_log "header_files = >$header_files<, exiting"
+   exit 1
+fi
+
+linker=$(grep 'SEARCH.*/usr/lib' dummy.log | sed 's|; |\n|g' | grep -v -- '-linux-gnu' )
+if [[ $linker != 'SEARCH_DIR("/usr/lib")
+SEARCH_DIR("/lib")' ]]; then
+
+   lfs_log "linker = >$linker<, exiting"
+   exit 1
+fi
+# Expected output something like:
+#     SEARCH_DIR("=/tools/x86_64-pc-linux-gnu/lib64")
+#     SEARCH_DIR("/usr/lib")
+#     SEARCH_DIR("/lib")
+#     SEARCH_DIR("=/tools/x86_64-pc-linux-gnu/lib");
+# Ignore lines with '-linux-gnu' components.
+
+glibc=$(grep "/lib.*/libc.so.6 " dummy.log)
+if [[ $glibc != 'attempt to open /lib/libc.so.6 succeeded' ]]; then
+    lfs_log "glibc=$glibc, exiting"
+    exit -1
+fi
+# Expected output:
+#     attempt to open /lib64/libc.so.6 succeeded
+
+
+found=$(grep found dummy.log)
+if [[ $found != 'found ld-linux-x86-64.so.2 at /lib/ld-linux-x86-64.so.2' ]]; then
+    lfs_log "found=$found, exiting"
+    exit -1
+fi
+
+rm -v dummy.c a.out dummy.log
+
+exit 0

@@ -1,0 +1,18 @@
+#
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter06/adjusting.html
+
+lfs_trap_err
+
+# backup the /tools linker, and replace it with the adjusted linker we made in chapter 5.
+
+lfs_log "ls -l /tools/bin/ld*: $(ls -l /tools/bin/ld*)"
+lfs_log "ls -l /tools/$(uname -m)-pc-linux-gnu/bin/ld*: $(ls -l /tools/$(uname -m)-pc-linux-gnu/bin/ld)"
+
+mv -v /tools/bin/{ld,ld-old}
+mv -v /tools/$(uname -m)-pc-linux-gnu/bin/{ld,ld-old}
+mv -v /tools/bin/{ld-new,ld}
+ln -sv /tools/bin/ld /tools/$(uname -m)-pc-linux-gnu/bin/ld
+
+exit 0
