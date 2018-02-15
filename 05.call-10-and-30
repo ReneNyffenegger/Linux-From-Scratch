@@ -1,0 +1,24 @@
+# vi: set ft=sh
+#
+
+. ./lfs-env
+
+lfs_trap_err
+
+lfs_log "Calling ./10.run"
+./10.run
+
+if [[ -f go-on-with-30 ]]; then
+   lfs_log "go-on-with-30 found"
+   lfs_log "changing ownership $LFS/tools"
+
+   sudo chown -R root:root $LFS/tools
+
+# TODO http://www.linuxfromscratch.org/lfs/view/stable/chapter05/toolchaintechnotes.html
+
+   lfs_log "Calling ./30.run"
+   sudo ./30.run-as-root
+
+else
+  lfs_log "go-on-with 30 not found"
+fi

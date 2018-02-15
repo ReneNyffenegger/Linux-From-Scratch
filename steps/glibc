@@ -6,6 +6,10 @@
 
 lfs_trap_err
 
+#
+# TODO: this removing should not be necessary once
+# the build completes.
+#
 # pushd $LFS/sources/untarred/glibc-*
   pushd $LFS/sources/untarred
   rm -rf glibc-*
@@ -14,8 +18,8 @@ lfs_trap_err
   tar xf glibc-*.tar.xz -C untarred
   cd untarred/glibc-*
 
-lfs_log "Applying patch"
-patch -Np1 -i ../../glibc-2.26-fhs-1.patch
+# lfs_log "Applying patch"
+# patch -Np1 -i ../../glibc-2.26-fhs-1.patch
 
 mkdir -v build
 cd       build 
@@ -47,7 +51,7 @@ lfs_log "calling ../configure, PWD=$PWD"
       --enable-kernel=3.2                \
       --with-headers=/tools/include      \
       libc_cv_forced_unwind=yes          \
-      libc_cv_ctors_header=yes
+      libc_cv_c_cleanup=yes
 
 
 lfs_log "calling make, MAKEFLAGS=$MAKEFLAGS"
@@ -58,7 +62,9 @@ make
 #
 # make -j1
 
+lfs_log "ls -l /tools/lib before make install: $(ls -l /tools/lib)"
 make install
+lfs_log "ls -l /tools/lib after  make install: $(ls -l /tools/lib)"
 
 #
 # Sanity check

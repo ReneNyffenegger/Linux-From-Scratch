@@ -1,0 +1,14 @@
+# vim: ft=sh
+
+lfs_trap_err
+
+package_depot_dir=~/lfs.sources
+
+if [[ ! -d ~/lfs.sources ]]; then
+  lfs_log "Copying packages from $LFS/sources to $package_depot_dir"
+  cp -r $LFS/sources $package_depot_dir
+else
+  lfs_log "Package depot $package_depot_dir already exists, not copying"
+fi
+
+exit 0

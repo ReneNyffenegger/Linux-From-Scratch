@@ -53,6 +53,7 @@ cp -pr ../mpc-*  ./mpc
 mkdir -v  build
 cd        build
 
+lfs_log "calling configure, PWD=$PWD"
 
 CC=$LFS_TGT-gcc                                    \
 CXX=$LFS_TGT-g++                                   \

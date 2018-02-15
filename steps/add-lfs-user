@@ -27,9 +27,13 @@ else
   lfs_log "user lfs already exists"
 fi
 
-sudo chown -v lfs $LFS/tools
-sudo chown -v lfs $LFS/sources
+sudo chown -v  lfs $LFS/tools
+sudo chown -Rv lfs $LFS/sources
+sudo chown -R  lfs $lfs_root
 
-# 2018-02-12 chmod 755 ./lfs-env
+# sudo chmod    755 $LFS/tools
+sudo chmod    755 $LFS/sources
+sudo chmod    655 $LFS/sources/*
+sudo chmod -R 777 $lfs_root
 
 exit 0

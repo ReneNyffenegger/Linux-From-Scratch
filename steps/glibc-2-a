@@ -7,11 +7,8 @@ lfs_trap_err
 
 pushd /sources/untarred
 rm -rf glibc-*
-
-cd /sources
-
+cd ..
 tar xf glibc-*.tar.xz -C untarred
-
 cd untarred/glibc-*
 
 lfs_log "Apply patch. PWD=$PWD, does ../../glibc-*-fhs-1.patch exist?"

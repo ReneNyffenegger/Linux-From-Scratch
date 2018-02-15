@@ -9,9 +9,6 @@ lfs_run_step prep-virt-kfs
 
 
 
-
-
-
 # TODO lfs_run_step enter-chroot-env
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter06/chroot.html
 chroot "$LFS" /tools/bin/env -i                           \
