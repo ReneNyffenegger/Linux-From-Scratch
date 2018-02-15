@@ -16,6 +16,18 @@ patch -Np1 -i ../../glibc-*-fhs-1.patch
 
 ln -sfv /tools/lib/gcc /usr/lib
 
+
+case $(uname -m) in
+    i?86)    GCC_INCDIR=/usr/lib/gcc/$(uname -m)-pc-linux-gnu/7.2.0/include
+            ln -sfv ld-linux.so.2 /lib/ld-lsb.so.3
+    ;;
+    x86_64) GCC_INCDIR=/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/include
+            ln -sfv ../lib/ld-linux-x86-64.so.2 /lib64
+            ln -sfv ../lib/ld-linux-x86-64.so.2 /lib64/ld-lsb-x86-64.so.3
+    ;;
+esac
+
+
 rm -f /usr/include/limits.h
 
 
@@ -23,6 +35,7 @@ rm -f /usr/include/limits.h
 mkdir -v build
 cd       build
 
+lfs_log "calling configure"
 CC="gcc -isystem $GCC_INCDIR -isystem /usr/include" \
 ../configure --prefix=/usr                          \
              --disable-werror                       \
@@ -39,8 +52,9 @@ CC="gcc -isystem $GCC_INCDIR -isystem /usr/include" \
 
 unset GCC_INCDIR
 
+lfs_log "calling make"
 make
 
 popd
 
-return 0
+exit 0

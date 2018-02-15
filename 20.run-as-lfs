@@ -42,6 +42,6 @@ lfs_run_step stripping
 lfs_log "exiting from 20.run-as-lfs to become a user in sudo group"
 
 # TODO: not so nice a solution
-touch go-on-with-30
+touch $lfs_root/done/20
 
 exit 0

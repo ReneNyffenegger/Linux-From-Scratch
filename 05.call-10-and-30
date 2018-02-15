@@ -8,8 +8,8 @@ lfs_trap_err
 lfs_log "Calling ./10.run"
 ./10.run
 
-if [[ -f go-on-with-30 ]]; then
-   lfs_log "go-on-with-30 found"
+if [[ -f $lfs_root/done/20 ]]; then
+   lfs_log "$lfs_root/done/20 found"
    lfs_log "changing ownership $LFS/tools"
 
    sudo chown -R root:root $LFS/tools
@@ -20,5 +20,5 @@ if [[ -f go-on-with-30 ]]; then
    sudo ./30.run-as-root
 
 else
-  lfs_log "go-on-with 30 not found"
+   lfs_log "$lfs_root/done/20 not found"
 fi

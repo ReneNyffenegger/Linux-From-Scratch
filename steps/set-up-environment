@@ -40,7 +40,7 @@ export LFS_TGT=$(uname -m)-lfs-linux-gnu
 export PATH=/tools/bin:/bin:/usr/bin
 # export MAKEFLAGS='-j 2'                        # http://www.linuxfromscratch.org/lfs/view/stable/chapter04/aboutsbus.html / # TODO should I enable it. See also steps/glibc (make -j1)
 cd $lfs_root
-if [[ $lfs_root/20.run-as-lfs ]]; then
+if $lfs_root/20.run-as-lfs; then
    exit # 2018-02-15: go back 
 else
    echo "./bashrc: remaining as lfs"

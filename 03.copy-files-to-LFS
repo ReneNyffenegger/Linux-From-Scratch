@@ -19,7 +19,7 @@ cp 20.run-as-lfs    $lfs_root
 cp 30.run-as-root   $lfs_root
 cp 40.in-chroot-env $lfs_root
 cp steps/*          $lfs_root/steps
-# sudo chmod -R 777   $lfs_root
+sudo chmod    777   $lfs_root/steps/*
 
 # if [[ -d $LFS/sources ]]; then
 #   sudo chown -R lfs:lfs $LFS/sources

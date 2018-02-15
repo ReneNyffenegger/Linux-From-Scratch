@@ -1,7 +1,16 @@
-# vi: set ft=sh
+# vi: ft=sh
 #
 
 . /lfs/lfs-functions
+
+lfs_trap_err
+
+if [[ ! -e /lfs ]]; then
+   lfs_log "/lfs does not exist"
+   exit 1
+else
+   lfs_log "/lfs exists, going on ($lfs_root=$lfs_root)"
+fi
 
 lfs_log "Entered chroot env, id=$(id), ls / -> $(ls /)"
 
@@ -11,4 +20,5 @@ lfs_run_step Linux-API-headers-2
 lfs_run_step man-pages
 lfs_run_step glibc-2-a
 lfs_run_step glibc-2-b
-
+lfs_run_step glibc-2-c-install
+lfs_run_step glibc-2-d-configuring
