@@ -11,25 +11,26 @@ lfs_trap_err
 # TODO: Same variable also in steps/copy-fetched-packages
 lfs_package_depot_dir=~/lfs.sources
 
+
 if [[ -d $lfs_package_depot_dir ]]; then # { copy from depot dir, if available
    lfs_log "lfs_package_depot_dir ($lfs_package_depot_dir) exists, copying from there"
 
-   if [[ ! -d $lfs_source_dir ]]; then
-       # TODO this check should not be necessary....
-       lfs_log "lfs_source_dir does not exist"
-       exit -1
-   fi
+#  if [[ ! -d $lfs_source_dir ]]; then
+#      # TODO this check should not be necessary....
+#      lfs_log "lfs_source_dir ($lfs_source_dir) does not exist"
+#      exit -1
+#  fi
 
    cp -r $lfs_package_depot_dir $lfs_source_dir
+   exit 0
 fi # }
+
 
 if [[ ! -d $LFS/sources ]]; then
     lfs_log "$LFS/sources does not exist. Creating"
     mkdir -pv $LFS/sources
-
 fi
 chmod -v a+wt $LFS/sources
-
 
 lfs_log "downloading sources"
 

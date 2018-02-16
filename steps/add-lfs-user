@@ -7,25 +7,27 @@
 
 lfs_trap_err
 
-if ! grep -q '^lfs:' /etc/group ; then
-   sudo groupadd lfs
-   lfs_log "group lfs created"
-else
-   lfs_log "group lfs already exists"
-fi
-
-
-# Create user lfs, adding to group lfs (if it not already exists)
-
-if ! id lfs >/dev/null 2>&1 ; then
-  sudo useradd  -s /bin/bash -g lfs -m -k /dev/null lfs
-
-  # Change password for lfs to pw
-  echo 'lfs:pw' | sudo chpasswd
-  lfs_log "user lfs created"
-else
-  lfs_log "user lfs already exists"
-fi
+# TODO: lfs is not added here, lfs must be created at the beginning
+#
+# if ! grep -q '^lfs:' /etc/group ; then
+#    sudo groupadd lfs
+#    lfs_log "group lfs created"
+# else
+#    lfs_log "group lfs already exists"
+# fi
+# 
+# 
+# # Create user lfs, adding to group lfs (if it not already exists)
+# 
+# if ! id lfs >/dev/null 2>&1 ; then
+#   sudo useradd  -s /bin/bash -g lfs -m -k /dev/null lfs
+# 
+#   # Change password for lfs to pw
+#   echo 'lfs:pw' | sudo chpasswd
+#   lfs_log "user lfs created"
+# else
+#   lfs_log "user lfs already exists"
+# fi
 
 sudo chown -v  lfs $LFS/tools
 sudo chown -Rv lfs $LFS/sources

@@ -18,7 +18,7 @@ fi
 lfs_run_step fetch-packages-and-patches
 lfs_run_step copy-fetched-packages
 lfs_run_step create-LFS-tools-directory
-lfs_run_step add-lfs-user
+lfs_run_step add-lfs-user                 # TQ84 This step is not adding the lfs user anymore.
 lfs_run_step set-up-environment
 
 
@@ -37,4 +37,4 @@ else
   lfs_log "$USER == lfs, not switching to lfs"
 fi
 
-lfs_log "10.run: is this ever reached (two)?"
+lfs_log "10.run: is this ever reached (two)? Apparently so."

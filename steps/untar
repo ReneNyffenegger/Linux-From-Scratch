@@ -2,7 +2,7 @@
 
 lfs_trap_err
 
-pushd $LFS/sources
+cd $LFS/sources
 mkdir untarred
 
 for tar in *.tar.xz *.tar.bz2 *.tar.xz *.tar.gz; do
@@ -18,7 +18,5 @@ for tar in *.tar.xz *.tar.bz2 *.tar.xz *.tar.gz; do
         tar xf $tar -C untarred
     fi
 done
-
-popd
 
 exit 0
