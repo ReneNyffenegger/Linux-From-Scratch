@@ -1,6 +1,14 @@
-# vi: set ft=sh
+# vi: ft=sh
 #
 . ./lfs-env
+
+for mount in $(mount | awk '{ print $3 }' | grep $LFS/); do
+#
+#   TODO: should $LFS/dev be unmounted first
+#
+    echo unmounting $mount
+    sudo umount $mount
+done
 
 sudo rm /tools
 
