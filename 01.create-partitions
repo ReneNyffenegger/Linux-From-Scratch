@@ -28,10 +28,13 @@ $echo_or_sudo dd bs=1024 count=$((1024 * 25 )) if=/dev/zero of=/dev/$lfs_partiti
 
 $echo_or_sudo parted /dev/$lfs_partition_device -s mklabel gpt
 
+#
+#  TODO: Should it not be possible to create a partition with 10GiB
+#
 $echo_or_sudo parted -s /dev/$lfs_partition_device  \
    mkpart lfs_boot_partition ext4     1MiB 100MiB   \
-   mkpart lfs_root_partition ext4   100MiB  10GiB   \
-   mkpart lfs_swap_partition ext4    10GiB $(( 10*1024 + 2*$memory_size_mb ))MiB \
+   mkpart lfs_root_partition ext4   100MiB  20GiB   \
+   mkpart lfs_swap_partition ext4    20GiB $(( 10*1024 + 2*$memory_size_mb ))MiB \
    print
 
 

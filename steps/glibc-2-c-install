@@ -3,11 +3,16 @@
 
 lfs_trap_err
 
-pushd /sources/untarred/glibc-*
+# pushd /sources/untarred/glibc-*
+lfs_cd_untarred glibc
 
 touch /etc/ld.so.conf
 
 cd build
+
+#
+#  Substitue '$(PERL)' with 'echo not running' in line matching 'test-installation':
+#
 sed '/test-installation/s@$(PERL)@echo not running@' -i ../Makefile
 
 lfs_log "executing make install"
@@ -41,7 +46,5 @@ localedef -i zh_CN      -f GB18030 zh_CN.GB18030
 
 lfs_log "TODO install locale for own country, language and character set"
 lfs_log "TODO or, alternatively, make localedata/install-locales"
-
-popd
 
 exit 0

@@ -28,6 +28,9 @@ EOF
 lfs_log "Adding time zone data"
 
 # tar -xf ../../tzdata2016a.tar.gz
+#
+# TODO: cannot use lfs_cd_untarred because tzdata does not end in -
+#
 pushd /sources/untarred/tzdata
 
 tar -xf ../../tzdata2017b.tar.gz
@@ -64,4 +67,4 @@ cat > /etc/ld.so.conf << "EOF"
 # include /etc/ld.so.conf.d/*.conf
 EOF
 
-mkdir -pv /etc/ld.so.conf.d
+# mkdir -pv /etc/ld.so.conf.d

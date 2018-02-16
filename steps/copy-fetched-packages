@@ -2,13 +2,14 @@
 
 lfs_trap_err
 
-package_depot_dir=~/lfs.sources
+# TODO: Same variable also in steps/fetch-packages-and-patches
+lfs_package_depot_dir=~/lfs.sources
 
 if [[ ! -d ~/lfs.sources ]]; then
-  lfs_log "Copying packages from $LFS/sources to $package_depot_dir"
-  cp -r $LFS/sources $package_depot_dir
+  lfs_log "Copying packages from $LFS/sources to $lfs_package_depot_dir"
+  cp -r $LFS/sources $lfs_package_depot_dir
 else
-  lfs_log "Package depot $package_depot_dir already exists, not copying"
+  lfs_log "Package depot $lfs_package_depot_dir already exists, not copying"
 fi
 
 exit 0

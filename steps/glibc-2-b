@@ -1,22 +1,30 @@
 #
 # vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter06/glibc.html
 
 lfs_trap_err
 
 
-pushd /sources/untarred/glibc-*
+lfs_cd_untarred glibc
+# pushd /sources/untarred/glibc-*
 
 cd build
+lfs_log "make check, PWD=$PWD"
 
 # TODO if [ ${RUN_TESTS_CHAPTER_6-NO} == "YES" ]; then
+
+  trap - ERR # make check has some known failes, so don't trap error messages here
   make check
+  lfs_trap_err
 
   cat *test-result
 
-  grep -v OK$ *.out
+  lfs_log "grep -v OK$, PWD=$PWD"
+  if ! grep -v OK$ *.out > grep_v_ok ; then
+    lfs_log "grep -v OK found not oks, look at grep_v_ok"
+  fi
+  lfs_log "grepped"
 # TODO fi
 
-# ------------------------------------
-popd
-
-return 0
+exit 0

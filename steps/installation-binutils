@@ -14,14 +14,17 @@ if [[ $expect_gotten != 'spawn ls' ]]; then
   exit -1
 fi
 
-cd /sources/untarred
+lfs_untar_and_cd binutils
 
-rm -rf binutils-*
-cd ..
-tar xf binutils-* -C untarred
+# cd /sources/untarred
+# 
+# rm -rf binutils-*
+# cd ..
+# tar xf binutils-* -C untarred
+# 
+# cd /sources/untarred/binutils-*
 
-cd /sources/untarred/binutils-*
-
+lfs_log "TQ84 mkdir build, PWD=$PWD"
 mkdir build
 cd    build
 
@@ -40,11 +43,11 @@ lfs_log "configure finished"
 
 
 trap - ERR # Temporarily untrapping because ../configure will complain about missing bison
+
 lsf_log "calling make"
-
 make tooldir=/usr
-
 lsf_log "made"
+
 lfs_trap_err
 
 trap - ERR # Temporarily untrapping because debug_msg.sh fails

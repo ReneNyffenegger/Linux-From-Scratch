@@ -20,13 +20,10 @@ export lfs_swap_partition_nr=3
 
 export LFS=$(realpath $PWD/mnt-lfs)
 
-# TODO: Is this variable needed here?
-# export LFS_TGT=$(uname -m)-lfs-linux-gnu
-
-# 
 #
 # 2018-02-12 export lfs_root=$(realpath $PWD)
 export lfs_root=$LFS/lfs
+export lfs_source_dir=$LFS/sources
 
 # Functions
 #

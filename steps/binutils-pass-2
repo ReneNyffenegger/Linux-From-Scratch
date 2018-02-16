@@ -39,6 +39,15 @@ make install
 
 make -C ld clean
 make -C ld LIB_PATH=/usr/lib:/lib
+
+#
+#   Apparently, binutils builds an ld/ld-new
+#
+#   ld/ld-new will be moved again in steps/adjust-toolchain-backup-tools
+#
+lfs_log "TQ84: ls -l ld/ld-new:     $(ls -l ld/ld-new)"
+lfs_log "TQ84: ls -ld /tools:       $(ls -ld /tools)"
+lfs_log "TQ84: ls -ld /tools/bin:   $(ls -ld /tools/bin)"
 cp -v ld/ld-new /tools/bin
 
 popd

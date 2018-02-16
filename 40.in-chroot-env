@@ -22,7 +22,6 @@ lfs_run_step glibc-2-a
 lfs_run_step glibc-2-b
 lfs_run_step glibc-2-c-install
 lfs_run_step glibc-2-d-configuring
-lfs_run_step glibc-2-d-configuring
 lfs_run_step adjust-toolchain-backup-tools
 lfs_run_step adjust-toolchain
 lfs_run_step installation-zlib
@@ -34,6 +33,7 @@ lfs_run_step installation-binutils
 lfs_run_step installation-gmp
 lfs_run_step installation-mpfr
 lfs_run_step installation-mpc
+lfs_run_step installation-gcc-delete-symlink
 lfs_run_step installation-gcc
 lfs_run_step installation-bzip2
 lfs_run_step installation-pkg-config
@@ -58,7 +58,6 @@ lfs_run_step installation-perl
 lfs_run_step installation-xml-parser
 lfs_run_step installation-intltool
 lfs_run_step installation-autoconf
-lfs_run_step installation-automake
 lfs_run_step installation-automake
 
 # lfs_untar_and_cd lfs_run_step installation-xz

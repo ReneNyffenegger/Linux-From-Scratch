@@ -6,37 +6,42 @@
 
 lfs_trap_err
 
-cd /sources/untarred/
-lfs_log "rm -rf gcc-*, PWD=$PWD"
-rm -rf gcc-*
-cd ..
-lfs_log "tar xf gcc-*.tar.xz, PWD=$PWD"
-tar xf gcc-*.tar.xz -C untarred
-cd untarred/gcc-*
+lfs_untar_and_cd gcc
+
+# cd /sources/untarred/
+# lfs_log "rm -rf gcc-*, PWD=$PWD"
+# rm -rf gcc-*
+# cd ..
+# lfs_log "tar xf gcc-*.tar.xz, PWD=$PWD"
+# tar xf gcc-*.tar.xz -C untarred
+# cd untarred/gcc-*
 
 
 
 case $(uname -m) in
   x86_64)
+    lfs_log "uname -m = $(uname -m) -> do the sed thing in $PWD"
     sed -e '/m64=/s/lib64/lib/' \
         -i.orig gcc/config/i386/t-linux64
   ;;
 esac
 
 
-# Remove symlink that was created in steps/glibc-2-a (?)
-lfs_log "before deletion of symlink ls -ld /usr/lib/gcc = $(ls -ld /usr/lib/gcc)"
-#q rm -f /usr/lib/gcc
-lfs_log "after  deletion of symlink ls -ld /usr/lib/gcc = $(ls -ld /usr/lib/gcc)"
-
-
-
-
-
 mkdir -v build
 cd       build
 
 
+# TODO: Most of these log commands are not really necessary
+lfs_log "lfs_root: $lfs_root"
+lfs_log "lfs_source_dir: $lfs_source_dir"
+lfs_log "ls -l /usr/bin/gcc: $(ls -l /usr/bin/gcc)"
+lfs_log "PATH:             $PATH"
+lfs_log "echo (echo PATH): $(echo $PATH)"
+lfs_log "type gcc: $(type gcc)"          # which is not known at this time
+# lfs_log "which gcc: $(which gcc)"          # which is not known at this time
+# lfs_log "ls -l gcc: $(ls -l $which(gcc))"  # which is not known at this time
+lfs_log "gcc -v   : $(gcc -v)"
+lfs_log "/usr/bin/gcc -v   : $(/usr/bin/gcc -v)"
 
 lfs_log "executing ../configure"
 SED=sed                               \

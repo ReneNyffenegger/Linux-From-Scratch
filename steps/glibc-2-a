@@ -5,13 +5,14 @@
 
 lfs_trap_err
 
-pushd /sources/untarred
-lfs_log "rm -rf glibc-*, PWD=$PWD"
-rm -rf glibc-*
-cd ..
-lfs_log "untarring glibc-*.tar.xz, PWD=$PWD"
-tar xf glibc-*.tar.xz -C untarred
-cd untarred/glibc-*
+lfs_untar_and_cd glibc
+# cd /sources/untarred
+# lfs_log "rm -rf glibc-*, PWD=$PWD"
+# rm -rf glibc-*
+# cd ..
+# lfs_log "untarring glibc-*.tar.xz, PWD=$PWD"
+# tar xf glibc-*.tar.xz -C untarred
+# cd untarred/glibc-*
 
 lfs_log "Apply patch. PWD=$PWD, does ../../glibc-*-fhs-1.patch exist?"
 patch -Np1 -i ../../glibc-*-fhs-1.patch
@@ -40,7 +41,7 @@ rm -f /usr/include/limits.h
 mkdir -v build
 cd       build
 
-lfs_log "calling configure"
+lfs_log "calling configure, GCC_INCDIR=$GCC_INCDIR"
 CC="gcc -isystem $GCC_INCDIR -isystem /usr/include" \
 ../configure --prefix=/usr                          \
              --disable-werror                       \
@@ -60,6 +61,5 @@ unset GCC_INCDIR
 lfs_log "calling make"
 make
 
-popd
 
 exit 0

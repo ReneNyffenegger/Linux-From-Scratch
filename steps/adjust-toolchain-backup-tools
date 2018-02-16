@@ -10,9 +10,9 @@ lfs_trap_err
 lfs_log "ls -l /tools/bin/ld*: $(ls -l /tools/bin/ld*)"
 lfs_log "ls -l /tools/$(uname -m)-pc-linux-gnu/bin/ld*: $(ls -l /tools/$(uname -m)-pc-linux-gnu/bin/ld)"
 
-mv -v /tools/bin/{ld,ld-old}
-mv -v /tools/$(uname -m)-pc-linux-gnu/bin/{ld,ld-old}
-mv -v /tools/bin/{ld-new,ld}
+mv  -v /tools/bin/{ld,ld-old}
+mv  -v /tools/$(uname -m)-pc-linux-gnu/bin/{ld,ld-old}
+mv  -v /tools/bin/{ld-new,ld}                                  # See steps/binutils-pass-2
 ln -sv /tools/bin/ld /tools/$(uname -m)-pc-linux-gnu/bin/ld
 
 exit 0

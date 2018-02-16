@@ -19,6 +19,8 @@ lfs_run_step() {
   local step_name=$1
   local script_name=${BASH_SOURCE[1]}
 
+
+
   if [[ -f $lfs_root/done/$step_name ]]; then
     lfs_log_ $script_name "already done: $step_name"
     return
@@ -26,20 +28,45 @@ lfs_run_step() {
 
   lfs_log_ $script_name "doing step   : $step_name, id=$(id)"
 
+  if [[ $lfs_in_chroot_env == 'yes' ]]; then #_{
+
+     find / -path '/proc'          -prune -o \
+            -path '/sources'       -prune -o \
+            -path '/dev'           -prune -o \
+            -path '/lfs'           -prune -o \
+            -path '/sys'           -prune -o \
+            -path '/usr/include'   -prune -o \
+            -path '/usr/lib/gconv' -prune -o \
+            -path '/usr/share'     -prune -o \
+            -path '/tools'         -prune -o \
+            -print > $lfs_root/done/$step_name.tree.before
+  fi #_}
+
   local start_time=$SECONDS
   if $lfs_root/steps/$step_name; then
     touch $lfs_root/done/$step_name
     local diff_time=$(( $SECONDS - $start_time ))
 
     local space_free=$(df | grep "/dev/$lfs_partition_device$lfs_root_partition_nr" | awk '{ print $5 }')
- #
- #  TODO cannot determine used disk amount because LFS is not defined in chroot environment:
- #  lfs_log_ $script_name "step $step_name done, took $diff_time seconds, mount LFS used: $(df | grep $LFS | awk '{ print $5 }')"
     lfs_log_ $script_name "step $step_name done, took $diff_time seconds, mount LFS used: $space_free"
   else
     lfs_log_ $script_name "step $step_name failed"
     exit 1
   fi
+
+  if [[ $lfs_in_chroot_env == 'yes' ]]; then #_{
+
+     find / -path '/proc'          -prune -o \
+            -path '/sources'       -prune -o \
+            -path '/dev'           -prune -o \
+            -path '/lfs'           -prune -o \
+            -path '/sys'           -prune -o \
+            -path '/usr/include'   -prune -o \
+            -path '/usr/lib/gconv' -prune -o \
+            -path '/usr/share'     -prune -o \
+            -path '/tools'         -prune -o \
+            -print > $lfs_root/done/$step_name.tree.after
+  fi #_}
 }
 export -f lfs_run_step
 
@@ -61,20 +88,32 @@ lfs_untar_and_cd() {
   local script_name=${BASH_SOURCE[1]}
   lfs_log_ $script_name "lfs_untar_and_cd, tar_pattern=$tar_pattern"
 
-  cd /sources
-  if [[ -d untarred/$tar_pattern-* ]]; then
-    lfs_log_ $script_name "lfs_untar_and_cd, untarred untarred/$tar_pattern exists, removing it"
+  cd $lfs_source_dir
+  if [ -d untarred/$tar_pattern-* ]; then
+    lfs_log_ $script_name "lfs_untar_and_cd, untarred untarred/$tar_pattern exists, removing it. PWD=$PWD"
     rm -rf untarred/$tar_pattern-*
+  else
+    lfs_log_ $script_name "lfs_untar_and_cd, untarred untarred/$tar_pattern does not exist. PWD=$PWD"
   fi
 
-  tar xv $tar_pattern-* -C untarred
+  lfs_log "untarring $tar_pattern-*, PWD=$PWD"
+  tar xf $tar_pattern-* -C untarred
   cd untarred/$tar_pattern-*
 
 }
+export -f lfs_untar_and_cd
+
 lfs_cd_untarred() {
   local tar_pattern=$1
   local script_name=${BASH_SOURCE[1]}
 
-  fs_log_ $script_name "lfs_cd_untarred: cd'ing into /sources/untarred/$tar_pattern-*"
-  cd /sources/untarred/$tar_patten-*
+# lfs_log_ $script_name "lfs_source_dir=$lfs_source_dir"
+
+# if [[ ! -d $lfs_source_dir ]]; then
+#   lfs_log_ $script_name "lfs_cd_untarred: lfs_source_dir $lfs_source_dir is not a directory";
+# fi
+     
+  lfs_log_ $script_name "lfs_cd_untarred: cd'ing into $lfs_source_dir/untarred/$tar_pattern-*"
+  cd $lfs_source_dir/untarred/$tar_pattern-*
 }
+export -f lfs_cd_untarred
