@@ -6,6 +6,8 @@
 
 lfs_trap_err
 
+mkdir -p /logs
+
 # Verify if PTYs are working
 expect_gotten=$(expect -c "spawn ls")
 
@@ -25,11 +27,20 @@ lfs_untar_and_cd binutils
 # cd /sources/untarred/binutils-*
 
 lfs_log "TQ84 mkdir build, PWD=$PWD"
+
 mkdir build
 cd    build
 
 
+lfs_log "TQ84 ls -l /usr/bin/ld        BEFORE: $(ls -l /usr/bin/ld       )"
+lfs_log "TQ84 ls -l /usr/bin/addr2line BEFORE: $(ls -l /usr/bin/addr2line)"
+lfs_log "TQ84 ls -l /usr/bin/readelf   BEFORE: $(ls -l /usr/bin/readelf  )"
+lfs_log "TQ84 ls -l /usr/bin/strings   BEFORE: $(ls -l /usr/bin/strings  )"
+lfs_log "TQ84 ls -l /usr/bin/ar        BEFORE: $(ls -l /usr/bin/ar       )"
+
 lfs_log "calling configure"
+
+mkdir -p /logs
 
 ../configure --prefix=/usr       \
              --enable-gold       \
@@ -37,7 +48,7 @@ lfs_log "calling configure"
              --enable-plugins    \
              --enable-shared     \
              --disable-werror    \
-             --with-system-zlib
+             --with-system-zlib   &> /logs/binutils.configure
 
 lfs_log "configure finished"
 
@@ -45,15 +56,24 @@ lfs_log "configure finished"
 trap - ERR # Temporarily untrapping because ../configure will complain about missing bison
 
 lsf_log "calling make"
-make tooldir=/usr
+make tooldir=/usr &> /logs/binutils.make
 lsf_log "made"
 
 lfs_trap_err
 
 trap - ERR # Temporarily untrapping because debug_msg.sh fails
-make -k check
+lsf_log "calling make -k check"
+make -k check &> /logs/binutils.make-check
 lfs_trap_err
 
 trap - ERR # Temporarily untrapping because bison is not found, but is apparently not so terrible
-make tooldir=/usr install
+lsf_log "calling make install"
+make tooldir=/usr install &> /logs/binutils.make-install
 lfs_trap_err
+
+lfs_log "TQ84 ls -l /usr/bin/ld        AFTER : $(ls -l /usr/bin/ld       )"
+lfs_log "TQ84 ls -l /usr/bin/addr2line AFTER : $(ls -l /usr/bin/addr2line)"
+lfs_log "TQ84 ls -l /usr/bin/readelf   AFTER : $(ls -l /usr/bin/readelf  )"
+lfs_log "TQ84 ls -l /usr/bin/strings   AFTER : $(ls -l /usr/bin/strings  )"
+lfs_log "TQ84 ls -l /usr/bin/ar        AFTER : $(ls -l /usr/bin/ar       )"
+

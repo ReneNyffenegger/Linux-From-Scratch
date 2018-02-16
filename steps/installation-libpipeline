@@ -1,0 +1,16 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/libpipeline.html
+#
+
+lfs_trap_err
+
+# lfs_untar_and_cd
+lfs_cd_untarred libpipeline
+
+PKG_CONFIG_PATH=/tools/lib/pkgconfig ./configure --prefix=/usr
+
+make
+make check
+make install

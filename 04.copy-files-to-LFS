@@ -32,6 +32,7 @@ sudo chmod a+rx $lfs_root/40.in-chroot-env
 sudo cp steps/*        $lfs_root/steps
 sudo chown lfs:lfs  -R $lfs_root
 sudo chmod a+rx        $lfs_root/steps/*
+sudo chmod a+w         $lfs_root/done
 
 # sudo chmod    777   $lfs_root/steps/*
 

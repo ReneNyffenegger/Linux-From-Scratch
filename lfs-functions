@@ -12,7 +12,7 @@ export -f lfs_log_
 
 lfs_log() {
   local text="$1"
-  lfs_log_ "${BASH_SOURCE[1]}" "$text"
+  lfs_log_ "${BASH_SOURCE[1]}" "  $text"
 }
 export -f lfs_log
 
@@ -22,9 +22,9 @@ lfs_run_step() {
   local script_name=${BASH_SOURCE[1]}
 
 
-  lfs_log_ $script_name "lfs_run_step, \$lfs_root  = $lfs_root"
-  lfs_log_ $script_name "lfs_run_step, \$step_name = $step_name"
-  lfs_log_ $script_name "lfs_run_step ls -l \$lfs_root/done/\$step_name: $($lfs_root/done/$step_name)"
+# lfs_log_ $script_name "lfs_run_step, \$lfs_root  = $lfs_root"
+# lfs_log_ $script_name "lfs_run_step, \$step_name = $step_name"
+# lfs_log_ $script_name "lfs_run_step ls -l \$lfs_root/done/\$step_name: $($lfs_root/done/$step_name)"
 # lfs_log_ $script_name "lfs_run_step ls -l \$lfs_root/done: $(lfs_root/done)"
 
   if [[ -f $lfs_root/done/$step_name ]]; then
@@ -50,11 +50,18 @@ lfs_run_step() {
 
   local start_time=$SECONDS
   if $lfs_root/steps/$step_name; then
-    touch $lfs_root/done/$step_name
+    if ! touch $lfs_root/done/$step_name; then
+      lfs_log_ $script_name "!!! Could not touch $lfs_root/done/$step_name"
+    fi
+    
+#   lfs_log_ "TOUCH_INFO", "$lfs_root/done/$step_name"
+#   lfs_log_ "DONE-INFO-1", "ls -l $(ls -l /var/tmp/Linux-From-Scratch/mnt-lfs/lfs/done/fetch-pacakges-and-patches)"
+#   lfs_log_ "DONE-INFO-a", "ls -l $(ls -l $lfs_root/done/$step_name)"
     local diff_time=$(( $SECONDS - $start_time ))
 
     local space_free=$(df | grep "/dev/$lfs_partition_device$lfs_root_partition_nr" | awk '{ print $5 }')
     lfs_log_ $script_name "step $step_name done, took $diff_time seconds, mount LFS used: $space_free"
+#   lfs_log_ "DONE-INFO-2", "ls -l $(ls -l /var/tmp/Linux-From-Scratch/mnt-lfs/lfs/done/fetch-pacakges-and-patches)"
   else
     lfs_log_ $script_name "step $step_name failed"
     exit 1
@@ -79,7 +86,7 @@ export -f lfs_run_step
 lfs_trap_err_handler() {
   local line=$1
   local script_name=${BASH_SOURCE[1]}
-  lfs_log_ $script_name "trapped error at line $line"
+  lfs_log_ $script_name "  trapped error at line $line"
   exit 1
 }
 export -f lfs_trap_err_handler
@@ -92,19 +99,19 @@ export -f lfs_trap_err
 lfs_untar_and_cd() {
   local tar_pattern=$1
   local script_name=${BASH_SOURCE[1]}
-  lfs_log_ $script_name "lfs_untar_and_cd, tar_pattern=$tar_pattern"
+  lfs_log_ $script_name "  lfs_untar_and_cd, tar_pattern=$tar_pattern"
 
   cd $lfs_source_dir
   if [ -d untarred/$tar_pattern-* ]; then
-    lfs_log_ $script_name "lfs_untar_and_cd, untarred untarred/$tar_pattern exists, removing it. PWD=$PWD"
+    lfs_log_ $script_name "  lfs_untar_and_cd, untarred untarred/$tar_pattern exists, removing it. PWD=$PWD"
     rm -rf untarred/$tar_pattern-*
   else
-    lfs_log_ $script_name "lfs_untar_and_cd, untarred untarred/$tar_pattern does not exist. PWD=$PWD"
+    lfs_log_ $script_name "  lfs_untar_and_cd, untarred untarred/$tar_pattern does not exist. PWD=$PWD"
   fi
 
-  lfs_log "ls -l $tar_pattern-*: $(ls -l $tar_pattern)"
+  lfs_log "ls -l $tar_pattern-*.tar.*: $(ls -l $tar_pattern-*.tar.*), PWD=$PWD"
   lfs_log "untarring $tar_pattern-*, PWD=$PWD"
-  if ! tar xf $tar_pattern-* -C untarred ; then
+  if ! tar xf $tar_pattern-*.tar.* -C untarred ; then
     lfs_log "tar returned $?"
     return 1
   fi
@@ -126,7 +133,7 @@ lfs_cd_untarred() {
 #   lfs_log_ $script_name "lfs_cd_untarred: lfs_source_dir $lfs_source_dir is not a directory";
 # fi
      
-  lfs_log_ $script_name "lfs_cd_untarred: cd'ing into $lfs_source_dir/untarred/$tar_pattern-*"
+  lfs_log_ $script_name "  lfs_cd_untarred: cd'ing into $lfs_source_dir/untarred/$tar_pattern-*"
   cd $lfs_source_dir/untarred/$tar_pattern-*
 }
 export -f lfs_cd_untarred

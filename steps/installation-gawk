@@ -1,0 +1,21 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/gawk.html
+#
+
+lfs_trap_err
+
+lfs_untar_and_cd  gawk
+# lfs_cd_untarred
+
+./configure --prefix=/usr
+
+make
+make check
+make install
+
+# TODO: If desired, install docu
+#
+# mkdir -v /usr/share/doc/gawk-4.1.4
+# cp    -v doc/{awkforai.txt,*.{eps,pdf,jpg}} /usr/share/doc/gawk-4.1.4

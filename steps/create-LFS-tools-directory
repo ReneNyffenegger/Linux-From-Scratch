@@ -18,18 +18,19 @@ lfs_trap_err
 lfs_log "Creating directory $LFS/tools"
 
 if [[ -d $LFS/tools ]]; then
-  lfs_log "$LFS/tools exists, removing it"
-  sudo rm -rf $LFS/tools
+  lfs_log "$LFS/tools exists, something is seriously wrong"
+# sudo rm -rf $LFS/tools
+  exit 1
 fi
 
 sudo mkdir -pv $LFS/tools
-# sudo chmod 777 $LFS/tools
 
 if [[ $(readlink /tools ) != "$LFS/tools" ]]; then
   lfs_log "create symlink for /tools"
   sudo ln    -sv $LFS/tools /
 else
-  lfs_log "symlink for tools already created"
+  lfs_log "symlink for tools already created, that shuld not be the case"
+  exit 1
 fi
 
 lfs_log "ls -ld /tools:     $(ls -ld /tools)"

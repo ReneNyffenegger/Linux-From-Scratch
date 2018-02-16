@@ -37,7 +37,16 @@ lfs_log "lfs_source_dir: $lfs_source_dir"
 lfs_log "ls -l /usr/bin/gcc: $(ls -l /usr/bin/gcc)"
 lfs_log "PATH:             $PATH"
 lfs_log "echo (echo PATH): $(echo $PATH)"
-lfs_log "type gcc: $(type gcc)"          # which is not known at this time
+
+# gcc is suposed to be /tools/bing/cc
+type_gcc=$(type gcc)
+lfs_log "TQ84 type_gcc before make install: $type_gcc"
+if [[ $type_gcc != 'gcc is /tools/bin/gcc' ]]; then
+  lfs_log "type_gcc: $type_gcc, exiting"
+  exit 1
+fi
+
+# lfs_log "type gcc: $(type gcc)"          # which is not known at this time
 # lfs_log "which gcc: $(which gcc)"          # which is not known at this time
 # lfs_log "ls -l gcc: $(ls -l $which(gcc))"  # which is not known at this time
 lfs_log "gcc -v   : $(gcc -v)"
@@ -67,6 +76,8 @@ lfs_log "TODO / TQ84 skipping make check -k, for once"
 lfs_log "executing make install"
 make install
 
+type_gcc=$(type gcc)
+lfs_log "TQ84 type_gcc after make install: $type_gcc"
 
 # Mandated by FHS (http://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s09.html) for historical reasons.
 ln -sv ../usr/bin/cpp /lib

@@ -1,0 +1,16 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/groff.html
+#
+
+lfs_trap_err
+
+# lfs_untar_and_cd
+lfs_cd_untarred  groff
+
+PAGE=A4 ./configure --prefix=/usr
+
+make -j1
+
+make install

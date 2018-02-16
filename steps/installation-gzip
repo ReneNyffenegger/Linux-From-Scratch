@@ -1,0 +1,23 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/gzip.html
+#
+
+lfs_trap_err
+
+lfs_untar_and_cd gzip
+# lfs_cd_untarred
+
+
+./configure --prefix=/usr
+
+
+make
+
+# Two tests are known to fail in the LFS environment: help-version and zmore.
+make check
+
+make install
+
+mv -v /usr/bin/gzip /bin
