@@ -4,9 +4,9 @@
 
 if ! grep -q '^lfs:' /etc/group ; then
    sudo groupadd lfs
-   lfs_log "group lfs created"
+   echo "group lfs created"
 else
-   lfs_log "group lfs already exists"
+   echo "group lfs already exists"
 fi
 
 
@@ -17,7 +17,7 @@ if ! id lfs >/dev/null 2>&1 ; then
 
   # Change password for lfs to pw
   echo 'lfs:pw' | sudo chpasswd
-  lfs_log "user lfs created"
+  echo "user lfs created"
 else
-  lfs_log "user lfs already exists"
+  echo "user lfs already exists"
 fi

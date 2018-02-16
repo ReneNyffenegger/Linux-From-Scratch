@@ -2,6 +2,7 @@
 
 . ./lfs-env
 
+umask 022
 
 if [[ ! -d $lfs_root ]]; then
   echo "lfs_root ($lfs_root) does not exist, creating"
@@ -9,21 +10,34 @@ if [[ ! -d $lfs_root ]]; then
   mkdir $lfs_root/done
   mkdir $lfs_root/steps
   touch $lfs_root/log
+
   sudo chown -R lfs:lfs $lfs_root
 # sudo chmod 755 $LFS/sources
+  sudo chmod 666 $lfs_root/log
+# sudo chmod 777 $lfs_root/steps
 fi
 
 # cp lfs-env          $lfs_root
-cp lfs-functions    $lfs_root
-cp 20.run-as-lfs    $lfs_root
-cp 30.run-as-root   $lfs_root
-cp 40.in-chroot-env $lfs_root
-cp steps/*          $lfs_root/steps
-sudo chmod    777   $lfs_root/steps/*
+
+sudo cp lfs-functions    $lfs_root
+sudo cp 20.run-as-lfs    $lfs_root
+sudo cp 30.run-as-root   $lfs_root
+sudo cp 40.in-chroot-env $lfs_root
+
+sudo chmod a+r  $lfs_root/lfs-functions
+sudo chmod a+rx $lfs_root/20.run-as-lfs
+sudo chmod a+rx $lfs_root/30.run-as-root
+sudo chmod a+rx $lfs_root/40.in-chroot-env
+
+sudo cp steps/*        $lfs_root/steps
+sudo chown lfs:lfs  -R $lfs_root
+sudo chmod a+rx        $lfs_root/steps/*
+
+# sudo chmod    777   $lfs_root/steps/*
 
 # if [[ -d $LFS/sources ]]; then
 #   sudo chown -R lfs:lfs $LFS/sources
 #   sudo chmod 755 $LFS/sources
 #   sudo chmod 644 $LFS/sources/*
 # fi
-chmod 755 ../Linux-From-Scratch/
+# chmod 755 ../Linux-From-Scratch/

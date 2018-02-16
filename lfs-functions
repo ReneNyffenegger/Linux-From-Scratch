@@ -4,7 +4,9 @@
 lfs_log_() {
   local script_file=$(basename "$1")
   local text="$2"
-  printf "%s: %-29s %s\n" "$(date +'%Y-%m-%d %H:%M:%S')" $script_file      "$text" >> $lfs_root/log
+
+  # Note: using UTF so that all log messages are consistent.
+  printf "%s: %-29s %s\n" "$(TZ=UTF date +'%Y-%m-%d %H:%M:%S')" $script_file      "$text" >> $lfs_root/log
 }
 export -f lfs_log_
 
@@ -20,6 +22,10 @@ lfs_run_step() {
   local script_name=${BASH_SOURCE[1]}
 
 
+  lfs_log_ $script_name "lfs_run_step, \$lfs_root  = $lfs_root"
+  lfs_log_ $script_name "lfs_run_step, \$step_name = $step_name"
+  lfs_log_ $script_name "lfs_run_step ls -l \$lfs_root/done/\$step_name: $($lfs_root/done/$step_name)"
+# lfs_log_ $script_name "lfs_run_step ls -l \$lfs_root/done: $(lfs_root/done)"
 
   if [[ -f $lfs_root/done/$step_name ]]; then
     lfs_log_ $script_name "already done: $step_name"
@@ -38,7 +44,7 @@ lfs_run_step() {
             -path '/usr/include'   -prune -o \
             -path '/usr/lib/gconv' -prune -o \
             -path '/usr/share'     -prune -o \
-            -path '/tools'         -prune -o \
+            -path '/tools/*/*'     -prune -o \
             -print > $lfs_root/done/$step_name.tree.before
   fi #_}
 
@@ -64,7 +70,7 @@ lfs_run_step() {
             -path '/usr/include'   -prune -o \
             -path '/usr/lib/gconv' -prune -o \
             -path '/usr/share'     -prune -o \
-            -path '/tools'         -prune -o \
+            -path '/tools/*/*'     -prune -o \
             -print > $lfs_root/done/$step_name.tree.after
   fi #_}
 }
@@ -96,8 +102,15 @@ lfs_untar_and_cd() {
     lfs_log_ $script_name "lfs_untar_and_cd, untarred untarred/$tar_pattern does not exist. PWD=$PWD"
   fi
 
+  lfs_log "ls -l $tar_pattern-*: $(ls -l $tar_pattern)"
   lfs_log "untarring $tar_pattern-*, PWD=$PWD"
-  tar xf $tar_pattern-* -C untarred
+  if ! tar xf $tar_pattern-* -C untarred ; then
+    lfs_log "tar returned $?"
+    return 1
+  fi
+
+
+  lfs_log "cd to untarred/$tar_pattern-*, PWD=$PWD"
   cd untarred/$tar_pattern-*
 
 }
