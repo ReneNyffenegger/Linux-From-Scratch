@@ -6,9 +6,20 @@
 
 lfs_trap_err
 
-cd /sources/untarred/autoconf-*
+# cd /sources/untarred/autoconf-*
+lfs_cd_untarred autoconf
 
-./configure --prefix=/usr
-make
-make check
-make install
+./configure --prefix=/usr &> /lfs/logs/autoconf.configure
+
+lfs_log "make make"
+make                      &> /lfs/logs/autoconf.make
+
+# TODO: Skipping, for once
+#
+# lfs_log "make check"
+# make check                &> /lfs/logs/autoconf.make-check
+#
+# TODO: append TESTSUITEFLAGS=-j<N> might reduce the time significantly
+
+lfs_log "make install"
+make install              &> /lfs/logs/autoconf.make-install

@@ -5,8 +5,15 @@
 
 lfs_trap_err
 
-pushd $LFS/sources/untarred/bash-*
+#
+#  TODO: use lfs_cd_untarred here?
+#
+cd $LFS/sources/untarred/bash-*
 
+
+type_bash=$(type bash)
+lfs_log "TQ84: type bash before      : $type_bash"
+lfs_log "TQ84: ls -l /tools/bin/bash before: $(ls -l /tools/bin/bash)"
 ./configure --prefix=/tools --without-bash-malloc
 
 make
@@ -17,9 +24,10 @@ if [ ${RUN_TESTS_CHAPTER_5-NO} == "YES" ]; then
 fi
 
 make install
+lfs_log "TQ84: type bash after      : $type_bash / Should probably be /tools/bin/bash"
+lfs_log "TQ84: ls -l /tools/bin/bash after: $(ls -l /tools/bin/bash)"
 
 ln -sv bash /tools/bin/sh
 
-popd
 
 exit 0

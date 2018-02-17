@@ -1,4 +1,4 @@
-# vi: ft=sh
+# vi: ft=sh path=.,steps
 #
 
 . /lfs/lfs-functions
@@ -59,22 +59,32 @@ lfs_run_step installation-xml-parser
 lfs_run_step installation-intltool
 lfs_run_step installation-autoconf
 lfs_run_step installation-automake
+lfs_run_step installation-xz
+# using lfs_untar_and_cd or lfs_cd_untarred
+lfs_run_step installation-kmod
+lfs_run_step installation-gettext
+lfs_run_step installation-procps-ng
+lfs_run_step installation-e2fsprogs
+lfs_run_step installation-coreutils
+lfs_run_step installation-diffutils
+lfs_run_step installation-findutils
+lfs_run_step installation-groff
+lfs_run_step installation-grub
+lfs_run_step installation-less
+lfs_run_step installation-gzip
+lfs_run_step installation-iproute
+lfs_run_step installation-kbd
+lfs_run_step installation-libpipeline
+lfs_run_step installation-make
+lfs_run_step installation-patch
+lfs_run_step installation-sysklogd
+lfs_run_step installation-sysvinit
+lfs_run_step installation-eudev
+lfs_run_step installation-util-linux
+lfs_run_step installation-man-db
+lfs_run_step installation-tar
+lfs_run_step installation-texinfo
+lfs_run_step installation-vim
+lfs_run_step strip-again
+lfs_run_step clean-up
 
-# lfs_untar_and_cd lfs_run_step installation-xz
-# lfs_untar_and_cd lfs_run_step installation-kmod
-# lfs_untar_and_cd lfs_run_step installation-gettext
-# lfs_untar_and_cd lfs_run_step installation-procps-ng
-# lfs_untar_and_cd lfs_run_step installation-e2fsprogs
-# lfs_untar_and_cd lfs_run_step installation-coreutils
-# lfs_untar_and_cd lfs_run_step installation-diffutils
-# lfs_untar_and_cd lfs_run_step installation-findutils
-# lfs_untar_and_cd lfs_run_step installation-groff
-# lfs_untar_and_cd lfs_run_step installation-grub
-# lfs_untar_and_cd lfs_run_step installation-less
-# lfs_untar_and_cd lfs_run_step installation-gzip
-# lfs_untar_and_cd lfs_run_step installation-iproute
-# lfs_untar_and_cd lfs_run_step installation-kbd
-# lfs_untar_and_cd lfs_run_step installation-libpipeline
-# lfs_untar_and_cd lfs_run_step installation-make
-# lfs_untar_and_cd lfs_run_step installation-patch
-# lfs_untar_and_cd lfs_run_step installation-sysklogd

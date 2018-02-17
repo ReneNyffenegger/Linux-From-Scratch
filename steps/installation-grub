@@ -7,7 +7,7 @@
 lfs_trap_err
 
 # lfs_untar_and_cd
-lfs_cd_untarred
+lfs_cd_untarred grub
 
 ./configure --prefix=/usr          \
             --sbindir=/sbin        \
@@ -16,12 +16,5 @@ lfs_cd_untarred
             --disable-werror
 
 make
-make installmake
-make installmake
-make installmake
-make installmake
-make installmake
-make installmake
-make installmake
-make installmake
+
 make install

@@ -1,0 +1,25 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/texinfo.html
+#
+
+lfs_trap_err
+
+lfs_untar_and_cd texinfo
+# lfs_cd_untarred
+
+./configure --prefix=/usr --disable-static
+
+make
+make check
+make install
+
+make TEXMF=/usr/share/texmf install-tex
+
+pushd /usr/share/info
+rm -v dir
+for f in *
+  do install-info $f dir 2>/dev/null
+done
+popd

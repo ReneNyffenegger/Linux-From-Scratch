@@ -2,6 +2,9 @@
 #
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter05/dejagnu.html
 #
+#
+#  TODO: Tcl, Expect and DejaGNU are apparently (only) needed to run the toolchain tests.
+#
 
 lfs_trap_err
 

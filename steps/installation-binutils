@@ -6,6 +6,7 @@
 
 lfs_trap_err
 
+# TODO create /lfs/logs earlier
 mkdir -p /lfs/logs
 
 # Verify if PTYs are working
@@ -30,6 +31,12 @@ lfs_log "TQ84 mkdir build, PWD=$PWD"
 
 mkdir build
 cd    build
+
+executables_check="ld addr2line readelf strings ar"
+for executable in $executables_check; do
+   type_executuable=$(type $executable)
+   lfs_log "TQ84 $executable is $type_executuable, OK"
+done
 
 
 lfs_log "TQ84 ls -l /usr/bin/ld        BEFORE: $(ls -l /usr/bin/ld       )"
@@ -70,10 +77,15 @@ lfs_log "calling make install"
 make tooldir=/usr install &> /lfs/logs/binutils.make-install
 lfs_trap_err
 
-lfs_log "TQ84 ls -l /usr/bin/ld        AFTER : $(ls -l /usr/bin/ld       )"
-lfs_log "TQ84 ls -l /usr/bin/addr2line AFTER : $(ls -l /usr/bin/addr2line)"
-lfs_log "TQ84 ls -l /usr/bin/readelf   AFTER : $(ls -l /usr/bin/readelf  )"
-lfs_log "TQ84 ls -l /usr/bin/strings   AFTER : $(ls -l /usr/bin/strings  )"
-lfs_log "TQ84 ls -l /usr/bin/ar        AFTER : $(ls -l /usr/bin/ar       )"
+for executable in $executables_check; do
+   type_executuable=$(type $executable)
+  if [[ $type_executuable != "$executable is /usr/bin/$executable" ]]; then
+     lfs_log "type $executable is $type_executuable, exiting"
+     exit -1
+  else
+     lfs_log "TQ84 $executable is $type_executuable, OK"
+  fi
+done
+unset executables_check
+unset type_executuable
 
-cd /bla/bla/bla

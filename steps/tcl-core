@@ -3,6 +3,11 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter05/tcl.html
 #
 
+#
+#  TODO: Tcl, Expect and DejaGNU are apparently (only) needed to run the toolchain tests.
+#
+
+
 lfs_trap_err
 
 pushd $LFS/sources/untarred/tcl*

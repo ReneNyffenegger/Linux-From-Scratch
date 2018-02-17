@@ -7,7 +7,7 @@
 lfs_trap_err
 
 # lfs_untar_and_cd
-lfs_cd_untarred iproute
+lfs_cd_untarred iproute2
 
 sed -i /ARPD/d Makefile
 sed -i 's/arpd.8//' man/man8/Makefile

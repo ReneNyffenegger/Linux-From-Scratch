@@ -6,15 +6,19 @@
 
 lfs_trap_err
 
-cd /sources/untarred/automake-*
+# cd /sources/untarred/automake-*
+lfs_cd_untarred automake
 
+./configure --prefix=/usr --docdir=/usr/share/doc/automake-1.15.1 &> /lfs/logs/automake.configure
 
-./configure --prefix=/usr --docdir=/usr/share/doc/automake-1.15.1
-
-
-make
+make &> /lfs/logs/automake.make
 
 sed -i "s:./configure:LEXLIB=/usr/lib/libfl.a &:" t/lex-{clean,depend}-cxx.sh
-make -j4 check
+#
+# TODO: skipped for now
+#
+# make -j4 check  &> /lfs/logs/automake.make-check
+#
+# Output of check would be in test-suite.log
 
-make install
+make install &> /lfs/logs/automake.make-install

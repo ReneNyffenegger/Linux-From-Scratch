@@ -6,23 +6,32 @@
 
 lfs_trap_err
 
-cd /sources/untarred/perl-*
+# cd /sources/untarred/perl-*
+lfs_untar_and_cd perl
 
 echo "127.0.0.1 localhost $(hostname)" > /etc/hosts
 
 export BUILD_ZLIB=False
 export BUILD_BZIP2=0
 
+lfs_log "sh Configure"
 sh Configure -des -Dprefix=/usr                 \
                   -Dvendorprefix=/usr           \
                   -Dman1dir=/usr/share/man/man1 \
                   -Dman3dir=/usr/share/man/man3 \
                   -Dpager="/usr/bin/less -isR"  \
                   -Duseshrplib                  \
-                  -Dusethreads
+                  -Dusethreads    &> /lfs/logs/perl.configure
 
-make
-make -k test
-make install
+lfs_log "make"
+make           &> /lfs/logs/perl.make
+
+# TODO, skipping for once
+#
+# lfs_log "make test"
+# make -k test   &> /lfs/logs/perl.make-test
+
+lfs_log "make install"
+make install   &> /lfs/logs/perl.make-install
 
 unset BUILD_ZLIB BUILD_BZIP2

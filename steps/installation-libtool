@@ -1,7 +1,7 @@
 #
 # vi: ft=sh
 #
-#  libtool
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/libtool.html
 #
 
 lfs_trap_err
@@ -11,5 +11,9 @@ cd /sources/untarred/libtool-*
 ./configure --prefix=/usr
 
 make
-make check
+
+# TODO: Skipped for the moment
+#
+# make check
+
 make install

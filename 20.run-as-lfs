@@ -1,4 +1,4 @@
-# vi: set ft=sh
+# vi: ft=sh path=.,steps
 
 . $lfs_root/lfs-functions
 

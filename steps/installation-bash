@@ -6,24 +6,35 @@
 
 lfs_trap_err
 
-cd /sources/untarred/bash-*
+# cd /sources/untarred/bash-*
+lfs_untar_and_cd bash
 
 patch -Np1 -i ../../bash-4.4-upstream_fixes-1.patch
+
+type_bash=$(type bash)
+
+lfs_log "TQ84 type bash before: $type_bash"
 
 ./configure --prefix=/usr                       \
             --docdir=/usr/share/doc/bash-4.4    \
             --without-bash-malloc               \
-            --with-installed-readline
+            --with-installed-readline  &> /lfs/logs/bash.configure
 
-make
+make &> /lfs/logs/bash.make
 
-chown -Rv nobody .
+chown -Rv nobody . &> /lfs/logs/bash.chown
 
-su nobody -s /bin/bash -c "PATH=$PATH make tests"
+# TODO: This /bin/bash does apparently not exist here
+lfs_log "TQ84 does /bin/bash exist here? Apparently, it should. ls -l /bin/bash: $(ls -l /bin/bash)"
+#
+# su nobody -s /bin/bash -c "PATH=$PATH make tests"
 
 make install
 
+
 mv -vf /usr/bin/bash /bin
+
+lfs_log "TQ84 type bash after: $type_bash"
 
 #
 lfs_log "TQ84: does /bin/bash really need to be exec'd"

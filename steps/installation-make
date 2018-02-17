@@ -6,7 +6,7 @@
 
 lfs_trap_err
 
-lfs_untar_and_cd
+lfs_untar_and_cd  make
 # lfs_cd_untarred
 
 ./configure --prefix=/usr

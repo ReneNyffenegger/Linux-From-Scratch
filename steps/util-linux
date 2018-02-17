@@ -5,8 +5,10 @@
 
 lfs_trap_err
 
-
-pushd $LFS/sources/untarred/util-linux-*
+#
+#  TODO: can lfs_cd_untarred be used?
+#
+cd $LFS/sources/untarred/util-linux-*
 
 ./configure --prefix=/tools                \
             --without-python               \
@@ -17,7 +19,5 @@ pushd $LFS/sources/untarred/util-linux-*
 
 make
 make install
-
-popd
 
 exit 0

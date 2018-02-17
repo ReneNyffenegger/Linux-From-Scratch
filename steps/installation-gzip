@@ -6,17 +6,19 @@
 
 lfs_trap_err
 
-lfs_untar_and_cd gzip
-# lfs_cd_untarred
+lfs_untar_and_cd   gzip
+#  lfs_cd_untarred gzip
 
 
 ./configure --prefix=/usr
 
-
 make
 
+# TODO: Skipped, for once
+#
 # Two tests are known to fail in the LFS environment: help-version and zmore.
-make check
+#
+# make check
 
 make install
 

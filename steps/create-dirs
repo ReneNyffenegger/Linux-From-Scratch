@@ -6,6 +6,11 @@
 lfs_trap_err
 
 mkdir -pv /{bin,boot,etc/{opt,sysconfig},home,lib/firmware,mnt,opt}
+
+# TODO
+#   Should /home be chmod'ed to 755?
+#
+
 mkdir -pv /{media/{floppy,cdrom},sbin,srv,var}
 install -dv -m 0750 /root
 install -dv -m 1777 /tmp /var/tmp

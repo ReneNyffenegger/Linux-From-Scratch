@@ -6,10 +6,11 @@
 
 lfs_trap_err
 
-cd /sources/untarred/bzip2-*
+# cd /sources/untarred/bzip2-*
+lfs_untar_and_cd bzip2
 
 lfs_log "applying patch"
-patch -Np1 -i ../bzip2-1.0.6-install_docs-1.patch
+patch -Np1 -i ../../bzip2-1.0.6-install_docs-1.patch
 
 sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
 

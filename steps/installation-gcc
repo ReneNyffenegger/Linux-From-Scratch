@@ -131,6 +131,8 @@ if [[ $headers != '#include <...> search starts here:
 
    lfs_log "headers=$headers, exiting"
    exit -1
+else
+   lfs_log "TQ84 headers seem ok: $headers"
 fi
 
 search_dirs=$(grep 'SEARCH.*/usr/lib' dummy.log |sed 's|; |\n|g')
@@ -145,6 +147,8 @@ SEARCH_DIR("/usr/lib");'  ]]; then
 
   lfs_log "search_dirs = $search_dirs, exiting"
   exit -1
+else
+  lfs_log "TQ84 search_dirs seem OK: $search_dirs"
 fi
 
 libc_used=$(grep "/lib.*/libc.so.6 " dummy.log)
@@ -162,5 +166,8 @@ fi
 
 rm -v dummy.c a.out dummy.log
 
+#
+#  TODO: what's happening here?
+#
 mkdir -pv /usr/share/gdb/auto-load/usr/lib
 mv -v /usr/lib/*gdb.py /usr/share/gdb/auto-load/usr/lib

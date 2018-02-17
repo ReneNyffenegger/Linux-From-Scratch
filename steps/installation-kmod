@@ -8,9 +8,20 @@ lfs_trap_err
 
 lfs_cd_untarred kmod
 
-make
 
-make install
+lfs_log "calling configure"
+./configure --prefix=/usr          \
+            --bindir=/bin          \
+            --sysconfdir=/etc      \
+            --with-rootlibdir=/lib \
+            --with-xz              \
+            --with-zlib  &> /lfs/logs/kmod.configure
+
+lfs_log "calling make"
+make &> /lfs/logs/kmod.make
+
+lfs_log "calling make install"
+make install &> /lfs/logs/kmod.make-install
 
 for target in depmod insmod lsmod modinfo modprobe rmmod; do
   ln -sfv ../bin/kmod /sbin/$target
