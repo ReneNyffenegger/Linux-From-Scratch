@@ -29,7 +29,7 @@ export lfs_source_dir=$LFS/sources
 # Functions
 #
 
-if [[ -f $lfs_root/lfs-functions ]]; then
+if [[ -r $lfs_root/lfs-functions ]]; then
   . $lfs_root/lfs-functions
 elif [[ -f ./lfs-functions ]]; then
   . ./lfs-functions

@@ -5,18 +5,22 @@
 
 lfs_trap_err
 
-pushd $LFS/sources/untarred/bison-*
+cd $LFS/sources/untarred/bison-*
 
+lfs_log "calling ./configure, PWD=$PWD"
 ./configure --prefix=/tools
 
+lfs_log "calling make"
 make
 
-if [ ${RUN_TESTS_CHAPTER_5-NO} == "YES" ]; then
-  lfs_log "make check"
-  make install
-fi
+# TODO if [ ${RUN_TESTS_CHAPTER_5-NO} == "YES" ]; then
+# lfs_log "calling make check"
+# make check
+# TODO fi
 
-popd
+lfs_log "calling make install"
+lfs_log "make install"
+make install
+
 
 exit 0
-

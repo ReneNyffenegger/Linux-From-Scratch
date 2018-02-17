@@ -6,7 +6,7 @@
 
 lfs_trap_err
 
-mkdir -p /logs
+mkdir -p /lfs/logs
 
 # Verify if PTYs are working
 expect_gotten=$(expect -c "spawn ls")
@@ -40,7 +40,6 @@ lfs_log "TQ84 ls -l /usr/bin/ar        BEFORE: $(ls -l /usr/bin/ar       )"
 
 lfs_log "calling configure"
 
-mkdir -p /logs
 
 ../configure --prefix=/usr       \
              --enable-gold       \
@@ -48,27 +47,27 @@ mkdir -p /logs
              --enable-plugins    \
              --enable-shared     \
              --disable-werror    \
-             --with-system-zlib   &> /logs/binutils.configure
+             --with-system-zlib   &> /lfs/logs/binutils.configure
 
 lfs_log "configure finished"
 
 
 trap - ERR # Temporarily untrapping because ../configure will complain about missing bison
 
-lsf_log "calling make"
-make tooldir=/usr &> /logs/binutils.make
-lsf_log "made"
+lfs_log "calling make"
+make tooldir=/usr &> /lfs/logs/binutils.make
+lfs_log "made"
 
 lfs_trap_err
 
 trap - ERR # Temporarily untrapping because debug_msg.sh fails
-lsf_log "calling make -k check"
-make -k check &> /logs/binutils.make-check
+lfs_log "calling make -k check"
+make -k check &> /lfs/logs/binutils.make-check
 lfs_trap_err
 
 trap - ERR # Temporarily untrapping because bison is not found, but is apparently not so terrible
-lsf_log "calling make install"
-make tooldir=/usr install &> /logs/binutils.make-install
+lfs_log "calling make install"
+make tooldir=/usr install &> /lfs/logs/binutils.make-install
 lfs_trap_err
 
 lfs_log "TQ84 ls -l /usr/bin/ld        AFTER : $(ls -l /usr/bin/ld       )"
@@ -77,3 +76,4 @@ lfs_log "TQ84 ls -l /usr/bin/readelf   AFTER : $(ls -l /usr/bin/readelf  )"
 lfs_log "TQ84 ls -l /usr/bin/strings   AFTER : $(ls -l /usr/bin/strings  )"
 lfs_log "TQ84 ls -l /usr/bin/ar        AFTER : $(ls -l /usr/bin/ar       )"
 
+cd /bla/bla/bla

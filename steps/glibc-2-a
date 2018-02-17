@@ -18,9 +18,9 @@ lfs_log "Apply patch. PWD=$PWD, does ../../glibc-*-fhs-1.patch exist?"
 patch -Np1 -i ../../glibc-*-fhs-1.patch
 
 # Create symlink. This will apparently be deleted again in steps/installation-gcc
-lfs_log "before symlink ls -ld /usr/lib/gcc = $(ls -ld /usr/lib/gcc)"
+lfs_log "TQ84: before symlink ls -ld /usr/lib/gcc = $(ls -ld /usr/lib/gcc)"
 ln -sfv /tools/lib/gcc /usr/lib
-lfs_log "after  symlink ls -ld /usr/lib/gcc = $(ls -ld /usr/lib/gcc)"
+lfs_log "TQ84: after  symlink ls -ld /usr/lib/gcc = $(ls -ld /usr/lib/gcc)"
 
 
 case $(uname -m) in
