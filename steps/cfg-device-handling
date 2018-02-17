@@ -1,0 +1,11 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter07/udev.html
+#
+
+lfs_trap_err
+
+#  TODO echo softdep snd-pcm post: snd-pcm-oss > /etc/modprobe.d/<filename>.conf 
+#  TODO echo blacklist forte                   > /etc/modprobe.d/blacklist.conf 
+

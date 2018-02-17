@@ -6,9 +6,7 @@
 lfs_trap_err
 
 cat > /etc/sysconfig/clock << "EOF"
-# Configuring the system clock
-
-UTC=1
+UTC=1 # Hardware clock is running in UTF
 
 # Set this to any options you might need to give to hwclock,
 # such as machine hardware clock type for Alphas.
@@ -18,5 +16,3 @@ CLOCKPARAMS=
 #  Note: CLOCKPARAMS and UTC can alternatively be set in /etc/sysconfig/rc.site
 #
 EOF
-#
-

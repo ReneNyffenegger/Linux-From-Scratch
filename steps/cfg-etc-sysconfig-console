@@ -1,0 +1,16 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter07/usage.html
+#
+
+lfs_trap_err
+
+cat > /etc/sysconfig/console << "EOF"
+#
+#  This file only controls the console. It has nothing to do with X.
+#
+UNICODE=1
+# KEYMAP="de-latin1"
+FONT="lat2a-16 -m 8859-2"
+EOF

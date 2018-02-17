@@ -1,0 +1,12 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter07/bootscripts.html
+#
+
+lfs_trap_err
+
+# lfs_untar_and_cd
+lfs_cd_untarred lfs-bootscripts
+
+make install

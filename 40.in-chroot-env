@@ -87,4 +87,17 @@ lfs_run_step installation-texinfo
 lfs_run_step installation-vim
 lfs_run_step strip-again
 lfs_run_step clean-up
+lfs_run_step cfg-lfs-bootscripts
+lfs_run_step cfg-device-handling
+lfs_run_step cfg-cdroms
+lfs_run_step cfg-network-devices
+lfs_run_step cfg-duplicate-devices
+lfs_run_step cfg-network
+lfs_run_step cfg-etc-inittab
+lfs_run_step cfg-etc-sysconfig-clock
+lfs_run_step cfg-etc-sysconfig-console
+lfs_run_step cfg-etc-profile
+lfs_run_step cfg-etc-inputrc
+lfs_run_step cfg-etc-shells
+lfs_run_step cfg-etc-fstab
 

@@ -1,0 +1,11 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter07/symlinks.html
+#
+
+lfs_trap_err
+
+#
+#  TODO
+#

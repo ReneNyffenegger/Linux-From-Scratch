@@ -7,8 +7,6 @@
 lfs_trap_err
 
 cat > /etc/inittab << "EOF"
-# Begin /etc/inittab
-
 id:3:initdefault:
 
 si::sysinit:/etc/rc.d/init.d/rc S
@@ -31,7 +29,4 @@ su:S016:once:/sbin/sulogin
 4:2345:respawn:/sbin/agetty tty4 9600
 5:2345:respawn:/sbin/agetty tty5 9600
 6:2345:respawn:/sbin/agetty tty6 9600
-
-# End /etc/inittab
 EOF
-

@@ -14,6 +14,10 @@ echo "127.0.0.1 localhost $(hostname)" > /etc/hosts
 export BUILD_ZLIB=False
 export BUILD_BZIP2=0
 
+lfs_log "TQ84 At this point /bin/bash should be a symlink to /tools/bin/bash (mail 2018-02-17 08:25PM)"
+lfs_log "TQ84 it is: ls -l /bin/bash $(ls -l /bin/bash)"
+lfs_log "TQ84 ls -l /tools//bin/bash $(ls -l /tools/bin/bash)"
+
 lfs_log "sh Configure"
 sh Configure -des -Dprefix=/usr                 \
                   -Dvendorprefix=/usr           \

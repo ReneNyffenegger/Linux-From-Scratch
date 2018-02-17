@@ -1,0 +1,15 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter07/etcshells.html
+#
+
+lfs_trap_err
+
+cat > /etc/shells << "EOF"
+#
+#   List of login shells on the system
+#
+/bin/sh
+/bin/bash
+EOF

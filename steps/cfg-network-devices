@@ -1,0 +1,17 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter07/symlinks.html
+#
+
+lfs_trap_err
+
+lfs_log "TQ84 ls -l /etc/udev/rules.d/70-persistent-net.rules: $(ls -l /etc/udev/rules.d/70-persistent-net.rules)"
+bash /lib/udev/init-net-rules.sh
+
+cat /etc/udev/rules.d/70-persistent-net.rules
+#
+#  TODO
+#    The value of NAME is the important part. Make sure you know which name has
+#    been assigned to each of your network cards before proceeding, and be sure
+#    to use that NAME value when creating your configuration files below. 

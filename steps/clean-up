@@ -8,6 +8,10 @@ lfs_trap_err
 
 rm -rf /tmp/*
 
+# TODO
+#
+# rm -rf /source/untarred
+
 #
 #  TODO:  If the virtual kernel file systems have been unmounted, either
 #  manually or through a reboot, ensure that the virtual kernel file systems
