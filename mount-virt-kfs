@@ -1,0 +1,15 @@
+#  vi: ft=sh
+#
+#  TODO: compare with steps/prep-virt-kfs
+#
+
+if [[ -z "$LFS" ]]; then
+  echo "\$LFS not set, sourcing lfs-env"
+  . lfs-env
+fi
+
+sudo mount -v --bind    /dev $LFS/dev
+sudo mount -vt devpts devpts $LFS/dev/pts -o gid=5,mode=620
+sudo mount -vt proc   proc   $LFS/proc
+sudo mount -vt sysfs  sysfs  $LFS/sys
+sudo mount -vt tmpfs  tmpfs  $LFS/run
