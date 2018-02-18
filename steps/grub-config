@@ -14,15 +14,23 @@ insmod ext2
 #
 # Hard drive number starts from zero, partition number from one.
 #
-set root=(hd1,2) # TODO: Configure this, as well. (hd1,2 is /dev/sdb2)
+set root=(hd0,msdos2) # TODO: Configure this, as well. (hd1,2 is /dev/sdb2)
 
 menuentry "GNU/Linux, Linux 4.12.7-lfs-8.1" {
      #
      #  The grub-command
      #     linux file opts
-     #  loads the linux kernel indicated with 'file' and passes opts verbatim as the kernel command line.
+     #  loads the linux kernel indicated with 'file' and passes
+     #  opts verbatim as the kernel command line (»boot parameters« or »bootparams«)
      #
-        linux   /boot/vmlinuz-4.12.7-lfs-8.1 root=/dev/${lfs_partition_device}${lfs_root_partition_nr} ro
+     #  The bootparam
+     #    root
+     #  specifies the root device
+     #  
+     #  rw mounts the root device as rw
+     #   
+     #
+        linux   /boot/vmlinuz-4.12.7-lfs-8.1 root=/dev/${lfs_partition_device}${lfs_root_partition_nr} rw
 }
 EOF
 
