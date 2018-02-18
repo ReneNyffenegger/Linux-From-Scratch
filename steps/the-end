@@ -1,0 +1,19 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter09/theend.html
+#
+
+lfs_trap_err
+
+# TODO: Configure version
+echo 8.1 > /etc/lfs-release
+
+cat > /etc/lsb-release << "EOF"
+DISTRIB_ID="Linux From Scratch"
+DISTRIB_RELEASE="8.1"
+DISTRIB_CODENAME="René"
+DISTRIB_DESCRIPTION="Linux From Scratch"
+EOF
+
+

@@ -1,0 +1,29 @@
+
+lfs_cd_untarred linux
+
+make mrproper
+
+make defconfig
+#
+#    Writes to .config
+#
+
+grep -p -e CONFIG_EFI_STUB -e CONFIG_DEVTMPFS .config
+
+make menuconfig
+
+make && make modules_install
+
+cp -v arch/x86/boot/bzImage /boot/vmlinuz-4.12.7-lfs-8.1
+
+cp -v System.map /boot/System.map-4.12.7
+
+cp -v .config /boot/config-4.12.7
+
+
+# TODO
+#
+# install -d /usr/share/doc/linux-4.12.7
+# cp -r Documentation/* /usr/share/doc/linux-4.12.7
+
+

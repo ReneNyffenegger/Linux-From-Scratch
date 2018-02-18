@@ -20,4 +20,5 @@ chroot "$LFS" /tools/bin/env -i                           \
     lfs_root=/lfs                                         \
     lfs_source_dir=/sources                               \
     lfs_in_chroot_env=yes                                 \
+    lfs_partition_device=$lfs_partition_device            \
     /tools/bin/bash --login +h -c /lfs/40.in-chroot-env

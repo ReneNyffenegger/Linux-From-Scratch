@@ -1,0 +1,25 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter08/grub.html
+#
+
+lfs_trap_err
+
+cat > /boot/grub/grub.cfg << EOF
+set default=0
+set timeout=5
+
+insmod ext2
+#
+# Hard drive number starts from zero, partition number from one.
+#
+set root=(hd2,2) # TODO: Configure this, as well. (hd2,2 is /dev/sdb2)
+
+menuentry "GNU/Linux, Linux 4.12.7-lfs-8.1" {
+        linux   /boot/vmlinuz-4.12.7-lfs-8.1 root=/dev/${lfs_partition_device}${lfs_root_partition_nr} ro
+}
+EOF
+
+# TODO: Check if lfs_partition_device and lfs_root_partition_nr were correctly writting into /boot/grub/crub.cfg
+cd /bla/bla/bla

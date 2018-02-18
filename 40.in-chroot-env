@@ -101,3 +101,17 @@ lfs_run_step cfg-etc-inputrc
 lfs_run_step cfg-etc-shells
 lfs_run_step cfg-etc-fstab
 
+lfs_run_step build-kernel
+
+lfs_run_step cfg-etc-modprobe_d-usb
+
+# TODO http://www.linuxfromscratch.org/lfs/view/stable/chapter08/grub.html
+#      grub-mkrescue --output=grub-img.iso 
+
+# TODO
+# mkdir save-points
+# mkdir save-points/01
+# sudo dd if=/dev/sdb2 conv=sync,noerror bs=64K of=save-points/01/dd.sdb2
+
+lfs_run_step grub-install
+lfs_run_step grub-config

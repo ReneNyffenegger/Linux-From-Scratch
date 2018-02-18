@@ -1,0 +1,22 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter08/grub.html
+#
+
+lfs_trap_err
+
+# lfs_untar_and_cd
+# lfs_cd_untarred
+
+
+lfs_log "TQ84 ls /boot: $(ls /boot)"
+
+lfs_log "TQ84: lfs_partition_device=$lfs_partition_device"
+
+if [[ -z $lfs_partition_device ]]; then
+   lfs_log "lfs_partition_device not set, exiting"
+   exit 1
+fi
+
+grub-install /dev/$lfs_partition_device
