@@ -101,6 +101,8 @@ lfs_run_step cfg-etc-inputrc
 lfs_run_step cfg-etc-shells
 lfs_run_step cfg-etc-fstab
 
+lfs_run_step cfg-etc-login_defs # TQ84
+
 lfs_run_step build-kernel
 
 lfs_run_step cfg-etc-modprobe_d-usb

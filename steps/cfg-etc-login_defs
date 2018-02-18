@@ -1,0 +1,6 @@
+# vi: ft=sh
+#
+#
+lfs_trap_err
+
+sed -i 's/.*\bCREATE_HOME\b.*/CREATE_HOME     no/' /etc/login.defs
