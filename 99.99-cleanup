@@ -2,8 +2,8 @@
 #
 . ./lfs-env
 
-if mount | grep $LFS/dev; then
-  sudo umount $LFS/dev
+if mount | grep $LFS/dev/pts; then
+  sudo umount $LFS/dev/pts
 fi
 for mount in $(mount | awk '{ print $3 }' | grep $LFS/); do
     echo unmounting $mount
