@@ -17,6 +17,11 @@ insmod ext2
 set root=(hd1,2) # TODO: Configure this, as well. (hd1,2 is /dev/sdb2)
 
 menuentry "GNU/Linux, Linux 4.12.7-lfs-8.1" {
+     #
+     #  The grub-command
+     #     linux file opts
+     #  loads the linux kernel indicated with 'file' and passes opts verbatim as the kernel command line.
+     #
         linux   /boot/vmlinuz-4.12.7-lfs-8.1 root=/dev/${lfs_partition_device}${lfs_root_partition_nr} ro
 }
 EOF
