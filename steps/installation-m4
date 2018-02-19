@@ -6,9 +6,19 @@
 
 lfs_trap_err
 
-cd /sources/untarred/m4-*
+mkdir -p /lfs/logs
 
-./configure --prefix=/usr
-make
-make check
-make install
+lfs_untar_and_cd m4
+# cd /sources/untarred/m4-*
+
+./configure --prefix=/usr &> /lfs/logs/m4.configure
+
+make             &> /lfs/logs.m4.make
+
+# TODO: temporarily untrapping errors
+trap - ERR
+make check       &> /lfs/logs.m4.make-check
+lfs_trap_err
+
+
+make install     &> /lfs/logs.m4.make-install

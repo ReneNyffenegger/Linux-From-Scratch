@@ -11,8 +11,14 @@ fi
 
 # TODO: Make a check if /tools exists
 #
-tools_=/
-# tools_=/tools/
+
+if [[ -d $LFS/tools ]]; then
+  tools_=/tools/
+else
+  tools_=/
+fi
+
+echo "tools_=$tools_"
 
 path_=/bin:/usr/bin:/sbin:/usr/sbin
 

@@ -6,7 +6,8 @@
 
 lfs_trap_err
 
-cd /sources/untarred/gmp-*
+# cd /sources/untarred/gmp-*
+lfs_cd_untarred gmp
 
 #
 # If running on 32 bit only?
@@ -18,15 +19,20 @@ cd /sources/untarred/gmp-*
 ./configure --prefix=/usr    \
             --enable-cxx     \
             --disable-static \
-            --docdir=/usr/share/doc/gmp-6.1.2
+            --docdir=/usr/share/doc/gmp-6.1.2 &> /lfs/logs/gmp.configure
 
 
 
-make
+make &> /lfs/logs/gmp.make
+
 # make html
 
+# TODO: temporarily untrapping errors
+trap - ERR
 make check 2>&1 | tee gmp-check-log
+lfs_trap_err
 
+lfs_log "TQ84 ls -l gmp-check-log: $(ls -l gmp-check-log)"
 total=$( awk '/# PASS:/{total+=$3} ; END{print total}' gmp-check-log )
 
 if [[ $total != '190' ]]; then
@@ -36,5 +42,5 @@ fi
 
 lfs_log "total=$total"
 
-make install
+make install  &> /lfs/logs/gmp.make-install
 # make install-html

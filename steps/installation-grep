@@ -6,10 +6,16 @@
 
 lfs_trap_err
 
-cd /sources/untarred/grep-*
+# cd /sources/untarred/grep-*
+lfs_untar_and_cd grep
 
-./configure --prefix=/usr --bindir=/bin
+./configure --prefix=/usr --bindir=/bin  &> /lfs/logs/grep.configure
 
-make
-make check
-make install
+make           &> /lfs/logs/grep.make
+
+# TODO: temporarily untrapping errors
+trap - ERR
+make check     &> /lfs/logs/grep.make-check
+lfs_trap_err
+
+make install   &> /lfs/logs/grep.make-install

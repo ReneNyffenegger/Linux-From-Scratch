@@ -9,7 +9,7 @@ lfs_trap_err
 # lfs_untar_and_cd
 # lfs_cd_untarred
 
-lfs_cd_untarred linux
+lfs_untar_and_cd linux
 
 make mrproper
 

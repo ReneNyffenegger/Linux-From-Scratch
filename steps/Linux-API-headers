@@ -5,10 +5,12 @@
 
 lfs_trap_err
 
-pushd $LFS/sources/untarred/linux-*
+# pushd $LFS/sources/untarred/linux-*
 
+lfs_log "calling make mrproper"
 make mrproper
 
+lfs_log "calling make"
 make INSTALL_HDR_PATH=dest headers_install
 
 #
@@ -19,6 +21,5 @@ make INSTALL_HDR_PATH=dest headers_install
 
 cp -rv dest/include/* /tools/include
 
-popd
 
 exit 0

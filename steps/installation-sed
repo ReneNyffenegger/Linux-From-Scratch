@@ -6,23 +6,28 @@
 
 lfs_trap_err
 
-cd /sources/untarred/sed-*
+# cd /sources/untarred/sed-*
+lfs_untar_and_cd sed
 
 
 sed -i 's/usr/tools/'                 build-aux/help2man
 sed -i 's/testsuite.panic-tests.sh//' Makefile.in
 
 
-./configure --prefix=/usr --bindir=/bin
+./configure --prefix=/usr --bindir=/bin &> /lfs/logs/sed.configure
 
 
-make
-make html
+make          &> /lfs/logs/sed.make
+# make html     &> /lfs/logs/sed.make-html
 
 
-make check
+# TODO: temporarily untrapping errors
+trap - ERR
+make check    &> /lfs/logs/sed.make-check
+lfs_trap_err
 
 
-make install
+make install  &> /lfs/logs/sed.make-install
+
 install -d -m755           /usr/share/doc/sed-4.4
 install -m644 doc/sed.html /usr/share/doc/sed-4.4

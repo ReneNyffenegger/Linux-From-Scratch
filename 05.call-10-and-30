@@ -12,7 +12,8 @@ if [[ -f $lfs_root/done/20 ]]; then
    lfs_log "$lfs_root/done/20 found"
    lfs_log "changing ownership $LFS/tools"
 
-   sudo chown -R root:root $LFS/tools
+#  TODO: is this really necessary?
+#  sudo chown -R root:root $LFS/tools
 
 # TODO http://www.linuxfromscratch.org/lfs/view/stable/chapter05/toolchaintechnotes.html
 
