@@ -9,8 +9,13 @@ lfs_trap_err
 lfs_untar_and_cd patch
 # lfs_cd_untarred
 
-./configure --prefix=/usr
+./configure --prefix=/usr  &> /lfs/logs.patch.configure
 
-make
-make check
-make install
+make                       &> /lfs/logs.patch.make
+
+# TODO: temporarily untrapping errors
+trap - ERR
+make check                 &> /lfs/logs.patch.make-check
+lfs_trap_err
+
+make install               &> /lfs/logs.patch.make-install

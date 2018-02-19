@@ -23,11 +23,13 @@ sudo cp lfs-functions    $lfs_root
 sudo cp 20.run-as-lfs    $lfs_root
 sudo cp 30.run-as-root   $lfs_root
 sudo cp 40.in-chroot-env $lfs_root
+sudo cp bash-env         $lfs_root
 
 sudo chmod a+r  $lfs_root/lfs-functions
 sudo chmod a+rx $lfs_root/20.run-as-lfs
 sudo chmod a+rx $lfs_root/30.run-as-root
 sudo chmod a+rx $lfs_root/40.in-chroot-env
+sudo chmod a+rx $lfs_root/bash-env
 
 sudo cp steps/*        $lfs_root/steps
 sudo chown lfs:lfs  -R $lfs_root

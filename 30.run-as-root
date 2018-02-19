@@ -15,6 +15,9 @@ lfs_run_step prep-virt-kfs
 #
 #  TODO: compare with ./chroot-lfs
 #
+#  TODO: Somehow, the +h below does not seem as intended
+#        Therefore, the ./40.in-chroot-env script contains a »set +h«
+#
 chroot "$LFS" /tools/bin/env -i                           \
     HOME=/root                                            \
     TERM="$TERM"                                          \

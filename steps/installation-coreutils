@@ -6,8 +6,11 @@
 
 lfs_trap_err
 
-# lfs_untar_and_cd coreutils
-lfs_cd_untarred coreutils
+lfs_log "TQ84 \$-=$-, SHELLOPTS=$SHELLOPTS"
+
+lfs_untar_and_cd coreutils
+# cd /sources/untarred/coreutils-*
+# lfs_cd_untarred coreutils
 
 
 patch -Np1 -i ../../coreutils-8.27-i18n-1.patch
@@ -18,13 +21,16 @@ FORCE_UNSAFE_CONFIGURE=1 ./configure \
             --prefix=/usr            \
             --enable-no-install-program=kill,uptime
 
-FORCE_UNSAFE_CONFIGURE=1 make
+FORCE_UNSAFE_CONFIGURE=1 make &> /lfs/logs/coreutils.make
 
-make NON_ROOT_USERNAME=nobody check-root
+lfs_log "TODO: temporarily(?) untrapping for make check check-root"
+trap - ERR
+make NON_ROOT_USERNAME=nobody check-root &> /lfs/logs/coreutils.make-check-root
+lfs_trap_err
 
 echo "dummy:x:1000:nobody" >> /etc/group
 
-chown -Rv nobody . 
+chown -Rv nobody .  &> /lfs/logs/coreutils.chown
 
 # TODO skipping, for once
 #
@@ -33,7 +39,7 @@ chown -Rv nobody .
 
 sed -i '/dummy/d' /etc/group
 
-make install
+make install &> /lfs/logs/coreutils.make-install
 
 mv -v /usr/bin/{cat,chgrp,chmod,chown,cp,date,dd,df,echo} /bin
 

@@ -7,14 +7,20 @@
 lfs_trap_err
 
 lfs_untar_and_cd   tar
-# lfs_cd_untarred
+
+# lfs_cd_untarred tar
 
 FORCE_UNSAFE_CONFIGURE=1  \
 ./configure --prefix=/usr \
-            --bindir=/bin
+            --bindir=/bin        &> /lfs/logs/tar.configure
 
-make
-make check
-make install
+make            &> /lfs/logs/tar.make
+
+# TODO: temporarily untrapping errors
+trap - ERR
+make check      &> /lfs/logs/tar.make
+lfs_trap_err
+
+make install    &> /lfs/logs/tar.make
 
 make -C doc install-html docdir=/usr/share/doc/tar-1.29

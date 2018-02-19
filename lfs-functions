@@ -49,6 +49,7 @@ lfs_run_step() {
   fi #_}
 
   local start_time=$SECONDS
+  lfs_log_ $script_name "lfs_run_step \$-=$-, SHELLOPTS=$SHELLOPTS"
   if $lfs_root/steps/$step_name; then
     if ! touch $lfs_root/done/$step_name; then
       lfs_log_ $script_name "!!! Could not touch $lfs_root/done/$step_name"

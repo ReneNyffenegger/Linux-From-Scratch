@@ -1,3 +1,13 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter08/kernel.html
+#
+
+lfs_trap_err
+
+# lfs_untar_and_cd
+# lfs_cd_untarred
 
 lfs_cd_untarred linux
 
@@ -10,7 +20,9 @@ make defconfig
 
 grep -p -e CONFIG_EFI_STUB -e CONFIG_DEVTMPFS .config
 
-make menuconfig
+# TODO...
+#
+# make menuconfig
 
 make && make modules_install
 

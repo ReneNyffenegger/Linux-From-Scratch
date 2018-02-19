@@ -33,6 +33,3 @@ menuentry "GNU/Linux, Linux 4.12.7-lfs-8.1" {
         linux   /boot/vmlinuz-4.12.7-lfs-8.1 root=/dev/${lfs_partition_device}${lfs_root_partition_nr} rw
 }
 EOF
-
-# TODO: Check if lfs_partition_device and lfs_root_partition_nr were correctly writting into /boot/grub/crub.cfg
-cd /bla/bla/bla

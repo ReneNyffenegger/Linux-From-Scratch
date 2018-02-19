@@ -8,7 +8,6 @@ lfs_trap_err
 
 # TODO: Can't use lfs_cd_untarred because vim does not have a hyphen.
 #
-# lfs_cd_untarred vim
 cd /sources/untarred/vim*
 
 #  First, change the default location of the vimrc configuration file to /etc:
@@ -24,11 +23,16 @@ sed -i '/call/{s/split/xsplit/;s/303/492/}' src/testdir/test_recover.vim
 make
 
 # To test the results, issue:
+
+# TODO: temporarily untrapping errors
+trap - ERR
 make -j1 test &> /lfs/logs/vim.make-test
 # However, this test suite outputs a lot of binary data to the screen, which can cause issues with the settings of the current terminal. This can be resolved by redirecting the output to a log file. A successful test will result in the words "ALL DONE" at completion.
+lfs_trap_err
+
 
 # Install the package:
-make install
+make install       &> /lfs/logs/vim.make-intall
 
 # Many users are used to using vi instead of vim. To allow execution of vim when users habitually enter vi, create a symlink for both the binary and the man page in the provided languages:
 

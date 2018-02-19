@@ -6,11 +6,18 @@
 
 lfs_trap_err
 
+# cd /sources/untarred/diffutils-*
+
 lfs_untar_and_cd diffutils
 # lfs_cd_untarred
 
 ./configure --prefix=/usr
 
-make
-make check
-make install
+make           &> /lfs/logs/diffutils.make
+
+# TODO temporarily untrapped
+trap - ERR
+make check     &> /lfs/logs/diffutils.make-check
+lfs_trap_err
+
+make install   &> /lfs/logs/diffutils.make-install

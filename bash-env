@@ -1,0 +1,8 @@
+#
+# https://unix.stackexchange.com/a/425099/6479
+# 
+# TODO: Should probably be using a lfs_start_step function
+#       that sets +h
+#
+echo "Bash env"
+set +h
