@@ -77,9 +77,9 @@ lfs_run_step installation-kmod
 lfs_run_step installation-gettext
 lfs_run_step installation-procps-ng
 lfs_run_step installation-e2fsprogs
-lfs_log "40.in-chroot-env: \$-=$-"
 lfs_run_step installation-coreutils
 lfs_run_step installation-diffutils
+lfs_run_step installation-gawk
 lfs_run_step installation-findutils
 lfs_run_step installation-groff
 lfs_run_step installation-grub

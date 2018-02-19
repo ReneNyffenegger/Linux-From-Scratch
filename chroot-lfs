@@ -8,14 +8,28 @@ if [[ -z "$LFS" ]]; then
   . lfs-env
 fi
 
-sudo chroot "$LFS" /tools/bin/env -i                      \
-    HOME=/root                                            \
+
+# TODO: Make a check if /tools exists
+#
+tools_=/
+# tools_=/tools/
+
+path_=/bin:/usr/bin:/sbin:/usr/sbin
+
+if [[ $tools_ == "/tools/" ]]; then
+  path_=$path_:/tools/bin
+  env_=/tools/bin/env
+else
+  env_=/usr/bin/env
+fi
+
+sudo chroot "$LFS" $env_ -i                               \
     TERM="$TERM"                                          \
     PS1='\u:\w\$ '                                        \
-    PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin         \
+    PATH=$path_                                           \
     lfs_root=/lfs                                         \
     lfs_source_dir=/sources                               \
     lfs_in_chroot_env=yes                                 \
     lfs_partition_device=$lfs_partition_device            \
     lfs_root_partition_nr=$lfs_root_partition_nr          \
-    /tools/bin/bash --login +h
+    ${tools_}bin/bash --login +h

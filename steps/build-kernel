@@ -18,13 +18,16 @@ make defconfig
 #    Writes to .config
 #
 
-grep -p -e CONFIG_EFI_STUB -e CONFIG_DEVTMPFS .config
+# TODO
+grep -e CONFIG_EFI_STUB -e CONFIG_DEVTMPFS .config
 
 # TODO...
 #
 # make menuconfig
 
-make && make modules_install
+make &> /lfs/logs/linux.make
+
+make modules_install &> /lfs/logs/linux.make-install
 
 cp -v arch/x86/boot/bzImage /boot/vmlinuz-4.12.7-lfs-8.1
 
