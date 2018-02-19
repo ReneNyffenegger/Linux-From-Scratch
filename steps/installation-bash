@@ -6,6 +6,11 @@
 
 lfs_trap_err
 
+#
+# TODO
+#
+mkdir -p /logs
+
 # cd /sources/untarred/bash-*
 lfs_untar_and_cd bash
 
@@ -18,16 +23,16 @@ lfs_log "TQ84 type bash before: $type_bash"
 ./configure --prefix=/usr                       \
             --docdir=/usr/share/doc/bash-4.4    \
             --without-bash-malloc               \
-            --with-installed-readline  &> /lfs/logs/bash.configure
+            --with-installed-readline  &> /logs/bash.configure
 
-make &> /lfs/logs/bash.make
+make &> /logs/bash.make
 
-chown -Rv nobody . &> /lfs/logs/bash.chown
+chown -Rv nobody . &> /logs/bash.chown
 
 # TODO: This /bin/bash does apparently not exist here
-lfs_log "TQ84 does /bin/bash exist here? Apparently, it should. ls -l /bin/bash: $(ls -l /bin/bash)"
-#
-# su nobody -s /bin/bash -c "PATH=$PATH make tests"
+lfs_log "TQ84 does /bin/bash exist here? Apparently, it should point to /tools/bin/bash. ls -l /bin/bash: $(ls -l /bin/bash)"
+
+su nobody -s /bin/bash -c "PATH=$PATH make tests"  > /logs/bash.make.tests
 
 make install
 

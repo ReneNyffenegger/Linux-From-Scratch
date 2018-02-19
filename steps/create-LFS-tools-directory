@@ -24,6 +24,9 @@ if [[ -d $LFS/tools ]]; then
 fi
 
 sudo mkdir -pv $LFS/tools
+lfs_log "TQ84 what are permissions (1) of -ls $LFS/tools?: $(ls -l $LFS/tools)"
+sudo chmod 755 $LFS/tools
+lfs_log "TQ84 what are permissions (2) of -ls $LFS/tools?: $(ls -l $LFS/tools)"
 
 if [[ $(readlink /tools ) != "$LFS/tools" ]]; then
   lfs_log "create symlink for /tools"
