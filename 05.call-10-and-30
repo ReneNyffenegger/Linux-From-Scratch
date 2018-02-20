@@ -6,6 +6,8 @@
 lfs_trap_err
 
 lfs_log "Calling ./10.run"
+
+umask 022
 ./10.run
 
 if [[ -f $lfs_root/done/20 ]]; then

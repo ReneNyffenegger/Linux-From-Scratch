@@ -5,18 +5,19 @@
 
 lfs_trap_err
 
-pushd $LFS/sources/untarred
-
-lfs_log "Trying to remove gcc-* in $PWD"
-rm -rf gcc-*
-
-cd ..
-
-lfs_log "Trying to tar xf gcc-* in $PWD"
-tar xf gcc-* -C untarred
-
-cd untarred/gcc-*
-# ------------------------------
+lfs_untar_and_cd gcc
+# pushd $LFS/sources/untarred
+# 
+# lfs_log "Trying to remove gcc-* in $PWD"
+# rm -rf gcc-*
+# 
+# cd ..
+# 
+# lfs_log "Trying to tar xf gcc-* in $PWD"
+# tar xf gcc-* -C untarred
+# 
+# cd untarred/gcc-*
+# # ------------------------------
 
 
 cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
@@ -70,7 +71,10 @@ RANLIB=$LFS_TGT-ranlib                             \
     --disable-libgomp
 
 
+lfs_log "calling make, PWD=$PWD"
 make
+
+lfs_log "calling make install, PWD=$PWD"
 make install
 
 ln -sv gcc /tools/bin/cc
@@ -82,8 +86,5 @@ lfs_log "TODO: check for expected value [Requesting program interpreter: /tools/
 lfs_log "$(readelf -l a.out | grep ': /tools')"
 
 rm -v dummy.c a.out
-
-# ------------------------------
-popd
 
 exit 0

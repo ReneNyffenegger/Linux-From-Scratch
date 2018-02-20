@@ -6,6 +6,7 @@
 lfs_trap_err
 
 # pushd $LFS/sources/untarred/linux-*
+lfs_cd_untarred linux
 
 lfs_log "calling make mrproper"
 make mrproper

@@ -30,6 +30,7 @@ else
 fi
 
 sudo chroot "$LFS" $env_ -i                               \
+    HOME=/root                                            \
     TERM="$TERM"                                          \
     PS1='\u:\w\$ '                                        \
     PATH=$path_                                           \

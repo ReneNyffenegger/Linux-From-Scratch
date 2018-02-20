@@ -67,10 +67,14 @@ lfs_log "made"
 
 lfs_trap_err
 
-trap - ERR # Temporarily untrapping because debug_msg.sh fails
-lfs_log "calling make -k check"
-make -k check &> /lfs/logs/binutils.make-check
-lfs_trap_err
+if [[ "yes" == "no" ]]; then
+  trap - ERR # Temporarily untrapping because debug_msg.sh fails
+  lfs_log "calling make -k check"
+  make -k check &> /lfs/logs/binutils.make-check
+  lfs_trap_err
+else
+  lfs_log "TODO: Not calling make -k check"
+fi
 
 trap - ERR # Temporarily untrapping because bison is not found, but is apparently not so terrible
 lfs_log "calling make install"

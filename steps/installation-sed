@@ -30,4 +30,5 @@ lfs_trap_err
 make install  &> /lfs/logs/sed.make-install
 
 install -d -m755           /usr/share/doc/sed-4.4
-install -m644 doc/sed.html /usr/share/doc/sed-4.4
+
+# install -m644 doc/sed.html /usr/share/doc/sed-4.4

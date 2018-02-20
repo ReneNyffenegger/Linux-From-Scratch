@@ -1,9 +1,10 @@
-# vi: set ft=sh
+# vi: ft=sh path=.,steps
 #
 
 . ./lfs-env
 
 lfs_trap_err
+umask 022
 
 if  mount | grep -q $LFS ; then
   lfs_log "$LFS is mounted, OK"

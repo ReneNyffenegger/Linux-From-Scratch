@@ -5,18 +5,19 @@
 
 lfs_trap_err
 
-pushd $LFS/sources/untarred
+# pushd $LFS/sources/untarred
 
 # 2018-02-12 Apparently, gcc-* is already used in step GCC-pass-1
+lfs_untar_and_cd gcc
 
-lfs_log "rm -rf gcc-* in $PWD"
-rm -rf gcc-*
-
-cd ..
-lfs_log "tar xf gcc-* -C untarred in $PWD"
-tar xf gcc-* -C untarred
-
-cd untarred/gcc-*
+# lfs_log "rm -rf gcc-* in $PWD"
+# rm -rf gcc-*
+# 
+# cd ..
+# lfs_log "tar xf gcc-* -C untarred in $PWD"
+# tar xf gcc-* -C untarred
+# 
+# cd untarred/gcc-*
 
 mkdir -v build
 cd       build
@@ -35,6 +36,5 @@ lfs_log "calling ../libstdc++-v3/configure, PWD=$PWD"
 make
 make install
 
-popd
 
 exit 0

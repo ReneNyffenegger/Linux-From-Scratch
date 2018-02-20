@@ -35,9 +35,11 @@ export LFS=$LFS
 export lfs_root=$lfs_root
 export lfs_partition_device=$lfs_partition_device
 export lfs_root_partition_nr=$lfs_root_partition_nr
+export lfs_source_dir=$lfs_source_dir
 export LC_ALL=POSIX
 export LFS_TGT=$(uname -m)-lfs-linux-gnu
 export PATH=/tools/bin:/bin:/usr/bin
+export BASH_ENV=$lfs_root/bash-env
 # export MAKEFLAGS='-j 2'                        # http://www.linuxfromscratch.org/lfs/view/stable/chapter04/aboutsbus.html / # TODO should I enable it. See also steps/glibc (make -j1)
 cd $lfs_root
 if $lfs_root/20.run-as-lfs; then

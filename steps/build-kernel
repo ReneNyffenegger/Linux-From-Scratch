@@ -6,9 +6,7 @@
 
 lfs_trap_err
 
-# lfs_untar_and_cd
-# lfs_cd_untarred
-
+# lfs_cd_untarred linux
 lfs_untar_and_cd linux
 
 make mrproper
@@ -21,18 +19,22 @@ make defconfig
 # TODO
 grep -e CONFIG_EFI_STUB -e CONFIG_DEVTMPFS .config
 
+sort .config -o /lfs/linux.config.sorted
+
 # TODO...
 #
 # make menuconfig
 
-make &> /lfs/logs/linux.make
+# TODO: temporarily untrapping errors
+#trap - ERR
+  make
+# make &> /lfs/logs/linux.make
+#lfs_trap_err
 
 make modules_install &> /lfs/logs/linux.make-install
 
 cp -v arch/x86/boot/bzImage /boot/vmlinuz-4.12.7-lfs-8.1
-
 cp -v System.map /boot/System.map-4.12.7
-
 cp -v .config /boot/config-4.12.7
 
 

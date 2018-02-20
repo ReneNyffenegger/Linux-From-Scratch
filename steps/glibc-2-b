@@ -7,12 +7,12 @@ lfs_trap_err
 
 
 lfs_cd_untarred glibc
-# pushd /sources/untarred/glibc-*
 
 cd build
-lfs_log "make check, PWD=$PWD"
 
-# TODO if [ ${RUN_TESTS_CHAPTER_6-NO} == "YES" ]; then
+  lfs_log "make check, PWD=$PWD"
+
+if [[ "NO" == "YES" ]]; then
 
   trap - ERR # make check has some known failes, so don't trap error messages here
   make check
@@ -25,6 +25,10 @@ lfs_log "make check, PWD=$PWD"
     lfs_log "grep -v OK found not oks, look at grep_v_ok"
   fi
   lfs_log "grepped"
-# TODO fi
+
+else
+  lfs_log "TODO: Skipping tests"
+
+fi
 
 exit 0

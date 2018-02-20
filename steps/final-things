@@ -1,0 +1,16 @@
+# vi: ft=sh
+#
+
+lfs_trap_err
+
+# lfs_untar_and_cd
+# lfs_cd_untarred
+
+#
+#  Does / belong to root?
+#
+lfs_log "ls -l  /                    : $(ls -l /)"
+lfs_log "ls -l  /lib/libncursesw.6.0 : $(ls -l /lib/libncursesw.so.6.0)"
+lfs_log "ls -ld /lib64               : $(ls -l /lib64)"
+
+chown root /

@@ -4,16 +4,15 @@
 
 lfs_trap_err
 
-# TODO: This rm gcc-* untar thingy can be replaced
-# with the single following line when evertying compiles
-# ok finally.
-# pushd $LFS/sources/untarred/gcc-*
-pushd $LFS/sources/untarred
-rm -rf gcc-*
-cd ..
-lfs_log "tar xf gcc-* in $PWD"
-tar xf gcc-*.tar.xz -C untarred
-cd untarred/gcc-*
+
+lfs_cd_untarred gcc
+
+# pushd $LFS/sources/untarred
+# rm -rf gcc-*
+# cd ..
+# lfs_log "tar xf gcc-* in $PWD"
+# tar xf gcc-*.tar.xz -C untarred
+# cd untarred/gcc-*
 
 
 lfs_log "LFS=$LFS LFS_TGT=$LFS_TGT PATH=$PATH"
@@ -94,6 +93,5 @@ lfs_log "gcc -print-prog-name=ld: $(realpath $(/tools/bin/$LFS_TGT-gcc -print-pr
 #?   exit 1
 #? fi
 
-popd
 
 exit 0

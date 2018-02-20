@@ -13,10 +13,14 @@ lfs_untar_and_cd texinfo
 
 make          &> /lfs/logs/texinfo.make
 
-# TODO: temporarily untrapping errors
-trap - ERR
-make check    &> /lfs/logs/texinfo.make-check
-lfs_trap_err
+if [[ "yes" == "no" ]]; then
+  # TODO: temporarily untrapping errors
+  trap - ERR
+  make check    &> /lfs/logs/texinfo.make-check
+  lfs_trap_err
+else
+  lfs_log "TODO: Skipped make check"
+fi
 
 make install  &> /lfs/logs/texinfo.make-install
 

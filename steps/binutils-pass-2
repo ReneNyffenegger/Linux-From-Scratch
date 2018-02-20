@@ -7,17 +7,21 @@ lfs_trap_err
 
 #  TODO: as soon as everything compiles, this untar hack should not be necessary anymore
 # pushd $LFS/sources/untarred/binutils-*
-pushd $LFS/sources/untarred
-lfs_log "Trying to remove binutils-*, PWD=$PWD"
 
-rm -rf binutils-*
-cd ..
+# pushd $LFS/sources/untarred
 
-lfs_log "Trying to tar xf binutils-*, PWD=$PWD"
-tar xf binutils-* -C untarred
+lfs_untar_and_cd binutils
 
-
-cd untarred/binutils-*
+# lfs_log "Trying to remove binutils-*, PWD=$PWD"
+# 
+# rm -rf binutils-*
+# cd ..
+# 
+# lfs_log "Trying to tar xf binutils-*, PWD=$PWD"
+# tar xf binutils-* -C untarred
+# 
+# 
+# cd untarred/binutils-*
 
 mkdir -v build
 cd       build
@@ -50,6 +54,5 @@ lfs_log "TQ84: ls -ld /tools:       $(ls -ld /tools)"
 lfs_log "TQ84: ls -ld /tools/bin:   $(ls -ld /tools/bin)"
 cp -v ld/ld-new /tools/bin
 
-popd
 
 exit 0

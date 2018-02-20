@@ -24,6 +24,9 @@ case $(uname -m) in
  x86_64) mkdir -v /lib64 ;;
 esac
 
+lfs_log "TQ84 ls -ld /lib64: $(ls -ld /lib64)"
+lfs_log "TQ84 umask: $(umask)"
+
 mkdir -v /var/{log,mail,spool}
 ln -sv /run /var/run
 ln -sv /run/lock /var/lock

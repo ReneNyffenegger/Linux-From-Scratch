@@ -10,13 +10,15 @@ lfs_trap_err
 # TODO: this removing should not be necessary once
 # the build completes.
 #
-# pushd $LFS/sources/untarred/glibc-*
-  pushd $LFS/sources/untarred
-  rm -rf glibc-*
-  cd ..
-  lfs_log "tar xf glibc-* in $PWD"
-  tar xf glibc-*.tar.xz -C untarred
-  cd untarred/glibc-*
+
+lfs_cd_untarred glibc
+
+# pushd $LFS/sources/untarred
+# rm -rf glibc-*
+# cd ..
+# lfs_log "tar xf glibc-* in $PWD"
+# tar xf glibc-*.tar.xz -C untarred
+# cd untarred/glibc-*
 
 # lfs_log "Applying patch"
 # patch -Np1 -i ../../glibc-2.26-fhs-1.patch

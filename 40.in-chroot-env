@@ -4,6 +4,7 @@
 . /lfs/lfs-functions
 
 lfs_trap_err
+umask 022
 
 export BASH_ENV=$lfs_root/bash-env
 
@@ -137,3 +138,5 @@ lfs_run_step cfg-etc-modprobe_d-usb
 
 lfs_run_step grub-install
 lfs_run_step grub-config
+
+lfs_run_step final-things

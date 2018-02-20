@@ -26,7 +26,12 @@ PKG_CONFIG_PATH=/tools/lib/pkgconfig \
 make
 
 ln -sfv /tools/lib/lib{blk,uu}id.so.1 lib
-make LD_LIBRARY_PATH=/tools/lib check
+
+if [[ "yes" == "no" ]]; then
+  make LD_LIBRARY_PATH=/tools/lib check
+else
+  lfs_log "TODO: skipping make check"
+fi
 
 
 

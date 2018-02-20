@@ -6,6 +6,8 @@
 
 lfs_trap_err
 
+lfs_log "TQ84 umask: $(umask)"
+
 cat > /etc/profile << "EOF"
 # export LANG=<ll>_<CC>.<charmap><@modifiers>
 
@@ -50,3 +52,5 @@ umask 022
 # unset MANPATH
 
 EOF
+
+lfs_log "TQ84: ls -l /etc/profile: $(ls -l /etc/profile)"
