@@ -3,5 +3,5 @@
 #
 lfs_trap_err
 
-lfs_log "TQ84: CREATE_MAIL_SPOOL=YES in /etc/default/useradd"
-sed -i 's/.*\bCREATE_MAIL_SPOOL\b.*/CREATE_MAIL_SPOOL=YES'     /etc/default/useradd
+lfs_log "TQ84: Changing setting CREATE_HOME to yes in /etc/login.defs"
+sed -i 's/.*\bCREATE_HOME\b.*/CREATE_HOME     yes/' /etc/login.defs

@@ -2,3 +2,5 @@
 
 lfs_trap_err
 
+lfs_log "TQ84: CREATE_MAIL_SPOOL=no in /etc/default/useradd"
+sed -i 's/.*\bCREATE_MAIL_SPOOL\b.*/CREATE_MAIL_SPOOL=no/'     /etc/default/useradd
