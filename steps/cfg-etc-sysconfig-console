@@ -12,5 +12,6 @@ cat > /etc/sysconfig/console << "EOF"
 #
 UNICODE=1
 # KEYMAP="de-latin1"
-FONT="lat2a-16 -m 8859-2"
+# FONT="lat2a-16 -m 8859-2"
+FONT="Lat2-Terminus16"      # TQ84
 EOF
