@@ -1,0 +1,23 @@
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/blfs/view/stable/postlfs/firmware.html
+#
+
+
+#
+#  Must be =y
+#
+grep -e CONFIG_BLK_DEV_INITRD -e 'CONFIG_MICROCODE\>' -e CONFIG_MICROCODE_INTEL $LFS/lfs/linux.config.sorted
+
+cpu_identification_hex=$(head -n7 /proc/cpuinfo | awk '
+  /^cpu family/ { cpu_family = $4  }
+  /^model\t/    { model      = $3  }
+  /^stepping/   { stepping   = $3  }
+  END           { printf("%02x-%02x-%02x", cpu_family, model, stepping)    }
+')
+
+
+# tar xf blfs/microcode-20171117.tgz
+
+echo "sudo cp -v intel-ucode/$cpu_identification_hex mnt-lfs/lib/firmware/intel-ucode"
+
