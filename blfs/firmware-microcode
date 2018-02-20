@@ -19,5 +19,6 @@ cpu_identification_hex=$(head -n7 /proc/cpuinfo | awk '
 
 # tar xf blfs/microcode-20171117.tgz
 
+echo "sudo mkdir                                     mnt-lfs/lib/firmware/intel-ucode"
 echo "sudo cp -v intel-ucode/$cpu_identification_hex mnt-lfs/lib/firmware/intel-ucode"
 
