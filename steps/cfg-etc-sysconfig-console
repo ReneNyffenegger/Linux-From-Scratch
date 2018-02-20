@@ -15,6 +15,22 @@ cat > /etc/sysconfig/console << "EOF"
 #
 UNICODE=1
 # KEYMAP="de-latin1"
+KEYMAP="tq84"               # See /usr/share/keymaps/tq84.map
 # FONT="lat2a-16 -m 8859-2"
 FONT="Lat2-Terminus16"      # TQ84
+EOF
+
+cat > /usr/share/keymaps/tq84.map << "EOF"
+include "vim-compose.latin1"
+
+
+keycode   1 = Caps_Lock           Caps_Lock          
+	alt     keycode   1 = Meta_Escape     
+
+keycode  58 = Escape       
+keycode 126 = Control
+
+#  keycode 37 is k, so compose character is ^k
+#
+	control keycode 37 = Compose
 EOF
