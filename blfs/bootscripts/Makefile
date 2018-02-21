@@ -448,6 +448,16 @@ install-sddm: create-dirs
 	ln -sf  ../init.d/sddm ${EXTDIR}/rc.d/rc5.d/S95sddm
 	ln -sf  ../init.d/sddm ${EXTDIR}/rc.d/rc6.d/K05sddm
 
+install-lightdm: create-dirs
+	install -m ${MODE} blfs/init.d/lightdm        ${EXTDIR}/rc.d/init.d/
+	ln -sf  ../init.d/lightdm ${EXTDIR}/rc.d/rc0.d/K05lightdm
+	ln -sf  ../init.d/lightdm ${EXTDIR}/rc.d/rc1.d/K05lightdm
+	ln -sf  ../init.d/lightdm ${EXTDIR}/rc.d/rc2.d/K05lightdm
+	ln -sf  ../init.d/lightdm ${EXTDIR}/rc.d/rc3.d/K05lightdm
+	ln -sf  ../init.d/lightdm ${EXTDIR}/rc.d/rc4.d/K05lightdm
+	ln -sf  ../init.d/lightdm ${EXTDIR}/rc.d/rc5.d/S95lightdm
+	ln -sf  ../init.d/lightdm ${EXTDIR}/rc.d/rc6.d/K05lightdm
+
 install-sendmail: create-dirs
 	install -m ${MODE} blfs/init.d/sendmail   ${EXTDIR}/rc.d/init.d/
 	ln -sf  ../init.d/sendmail ${EXTDIR}/rc.d/rc0.d/K25sendmail
@@ -971,6 +981,16 @@ uninstall-sddm:
 	rm -f ${EXTDIR}/rc.d/rc4.d/K05sddm
 	rm -f ${EXTDIR}/rc.d/rc5.d/S95sddm
 	rm -f ${EXTDIR}/rc.d/rc6.d/K05sddm
+
+uninstall-lightdm:
+	rm -f ${EXTDIR}/rc.d/init.d/lightdm
+	rm -f ${EXTDIR}/rc.d/rc0.d/K05lightdm
+	rm -f ${EXTDIR}/rc.d/rc1.d/K05lightdm
+	rm -f ${EXTDIR}/rc.d/rc2.d/K05lightdm
+	rm -f ${EXTDIR}/rc.d/rc3.d/K05lightdm
+	rm -f ${EXTDIR}/rc.d/rc4.d/K05lightdm
+	rm -f ${EXTDIR}/rc.d/rc5.d/S95lightdm
+	rm -f ${EXTDIR}/rc.d/rc6.d/K05lightdm
 
 uninstall-sendmail:
 	rm -f ${EXTDIR}/rc.d/init.d/sendmail
