@@ -1,0 +1,21 @@
+# vi: ft=sh
+#
+
+lfs_trap_err
+
+
+todo 
+
+
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/introduction/bootscripts.html
+#    wget http://anduin.linuxfromscratch.org/BLFS/blfs-bootscripts/blfs-bootscripts-20170731.tar.xz
+# 
+# However, the bootscripts are already located under
+#   blfs/bootscripts
+# So, they can be copied
+#
+sudo cp -r blfs/bootscripts/ $LFS/lfs/bootscripts
+
+
+todo download cpio etc.

@@ -144,4 +144,6 @@ lfs_run_step grub-config
 
 lfs_run_step final-things
 
+lfs_run_step blfs-random-numbers
+
 # later? lfs_run_step blfs-cpio

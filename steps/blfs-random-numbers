@@ -1,0 +1,10 @@
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/blfs/view/stable/postlfs/random.html
+#
+
+# lfs_trap_err
+
+cd /lfs/bootscripts
+
+make install-random

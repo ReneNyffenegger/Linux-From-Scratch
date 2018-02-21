@@ -21,6 +21,7 @@ lfs_run_step copy-fetched-packages
 lfs_run_step create-LFS-tools-directory
 lfs_run_step add-lfs-user                 # TQ84 This step is not adding the lfs user anymore.
 lfs_run_step set-up-environment
+lfs_run_step download-additional
 
 
 # Switch User to lfs
