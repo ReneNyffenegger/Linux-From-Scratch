@@ -125,6 +125,8 @@ lfs_run_step cfg-etc-fstab
 lfs_run_step cfg-etc-default-useradd # TQ84
 lfs_run_step cfg-etc-login_defs      # TQ84
 
+lfs_run_step cfg-root                # TQ84
+
 lfs_run_step build-kernel
 
 lfs_run_step cfg-etc-modprobe_d-usb
@@ -141,3 +143,5 @@ lfs_run_step grub-install
 lfs_run_step grub-config
 
 lfs_run_step final-things
+
+# later? lfs_run_step blfs-cpio

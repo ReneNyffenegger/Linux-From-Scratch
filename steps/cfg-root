@@ -1,0 +1,8 @@
+# vi: ft=sh
+#
+
+lfs_trap_err
+
+cat > /root/.bashrc << "EOF"
+set -o vi
+EOF

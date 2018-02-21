@@ -7,6 +7,10 @@
 #
 #  Must be =y
 #
+
+#
+#   First step: check if micro code works?
+#
 grep -e CONFIG_BLK_DEV_INITRD -e 'CONFIG_MICROCODE\>' -e CONFIG_MICROCODE_INTEL $LFS/lfs/linux.config.sorted
 
 cpu_identification_hex=$(head -n7 /proc/cpuinfo | awk '
@@ -22,3 +26,11 @@ cpu_identification_hex=$(head -n7 /proc/cpuinfo | awk '
 echo "sudo mkdir                                     mnt-lfs/lib/firmware/intel-ucode"
 echo "sudo cp -v intel-ucode/$cpu_identification_hex mnt-lfs/lib/firmware/intel-ucode"
 
+#
+#  Second step, if it works
+#
+mkdir -p initrd/kernel/x86/microcode
+pushd    initrd
+cp $LFS/lib/firmware/intel-ucode/* kernel/x86/microcode/GenuineIntel.bin
+popd
+rm -rf initrd

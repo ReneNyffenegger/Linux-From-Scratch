@@ -39,4 +39,5 @@ sudo chroot "$LFS" $env_ -i                               \
     lfs_in_chroot_env=yes                                 \
     lfs_partition_device=$lfs_partition_device            \
     lfs_root_partition_nr=$lfs_root_partition_nr          \
-    ${tools_}bin/bash --login +h
+    ${tools_}bin/bash --login +h                          \
+    -o vi

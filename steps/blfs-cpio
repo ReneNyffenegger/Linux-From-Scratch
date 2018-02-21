@@ -1,0 +1,51 @@
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/blfs/view/stable/general/cpio.html
+#
+
+
+
+    
+
+# As ordinary user
+#
+# pushd $lfs_source_dir
+# wget ftp://ftp.gnu.org/gnu/cpio/cpio-2.12.tar.bz2
+# popd
+
+lfs_trap_err
+
+lfs_untar_and_cd cpio
+# lfs_cd_untarred
+
+# lfs_log "lfs_source_dir=$lfs_source_dir"
+
+# if [[ -z $lfs_source_dir ]]; then
+#   lfs_log "lfs_source_dir not defined"
+# fi
+
+
+lfs_log "calling configure"
+./configure --prefix=/usr \
+            --bindir=/bin \
+            --enable-mt   \
+            --with-rmt=/usr/libexec/rmt
+
+lfs_log "calling make"
+make
+
+# makeinfo --html            -o doc/html      doc/cpio.texi &&
+# makeinfo --html --no-split -o doc/cpio.html doc/cpio.texi &&
+# makeinfo --plaintext       -o doc/cpio.txt  doc/cpio.texi
+
+
+# Only if texlive is installed
+#
+# make -C doc pdf &&
+# make -C doc ps
+
+if [[ 'yes' == 'no' ]]; then
+  make check
+fi
+
+make install
