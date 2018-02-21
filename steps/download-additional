@@ -3,9 +3,12 @@
 
 lfs_trap_err
 
+exit 0
 
 todo 
 
+# sudo wget ftp://roy.marples.name/pub/dhcpcd/dhcpcd-6.11.5.tar.xz -P $LFS/sources
+sudo wget  http://roy.marples.name/downloads/dhcpcd/dhcpcd-6.11.5.tar.xz -P $LFS/sources
 
 #
 # http://www.linuxfromscratch.org/blfs/view/stable/introduction/bootscripts.html

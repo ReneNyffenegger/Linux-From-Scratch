@@ -7,14 +7,25 @@
 lfs_trap_err
 
 
+
 cat > /etc/sysconfig/ifconfig.eth0 << "EOF"
 ONBOOT=yes                # Bring up network interface card (NIC) while booting
-IFACE=eth0                # Interface name
-SERVICE=ipv4-static       # TODO DHCP?
-IP=192.168.1.2
-GATEWAY=192.168.1.1
-PREFIX=24                 # Number of bits in the subnet
-BROADCAST=192.168.1.255
+IFACE=wlp0s29u1u4         # Interface name. Must apparently be found in /sys/class/net
+
+# Static IP:
+#
+# SERVICE=ipv4-static
+# IP=192.168.1.2
+# GATEWAY=192.168.1.1
+# PREFIX=24                 # Number of bits in the subnet
+# BROADCAST=192.168.1.255
+
+# DHCP configuration
+#   http://www.linuxfromscratch.org/blfs/view/stable/basicnet/dhcpcd.html
+SERVICE=dhcpcd
+DHCP_START="-b -q" # Add appropriate start options here
+DHCP_STOP="-k"     # stop options
+
 #
 # TODO: see man ifup
 #

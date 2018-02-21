@@ -1,0 +1,19 @@
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/blfs/view/stable/basicnet/dhcpcd.html
+#
+
+lfs_trap_err
+
+# lfs_cd_untarred
+lfs_untar_and_cd dhcpcd
+
+./configure --libexecdir=/lib/dhcpcd \
+            --dbdir=/var/lib/dhcpcd  &&
+make
+
+make install
+
+pushd /lfs/bootscripts
+make install-service-dhcpcd
+popd
