@@ -16,8 +16,17 @@ sudo wget  https://github.com//libusb/libusb/releases/download/v1.0.21/libusb-1.
 sudo mkdir                                                                                      $LFS/usr/share/hwdata
 sudo wget  https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-009.tar.xz           -P $LFS/sources
 sudo wget  https://www.kernel.org/pub/software/utils/pciutils/pciutils-3.5.5.tar.xz          -P $LFS/sources
-sudo wget   https://pci-ids.ucw.cz/v2.2/pci.ids                                              -O $LFS/usr/share/hwdata/pci.ids
+sudo wget  https://pci-ids.ucw.cz/v2.2/pci.ids                                               -O $LFS/usr/share/hwdata/pci.ids
 sudo wget   http://www.linux-usb.org/usb.ids                                                 -O $LFS/usr/share/hwdata/usb.ids
+
+# OpenSSL
+sudo wget  https://openssl.org/source/openssl-1.1.0f.tar.gz                                  -P $LFS/sources
+
+# libnl
+sudo wget  https://github.com/thom311/libnl/releases/download/libnl3_3_0/libnl-3.3.0.tar.gz  -P $LFS/sources
+
+# wpa_supplicant
+sudo wget  https://w1.fi/releases/wpa_supplicant-2.6.tar.gz                                  -P $LFS/sources
 
 #
 # http://www.linuxfromscratch.org/blfs/view/stable/introduction/bootscripts.html

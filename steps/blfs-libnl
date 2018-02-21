@@ -1,0 +1,25 @@
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/blfs/view/8.1/basicnet/libnl.html
+#
+# libnl is apparently required for wpa_supplicant
+
+lfs_trap_err
+
+lfs_untar_and_cd libnl
+# lfs_cd_untarred
+
+lfs_log "calling configure"
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --disable-static
+
+lfs_log "calling make"
+make
+
+make install
+
+#
+# mkdir -vp /usr/share/doc/libnl-3.3.0
+# tar -xf ../libnl-doc-3.3.0.tar.gz --strip-components=1 --no-same-owner \
+#     -C  /usr/share/doc/libnl-3.3.0

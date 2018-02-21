@@ -1,0 +1,28 @@
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/blfs/view/8.1/postlfs/openssl.html
+#
+# Required for wsa_supplicant
+
+lfs_trap_err
+
+# lfs_cd_untarred
+lfs_untar_and_cd openssl
+
+
+./config --prefix=/usr         \
+         --openssldir=/etc/ssl \
+         --libdir=lib          \
+         shared                \
+         zlib-dynamic
+
+make
+
+# disable static libraries
+sed -i 's# libcrypto.a##;s# libssl.a##;/INSTALL_LIBS/s#libcrypto.a##' Makefile
+
+make MANSUFFIX=ssl install
+
+mv -v /usr/share/doc/openssl{,-1.1.0f}
+
+cp -vfr doc/* /usr/share/doc/openssl-1.1.0f
