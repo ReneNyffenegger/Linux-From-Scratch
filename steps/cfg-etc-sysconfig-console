@@ -10,7 +10,7 @@ cat > /etc/sysconfig/console << "EOF"
 #
 #  This file only controls the console. It has nothing to do with X.
 #
-#  This file is sources by the /etc/rc.d/init.d/console script which then
+#  This file is sourced by the /etc/rc.d/init.d/console script which then
 #  uses the values of the variables set here.
 #
 UNICODE=1
