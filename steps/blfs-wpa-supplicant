@@ -77,8 +77,9 @@ install -v -m644 doc/docbook/wpa_{cli,passphrase,supplicant}.8 /usr/share/man/ma
 # install -v -m644 wpa_gui-qt4/wpa_gui.desktop /usr/share/applications/ &&
 # install -v -m644 wpa_gui-qt4/icons/wpa_gui.svg /usr/share/pixmaps/
 
-read -p "SSID:     " WIFI_SSID
-read -p "PASSWORD: " WIFI_PASSWORD
+read -p "SSID:      " WIFI_SSID
+read -p "Password:  " WIFI_PASSWORD
+read -p "Interface: " WIFI_INTERFACE
 
 wpa_passphrase $WIFI_SSID $WIFI_PASSWORD > /etc/sysconfig/wpa_supplicant-wifi0.conf
 
@@ -86,9 +87,9 @@ pushd /lfs/bootscripts
 make install-service-wpa
 popd
 
-cat > /etc/sysconfig/ifconfig.wifi0 << "EOF"
+cat > /etc/sysconfig/ifconfig.wifi0 << EOF
 ONBOOT="yes"
-IFACE="wlan0"
+IFACE="$WIFI_INTERFACE"  # Name of interface. Apparently, must correspont to one in /sys/class/net
 SERVICE="wpa"
 
 # Additional arguments to wpa_supplicant
