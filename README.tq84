@@ -1,0 +1,8 @@
+These bootscripts were downloaded via
+  http://www.linuxfromscratch.org/blfs/view/stable/introduction/bootscripts.html
+from
+  http://anduin.linuxfromscratch.org/BLFS/blfs-bootscripts/blfs-bootscripts-20170731.tar.xz
+
+
+Apparently, they're also found on
+  http://svn.linuxfromscratch.org/BLFS/trunk/bootscripts/
