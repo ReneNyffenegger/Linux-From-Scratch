@@ -8,7 +8,16 @@ exit 0
 todo 
 
 # sudo wget ftp://roy.marples.name/pub/dhcpcd/dhcpcd-6.11.5.tar.xz -P $LFS/sources
-sudo wget  http://roy.marples.name/downloads/dhcpcd/dhcpcd-6.11.5.tar.xz -P $LFS/sources
+sudo wget   http://roy.marples.name/downloads/dhcpcd/dhcpcd-6.11.5.tar.xz                    -P $LFS/sources
+
+sudo wget  https://github.com//libusb/libusb/releases/download/v1.0.21/libusb-1.0.21.tar.bz2 -P $LFS/sources
+
+# PCI and USB utils
+sudo mkdir                                                                                      $LFS/usr/share/hwdata
+sudo wget  https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-009.tar.xz           -P $LFS/sources
+sudo wget  https://www.kernel.org/pub/software/utils/pciutils/pciutils-3.5.5.tar.xz          -P $LFS/sources
+sudo wget   https://pci-ids.ucw.cz/v2.2/pci.ids                                              -O $LFS/usr/share/hwdata/pci.ids
+sudo wget   http://www.linux-usb.org/usb.ids                                                 -O $LFS/usr/share/hwdata/usb.ids
 
 #
 # http://www.linuxfromscratch.org/blfs/view/stable/introduction/bootscripts.html

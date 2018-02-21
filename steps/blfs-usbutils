@@ -1,0 +1,14 @@
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/blfs/view/stable/general/usbutils.html
+#
+
+lfs_trap_err
+
+# lfs_cd_untarred
+lfs_untar_and_cd usbutils
+
+./configure --prefix=/usr --datadir=/usr/share/hwdata &&
+make
+
+make install

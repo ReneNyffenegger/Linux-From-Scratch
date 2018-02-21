@@ -146,5 +146,8 @@ lfs_run_step final-things
 
 lfs_run_step blfs-random-numbers
 lfs_run_step blfs-dhcpcd
+lfs_run_step blfs-libusb
+lfs_run_step blfs-pciutils
+lfs_run_step blfs-usbutils
 
 # later? lfs_run_step blfs-cpio

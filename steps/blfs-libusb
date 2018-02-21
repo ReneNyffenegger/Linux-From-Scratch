@@ -1,0 +1,22 @@
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/blfs/view/stable/general/libusb.html
+#
+
+lfs_trap_err
+
+# lfs_cd_untarred
+lfs_untar_and_cd libusb
+
+
+sed -i "s/^PROJECT_LOGO/#&/" doc/doxygen.cfg.in &&
+
+./configure --prefix=/usr --disable-static &&
+make -j1
+
+
+# If Doxygen is installed
+# make -C doc docs
+
+make install
+
