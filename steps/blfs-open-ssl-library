@@ -1,0 +1,51 @@
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/blfs/view/stable/postlfs/openssl10.html
+#
+#  NOTE This is open ssl libraries, there is also open ssl.
+
+lfs_trap_err
+
+# lfs_cd_untarred
+# lfs_untar_and_cd
+cd /sources
+
+if [[ -d OPENSSL_LIB ]]; then
+  lfs_log "directory OPENSSL_LIB exists, removing it"
+  rm -rf OPENSSL_LIB
+fi
+
+mkdir OPENSSL_LIB
+tar xf OPENSSL_LIB.tar.gz -C OPENSSL_LIB
+cd OPENSSL_LIB/openssl-*
+
+
+lfs_log "patching, PWD=$PWD"
+patch -Np1 -i ../../openssl-1.0.2l-compat_versioned_symbols-1.patch
+
+lfs_log "configuring"
+./config --prefix=/usr            \
+         --openssldir=/etc/ssl    \
+         --libdir=lib/openssl-1.0 \
+         shared                   \
+         zlib-dynamic             
+
+lfs_log "make depend"
+make depend
+
+lfs_log "make"
+make -j1
+
+make INSTALL_PREFIX=$PWD/Dest install_sw
+
+install -vdm755                   /usr/lib/openssl-1.0
+cp -Rv Dest/usr/lib/openssl-1.0/* /usr/lib/openssl-1.0
+
+mv -v  /usr/lib/openssl-1.0/lib{crypto,ssl}.so.1.0.0 /usr/lib
+ln -sv ../libssl.so.1.0.0         /usr/lib/openssl-1.0
+ln -sv ../libcrypto.so.1.0.0      /usr/lib/openssl-1.0
+
+install -vdm755                   /usr/include/openssl-1.0
+cp -Rv Dest/usr/include/openssl   /usr/include/openssl-1.0
+
+sed 's@/include$@/include/openssl-1.0@' -i /usr/lib/openssl-1.0/pkgconfig/*.pc

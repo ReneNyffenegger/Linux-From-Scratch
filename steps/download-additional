@@ -22,6 +22,12 @@ sudo wget   http://www.linux-usb.org/usb.ids                                    
 # OpenSSL
 sudo wget  https://openssl.org/source/openssl-1.1.0f.tar.gz                                  -P $LFS/sources
 
+# OpenSSL Libraries
+#
+# Note: special name to make problems hopefully smaller.
+sudo wget  https://openssl.org/source/openssl-1.0.2l.tar.gz                                                  -O $LFS/sources/OPENSSL_LIB.tar.gz
+sudo wget  http://www.linuxfromscratch.org/patches/blfs/8.1/openssl-1.0.2l-compat_versioned_symbols-1.patch  -P $LFS/sources
+
 # libnl
 sudo wget  https://github.com/thom311/libnl/releases/download/libnl3_3_0/libnl-3.3.0.tar.gz  -P $LFS/sources
 
@@ -30,6 +36,16 @@ sudo wget  https://w1.fi/releases/wpa_supplicant-2.6.tar.gz                     
 
 # wget
 sudo wget  https://ftp.gnu.org/gnu/wget/wget-1.19.1.tar.xz                                   -P $LFS/sources
+
+# libatomic_ops
+sudo wget  https://github.com/ivmai/libatomic_ops/releases/download/v7.4.6/libatomic_ops-7.4.6.tar.gz -P $LFS/sources
+
+# gc
+sudo wget  http://www.hboehm.info/gc/gc_source/gc-7.6.0.tar.gz                               -P $LFS/sources
+
+# W3m text browser
+sudo wget  https://downloads.sourceforge.net/w3m/w3m-0.5.3.tar.gz                            -P $LFS/sources
+sudo wget  http://www.linuxfromscratch.org/patches/blfs/8.1/w3m-0.5.3-bdwgc72-1.patch        -P $LFS/sources
 
 #
 # http://www.linuxfromscratch.org/blfs/view/stable/introduction/bootscripts.html

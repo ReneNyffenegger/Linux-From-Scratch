@@ -1,0 +1,33 @@
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/blfs/view/stable/general/gc.html
+#
+# gc apparently requires libatomic_ops
+
+lfs_trap_err
+
+# lfs_cd_untarred
+lfs_untar_and_cd gc
+
+lfs_log "sed"
+sed -i 's#pkgdata#doc#' doc/doc.am
+
+lfs_log "autoreconf"
+autoreconf -fi
+
+lfs_log "configure"
+./configure --prefix=/usr      \
+            --enable-cplusplus \
+            --disable-static   \
+            --docdir=/usr/share/doc/gc-7.6.0
+
+
+lfs_log "make"
+make
+
+lfs_log "make install"
+make install
+
+install -v -m644 doc/gc.man /usr/share/man/man3/gc_malloc.3
+
+ln -sfv gc_malloc.3 /usr/share/man/man3/gc.3

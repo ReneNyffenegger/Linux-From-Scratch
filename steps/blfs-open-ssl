@@ -3,6 +3,8 @@
 #  http://www.linuxfromscratch.org/blfs/view/8.1/postlfs/openssl.html
 #
 # Required for wsa_supplicant
+#
+# Note: This is open ssl, there is also open ssl libraries
 
 lfs_trap_err
 

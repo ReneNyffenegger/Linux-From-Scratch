@@ -1,0 +1,37 @@
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/blfs/view/stable/basicnet/w3m.html
+#
+
+lfs_trap_err
+
+# lfs_cd_untarred
+lfs_untar_and_cd w3m
+
+lfs_log "Patching"
+patch -Np1 -i ../../w3m-0.5.3-bdwgc72-1.patch
+
+lfs_log "sed 1"
+sed -i 's/file_handle/file_foo/' istream.{c,h}
+
+lfs_log "sed 2"
+sed -i 's#gdk-pixbuf-xlib-2.0#& x11#' configure
+
+lfs_log "configuring"
+PKG_CONFIG_PATH="/usr/lib/openssl-1.0/pkgconfig:$PKG_CONFIG_PATH" \
+    ./configure --prefix=/usr --sysconfdir=/etc  &&
+
+lfs_log "making"
+make
+
+lfs_log "make install"
+make install
+
+install -v -m644 -D doc/keymap.default /etc/w3m/keymap
+
+install -v -m644    doc/menu.default /etc/w3m/menu
+
+install -v -m755 -d /usr/share/doc/w3m-0.5.3
+
+install -v -m644    doc/{HISTORY,READ*,keymap.*,menu.*,*.html} \
+                    /usr/share/doc/w3m-0.5.3

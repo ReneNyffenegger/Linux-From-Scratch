@@ -154,4 +154,11 @@ lfs_run_step blfs-libnl
 lfs_run_step blfs-wpa-supplicant
 lfs_run_step blfs-wget
 
+lfs_run_step blfs-libatomic-ops
+lfs_run_step blfs-gc
+
+lfs_run_step blfs-open-ssl-library
+
+lfs_run_step blfs-w3m
+
 # later? lfs_run_step blfs-cpio

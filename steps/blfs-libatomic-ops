@@ -1,0 +1,22 @@
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/blfs/view/stable/general/libatomic_ops.html
+#
+#  libatomic_ops is apparently required for gc
+
+lfs_trap_err
+
+# lfs_cd_untarred
+lfs_untar_and_cd libatomic_ops
+
+lfs_log "configuring"
+./configure --prefix=/usr    \
+            --enable-shared  \
+            --disable-static \
+            --docdir=/usr/share/doc/libatomic_ops-7.4.6
+
+lfs_log "making"
+make
+
+lfs_log "make install"
+make install
