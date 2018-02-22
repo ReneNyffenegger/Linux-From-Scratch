@@ -47,6 +47,9 @@ sudo wget  http://www.hboehm.info/gc/gc_source/gc-7.6.0.tar.gz                  
 sudo wget  https://downloads.sourceforge.net/w3m/w3m-0.5.3.tar.gz                            -P $LFS/sources
 sudo wget  http://www.linuxfromscratch.org/patches/blfs/8.1/w3m-0.5.3-bdwgc72-1.patch        -P $LFS/sources
 
+# Curl
+sudo wget  https://curl.haxx.se/download/curl-7.55.1.tar.xz                                  -P $LFS/sources
+
 #
 # http://www.linuxfromscratch.org/blfs/view/stable/introduction/bootscripts.html
 #    wget http://anduin.linuxfromscratch.org/BLFS/blfs-bootscripts/blfs-bootscripts-20170731.tar.xz

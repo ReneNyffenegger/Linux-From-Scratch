@@ -165,4 +165,6 @@ lfs_run_step blfs-open-ssl-library
 
 lfs_run_step blfs-w3m
 
+lfs_run_step blfs-curl
+
 # later? lfs_run_step blfs-cpio
