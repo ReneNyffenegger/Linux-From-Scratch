@@ -168,4 +168,6 @@ lfs_run_step blfs-w3m
 lfs_run_step blfs-curl
 lfs_run_step blfs-perl-Error
 
+lfs_run_step blfs-libffi
+
 # later? lfs_run_step blfs-cpio
