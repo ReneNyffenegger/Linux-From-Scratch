@@ -150,9 +150,13 @@ lfs_run_step blfs-libusb
 lfs_run_step blfs-pciutils
 lfs_run_step blfs-usbutils
 lfs_run_step blfs-open-ssl
+
 lfs_run_step blfs-libnl
 lfs_run_step blfs-wpa-supplicant
 lfs_run_step blfs-wget
+
+# Correct order?
+lfs_run_step blfs-certificates
 
 lfs_run_step blfs-libatomic-ops
 lfs_run_step blfs-gc
