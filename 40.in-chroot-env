@@ -152,5 +152,6 @@ lfs_run_step blfs-usbutils
 lfs_run_step blfs-open-ssl
 lfs_run_step blfs-libnl
 lfs_run_step blfs-wpa-supplicant
+lfs_run_step blfs-wget
 
 # later? lfs_run_step blfs-cpio

@@ -28,6 +28,9 @@ sudo wget  https://github.com/thom311/libnl/releases/download/libnl3_3_0/libnl-3
 # wpa_supplicant
 sudo wget  https://w1.fi/releases/wpa_supplicant-2.6.tar.gz                                  -P $LFS/sources
 
+# wget
+sudo wget  https://ftp.gnu.org/gnu/wget/wget-1.19.1.tar.xz                                   -P $LFS/sources
+
 #
 # http://www.linuxfromscratch.org/blfs/view/stable/introduction/bootscripts.html
 #    wget http://anduin.linuxfromscratch.org/BLFS/blfs-bootscripts/blfs-bootscripts-20170731.tar.xz

@@ -1,0 +1,17 @@
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/blfs/view/stable/basicnet/wget.html
+#
+
+lfs_trap_err
+
+# lfs_cd_untarred
+lfs_untar_and_cd wget
+
+./configure --prefix=/usr      \
+            --sysconfdir=/etc  \
+            --with-ssl=openssl &&
+
+make
+
+make install
