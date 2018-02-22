@@ -53,6 +53,9 @@ sudo wget  https://curl.haxx.se/download/curl-7.55.1.tar.xz                     
 # libffi
 sudo wget  https://sourceware.org/ftp/libffi/libffi-3.2.1.tar.gz                             -P $LFS/sources
 
+# python 2
+sudo wget  https://www.python.org/ftp/python/2.7.13/Python-2.7.13.tar.xz                     -P $LFS/sources
+
 
 #
 # http://www.linuxfromscratch.org/blfs/view/stable/introduction/bootscripts.html

@@ -1,0 +1,27 @@
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/blfs/view/stable/general/python2.html
+#
+
+lfs_trap_err
+
+# lfs_cd_untarred
+lfs_untar_and_cd Python
+
+lfs_log "configuring"
+./configure --prefix=/usr       \
+            --enable-shared     \
+            --with-system-expat \
+            --with-system-ffi   \
+            --with-ensurepip=yes \
+            --enable-unicode=ucs4
+
+lfs_log "making"
+make
+
+lfs_log "installing"
+trap - ERR
+make install
+lfs_trap_err
+
+chmod -v 755 /usr/lib/libpython2.7.so.1.0

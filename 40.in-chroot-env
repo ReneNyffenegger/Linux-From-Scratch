@@ -170,4 +170,6 @@ lfs_run_step blfs-perl-Error
 
 lfs_run_step blfs-libffi
 
+lfs_run_step blfs-python-2
+
 # later? lfs_run_step blfs-cpio
