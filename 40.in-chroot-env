@@ -172,4 +172,6 @@ lfs_run_step blfs-libffi
 
 lfs_run_step blfs-python-2
 
+lfs_run_step blfs-git
+
 # later? lfs_run_step blfs-cpio

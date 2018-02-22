@@ -1,0 +1,18 @@
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/blfs/view/stable/general/git.html
+#
+
+lfs_trap_err
+
+# lfs_cd_untarred
+lfs_untar_and_cd git
+
+lfs_log "configuring"
+./configure --prefix=/usr --with-gitconfig=/etc/gitconfig
+
+lfs_log "making"
+make
+
+lfs_log "installing"
+make install

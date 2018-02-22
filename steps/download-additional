@@ -56,6 +56,8 @@ sudo wget  https://sourceware.org/ftp/libffi/libffi-3.2.1.tar.gz                
 # python 2
 sudo wget  https://www.python.org/ftp/python/2.7.13/Python-2.7.13.tar.xz                     -P $LFS/sources
 
+# git
+sudo wget  https://www.kernel.org/pub/software/scm/git/git-2.14.1.tar.xz                     -P $LFS/sources
 
 #
 # http://www.linuxfromscratch.org/blfs/view/stable/introduction/bootscripts.html
