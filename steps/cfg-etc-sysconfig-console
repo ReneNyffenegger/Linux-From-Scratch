@@ -21,14 +21,25 @@ FONT="Lat2-Terminus16"      # TQ84
 EOF
 
 cat > /usr/share/keymaps/tq84.map << "EOF"
-include "vim-compose.latin1"
+#
+#  Find key codes in terminal with
+#    $ showkey
+#
+#  Load changed key codes with
+#    $ loadkeys /usr/share/keymaps/tq84.map
 
+#
+#   Allow vim like digraphs:
+#   See 'ctrl keycode 37' below
+#
+include "vim-compose.latin1"
 
 keycode   1 = Caps_Lock           Caps_Lock          
 	alt     keycode   1 = Meta_Escape     
 
 keycode  58 = Escape       
-keycode 126 = Control
+keycode 100 = Alt     # Right Alt is apparently not assigned by default
+keycode 126 = Control # Right Windows
 
 #  keycode 37 is k, so compose character is ^k
 #

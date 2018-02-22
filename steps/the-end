@@ -9,6 +9,7 @@ lfs_trap_err
 echo 8.1 > /etc/lfs-release
 
 cat > /etc/lsb-release << "EOF"
+NAME=LSF
 DISTRIB_ID="Linux From Scratch"
 DISTRIB_RELEASE="8.1"
 DISTRIB_CODENAME="René"
