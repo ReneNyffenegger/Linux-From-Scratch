@@ -1,0 +1,19 @@
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/blfs/view/stable/general/perl-modules.html#perl-error
+#
+
+lfs_trap_err
+
+mkdir /lfs/perl-Error.temp
+cd    /lfs/perl-Error.temp
+
+wget https://www.cpan.org/authors/id/S/SH/SHLOMIF/Error-0.17025.tar.gz
+
+tar xf Error-*tar.gz
+rm Error-*tar.gz
+cd Error-*
+
+perl Makefile.PL
+make
+make install
