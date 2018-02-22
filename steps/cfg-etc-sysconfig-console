@@ -28,6 +28,10 @@ cat > /usr/share/keymaps/tq84.map << "EOF"
 #  Load changed key codes with
 #    $ loadkeys /usr/share/keymaps/tq84.map
 
+#
+#   Allow vim like digraphs:
+#   See 'ctrl keycode 37' below
+#
 include "vim-compose.latin1"
 
 keycode   1 = Caps_Lock           Caps_Lock          
