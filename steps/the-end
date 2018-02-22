@@ -1,4 +1,3 @@
-#
 # vi: ft=sh
 #
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter09/theend.html
@@ -15,5 +14,3 @@ DISTRIB_RELEASE="8.1"
 DISTRIB_CODENAME="René"
 DISTRIB_DESCRIPTION="Linux From Scratch"
 EOF
-
-

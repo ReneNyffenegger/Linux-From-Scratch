@@ -139,6 +139,9 @@ lfs_run_step cfg-etc-modprobe_d-usb
 # mkdir save-points/01
 # sudo dd if=/dev/sdb2 conv=sync,noerror bs=64K of=save-points/01/dd.sdb2
 
+lfs_run_step the-end
+
+
 lfs_run_step grub-install
 lfs_run_step grub-config
 
