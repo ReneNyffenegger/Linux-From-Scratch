@@ -5,6 +5,8 @@
 export XORG_PREFIX=/usr
 export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
 
+export lfs_download_dir=/etc/lfs/downloads
+
 if [ ! -d done ]; then
    mkdir 'done' # Without quote: syntax highlighting is really annoying
 fi
@@ -18,32 +20,36 @@ fi
 # Zero tolerance
 trap 'exit 1' ERR
 
-xls_x_step() {
 
-  trap 'echo Error at line $LINENO; exit 1' ERR
-
-  local name=$1
-  local download_url=$2
-
-  if [ -e done/$name ]; then
-    echo "$name already done"
-    return 0
-  fi
+lfs_download() {
+  local download_url=$1
 
   local download_file_name=$(basename $download_url)
-  echo "Downloading $download_file_name"
 
   #
   #  Download the file, if necessary
   #
-  if [ ! -f downloads/$download_file_name ]; then
+  if [ ! -f $lfs_download_dir/$download_file_name ]; then
     echo downloading $download_file_name
-    wget $download_url -P downloads
+    wget $download_url -P $lfs_download_dir
   else
     echo $download_file_name already downloaded
   fi
+}
+
+lfs_download_and_extract() {
+  local download_url=$1
+  local dest_dir=$2
+
+  if [ ! -d "$dest_dir" ]; then
+    echo "lfs_download_and_extract: $dest_dir does not exist"
+    return 1
+  fi
 
 
+  lfs_download $download_url
+
+  local download_file_name=$(basename $download_url)
   #
   #  Find last part of downloaded file
   #
@@ -54,22 +60,36 @@ xls_x_step() {
   #
   #  Extract the file, if necessary
   #
-  if [ ! -d steps/$extracted_dir ]; then
-    tar xf downloads/$download_file_name -C steps
+  if [ ! -d $dest_dir/$extracted_dir ]; then
+    echo "trying to untar $lfs_download_dir/$ into $dest_dir, PWD=$PWD"
+    tar xf $lfs_download_dir/$download_file_name -C $dest_dir
   else
-    echo directory steps/$extracted_dir already exists
+    echo directory $dest_dir/$extracted_dir already exists
+  fi
+
+}
+
+lfs_x_step() {
+
+  trap 'echo Error at line $LINENO; exit 1' ERR
+
+  local name=$1
+
+  if [ -e done/$name ]; then
+    echo "$name already done"
+    return 0
   fi
 
 
-  pushd steps/$extracted_dir > /dev/null
+  pushd steps/$name > /dev/null
 
-  ./configure $XORG_CONFIG
-  make install
+  . go
 
   popd              > /dev/null
 
   touch done/$name
 }
 
-xls_x_step  util-macros    ftp://ftp.x.org/pub/individual/util/util-macros-1.19.1.tar.bz2
+lfs_x_step  util-macros
+lfs_x_step  protocol-headers
 
