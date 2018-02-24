@@ -10,8 +10,10 @@ cat > /etc/sysconfig/console << "EOF"
 #
 #  This file only controls the console. It has nothing to do with X.
 #
-#  This file is sourced by the /etc/rc.d/init.d/console script which then
-#  uses the values of the variables set here.
+#  This file is sourced by the /etc/rc.d/init.d/console script when going
+#  to runlevel 'S'.
+#
+#  The values set here will later be used.
 #
 UNICODE=1
 # KEYMAP="de-latin1"
