@@ -10,7 +10,7 @@ cat > /etc/sysconfig/console << "EOF"
 #
 #  This file only controls the console. It has nothing to do with X.
 #
-#  This file is sourced by the /etc/rc.d/init.d/console script when going
+#  This file is sourced by the /etc/rc.d/init.d/rc script when going
 #  to runlevel 'S'.
 #
 #  The values set here will later be used.
