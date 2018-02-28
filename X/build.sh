@@ -170,7 +170,6 @@ lfs_x_step funcsigs      # required for beaker
 lfs_x_step beaker        # required for mako
 lfs_x_step mako          # required for mesa
 
-lfs_x_step libdrm        # required for mesa
 
 # TODO: Fix  util-macros
 #       and protocol-headers
@@ -184,11 +183,14 @@ lfs_x_step  libXau
 lfs_x_step  libXdmcp
 lfs_x_step  xcb-proto
 lfs_x_step  libxcb
-lfs_x_step  Xorg
+lfs_x_step  Xorg-libaries
 lfs_x_step  xcb-util
 lfs_x_step  xcb-util-image
 lfs_x_step  xcb-util-keysyms
 lfs_x_step  xcb-util-renderutil
 lfs_x_step  xcb-util-wm
 lfs_x_step  xcb-util-cursor
+
+lfs_x_step  libdrm        # required for mesa
+
 lfs_x_step  mesa
