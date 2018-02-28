@@ -1,0 +1,31 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/x/x7app.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.x.org/pub/individual/app/
+
+lfs_log "Doing the for package loop, PWD=$PWD"
+for package in $(grep -v '^#' Xorg-applications.md5 | awk '{print $2}'); do
+
+  # TODO: With the md5 sums available, I should also check them
+
+    lfs_log "trying to download $package"
+    lfs_download_extract_and_pushd https://www.x.org/pub/individual/lib/$package
+
+      ./configure $XORG_CONFIG
+      make
+      make install
+
+    popd
+done
+
+install -v -d -m755 /usr/share/fonts 
+
+ln -svfn $XORG_PREFIX/share/fonts/X11/OTF /usr/share/fonts/X11-OTF 
+ln -svfn $XORG_PREFIX/share/fonts/X11/TTF /usr/share/fonts/X11-TTF
+
+
+lfs_end_step

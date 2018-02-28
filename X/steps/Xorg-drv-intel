@@ -1,0 +1,24 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/x/x7driver.html#xorg-intel-driver
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd  ftp://anduin.linuxfromscratch.org/BLFS/xf86-video-intel/xf86-video-intel-20170826.tar.xz
+
+./configure $XORG_CONFIG      \
+            --enable-kms-only \
+            --enable-uxa      \
+            --mandir=/usr/share/man
+make
+make install
+
+mv -v /usr/share/man/man4/intel-virtual-output.4 \
+      /usr/share/man/man1/intel-virtual-output.1
+
+sed -i '/\.TH/s/4/1/' /usr/share/man/man1/intel-virtual-output.1
+
+
+lfs_end_step
+

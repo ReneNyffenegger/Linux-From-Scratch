@@ -1,0 +1,15 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/x/xcursor-themes.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.x.org/pub/individual/data/xcursor-themes-1.0.4.tar.bz2
+
+./configure $XORG_CONFIG
+make
+make install
+
+lfs_end_step
+

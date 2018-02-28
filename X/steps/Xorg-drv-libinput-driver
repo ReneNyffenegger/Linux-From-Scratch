@@ -1,0 +1,15 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/x/x7driver.html#xorg-libinput-driver
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd TODO
+
+./configure $XORG_CONFIG
+make
+make install
+
+lfs_end_step
+

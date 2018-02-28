@@ -1,0 +1,27 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/x/x7font.html
+#
+
+lfs_start_step
+
+
+for package in $(grep -v '^#' Xorg-fonts.md5 | awk '{print $2}'); do
+
+  # TODO: With the md5 sums available, I should also check them
+
+    lfs_log "trying to download $package"
+    lfs_download_extract_and_pushd https://www.x.org/pub/individual/lib/$package
+
+      ./configure $XORG_CONFIG
+      make
+      make install
+
+    popd
+done
+
+./configure $XORG_CONFIG
+make
+make install
+
+lfs_end_step

@@ -1,0 +1,16 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/x/x7driver.html#libevdev
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://www.freedesktop.org/software/libevdev/libevdev-1.5.7.tar.xz
+
+# TODO check CONFIG_INPUT_UINPUT
+
+./configure $XORG_CONFIG
+make
+make install
+
+lfs_end_step

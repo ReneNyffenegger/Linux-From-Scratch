@@ -1,0 +1,15 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/x/x7driver.html#xorg-fbdev-driver
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.x.org/pub/individual/driver/xf86-video-fbdev-0.4.4.tar.bz2
+
+./configure $XORG_CONFIG
+make
+make install
+
+lfs_end_step
+

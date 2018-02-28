@@ -1,0 +1,13 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/x/x7driver.html#libvdpau-va-gl
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd  https://github.com/i-rinat/libvdpau-va-gl/archive/v0.4.0/libvdpau-va-gl-0.4.0.tar.gz
+
+# TODO: Requires CMake!!!
+lfs_end_step
+exit 0
+

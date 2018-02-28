@@ -1,0 +1,14 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/general/pixman.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://www.cairographics.org/releases/pixman-0.34.0.tar.gz
+
+./configure $XORG_CONFIG
+make
+make install
+
+lfs_end_step

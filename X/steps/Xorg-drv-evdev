@@ -1,0 +1,15 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/x/x7driver.html#libevdev
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd  ftp://ftp.x.org/pub/individual/driver/xf86-input-evdev-2.10.5.tar.bz2
+
+./configure $XORG_CONFIG
+make
+make install
+
+lfs_end_step
+

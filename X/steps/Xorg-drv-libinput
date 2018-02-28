@@ -1,0 +1,20 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/x/x7driver.html#libevdev
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd  https://www.freedesktop.org/software/libinput/libinput-1.8.1.tar.xz
+
+./configure $XORG_CONFIG            \
+            --disable-libwacom      \
+            --disable-debug-gui     \
+            --disable-tests         \
+            --disable-documentation \
+            --with-udev-dir=/lib/udev
+
+make
+make install
+
+lfs_end_step

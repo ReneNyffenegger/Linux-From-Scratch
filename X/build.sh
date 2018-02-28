@@ -170,6 +170,9 @@ lfs_x_step funcsigs      # required for beaker
 lfs_x_step beaker        # required for mako
 lfs_x_step mako          # required for mesa
 
+lfs_x_step libpng        # required for Xorg-applications
+lfs_x_step pixman        # requried for Xorg-server
+
 
 # TODO: Fix  util-macros
 #       and protocol-headers
@@ -192,8 +195,28 @@ lfs_x_step  xcb-util-wm
 lfs_x_step  xcb-util-cursor
 
 lfs_x_step  libdrm        # required for mesa
-
 lfs_x_step  mesa
+lfs_x_step  libepoxy      # requries mesa
+
+lfs_x_step  xbitmaps
+lfs_x_step  Xorg-applications
+lfs_x_step  xcursor-themes
+lfs_x_step  Xorg-fonts
+lfs_x_step  XKeyboardConfig
+lfs_x_step  Xorg-server      # optional requirement: libepoxy
+
+lfs_x_step  Xorg-drv-libevdev
+lfs_x_step  Xorg-drv-evdev
+lfs_x_step  Xorg-drv-libinput
+lfs_x_step  Xorg-drv-libinput-driver
+# lfs_x_step  Xorg-drv-synaptics-driver
+# lfs_x_step  Xorg-drv-vmmouse
+# lfs_x_step  Xorg-drv-wacom
+lfs_x_step  Xorg-drv-fbdev
+lfs_x_step  Xorg-drv-intel
+lfs_x_step  Xorg-drv-libva
+lfs_x_step  Xorg-drv-libva-intel
+lfs_x_step  Xorg-drv-libvdpau-va-gl
 
 # lfs_x_step  one
 # lfs_x_step  two

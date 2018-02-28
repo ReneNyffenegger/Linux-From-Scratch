@@ -1,0 +1,20 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/x/xorg-server.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd  ftp://ftp.x.org/pub/individual/xserver/xorg-server-1.19.3.tar.bz2
+
+./configure $XORG_CONFIG
+make
+make install
+
+mkdir -pv /etc/X11/xorg.conf.d
+cat >> /etc/sysconfig/createfiles << "EOF"
+/tmp/.ICE-unix dir 1777 root root
+/tmp/.X11-unix dir 1777 root root
+EOF
+
+lfs_end_step
