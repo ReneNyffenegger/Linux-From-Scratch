@@ -25,8 +25,10 @@ trap 'exit 1' ERR
 
 lfs_log() {
   local text="$1"
-  echo $text >> $lfs_dir/log
+# echo $text >> $lfs_dir/log
 
+  # Note: using UTF so that all log messages are consistent.
+  printf "%s: %-20s %-32s %s\n" "$(TZ=UTF date +'%Y-%m-%d %H:%M:%S')" $lfs_cur_step_name ${FUNCNAME[1]}  "$text" >> $lfs_dir/log
 }
 export -f lfs_log
 
@@ -41,16 +43,23 @@ lfs_end_step() {
 export -f lfs_end_step
 
 lfs_download() {
-  local download_url=$1
 
+  trap 'return -1' ERR
+
+  local download_url=$1
   local download_file_name=$(basename $download_url)
+
+  lfs_log "download_url=$download_url, download_file_name=$download_file_name"
+
 
   #
   #  Download the file, if necessary
   #
+  lfs_log "going to check wheather $lfs_download_dir/$download_file_name already exists"
   if [ ! -f $lfs_download_dir/$download_file_name ]; then
-    lfs_log "downloading $download_file_name"
+    lfs_log "downloading $download_file_name to $lfs_download_dir"
     wget $download_url -P $lfs_download_dir
+    lfs_log "wget: \$?=$?"
   else
     lfs_log "$download_file_name already downloaded"
   fi
@@ -89,7 +98,7 @@ lfs_download_and_extract() {
   #  Extract the file, if necessary
   #
   if [ ! -d $dest_dir/$extracted_dir ]; then
-    lfs_log "trying to untar $lfs_download_dir/$ into $dest_dir, PWD=$PWD"
+    lfs_log "trying to untar $lfs_download_dir/$extracted_dir into $dest_dir, PWD=$PWD"
     tar xf $lfs_download_dir/$download_file_name -C $dest_dir
   else
     lfs_log directory $dest_dir/$extracted_dir already exists
@@ -123,6 +132,7 @@ lfs_x_step() {
   trap 'echo Error at line $LINENO; exit 1' ERR
 
   local name=$1
+  export lfs_cur_step_name=$name
 
   if [ -e done/$name ]; then
     lfs_log "lfs_x_step: $name already done"
@@ -141,6 +151,8 @@ lfs_x_step() {
 #  popd              > /dev/null
 
   touch done/$name
+
+  export lfs_cur_step_name='?'
 }
 
 # TODO: Fix  util-macros
@@ -152,4 +164,7 @@ lfs_x_step  protocol-headers
 #
 
 lfs_x_step  libXau
+lfs_x_step  libXdmcp
+
+
 
