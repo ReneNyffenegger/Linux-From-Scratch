@@ -12,6 +12,8 @@ lfs_start_step
 
 lfs_download_extract_and_pushd ftp://ftp.freedesktop.org/pub/mesa/mesa-17.1.6.tar.xz
 
+lfs_log "I am in PWD=$PWD"
+
 sed -i "/pthread_stubs_possible=/s/yes/no/" configure.ac &&
 
 #

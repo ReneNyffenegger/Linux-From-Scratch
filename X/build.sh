@@ -70,6 +70,8 @@ lfs_download_and_extract() {
 # local dest_dir=$2
   local dest_dir=$lfs_extract_dir
 
+  trap 'return -1' ERR
+
   lfs_log "lfs_download_and_extract called, download_url = $download_url"
 
   if [ -z "$dest_dir" ]; then
@@ -90,17 +92,19 @@ lfs_download_and_extract() {
   #  Find last part of downloaded file
   #
   local extracted_dir=$(basename $download_file_name .gz ) 
+        extracted_dir=$(basename $extracted_dir      .xz ) 
         extracted_dir=$(basename $extracted_dir      .bz2) 
         extracted_dir=$(basename $extracted_dir      .tar) 
 
   #
   #  Extract the file, if necessary
   #
+  lfs_log "Going to check whether extract dir $dest_dir/$extracted_dir exists"
   if [ ! -d $dest_dir/$extracted_dir ]; then
-    lfs_log "trying to untar $lfs_download_dir/$extracted_dir into $dest_dir, PWD=$PWD"
+    lfs_log "Directory does not exist, trying to untar $lfs_download_dir/$extracted_dir into $dest_dir, PWD=$PWD"
     tar xf $lfs_download_dir/$download_file_name -C $dest_dir
   else
-    lfs_log directory $dest_dir/$extracted_dir already exists
+    lfs_log "directory $dest_dir/$extracted_dir already exists"
   fi
 
   echo "$dest_dir/$extracted_dir"
@@ -109,6 +113,8 @@ lfs_download_and_extract() {
 export -f lfs_download_and_extract
 
 lfs_download_extract_and_pushd() {
+  trap 'return -1' ERR
+
   local download_url=$1
 # local dest_dir=$lfs_extract_dir  # Was: $2
 
@@ -117,7 +123,7 @@ lfs_download_extract_and_pushd() {
   local extracted_dir=$(lfs_download_and_extract $download_url) #  $dest_dir)
 
   if [[ -z $extracted_dir ]]; then
-    lfs_log "lfs_download_extract_and_pushd: extracted_dir is zero"
+    lfs_log "extracted_dir is zero"
     return -1
   fi
   lfs_log "lfs_download_extract_and_pushd: extracted_dir=$extracted_dir, pushd into it"
