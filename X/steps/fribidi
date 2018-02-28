@@ -1,0 +1,15 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/general/fribidi.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://www.fribidi.org/download/fribidi-0.19.7.tar.bz2
+
+./configure --prefix=/usr
+make
+make install
+
+lfs_end_step
+

@@ -1,0 +1,17 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/multimedia/opus.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://archive.mozilla.org/pub/opus/opus-1.2.1.tar.gz
+
+./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/opus-1.2.1
+make
+make install
+
+lfs_end_step
+

@@ -1,0 +1,22 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/multimedia/x265.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://bitbucket.org/multicoreware/x265/downloads/x265_2.5.tar.gz
+
+mkdir bld
+cd    bld
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DENABLE_STATIC=OFF         \
+      ../source
+
+make
+make install
+
+rm /usr/lib/libx265.a 
+
+lfs_end_step

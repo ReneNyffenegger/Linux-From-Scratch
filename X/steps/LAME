@@ -1,0 +1,19 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/multimedia/lame.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://downloads.sourceforge.net/lame/lame-3.99.5.tar.gz
+
+case $(uname -m) in
+   i?86) sed -i -e '/xmmintrin\.h/d' configure ;;
+esac
+
+./configure --prefix=/usr --enable-mp3rtp --disable-static
+make
+
+make pkghtmldir=/usr/share/doc/lame-3.99.5 install
+
+lfs_end_step

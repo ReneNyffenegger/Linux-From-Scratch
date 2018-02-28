@@ -7,6 +7,12 @@ lfs_start_step
 
 lfs_download_extract_and_pushd  https://github.com/i-rinat/libvdpau-va-gl/archive/v0.4.0/libvdpau-va-gl-0.4.0.tar.gz
 
-# TODO: Requires CMake!!!
+mkdir build
+cd    build
+
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$XORG_PREFIX ..
+make
+make install
+echo "export VDPAU_DRIVER=va_gl" >> /etc/profile.d/xorg.sh
+
 lfs_end_step
-exit 0

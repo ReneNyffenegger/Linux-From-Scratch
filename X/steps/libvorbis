@@ -1,0 +1,16 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/multimedia/libvorbis.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://downloads.xiph.org/releases/vorbis/libvorbis-1.3.5.tar.xz
+
+sed -i '/components.png \\/{n;d}' doc/Makefile.in
+
+./configure --prefix=/usr --disable-static 
+make
+make install
+
+lfs_end_step

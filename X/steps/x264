@@ -1,0 +1,17 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/multimedia/x264.ht
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd  https://download.videolan.org/x264/snapshots/x264-snapshot-20170822-2245-stable.tar.bz2
+
+
+./configure --prefix=/usr \
+            --enable-shared \
+            --disable-cli
+make
+make install
+
+lfs_end_step

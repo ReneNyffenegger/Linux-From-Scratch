@@ -161,6 +161,8 @@ lfs_x_step() {
   export lfs_cur_step_name='?'
 }
 
+lfs_x_step which
+
 lfs_x_step FreeType2     # required for fontconfig
 lfs_x_step fontconfig    # required for Xorg
 
@@ -177,17 +179,21 @@ lfs_x_step pixman        # requried for Xorg-server
 lfs_x_step libarchive    # optionally required by CMake
 lfs_x_step CMake
 
+lfs_x_step fribidi                  # required by libass
 lfs_x_step libass                   # optionally required by ffmpeg
 lfs_x_step fdk-aac                  # optionally required by ffmpeg
-lfs_x_step FreeType2                # optionally required by ffmpeg
 lfs_x_step LAME                     # optionally required by ffmpeg
-lfs_x_step libtheora                # optionally required by ffmpeg
+
+lfs_x_step libogg                   # required by libtheora
 lfs_x_step libvorbis                # optionally required by ffmpeg
+
+lfs_x_step libtheora                # optionally required by ffmpeg
+
+lfs_x_step yasm                     # optionally required by ffmpeg, required by libvpx
 lfs_x_step libvpx                   # optionally required by ffmpeg
-lfs_x_step Opus                     # optionally required by ffmpeg
-lfs_x_step x264-20170822-2245       # optionally required by ffmpeg
-lfs_x_step x265-2.5                 # optionally required by ffmpeg
-lfs_x_step yasm-1.3.0               # optionally required by ffmpeg
+lfs_x_step opus                     # optionally required by ffmpeg
+lfs_x_step x264                     # optionally required by ffmpeg
+lfs_x_step x265                     # optionally required by ffmpeg
 lfs_x_step ffmpeg
 
 # TODO: Fix  util-macros

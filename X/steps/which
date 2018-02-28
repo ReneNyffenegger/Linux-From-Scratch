@@ -1,0 +1,14 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/general/which.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.gnu.org/gnu/which/which-2.21.tar.gz
+
+./configure --prefix=/us
+make
+make install
+
+lfs_end_step

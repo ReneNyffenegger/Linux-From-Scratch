@@ -5,11 +5,10 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd TODO
+lfs_download_extract_and_pushd  ftp://ftp.x.org/pub/individual/driver/xf86-input-libinput-0.25.1.tar.bz2
 
 ./configure $XORG_CONFIG
 make
 make install
 
 lfs_end_step
-
