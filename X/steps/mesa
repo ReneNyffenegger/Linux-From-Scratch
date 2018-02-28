@@ -19,7 +19,8 @@ lfs_log "I am in PWD=$PWD"
 #  Driver selection. See
 #    http://www.mesa3d.org/systems.html. 
 #
-GLL_DRV="i915,r600,nouveau,radeonsi,svga,swrast"
+# TODO GLL_DRV="i915,r600,nouveau,radeonsi,svga,swrast"
+GLL_DRV="i915,svga"
 
 sed -i "/pthread_stubs_possible=/s/yes/no/" configure.ac &&
 
