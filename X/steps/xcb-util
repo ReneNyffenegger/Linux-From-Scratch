@@ -1,0 +1,14 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/x/xcb-util.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://xcb.freedesktop.org/dist/xcb-util-0.4.0.tar.bz2
+
+./configure $XORG_CONFIG
+make
+make install
+
+lfs_end_step

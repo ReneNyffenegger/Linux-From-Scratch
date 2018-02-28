@@ -1,0 +1,39 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/x/mesa.html
+#
+# TODO:
+#  mesa requires
+#    - libdrm
+#    - Mako
+#    - Python-2.7
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.freedesktop.org/pub/mesa/mesa-17.1.6.tar.xz
+
+sed -i "/pthread_stubs_possible=/s/yes/no/" configure.ac &&
+
+#
+#  Driver selection. See
+#    http://www.mesa3d.org/systems.html. 
+#
+GLL_DRV="i915,r600,nouveau,radeonsi,svga,swrast"
+
+./autogen.sh CFLAGS='-O2' CXXFLAGS='-O2' \
+            --prefix=$XORG_PREFIX        \
+            --sysconfdir=/etc            \
+            --enable-texture-float       \
+            --enable-osmesa              \
+            --enable-xa                  \
+            --enable-glx-tls             \
+            --with-platforms="drm,x11"   \
+            --with-gallium-drivers=$GLL_DRV
+
+unset GLL_DRV
+
+make
+
+make install
+
+lfs_end_step

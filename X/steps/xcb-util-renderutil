@@ -1,0 +1,14 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/x/xcb-util-renderutil.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://xcb.freedesktop.org/dist/xcb-util-renderutil-0.3.9.tar.bz2
+
+./configure $XORG_CONFIG
+make
+make install
+
+lfs_end_step
