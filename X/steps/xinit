@@ -1,0 +1,20 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/x/xinit.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.x.org/pub/individual/app/xinit-1.3.4.tar.bz2
+
+
+sed -e '/$serverargs $vtarg/ s/serverargs/: #&/' \
+    -i startx.cpp
+
+./configure $XORG_CONFIG --with-xinitdir=/etc/X11/app-defaults
+make
+make install
+
+ldconfig
+
+lfs_end_step
