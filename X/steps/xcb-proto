@@ -8,6 +8,7 @@ lfs_start_step
 lfs_download_extract_and_pushd https://xcb.freedesktop.org/dist/xcb-proto-1.12.tar.bz2
 lfs_download                   http://www.linuxfromscratch.org/patches/blfs/8.1/xcb-proto-1.12-schema-1.patch
 
+lfs_log "patching"
 patch -Np1 -i ../xcb-proto-1.12-schema-1.patch
 
 # If building with python 3

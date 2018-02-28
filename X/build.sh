@@ -59,7 +59,6 @@ lfs_download() {
   if [ ! -f $lfs_download_dir/$download_file_name ]; then
     lfs_log "downloading $download_file_name to $lfs_download_dir"
     wget $download_url -P $lfs_download_dir
-    lfs_log "wget: \$?=$?"
   else
     lfs_log "$download_file_name already downloaded"
   fi
@@ -135,12 +134,12 @@ lfs_x_step() {
   export lfs_cur_step_name=$name
 
   if [ -e done/$name ]; then
-    lfs_log "lfs_x_step: $name already done"
+    lfs_log "$name already done"
     return 0
   fi
 
   if [ ! -e steps/$name ]; then
-     lfs_log "lfs_x_step: steps/$name does not exist"
+     lfs_log "$name does not exist"
      return 1
   fi
 
@@ -165,4 +164,4 @@ lfs_x_step  protocol-headers
 
 lfs_x_step  libXau
 lfs_x_step  libXdmcp
-lfs_x_step  xcp-proto
+lfs_x_step  xcb-proto
