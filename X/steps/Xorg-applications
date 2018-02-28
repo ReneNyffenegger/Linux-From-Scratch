@@ -5,7 +5,7 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd ftp://ftp.x.org/pub/individual/app/
+# lfs_download_extract_and_pushd ftp://ftp.x.org/pub/individual/app/
 
 lfs_log "Doing the for package loop, PWD=$PWD"
 for package in $(grep -v '^#' Xorg-applications.md5 | awk '{print $2}'); do
@@ -13,7 +13,7 @@ for package in $(grep -v '^#' Xorg-applications.md5 | awk '{print $2}'); do
   # TODO: With the md5 sums available, I should also check them
 
     lfs_log "trying to download $package"
-    lfs_download_extract_and_pushd https://www.x.org/pub/individual/lib/$package
+    lfs_download_extract_and_pushd https://www.x.org/pub/individual/app/$package
 
       ./configure $XORG_CONFIG
       make
