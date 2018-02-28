@@ -1,0 +1,18 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/multimedia/libass.html
+#
+# Requires
+#  - FriBidi
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://github.com/libass/libass/releases/download/0.13.7/libass-0.13.7.tar.xz
+
+./configure --prefix=/usr --disable-static
+make
+make install
+
+lfs_end_step
+

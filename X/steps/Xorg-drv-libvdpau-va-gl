@@ -10,4 +10,3 @@ lfs_download_extract_and_pushd  https://github.com/i-rinat/libvdpau-va-gl/archiv
 # TODO: Requires CMake!!!
 lfs_end_step
 exit 0
-

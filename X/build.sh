@@ -173,6 +173,21 @@ lfs_x_step mako          # required for mesa
 lfs_x_step libpng        # required for Xorg-applications
 lfs_x_step pixman        # requried for Xorg-server
 
+lfs_x_step libarchive    # optionally required by CMake
+lfs_x_step CMake
+
+lfs_x_step libass                   # optionally required by ffmpeg
+lfs_x_step fdk-aac                  # optionally required by ffmpeg
+lfs_x_step FreeType2                # optionally required by ffmpeg
+lfs_x_step LAME                     # optionally required by ffmpeg
+lfs_x_step libtheora                # optionally required by ffmpeg
+lfs_x_step libvorbis                # optionally required by ffmpeg
+lfs_x_step libvpx                   # optionally required by ffmpeg
+lfs_x_step Opus                     # optionally required by ffmpeg
+lfs_x_step x264-20170822-2245       # optionally required by ffmpeg
+lfs_x_step x265-2.5                 # optionally required by ffmpeg
+lfs_x_step yasm-1.3.0               # optionally required by ffmpeg
+lfs_x_step ffmpeg
 
 # TODO: Fix  util-macros
 #       and protocol-headers

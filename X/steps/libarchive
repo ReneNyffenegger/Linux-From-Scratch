@@ -1,0 +1,15 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/general/libarchive.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd http://www.libarchive.org/downloads/libarchive-3.3.2.tar.gz
+
+./configure --prefix=/usr --disable-static
+make
+make install
+
+lfs_end_step
+
