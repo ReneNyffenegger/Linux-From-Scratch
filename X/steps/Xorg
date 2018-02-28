@@ -11,11 +11,12 @@ lfs_start_step
 
 
 
+lfs_log "Doing the for package loop, PWD=$PWD"
 for package in $(grep -v '^#' Xorg_lib-7.md5 | awk '{print $2}'); do
 
   # TODO: With the md5 sums available, I should also check tem
 
-    lfs_log "trying to downlaod $package"
+    lfs_log "trying to download $package"
     lfs_download_extract_and_pushd https://www.x.org/pub/individual/lib/$package
 
     case $package in
@@ -38,28 +39,20 @@ for package in $(grep -v '^#' Xorg_lib-7.md5 | awk '{print $2}'); do
        * )
          ./configure $XORG_CONFIG
        ;;
-     esac
-     make
+    esac
+    make
 
      #make check 2>&1 | tee ../$packagedir-make_check.log
 
-     make install
-     popd
+    make install
 #    rm -rf $packagedir
 
     popd
-
 done
 
 
 /sbin/ldconfig
 
-
-lfs_log "making, PWD=$PWD"
-make
-
-lfs_log "installing, PWD=$PWD"
-make install
 
 lfs_end_step
 

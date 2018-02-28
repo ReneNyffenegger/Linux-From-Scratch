@@ -134,7 +134,7 @@ lfs_x_step() {
   export lfs_cur_step_name=$name
 
   if [ -e done/$name ]; then
-    lfs_log "$name already done"
+    lfs_log "already done: $name"
     return 0
   fi
 
@@ -144,10 +144,10 @@ lfs_x_step() {
   fi
 
 
-#  pushd steps/$name > /dev/null
-   ./steps/$name
+   pushd steps > /dev/null
+   ./$name
 #  ./go
-#  popd              > /dev/null
+   popd              > /dev/null
 
   touch done/$name
 
