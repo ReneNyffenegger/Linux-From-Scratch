@@ -33,7 +33,7 @@ lfs_log() {
 export -f lfs_log
 
 lfs_start_step() {
-  trap 'echo Error at line $LINENO; exit 1' ERR
+  trap 'echo Error in $lfs_cur_step_name at line $LINENO; exit 1' ERR
 }
 export -f lfs_start_step
 
@@ -44,7 +44,7 @@ export -f lfs_end_step
 
 lfs_download() {
 
-  trap 'return -1' ERR
+# trap 'return -1' ERR
 
   local download_url=$1
   local download_file_name=$(basename $download_url)
@@ -70,7 +70,7 @@ lfs_download_and_extract() {
 # local dest_dir=$2
   local dest_dir=$lfs_extract_dir
 
-  trap 'return -1' ERR
+# trap 'return -1' ERR
 
   lfs_log "lfs_download_and_extract called, download_url = $download_url"
 
@@ -113,7 +113,7 @@ lfs_download_and_extract() {
 export -f lfs_download_and_extract
 
 lfs_download_extract_and_pushd() {
-  trap 'return -1' ERR
+# trap 'return -1' ERR
 
   local download_url=$1
 # local dest_dir=$lfs_extract_dir  # Was: $2
@@ -145,12 +145,12 @@ lfs_x_step() {
   fi
 
   if [ ! -e steps/$name ]; then
-     lfs_log "$name does not exist"
+     lfs_log "step $name does not exist, PWD=$PWD"
      return 1
   fi
 
 
-   pushd steps > /dev/null
+   pushd steps       > /dev/null
    ./$name
 #  ./go
    popd              > /dev/null
@@ -194,3 +194,6 @@ lfs_x_step  xcb-util-cursor
 lfs_x_step  libdrm        # required for mesa
 
 lfs_x_step  mesa
+
+# lfs_x_step  one
+# lfs_x_step  two

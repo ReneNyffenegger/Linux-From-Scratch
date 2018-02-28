@@ -5,10 +5,19 @@
 
 lfs_start_step
 
+
+lfs_log "Calling lfs_download_extract_and_pushd"
 lfs_download_extract_and_pushd  https://dri.freedesktop.org/libdrm/libdrm-2.4.82.tar.bz2
 
+lfs_log "configuring"
 ./configure --prefix=/usr --enable-udev 
+
+lfs_log "\$? = $?"
+
+lfs_log "making"
 make
+
+lfs_log "installing"
 make install
 
 lfs_end_step
