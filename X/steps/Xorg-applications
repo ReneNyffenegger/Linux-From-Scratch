@@ -15,6 +15,12 @@ for package in $(grep -v '^#' Xorg-applications.md5 | awk '{print $2}'); do
     lfs_log "trying to download $package"
     lfs_download_extract_and_pushd https://www.x.org/pub/individual/app/$package
 
+      case $packagedir in
+        luit-[0-9]* )
+          sed -i -e "/D_XOPEN/s/5/6/" configure
+        ;;
+      esac
+
       ./configure $XORG_CONFIG
       make
       make install
