@@ -154,6 +154,9 @@ lfs_x_step() {
   export lfs_cur_step_name='?'
 }
 
+lfs_x_step FreeType2   # required for fontconfig
+lfs_x_step fontconfig  # required for Xorg
+
 # TODO: Fix  util-macros
 #       and protocol-headers
 #       Especially the handling of the download directories.
@@ -165,3 +168,5 @@ lfs_x_step  protocol-headers
 lfs_x_step  libXau
 lfs_x_step  libXdmcp
 lfs_x_step  xcb-proto
+lfs_x_step  libxcb
+lfs_x_step  Xorg

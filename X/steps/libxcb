@@ -1,0 +1,23 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/x/libxcb.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://xcb.freedesktop.org/dist/libxcb-1.12.tar.bz2
+
+sed -i "s/pthread-stubs//" configure 
+
+./configure $XORG_CONFIG
+
+./configure $XORG_CONFIG      \
+            --enable-xinput   \
+            --without-doxygen \
+            --docdir='${datadir}'/doc/libxcb-1.12
+
+make
+
+make install
+
+lfs_end_step

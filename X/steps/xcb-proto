@@ -1,6 +1,6 @@
 # vi: ft=sh
 #
-# http://linuxfromscratch.org/blfs/view/cvs/x/libXdmcp.html
+# http://linuxfromscratch.org/blfs/view/stable/x/xcb-proto.html
 #
 
 lfs_start_step

@@ -1,0 +1,65 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/x/x7lib.html
+#
+# Requires
+#  FreeType2 and
+#  fontconfig
+#
+
+lfs_start_step
+
+
+
+for package in $(grep -v '^#' Xorg_lib-7.md5 | awk '{print $2}'); do
+
+  # TODO: With the md5 sums available, I should also check tem
+
+    lfs_log "trying to downlaod $package"
+    lfs_download_extract_and_pushd https://www.x.org/pub/individual/lib/$package
+
+    case $package in
+       libICE* )
+        lfs_log "Special case libICE"
+         ./configure $XORG_CONFIG ICE_LIBS=-lpthread
+       ;;
+   
+       libXfont2-[0-9]* )
+          lfs_log "Special case libXfont2 "
+         ./configure $XORG_CONFIG --disable-devel-docs
+       ;;
+   
+       libXt-[0-9]* )
+          lfs_log "Special case libXt ($package) "
+         ./configure $XORG_CONFIG \
+                     --with-appdefaultdir=/etc/X11/app-defaults
+       ;;
+   
+       * )
+         ./configure $XORG_CONFIG
+       ;;
+     esac
+     make
+
+     #make check 2>&1 | tee ../$packagedir-make_check.log
+
+     make install
+     popd
+#    rm -rf $packagedir
+
+    popd
+
+done
+
+
+/sbin/ldconfig
+
+
+lfs_log "making, PWD=$PWD"
+make
+
+lfs_log "installing, PWD=$PWD"
+make install
+
+lfs_end_step
+

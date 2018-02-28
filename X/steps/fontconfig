@@ -1,0 +1,37 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/general/fontconfig.html
+#
+# Requires FreeType2
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.12.4.tar.bz2
+
+rm -f src/fcobjshash.h
+
+./configure --prefix=/usr        \
+            --sysconfdir=/etc    \
+            --localstatedir=/var \
+            --disable-docs       \
+            --docdir=/usr/share/doc/fontconfig-2.12.4 
+
+make
+
+# make check
+
+make install
+
+# install -v -dm755 \
+#         /usr/share/{man/man{3,5},doc/fontconfig-2.12.4/fontconfig-devel} &&
+# install -v -m644 fc-*/*.1         /usr/share/man/man1 &&
+# install -v -m644 doc/*.3          /usr/share/man/man3 &&
+# install -v -m644 doc/fonts-conf.5 /usr/share/man/man5 &&
+# install -v -m644 doc/fontconfig-devel/* \
+#                                   /usr/share/doc/fontconfig-2.12.4/fontconfig-devel &&
+# install -v -m644 doc/*.{pdf,sgml,txt,html} \
+#                                   /usr/share/doc/fontconfig-2.12.4
+
+
+lfs_end_step
