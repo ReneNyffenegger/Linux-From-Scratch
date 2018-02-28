@@ -5,11 +5,14 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd https://www.fribidi.org/download/fribidi-0.19.7.tar.bz2
+# TODO: 2018-02-28 - was not available from www.fribidi.org
+# 
+# lfs_download_extract_and_pushd https://www.fribidi.org/download/fribidi-0.19.7.tar.bz2
+lfs_download_extract_and_pushd https://ftp.osuosl.org/pub/blfs/conglomeration/fribidi/fribidi-0.19.7.tar.bz2
+
 
 ./configure --prefix=/usr
 make
 make install
 
 lfs_end_step
-
