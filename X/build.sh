@@ -165,6 +165,4 @@ lfs_x_step  protocol-headers
 
 lfs_x_step  libXau
 lfs_x_step  libXdmcp
-
-
-
+lfs_x_step  xcp-proto
