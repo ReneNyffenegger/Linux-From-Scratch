@@ -5,7 +5,10 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd https://downloads.sourceforge.net/opencore-amr/fdk-aac-0.1.5.tar.gz
+# 2018-02-28: Link was down
+#
+# lfs_download_extract_and_pushd https://downloads.sourceforge.net/opencore-amr/fdk-aac-0.1.5.tar.gz
+lfs_download_extract_and_pushd https://ftp.osuosl.org/pub/blfs/conglomeration/fdk-aac/fdk-aac-0.1.5.tar.gz
 
 ./configure --prefix=/usr --disable-static
 make

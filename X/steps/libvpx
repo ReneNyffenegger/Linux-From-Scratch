@@ -5,7 +5,7 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd
+lfs_download_extract_and_pushd http://storage.googleapis.com/downloads.webmproject.org/releases/webm/libvpx-1.6.1.tar.bz2
 
 sed -i 's/cp -p/cp/' build/make/Makefile
 
