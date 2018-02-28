@@ -14,13 +14,14 @@ lfs_download_extract_and_pushd ftp://ftp.freedesktop.org/pub/mesa/mesa-17.1.6.ta
 
 lfs_log "I am in PWD=$PWD"
 
-sed -i "/pthread_stubs_possible=/s/yes/no/" configure.ac &&
 
 #
 #  Driver selection. See
 #    http://www.mesa3d.org/systems.html. 
 #
 GLL_DRV="i915,r600,nouveau,radeonsi,svga,swrast"
+
+sed -i "/pthread_stubs_possible=/s/yes/no/" configure.ac &&
 
 ./autogen.sh CFLAGS='-O2' CXXFLAGS='-O2' \
             --prefix=$XORG_PREFIX        \
