@@ -176,3 +176,4 @@ lfs_x_step  xcb-util-keysyms
 lfs_x_step  xcb-util-renderutil
 lfs_x_step  xcb-util-wm
 lfs_x_step  xcb-util-cursor
+lfs_x_step  mesa
