@@ -240,5 +240,10 @@ lfs_x_step  Xorg-drv-libva
 lfs_x_step  Xorg-drv-libva-intel
 lfs_x_step  Xorg-drv-libvdpau-va-gl
 
+lfx_x_step  twm # TODO really used
+lfx_x_step  xterm
+lfx_x_step  xclock
+lfx_x_step  xinit
+
 # lfs_x_step  one
 # lfs_x_step  two
