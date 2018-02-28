@@ -1,0 +1,19 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/general/python-modules.html#Beaker
+#
+# Required for
+#   mako
+#
+# Requires
+#   funcsigs (Python 2.7)
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://files.pythonhosted.org/packages/source/B/Beaker/Beaker-1.9.0.tar.gz
+
+python setup.py install --optimize=1
+
+lfs_end_step
+

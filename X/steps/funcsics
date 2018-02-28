@@ -1,0 +1,15 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/general/python-modules.html#funcsigs
+#
+# Required for
+#  - beaker
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://files.pythonhosted.org/packages/source/f/funcsigs/funcsigs-1.0.2.tar.gz
+
+python setup.py install --optimize=1
+
+lfs_end_step

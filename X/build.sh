@@ -160,8 +160,17 @@ lfs_x_step() {
   export lfs_cur_step_name='?'
 }
 
-lfs_x_step FreeType2   # required for fontconfig
-lfs_x_step fontconfig  # required for Xorg
+lfs_x_step FreeType2     # required for fontconfig
+lfs_x_step fontconfig    # required for Xorg
+
+
+
+lfs_x_step MarkupSafe    # required for beaker
+lfs_x_step funcsigs      # required for beaker
+lfs_x_step beaker        # required for mako
+lfs_x_step mako          # required for mesa
+
+lfs_x_step libdrm        # required for mesa
 
 # TODO: Fix  util-macros
 #       and protocol-headers

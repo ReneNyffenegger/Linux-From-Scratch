@@ -1,0 +1,16 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/general/python-modules.html#Mako
+#
+# Requires
+#  - Beaker-1.9
+#  - MarkupSafe-1.0
+#  
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://files.pythonhosted.org/packages/source/M/Mako/Mako-1.0.4.tar.gz
+
+python setup.py install --optimize=1
+
+lfs_end_step

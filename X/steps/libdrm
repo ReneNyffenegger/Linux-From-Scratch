@@ -1,0 +1,14 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/x/libdrm.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd  https://dri.freedesktop.org/libdrm/libdrm-2.4.82.tar.bz2
+
+./configure --prefix=/usr --enable-udev 
+make
+make install
+
+lfs_end_step
