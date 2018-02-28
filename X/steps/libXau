@@ -1,0 +1,15 @@
+# vi: ft=sh
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.x.org/pub/individual/lib/libXau-1.0.8.tar.bz2
+
+lfs_log "configuring, PWD=$PWD"
+
+./configure $XORG_CONFIG
+
+make
+
+make install
+
+lfs_end_step
