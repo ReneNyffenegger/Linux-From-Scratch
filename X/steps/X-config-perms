@@ -1,0 +1,23 @@
+# vi: ft=sh
+#
+# Apparently, some permissions were a bit restrictive.
+#
+
+lfs_start_step
+
+find /usr/share/X11               -type d -print0 | xargs -0 chmod 755 --
+find /usr/share/X11               -type f -print0 | xargs -0 chmod 644 --
+
+find /usr/share/fontconfig/       -type d -print0 | xargs -0 chmod 755 --
+find /usr/share/fontconfig/       -type f -print0 | xargs -0 chmod 644 --
+
+find /usr/share/fonts/            -type d -print0 | xargs -0 chmod 755 --
+find /usr/share/fonts/            -type f -print0 | xargs -0 chmod 644 --
+
+find /etc/X11                     -type d -print0 | xargs -0 chmod 755 --
+find /etc/X11                     -type f -print0 | xargs -0 chmod 644 --
+
+find /etc/fonts                   -type d -print0 | xargs -0 chmod 755 --
+find /etc/fonts                   -type f -print0 | xargs -0 chmod 644 --
+
+lfs_end_step

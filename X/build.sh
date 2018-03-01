@@ -244,5 +244,7 @@ lfs_x_step  xinit
 
 lfs_x_step  X-config
 
+lfs_x_step  X-config-perms
+
 # lfs_x_step  one
 # lfs_x_step  two
