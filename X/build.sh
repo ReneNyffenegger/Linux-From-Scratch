@@ -193,7 +193,7 @@ lfs_x_step x264                     # optionally required by ffmpeg
 lfs_x_step x265                     # optionally required by ffmpeg
 lfs_x_step ffmpeg
 
-lfx_x_step evdev                    # Apparently required for Xorg-drv-evdev
+lfs_x_step evdev                    # Apparently required for Xorg-drv-evdev
 
 # TODO: Fix  util-macros
 #       and protocol-headers
