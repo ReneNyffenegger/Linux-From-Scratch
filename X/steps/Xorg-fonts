@@ -11,7 +11,7 @@ for package in $(grep -v '^#' Xorg-fonts.md5 | awk '{print $2}'); do
   # TODO: With the md5 sums available, I should also check them
 
     lfs_log "trying to download $package"
-    lfs_download_extract_and_pushd https://www.x.org/pub/individual/lib/$package
+    lfs_download_extract_and_pushd https://www.x.org/pub/individual/font/$package
 
       ./configure $XORG_CONFIG
       make
@@ -20,8 +20,10 @@ for package in $(grep -v '^#' Xorg-fonts.md5 | awk '{print $2}'); do
     popd
 done
 
-./configure $XORG_CONFIG
-make
-make install
+install -v -d -m755 /sur/share/fonts
+
+ln -svfn $XORG_PREFIX/share/fonts/X11/OTF /usr/share/fonts/X11-OTF
+ln -svfn $XORG_PREFIX/share/fonts/X11/TTF /usr/share/fonts/X11-TTF
+
 
 lfs_end_step
