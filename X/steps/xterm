@@ -5,7 +5,10 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd ftp://invisible-island.net/xterm/xterm-330.tgz
+# 2018-01-03: not invisiable-island.net not available
+#
+# lfs_download_extract_and_pushd ftp://invisible-island.net/xterm/xterm-330.tgz
+lfs_download_extract_and_pushd https://invisible-mirror.net/archives/xterm/xterm-330.tgz
 
 sed -i '/v0/{n;s/new:/new:kb=^?:/}' termcap
 

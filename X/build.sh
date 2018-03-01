@@ -94,6 +94,7 @@ lfs_download_and_extract() {
         extracted_dir=$(basename $extracted_dir      .xz ) 
         extracted_dir=$(basename $extracted_dir      .bz2) 
         extracted_dir=$(basename $extracted_dir      .tar) 
+        extracted_dir=$(basename $extracted_dir      .tgz) 
 
   #
   #  Extract the file, if necessary
@@ -115,11 +116,8 @@ lfs_download_and_extract() {
 export -f lfs_download_and_extract
 
 lfs_download_extract_and_pushd() {
-# trap 'return -1' ERR
 
   local download_url=$1
-# local dest_dir=$lfs_extract_dir  # Was: $2
-
 
   local extracted_dir=$(lfs_download_and_extract $download_url) #  $dest_dir)
 
@@ -193,7 +191,7 @@ lfs_x_step x264                     # optionally required by ffmpeg
 lfs_x_step x265                     # optionally required by ffmpeg
 lfs_x_step ffmpeg
 
-lfs_x_step evdev                    # Apparently required for Xorg-drv-evdev
+lfs_x_step mtdev                    # Apparently required for Xorg-drv-evdev
 
 # TODO: Fix  util-macros
 #       and protocol-headers

@@ -1,4 +1,4 @@
-# vi: ft=sh
+# vim: ft=sh
 #
 # http://linuxfromscratch.org/blfs/view/stable/x/x7driver.html#libvdpau-va-gl
 #
@@ -13,6 +13,11 @@ cd    build
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$XORG_PREFIX ..
 make
 make install
+
+if [ ! -d /etc/profile.d ]; then
+  mkdir /etc/profile.d
+fi
+
 echo "export VDPAU_DRIVER=va_gl" >> /etc/profile.d/xorg.sh
 
 lfs_end_step
