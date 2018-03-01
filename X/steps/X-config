@@ -1,0 +1,105 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/x/xorg-config.html
+#
+
+lfs_start_step
+
+cat > /etc/X11/xorg.conf.d/xkb-defaults.conf <<"EOF"
+#
+# Apparently, in arch linux, changes to this file should be
+# made with localectl because localectl will overwrite
+# this file on the next start.
+#
+# ---------------------------------------------------
+#
+
+Section "InputClass"
+  Identifier           "XKB Defaults" # Or "Logitech Cordless" -> but XkbModel should then also be set.
+  MatchIsKeyboard      "yes"
+
+#
+# --------------------------------------------------------
+#
+# --  The five basic major XKB components: keycode, types,
+# --  compat, symbols and geometry.
+#
+
+# Somehow related to files under /usr/share/X11/xkb/keycodes
+# Option "XkbKeycodes"  ???
+
+# Somehow related to files under /usr/share/X11/xkb/types
+# Option "XkbTypes"     ???
+
+# Somehow related to files under /usr/share/X11/xkb/compat
+# Option "XkbCompat"    ???
+
+# Somehow related to files under /usr/share/X11/xkb/symbols
+# Option "XkbSymbols"   ???
+
+# Somehow related to files under /usr/share/X11/xkb/geometry
+# Option "XkbGeometry"  ???
+
+#
+# ---------------------------------------------------
+#
+# Specify the keyboard layout.
+#
+#   Apparently, these settings can be queried in X with
+#      setxkbmap -query                           or
+#      setxkbmap -print -verbose 10
+#
+#   The can also be set with setxkbmap:
+#      setxkbmap -model pc105 -layout us -option "..."
+# 
+
+  Option "XkbRules"    "evdev"  # ???
+
+# XkbModel defines the type of keyboard. pc105 is a
+#          keyboard with 105 keys.
+#          This setting is particularly interesting fo
+#          laptops.
+  Option "XkbModel"    "pc105"
+
+  Option "XkbLayout"   "us"             #  or "ch", or "cz,us"
+
+# XkbVariant chooses a specific layout variant. There must be as many
+#            variants as layouts. Empty strings are allowed for
+#            a variant.
+#
+#            If left out, the default is apparently 'basic'
+  Option "XkbVariant"  "basic"          #  or "dvorak"
+
+# XkbOptions allows to define how layouts can be switched, how keys are
+#            composed etc.
+  Option "XkbOptions"  "caps:swapescape,ctrl:swap_rwin_rctl"  # Found in /usr/share/X11/xkb/rules/base.lst AND /usr/share/X11/xkb/rules/event
+# Option "XkbOptions"  "terminate:ctrl_alt_bksp"  # "grp:menu_toggle"
+
+# Option "XkbKeymaps"  "be"
+EndSection
+EOF
+
+# # Switch Caps Lock and ESC / Assign control to Windows-R
+#
+# #    Change /sur/share/X11/xkb/symbols/pc
+# #    unfortunately, does not work satisfactonarlily
+#
+# sed -i /usr/share/X11/xkb/symbols/pc \
+# -e '/^ *key  *<CAPS>/ {
+#   s@^@// tq84 @
+#   a \    key <CAPS>  \{	[ Escape		]	\}\;
+# }' \
+# -e '/^ *key  *<ESC>/ {
+#   s!^!// tq84 !
+#   a \    key <ESC> \{	[ Caps_Lock		]	\}\;
+# }' \
+# -e '/^ *key  *<RWIN>/ {
+#   s!^!// tq84 !
+#   a \    key <RWIN> \{	[ Control_R		]	\}\;
+# }' \
+# -e '/^ *key  *<RCTL>/ {
+#   s!^!// tq84 !
+#   a \    key <RCTL> \{	[ Super_R  		]	\}\;
+# }'
+
+lfs_end_step

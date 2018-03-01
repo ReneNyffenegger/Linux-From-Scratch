@@ -21,4 +21,3 @@ make
 make install
 
 lfs_end_step
-

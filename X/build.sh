@@ -242,5 +242,7 @@ lfs_x_step  xterm
 lfs_x_step  xclock
 lfs_x_step  xinit
 
+lfs_x_step  X-config
+
 # lfs_x_step  one
 # lfs_x_step  two
