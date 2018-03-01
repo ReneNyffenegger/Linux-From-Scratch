@@ -9,10 +9,11 @@ lfs_download_extract_and_pushd https://xcb.freedesktop.org/dist/xcb-proto-1.12.t
 lfs_download                   http://www.linuxfromscratch.org/patches/blfs/8.1/xcb-proto-1.12-schema-1.patch
 
 lfs_log "patching"
-patch -Np1 -i ../xcb-proto-1.12-schema-1.patch
+# TODO: did this even work?
+patch -Np1 -i $lfs_download_dir/xcb-proto-1.12-schema-1.patch
 
 # If building with python 3
-# patch -Np1 -i ../xcb-proto-1.12-python3-1.patch
+# patch -Np1 -i $lfs_download_dir/xcb-proto-1.12-python3-1.patch
 
 lfs_log "configuring, PWD=$PWD"
 ./configure $XORG_CONFIG

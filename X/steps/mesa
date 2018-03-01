@@ -10,10 +10,13 @@
 
 lfs_start_step
 
+# Two demo programs for testing mesa
+lfs_download                   http://www.linuxfromscratch.org/patches/blfs/8.1/mesa-17.1.6-add_xdemos-1.patch
+
 lfs_download_extract_and_pushd ftp://ftp.freedesktop.org/pub/mesa/mesa-17.1.6.tar.xz
 
-lfs_log "I am in PWD=$PWD"
-
+# Apply the demo patch:
+patch -Np1 -i $lfs_download_dir/mesa-17.1.6-add_xdemos-1.patch
 
 #
 #  Driver selection. See
@@ -37,7 +40,9 @@ sed -i "/pthread_stubs_possible=/s/yes/no/" configure.ac &&
 unset GLL_DRV
 
 make
-
 make install
+
+# Building the demo programs (patch)
+make -C xdemos DEMOS_PREFIX=$XORG_PREFIX install
 
 lfs_end_step

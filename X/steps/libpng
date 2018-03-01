@@ -8,7 +8,9 @@ lfs_start_step
 lfs_download_extract_and_pushd https://downloads.sourceforge.net/libpng/libpng-1.6.31.tar.xz
 lfs_download                   https://downloads.sourceforge.net/apng/libpng-1.6.31-apng.patch.gz
 
-gzip -cd ../libpng-1.6.31-apng.patch.gz | patch -p0
+# TODO: did this even work?
+# gzip -cd ../libpng-1.6.31-apng.patch.gz | patch -p0
+gzip -cd $lfs_download_dir/libpng-1.6.31-apng.patch.gz | patch -p0
 
 LIBS=-lpthread ./configure --prefix=/usr --disable-static 
 make
