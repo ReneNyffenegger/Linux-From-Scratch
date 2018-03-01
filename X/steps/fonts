@@ -1,0 +1,48 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/stable/x/TTF-and-OTF-fonts.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd http://gsdview.appspot.com/chromeos-localmirror/distfiles/crosextrafonts-20130214.tar.gz
+
+popd
+
+lfs_download_extract_and_pushd http://ftp.gnome.org/pub/gnome/sources/cantarell-fonts/0.0/cantarell-fonts-0.0.25.tar.xz 
+
+popd
+
+lfs_download_extract_and_pushd http://gsdview.appspot.com/chromeos-localmirror/distfiles/crosextrafonts-carlito-20130920.tar.gz
+
+popd
+
+lfs_download_extract_and_pushd https://sourceforge.net/projects/dejavu/files/dejavu/
+   install -v -d -m755 /usr/share/fonts/dejavu
+   install -v -m644 ttf/*.ttf /usr/share/fonts/dejavu &&
+   fc-cache -v /usr/share/fonts/dejavu
+popd
+
+# TODO: There are also sfd and ttf fonts
+lfs_download_extract_and_pushd https://ftp.gnu.org/gnu/freefont/freefont-otf-20120503.tar.gz
+
+
+popd
+
+lfs_download_extract_and_pushd https://fontlibrary.org/assets/downloads/gelasio/4d610887ff4d445cbc639aae7828d139/gelasio.zip
+
+popd
+
+lfs_download_extract_and_pushd http://sources.openelec.tv/mirror/liberation-fonts-ttf/liberation-fonts-ttf-2.00.1.tar.gz
+
+popd
+
+lfs_download_extract_and_pushd https://noto-website-2.storage.googleapis.com/pkgs/Noto-hinted.zip
+
+popd
+
+
+lfs_download_extract_and_pushd http://download.kde.org/stable/plasma/5.4.3/oxygen-fonts-5.4.3.tar.xz
+
+popd
+lfs_end_step
