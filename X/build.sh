@@ -164,9 +164,6 @@ lfs_x_step() {
 lfs_x_step which
 
 lfs_x_step FreeType2     # required for fontconfig
-lfs_x_step fontconfig    # required for Xorg
-
-
 
 lfs_x_step MarkupSafe    # required for beaker
 lfs_x_step funcsigs      # required for beaker
@@ -195,6 +192,8 @@ lfs_x_step opus                     # optionally required by ffmpeg
 lfs_x_step x264                     # optionally required by ffmpeg
 lfs_x_step x265                     # optionally required by ffmpeg
 lfs_x_step ffmpeg
+
+lfx_x_step evdev                    # Apparently required for Xorg-drv-evdev
 
 # TODO: Fix  util-macros
 #       and protocol-headers
@@ -228,7 +227,7 @@ lfs_x_step  XKeyboardConfig
 lfs_x_step  Xorg-server      # optional requirement: libepoxy
 
 lfs_x_step  Xorg-drv-libevdev
-lfs_x_step  Xorg-drv-evdev
+lfs_x_step  Xorg-drv-evdev               # Seems to require mtdev
 lfs_x_step  Xorg-drv-libinput
 lfs_x_step  Xorg-drv-libinput-driver
 # lfs_x_step  Xorg-drv-synaptics-driver

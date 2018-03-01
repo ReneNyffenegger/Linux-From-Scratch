@@ -1,0 +1,17 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/svn/general/mtdev.html
+#
+# Apparently, mtdev is required for evdev (Xorg-drv-evdev)
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd http://bitmath.org/code/mtdev/mtdev-1.1.5.tar.bz2
+
+./configure --prefix=/usr --disable-static &&
+make
+make install
+
+lfs_end_step
+
