@@ -1,0 +1,18 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/basicnet/libevent.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://github.com/libevent/libevent/releases/download/release-2.1.8-stable/libevent-2.1.8-stable.tar.gz
+
+./configure --prefix=/usr --disable-static
+make
+make install
+
+install -v -m755 -d /usr/share/doc/libevent-2.1.8/api
+cp      -v -R       doxygen/html/* \
+                    /usr/share/doc/libevent-2.1.8/api
+
+lfs_end_step

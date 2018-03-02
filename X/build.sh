@@ -309,6 +309,8 @@ lfs_x_step expect               # required for deja-gnu
 lfs_x_step deja-gnu
 lfs_x_step autoconf-2-13        # required for firefox
 
+lfs_x_step libevent             # possibly required for firefox
+
 lfs_x_step atk                  # required for gtk-2
 
 lfs_x_step libjpeg-turbo        # required for gdk-pixbuf
