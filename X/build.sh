@@ -307,6 +307,7 @@ lfs_x_step  X-config-perms
 lfs_x_step tcl                  # required for expect
 lfs_x_step expect               # required for deja-gnu
 lfs_x_step deja-gnu
+lfs_x_step autoconf-2-13        # required for firefox
 
 lfs_x_step atk                  # required for gtk-2
 

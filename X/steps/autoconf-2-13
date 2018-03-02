@@ -1,0 +1,22 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/autoconf213.html
+#
+
+lfs_start_step
+
+lfs_download                   http://www.linuxfromscratch.org/patches/blfs/8.1/autoconf-2.13-consolidated_fixes-1.patch
+lfs_download_extract_and_pushd ftp://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz
+
+patch -Np1 -i $lfs_download_dir/autoconf-2.13-consolidated_fixes-1.patch
+
+mv -v autoconf.texi autoconf213.texi
+rm -v autoconf.info
+./configure --prefix=/usr --program-suffix=2.13
+make
+
+make install
+install -v -m644 autoconf213.info /usr/share/info
+install-info --info-dir=/usr/share/info autoconf213.info
+
+lfs_end_step
