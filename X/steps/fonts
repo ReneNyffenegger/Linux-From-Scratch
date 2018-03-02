@@ -5,29 +5,29 @@
 
 lfs_start_step
 
-# lfs_download_extract_and_pushd http://gsdview.appspot.com/chromeos-localmirror/distfiles/crosextrafonts-20130214.tar.gz
-#      install -v -d -m755 /usr/share/fonts/caldea
-#      install -v -m644 *.ttf /usr/share/fonts/caldea
-#      fc-cache -v /usr/share/fonts/caldea
-# popd
+lfs_download_extract_and_pushd http://gsdview.appspot.com/chromeos-localmirror/distfiles/crosextrafonts-20130214.tar.gz
+     install -v -d -m755 /usr/share/fonts/caldea
+     install -v -m644 *.ttf /usr/share/fonts/caldea
+     fc-cache -v /usr/share/fonts/caldea
+popd
 
-# lfs_download_extract_and_pushd http://ftp.gnome.org/pub/gnome/sources/cantarell-fonts/0.0/cantarell-fonts-0.0.25.tar.xz 
-#      install -v -d -m755 /usr/share/fonts/cantarell
-#      install -v -m644 otf/*.otf /usr/share/fonts/cantarell
-#      fc-cache -v /usr/share/fonts/cantarell
-# popd
+lfs_download_extract_and_pushd http://ftp.gnome.org/pub/gnome/sources/cantarell-fonts/0.0/cantarell-fonts-0.0.25.tar.xz 
+     install -v -d -m755 /usr/share/fonts/cantarell
+     install -v -m644 otf/*.otf /usr/share/fonts/cantarell
+     fc-cache -v /usr/share/fonts/cantarell
+popd
 
-# lfs_download_extract_and_pushd http://gsdview.appspot.com/chromeos-localmirror/distfiles/crosextrafonts-carlito-20130920.tar.gz
-#       install -v -d -m755 /usr/share/fonts/carlito
-#       install -v -m644 *.ttf /usr/share/fonts/carlito
-#       fc-cache -v /usr/share/fonts/carlito
-# popd
+lfs_download_extract_and_pushd http://gsdview.appspot.com/chromeos-localmirror/distfiles/crosextrafonts-carlito-20130920.tar.gz
+      install -v -d -m755 /usr/share/fonts/carlito
+      install -v -m644 *.ttf /usr/share/fonts/carlito
+      fc-cache -v /usr/share/fonts/carlito
+popd
 
-# lfs_download_extract_and_pushd https://freefr.dl.sourceforge.net/project/dejavu/dejavu/2.37/dejavu-fonts-ttf-2.37.tar.bz2
-#    install -v -d -m755 /usr/share/fonts/dejavu
-#    install -v -m644 ttf/*.ttf /usr/share/fonts/dejavu
-#    fc-cache -v /usr/share/fonts/dejavu
-# popd
+lfs_download_extract_and_pushd https://freefr.dl.sourceforge.net/project/dejavu/dejavu/2.37/dejavu-fonts-ttf-2.37.tar.bz2
+   install -v -d -m755 /usr/share/fonts/dejavu
+   install -v -m644 ttf/*.ttf /usr/share/fonts/dejavu
+   fc-cache -v /usr/share/fonts/dejavu
+popd
 
 # TODO: the tar.gz will be extracted into a directory whose name does not match the tar.gz name.
 # TODO: There are also sfd and ttf fonts
@@ -38,26 +38,39 @@ lfs_start_step
 #     fc-cache -v /usr/share/fonts/gnu-freefont
 # popd
  
-# TODO: This is a zip file
-# lfs_download_extract_and_pushd https://fontlibrary.org/assets/downloads/gelasio/4d610887ff4d445cbc639aae7828d139/gelasio.zip
-# 
-# popd
-
-# lfs_download_extract_and_pushd http://sources.openelec.tv/mirror/liberation-fonts-ttf/liberation-fonts-ttf-2.00.1.tar.gz
-#      install -v -d -m755 /usr/share/fonts/liberation
-#      install -v -m644 *.otf /usr/share/fonts/liberation
-#      fc-cache -v /usr/share/fonts/|iberation
-# popd
-
-lfs_download_extract_and_pushd https://noto-website-2.storage.googleapis.com/pkgs/Noto-hinted.zip
-
+lfs_download_extract_and_pushd https://fontlibrary.org/assets/downloads/gelasio/4d610887ff4d445cbc639aae7828d139/gelasio.zip
+      install -v -d -m755 /usr/share/fonts/gelasio
+      install -v -m644 *.ttf /usr/share/fonts/gelasio
+      lfs_log "Starting fc-cache"
+      fc-cache -v /usr/share/fonts/gelasio
+      lfs_log "fc-cache ended"
 popd
 
-# q 
-# q lfs_download_extract_and_pushd http://download.kde.org/stable/plasma/5.4.3/oxygen-fonts-5.4.3.tar.xz
-# q 
-# q popd
+lfs_download_extract_and_pushd http://sources.openelec.tv/mirror/liberation-fonts-ttf/liberation-fonts-ttf-2.00.1.tar.gz
+     install -v -d -m755 /usr/share/fonts/liberation
+     install -v -m644 *.otf /usr/share/fonts/liberation
+     fc-cache -v /usr/share/fonts/|iberation
+popd
+
+lfs_download_extract_and_pushd https://noto-website-2.storage.googleapis.com/pkgs/Noto-hinted.zip
+      install -v -d -m755 /usr/share/fonts/noto
+      install -v -m644 *.otf /usr/share/fonts/noto
+      fc-cache -v /usr/share/fonts/noto
+popd
+
+# fs_download_extract_and_pushd http://download.kde.org/stable/plasma/5.4.3/oxygen-fonts-5.4.3.tar.xz
+fs_download_extract_and_pushd https://ftp.osuosl.org/pub/blfs/conglomeration/oxygen-fonts/oxygen-fonts-5.4.3.tar.xz
+
+
+      install -v -d -m755 /usr/share/fonts/oxygen
+      install -v -m644 oxygen-fonts/*/*.ttf /usr/share/fonts/oxygen
+
+TODO: seems to hang
+
+      fc-cache -v /usr/share/fonts/oxygen
+popd
 
 cd /foo/bar
+
 
 lfs_end_step

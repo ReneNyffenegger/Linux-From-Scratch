@@ -113,7 +113,8 @@ lfs_download_and_extract() {
 #      lfs_log "! $dest/$extracted_dir is not a directory"
 #   fi
     if [ $isZip == yes ]; then
-      unzip  $lfs_download_dir/$download_file_name -d $dest_dir
+    # TODO 2018-03-02: because of Noto-hinted.zip
+      unzip  $lfs_download_dir/$download_file_name -d $dest_dir/$extracted_dir
     else
       tar xf $lfs_download_dir/$download_file_name -C $dest_dir
     fi
