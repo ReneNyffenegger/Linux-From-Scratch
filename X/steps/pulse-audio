@@ -1,11 +1,11 @@
 # vi: ft=sh
 #
-# 
+# http://www.linuxfromscratch.org/blfs/view/stable/multimedia/pulseaudio.html 
 #
 
 lfs_start_step
 
-lfs_download_extract_and_pushd http://www.linuxfromscratch.org/blfs/view/stable/multimedia/pulseaudio.html
+lfs_download_extract_and_pushd https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-10.0.tar.xz
 
 ./configure --prefix=/usr        \
             --sysconfdir=/etc    \

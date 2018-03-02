@@ -15,6 +15,6 @@ make
 make install
 
 # TODO as per wiki.linuxfromscratch.org/blfs/wiki/pango
-pango-querymodules > /etc/pango/pango.modules
+# pango-querymodules > /etc/pango/pango.modules
 
 lfs_end_step

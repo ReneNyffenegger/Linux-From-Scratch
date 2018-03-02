@@ -329,7 +329,7 @@ lfs_x_step nspr                 # required for nss
 
 lfs_x_step nss                  # required for firefox
 
-lfs_x_step json_c               # required for pulse-audio
+lfs_x_step json-c               # required for pulse-audio
 lfs_x_step libsndfile           # required for pulse-audio
 
 lfs_x_step alsa-lib             # recommended for pulse-audio
@@ -337,7 +337,7 @@ lfs_x_step fftw                 # recommended for pulse-audio
 lfs_x_step libsamplerate        # recommended for pulse-audio
 
 lfs_x_step pulse-audio          # required for firefox
-lfs_x_step rustc                # required for firefox
+lfs_x_step rust                 # required for firefox
 
 lfs_x_step firefox
 
