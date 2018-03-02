@@ -1,0 +1,2 @@
+svn co svn://svn.linuxfromscratch.org/LFS
+svn co svn://svn.linuxfromscratch.org/BLFS
