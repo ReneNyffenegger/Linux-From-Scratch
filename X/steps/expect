@@ -1,0 +1,21 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/general/expect.html
+#
+
+lfs_start_step
+
+# lfs_download_extract_and_pushd https://downloads.sourceforge.net/expect/expect5.45.tar.gz
+lfs_download_extract_and_pushd https://ftp.osuosl.org/pub/blfs/conglomeration/expect/expect5.45.tar.gz
+
+./configure --prefix=/usr           \
+            --with-tcl=/usr/lib     \
+            --enable-shared         \
+            --mandir=/usr/share/man \
+            --with-tclinclude=/usr/include
+make
+make install
+
+ln -svf expect5.45/libexpect5.45.so /usr/lib
+
+lfs_end_step

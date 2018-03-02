@@ -1,0 +1,43 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/general/tcl.html
+#
+
+lfs_start_step
+
+# lfs_download_extract_and_pushd https://downloads.sourceforge.net/tcl/tcl8.6.7-src.tar.gz
+lfs_download_extract_and_pushd  https://ftp.osuosl.org/pub/blfs/conglomeration/tcl/tcl8.6.7-src.tar.gz
+
+export SRCDIR=`pwd`
+
+cd unix
+
+./configure --prefix=/usr           \
+            --mandir=/usr/share/man \
+            $([ $(uname -m) = x86_64 ] echo --enable-64bit) &&
+make
+
+sed -e "s#$SRCDIR/unix#/usr/lib#" \
+    -e "s#$SRCDIR#/usr/include#"  \
+    -i tclConfig.sh
+
+sed -e "s#$SRCDIR/unix/pkgs/tdbc1.0.5#/usr/lib/tdbc1.0.5#" \
+    -e "s#$SRCDIR/pkgs/tdbc1.0.5/generic#/usr/include#"    \
+    -e "s#$SRCDIR/pkgs/tdbc1.0.5/library#/usr/lib/tcl8.6#" \
+    -e "s#$SRCDIR/pkgs/tdbc1.0.5#/usr/include#"            \
+    -i pkgs/tdbc1.0.5/tdbcConfig.sh
+
+sed -e "s#$SRCDIR/unix/pkgs/itcl4.1.0#/usr/lib/itcl4.1.0#" \
+    -e "s#$SRCDIR/pkgs/itcl4.1.0/generic#/usr/include#"    \
+    -e "s#$SRCDIR/pkgs/itcl4.1.0#/usr/include#"            \
+    -i pkgs/itcl4.1.0/itclConfig.sh
+
+unset SRCDIR
+
+make install
+make install-private-headers
+ln -v -sf tclsh8.6 /usr/bin/tclsh
+chmod -v 755 /usr/lib/libtcl8.6.so
+
+
+lfs_end_step

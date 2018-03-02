@@ -304,6 +304,9 @@ lfs_x_step  fonts
 
 lfs_x_step  X-config-perms
 
+lfx_x_step tcl                  # required for expect
+lfx_x_step expect               # required for deja-gnu
+lfs_x_step deja-gnu
 
 lfs_x_step atk                  # required for gtk-2
 
