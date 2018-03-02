@@ -5,10 +5,16 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd  ftp://ftp.gnome.org/pub/gnome/sources/pango/1.40/pango-1.40.10.tar.xz
+# lfs_download_extract_and_pushd  ftp://ftp.gnome.org/pub/gnome/sources/pango/1.40/pango-1.40.10.tar.xz
+# ./autogen.sh --prefix=/usr --sysconfdir=/etc
 
-./autogen.sh --prefix=/usr --sysconfdir=/etc
+lfs_download_extract_and_pushd https://www.mirrorservice.org/sites/ftp.gnome.org/pub/GNOME/sources/pango/1.40/pango-1.40.11.tar.xz
+./configure --prefix=/usr/ --sysconfdir=/etc
+
 make
 make install
+
+# TODO as per wiki.linuxfromscratch.org/blfs/wiki/pango
+pango-querymodules > /etc/pango/pango.modules
 
 lfs_end_step

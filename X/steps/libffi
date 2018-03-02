@@ -1,11 +1,11 @@
 # vi: ft=sh
 #
-# TODO
+# http://www.linuxfromscratch.org/blfs/view/stable/general/libffi.html
 #
 
 lfs_start_step
 
-lfs_download_extract_and_pushd http://www.linuxfromscratch.org/blfs/view/stable/general/libffi.html
+lfs_download_extract_and_pushd ftp://sourceware.org/pub/libffi/libffi-3.2.1.tar.gz
 
 sed -e '/^includesdir/ s/$(libdir).*$/$(includedir)/' \
     -i include/Makefile.in &&

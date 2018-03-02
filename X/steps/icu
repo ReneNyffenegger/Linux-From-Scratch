@@ -1,11 +1,12 @@
 # vi: ft=sh
 #
-# lfs_x_step  freeml           # required for shared-mime-info
+# http://linuxfromscratch.org/blfs/view/stable/general/icu.html
+# 
 #
 
 lfs_start_step
 
-lfs_download_extract_and_pushd TODO
+lfs_download_extract_and_pushd http://download.icu-project.org/files/icu4c/59.1/icu4c-59_1-src.tgz
 
 cd source
 sed -i 's/xlocale/locale/' i18n/digitlst.cpp

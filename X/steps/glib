@@ -12,11 +12,10 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd TODO
+lfs_download_extract_and_pushd ftp://ftp.gnome.org/pub/gnome/sources/glib/2.52/glib-2.52.3.tar.xz
 
-./configure $XORG_CONFIG
+./configure --prefix=/usr --with-pcre=system
 make
 make install
 
 lfs_end_step
-

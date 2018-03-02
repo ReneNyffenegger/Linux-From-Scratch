@@ -5,7 +5,8 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd  https://downloads.sourceforge.net/freeglut/freeglut-3.0.0.tar.gz
+# lfs_download_extract_and_pushd  https://downloads.sourceforge.net/freeglut/freeglut-3.0.0.tar.gz
+lfs_download_extract_and_pushd  https://ftp.osuosl.org/pub/blfs/conglomeration/freeglut/freeglut-3.0.0.tar.gz
 
 mkdir build
 cd    build

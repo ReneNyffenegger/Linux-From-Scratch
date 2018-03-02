@@ -21,7 +21,7 @@ lfs_download_extract_and_pushd  ftp://ftp.csx.cam.ac.uk/pub/software/programming
 make
 
 make install
-mv -v /usr/lib/libpcre.so.*
+mv -v /usr/lib/libpcre.so.* /lib
 ln -sfv ../../lib/$(readlink /usr/lib/libpcre.so) /usr/lib/libpcre.so
 
 lfs_end_step

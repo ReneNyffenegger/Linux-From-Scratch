@@ -59,7 +59,11 @@ lfs_download() {
   lfs_log "going to check wheather $lfs_download_dir/$download_file_name already exists"
   if [ ! -f $lfs_download_dir/$download_file_name ]; then
     lfs_log "downloading $download_url to $lfs_download_dir"
-    wget $download_url -P $lfs_download_dir
+    if ! wget $download_url -P $lfs_download_dir; then
+      lfs_log "wget reported a problem downloading $download_url, \$? = $?"
+      return 1
+    fi
+
   else
     lfs_log "$download_file_name already downloaded"
   fi
@@ -69,7 +73,6 @@ export -f lfs_download
 lfs_download_and_extract() {
   local download_url=$1
   local dest_dir=$lfs_extract_dir
-
 
   if [ -z "$dest_dir" ]; then
     lfs_log "lfs_download_and_extract: $dest_dir is zero"
@@ -90,11 +93,9 @@ lfs_download_and_extract() {
   #
 
   if [ ${download_file_name: -4} == '.zip' ]; then
-    lfs_log "$download_file_name is a zip file"
     local isZip=yes
     local extracted_dir=$(basename $download_file_name .zip)
   else
-    lfs_log "$download_file_name is NOT a zip file"
     local isZip=no
 
     local extracted_dir=$(basename $download_file_name .gz ) 
@@ -107,22 +108,49 @@ lfs_download_and_extract() {
   #
   #  Extract the file, if necessary
   #
-  lfs_log "Going to check whether extract dir $dest_dir/$extracted_dir exists"
+# lfs_log "Going to check whether extract dir $dest_dir/$extracted_dir exists"
   if [ ! -d $dest_dir/$extracted_dir ]; then
-    lfs_log "Directory does not exist, trying to untar $lfs_download_dir/$extracted_dir into $dest_dir, PWD=$PWD"
-#   if [ ! -d $dest/$extracted_dir ]; then
-#      lfs_log "! $dest/$extracted_dir is not a directory"
-#   fi
+    lfs_log "Extraction directory $dest_dir/$extracted_dir does not exist"
     if [ $isZip == yes ]; then
     # TODO 2018-03-02: because of Noto-hinted.zip
       unzip  $lfs_download_dir/$download_file_name -d $dest_dir/$extracted_dir
     else
-      tar xf $lfs_download_dir/$download_file_name -C $dest_dir
+    #
+    # Extract the downloaded file into an empty tmp directory first, so that
+    # we can make sure that the entire content of the tar file goes under
+    # $extracted_dir
+    #
+      rm -rf /tmp/lfs_extract_dir
+      mkdir  /tmp/lfs_extract_dir
+      if ! tar xf $lfs_download_dir/$download_file_name -C /tmp/lfs_extract_dir; then
+        lfs_log "$lfs_download_dir/$download_file_name does not seem to be a tar file"
+	echo "?"
+	return 1
+      fi
+      
+      
+
+      lfs_log "mkdir $dest_dir/$extracted_dir"
+      mkdir $dest_dir/$extracted_dir
+
+      if [ $(ls /tmp/lfs_extract_dir | wc -l) == 1 ]; then
+        lfs_log "$download_file_name contains a directory"
+	mv /tmp/lfs_extract_dir/*/* $dest_dir/$extracted_dir
+      else
+        lfs_log "$download_file_name contains multiple files"
+	mv /tmp/lfs_extract_dir/* $dest_dir/$extracted_dir
+      fi
+
+
+    # tar xf $lfs_download_dir/$download_file_name -C $dest_dir
     fi
   else
     lfs_log "directory $dest_dir/$extracted_dir already exists"
   fi
 
+#
+# This echo is necessary because this function is called
+# via $(lfs_download_and_extract ... )
   echo "$dest_dir/$extracted_dir"
 
 }
@@ -164,7 +192,6 @@ lfs_x_step() {
 
    pushd steps       > /dev/null
    ./$name
-#  ./go
    popd              > /dev/null
 
   touch done/$name
@@ -194,8 +221,8 @@ lfs_x_step funcsigs                 # required for beaker
 lfs_x_step beaker                   # required for mako
 lfs_x_step mako                     # required for mesa
 
-lfx_x_step libedit                  # option for sqlite
-lfx_x_step sqlite
+lfs_x_step libedit                  # option for sqlite
+lfs_x_step sqlite
 
 lfs_x_step libpng                   # required for Xorg-applications
 lfs_x_step pixman                   # requried for Xorg-server

@@ -1,15 +1,14 @@
 # vi: ft=sh
 #
-# TODO
+# http://www.linuxfromscratch.org/blfs/view/stable/general/zip.html
 #
 
 lfs_start_step
 
-lfs_download_extract_and_pushd TODO
+lfs_download_extract_and_pushd ftp://ftp.info-zip.org/pub/infozip/src/zip30.tgz
 
 make -f unix/Makefile generic_gcc
 make prefix=/usr MANDIR=/usr/share/man/man1 -f unix/Makefile install
-
 
 
 lfs_end_step
