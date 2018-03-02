@@ -1,0 +1,22 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/server/sqlite.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://sqlite.org/2017/sqlite-autoconf-3200000.tar.gz
+
+./configure --prefix=/usr --disable-static        \
+            CFLAGS="-g -O2 -DSQLITE_ENABLE_FTS3=1 \
+            -DSQLITE_ENABLE_COLUMN_METADATA=1     \
+            -DSQLITE_ENABLE_UNLOCK_NOTIFY=1       \
+            -DSQLITE_SECURE_DELETE=1              \
+            -DSQLITE_ENABLE_DBSTAT_VTAB=1"
+make
+make install
+# install -v -m755 -d /usr/share/doc/sqlite-3.20.0 
+# cp -v -R sqlite-doc-3200000/* /usr/share/doc/sqlite-3.20.0
+
+
+lfs_end_step

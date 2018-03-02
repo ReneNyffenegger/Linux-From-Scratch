@@ -1,0 +1,14 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/general/libtiff.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd http://download.osgeo.org/libtiff/tiff-4.0.8.tar.gz
+
+./configure --prefix=/usr --disable-static
+make
+make install
+
+lfs_end_step

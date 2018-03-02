@@ -1,0 +1,28 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/x/gtk2.html
+#
+# Requires
+#  - ATK
+#  - gdk-pixbuf
+#  - pango
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.gnome.org/pub/gnome/sources/gtk+/2.24/gtk+-2.24.31.tar.xz
+
+sed -e 's#l \(gtk-.*\).sgml#& -o \1#' \
+    -i docs/{faq,tutorial}/Makefile.in
+
+./configure --prefix=/usr --sysconfdir=/etc
+
+make
+make install
+
+mkdir -p /etc/gtk-2.0
+cat > /etc/gtk-2.0/gtkrc << "EOF"
+include "/usr/share/themes/Clearlooks/gtk-2.0/gtkrc"
+gtk-icon-theme-name = "elementary"
+EOF
+
+lfs_end_step

@@ -1,0 +1,28 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/general/libjpeg.html
+#
+# Requires
+#  - NASM or yasm
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-1.5.2.tar.gz
+
+
+./configure --prefix=/usr           \
+            --mandir=/usr/share/man \
+            --with-jpeg8            \
+            --disable-static        \
+            --docdir=/usr/share/doc/libjpeg-turbo-1.5.2
+make
+
+if ls /usr/lib/libjpeg.so*; then
+   lfs_log "TQ84: /usr/lib/libjpeg.so* exists, removing them"
+   rm -f /usr/lib/libjpeg.so8
+fi
+
+make install
+
+lfs_end_step

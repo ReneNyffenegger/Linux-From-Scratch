@@ -1,0 +1,19 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/x/at-spi2-core.html
+#
+# Requires
+#  - dbus
+#  - glib
+
+lfs_start_step
+
+lfs_download_extract_and_pushd  ftp://ftp.gnome.org/pub/gnome/sources/at-spi2-core/2.24/at-spi2-core-2.24.1.tar.xz
+
+
+./configure --prefix=/usr \
+            --sysconfdir=/etc
+make
+make install
+
+lfs_end_step

@@ -1,0 +1,18 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/x/gtk3.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.gnome.org/pub/gnome/sources/gtk+/3.22/gtk+-3.22.18.tar.xz
+
+./configure --prefix=/usr             \
+            --sysconfdir=/etc         \
+            --enable-broadway-backend \
+            --enable-x11-backend      \
+            --disable-wayland-backend
+make
+make install
+
+lfs_end_step

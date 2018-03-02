@@ -1,0 +1,30 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/general/dbus.html
+#
+# TODO: Some configuration is required.
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://dbus.freedesktop.org/releases/dbus/dbus-1.10.22.tar.gz
+
+groupadd -g 18 messagebus
+
+useradd -c "D-Bus Message Daemon User" -d /var/run/dbus \
+        -u 18 -g messagebus -s /bin/false messagebus
+
+./configure --prefix=/usr                        \
+            --sysconfdir=/etc                    \
+            --localstatedir=/var                 \
+            --disable-doxygen-docs               \
+            --disable-xml-docs                   \
+            --disable-static                     \
+            --docdir=/usr/share/doc/dbus-1.10.22 \
+            --with-console-auth-dir=/run/console \
+            --with-system-pid-file=/run/dbus/pid \
+            --with-system-socket=/run/dbus/system_bus_socket
+make
+
+make install
+
+lfs_end_step

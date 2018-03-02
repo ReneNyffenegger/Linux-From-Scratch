@@ -1,0 +1,14 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/x/pango.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd  ftp://ftp.gnome.org/pub/gnome/sources/pango/1.40/pango-1.40.10.tar.xz
+
+./autogen.sh --prefix=/usr --sysconfdir=/etc
+make
+make install
+
+lfs_end_step

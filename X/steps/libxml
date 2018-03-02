@@ -1,0 +1,16 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/general/libxml2.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://xmlsoft.org/libxml2/libxml2-2.9.4.tar.gz
+
+# sed -i '/_PyVerify_fd/,+1d' python/types.c
+
+./configure --prefix=/usr --disable-static --with-history
+make
+make install
+
+lfs_end_step

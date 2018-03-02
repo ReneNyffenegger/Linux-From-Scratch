@@ -1,0 +1,16 @@
+# vi: ft=sh
+#
+# TODO
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd TODO
+
+make -f unix/Makefile generic_gcc
+make prefix=/usr MANDIR=/usr/share/man/man1 -f unix/Makefile install
+
+
+
+lfs_end_step
+

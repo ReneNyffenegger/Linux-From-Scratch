@@ -1,0 +1,17 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/general/json-c.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://s3.amazonaws.com/json-c_releases/releases/json-c-0.12.1.tar.gz
+
+
+sed -i s/-Werror// Makefile.in tests/Makefile.in
+./configure --prefix=/usr --disable-static
+make -j1
+make install
+
+
+lfs_end_step

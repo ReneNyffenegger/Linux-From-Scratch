@@ -1,0 +1,17 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/multimedia/libsndfile.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd http://www.mega-nerd.com/libsndfile/files/libsndfile-1.0.28.tar.gz
+
+./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/libsndfile-1.0.28
+make
+make install
+
+
+lfs_end_step

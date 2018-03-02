@@ -1,0 +1,21 @@
+# vi: ft=sh
+#
+# 
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd http://www.linuxfromscratch.org/blfs/view/stable/multimedia/pulseaudio.html
+
+./configure --prefix=/usr        \
+            --sysconfdir=/etc    \
+            --localstatedir=/var \
+            --disable-bluez4     \
+            --disable-bluez5     \
+            --disable-rpath
+make
+
+make install
+rm /etc/dbus-1/system.d/pulseaudio-system.conf
+
+lfs_end_step

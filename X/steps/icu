@@ -1,0 +1,16 @@
+# vi: ft=sh
+#
+# lfs_x_step  freeml           # required for shared-mime-info
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd TODO
+
+cd source
+sed -i 's/xlocale/locale/' i18n/digitlst.cpp
+./configure --prefix=/usr
+make
+make install
+
+lfs_end_step

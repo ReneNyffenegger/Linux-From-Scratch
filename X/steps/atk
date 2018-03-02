@@ -1,0 +1,16 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/x/atk.html
+#
+#  Requires
+#    glib
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.gnome.org/pub/gnome/sources/atk/2.24/atk-2.24.0.tar.xz
+
+./configure --prefix=/usr
+make
+
+lfs_end_step

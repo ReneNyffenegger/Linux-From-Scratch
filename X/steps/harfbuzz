@@ -1,0 +1,14 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/general/harfbuzz.html 
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://www.freedesktop.org/software/harfbuzz/release/harfbuzz-1.4.8.tar.bz2
+
+./configure --prefix=/usr --with-gobject
+make
+make install
+
+lfs_end_step

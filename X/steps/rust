@@ -1,0 +1,29 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/general/rust.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://static.rust-lang.org/dist/rustc-1.19.0-src.tar.gz
+
+cat <<EOF > config.toml
+# see src/bootstrap/config.toml.example for more possible options
+[llvm]
+targets = "X86"
+
+[build]
+# install cargo as well as rust
+extended = true
+
+[install]
+prefix = "/usr"
+docdir = "share/doc/rustc-1.19.0"
+channel = "stable"
+EOF
+
+./x.py build
+./x.py install
+
+lfs_end_step
+

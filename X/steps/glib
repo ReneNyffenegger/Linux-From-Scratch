@@ -1,0 +1,22 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/general/glib2.html
+#
+# Requires
+#  - libffi
+#  - Python 2.7 or Python 3.6
+# 
+# Reqcommended
+#  - PCRE
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd TODO
+
+./configure $XORG_CONFIG
+make
+make install
+
+lfs_end_step
+

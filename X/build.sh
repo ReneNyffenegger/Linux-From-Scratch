@@ -1,3 +1,4 @@
+# vi: path=steps
 #
 #      TODO: The book suggests to store these variabls
 #            in /etc/profile.d/xorg.sh
@@ -173,19 +174,33 @@ lfs_x_step() {
 
 lfs_x_step which
 
-lfs_x_step unzip         # required to unzip *.zip files (?)
+lfs_x_step unzip                    # required to unzip *.zip files (?)
+lfs_x_step zip                      # required for firefox
 
-lfs_x_step FreeType2     # required for fontconfig
+lfs_x_step FreeType2                # required for fontconfig
+lfs_x_step libxml                   # required for shared-mime-info, option for fontconfig
+lfs_x_step fontconfig
 
-lfs_x_step MarkupSafe    # required for beaker
-lfs_x_step funcsigs      # required for beaker
-lfs_x_step beaker        # required for mako
-lfs_x_step mako          # required for mesa
+lfs_x_step libffi                   # required for glib
+lfs_x_step pcre                     # required for glib
 
-lfs_x_step libpng        # required for Xorg-applications
-lfs_x_step pixman        # requried for Xorg-server
+lfs_x_step glib                     # required for atk
 
-lfs_x_step libarchive    # optionally required by CMake
+lfs_x_step icu                      # required for harfbuzz
+lfs_x_step harfbuzz                 # required for pango
+
+lfs_x_step MarkupSafe               # required for beaker
+lfs_x_step funcsigs                 # required for beaker
+lfs_x_step beaker                   # required for mako
+lfs_x_step mako                     # required for mesa
+
+lfx_x_step libedit                  # option for sqlite
+lfx_x_step sqlite
+
+lfs_x_step libpng                   # required for Xorg-applications
+lfs_x_step pixman                   # requried for Xorg-server
+
+lfs_x_step libarchive               # optionally required by CMake
 lfs_x_step CMake
 
 lfs_x_step fribidi                  # required by libass
@@ -261,6 +276,42 @@ lfs_x_step  X-config
 lfs_x_step  fonts
 
 lfs_x_step  X-config-perms
+
+
+lfs_x_step atk                  # required for gtk-2
+
+lfs_x_step libjpeg-turbo        # required for gdk-pixbuf
+lfs_x_step shared-mime-info     # required for gdk-pixbuf
+lfs_x_step glu                  # option for freeglut
+lfs_x_step freeglut             # option for gdk-pixbuf
+lfs_x_step libtiff              # required for gdk-pixbuf
+lfs_x_step jasper               # option for gdk-pixbuf
+
+lfs_x_step gdk-pixbuf           # required for gtk-2
+lfs_x_step pango                # required for gtk-2
+
+lfs_x_step gtk-2                # required for firefox
+
+lfs_x_step dbus                 # required for at-spi-core
+lfs_x_step at-spi-core          # required for at-spi-atk
+lfs_x_step at-spi-atk           # required for gtk-3
+lfs_x_step gtk-3                # required for firefox
+
+lfs_x_step nspr                 # required for nss
+
+lfs_x_step nss                  # required for firefox
+
+lfs_x_step json_c               # required for pulse-audio
+lfs_x_step libsndfile           # required for pulse-audio
+
+lfs_x_step alsa-lib             # recommended for pulse-audio
+lfs_x_step fftw                 # recommended for pulse-audio
+lfs_x_step libsamplerate        # recommended for pulse-audio
+
+lfs_x_step pulse-audio          # required for firefox
+lfs_x_step rustc                # required for firefox
+
+lfs_x_step firefox
 
 # lfs_x_step  one
 # lfs_x_step  two

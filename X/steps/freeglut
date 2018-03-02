@@ -1,0 +1,23 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/x/freeglut.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd  https://downloads.sourceforge.net/freeglut/freeglut-3.0.0.tar.gz
+
+mkdir build
+cd    build
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr      \
+      -DCMAKE_BUILD_TYPE=Release       \
+      -DFREEGLUT_BUILD_DEMOS=OFF       \
+      -DFREEGLUT_BUILD_STATIC_LIBS=OFF \
+      ..
+
+make
+
+make install
+
+lfs_end_step

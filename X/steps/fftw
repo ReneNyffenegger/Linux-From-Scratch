@@ -1,0 +1,15 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/general/fftw.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.fftw.org/pub/fftw/fftw-3.3.6-pl2.tar.gz
+
+
+./configure --prefix=/usr  --enable-shared --enable-threads
+make
+make install
+
+lfs_end_step

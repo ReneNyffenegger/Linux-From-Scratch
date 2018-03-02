@@ -1,0 +1,16 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/multimedia/libsamplerate.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd http://www.mega-nerd.com/SRC/libsamplerate-0.1.9.tar.gz
+
+
+./configure --prefix=/usr --disable-static
+make
+make install
+make htmldocdir=/usr/share/doc/libsamplerate-0.1.9 install
+
+lfs_end_step

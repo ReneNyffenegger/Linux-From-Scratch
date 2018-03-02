@@ -1,0 +1,22 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/general/jasper.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd  http://www.ece.uvic.ca/~frodo/jasper/software/jasper-2.0.12.tar.gz
+
+mkdir BUILD
+cd    BUILD
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr    \
+      -DCMAKE_BUILD_TYPE=Release     \
+      -DCMAKE_SKIP_INSTALL_RPATH=YES \
+      -DCMAKE_INSTALL_DOCDIR=/usr/share/doc/jasper-2.0.12 \
+      ..
+make
+
+make install
+
+lfs_end_step

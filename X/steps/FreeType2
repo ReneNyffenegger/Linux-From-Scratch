@@ -6,6 +6,9 @@
 # fontconfig is required for the Xorg libraries
 #
 # TODO: it is recommended to install HarfBuzz as well.
+#       After HarfBuzz is installed, FreeType2 should be
+#       reinstalled.
+#
 #
 
 lfs_start_step

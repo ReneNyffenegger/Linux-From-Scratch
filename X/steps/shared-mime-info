@@ -1,0 +1,17 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/general/shared-mime-info.html
+#
+# Requires
+#  - libxml
+
+lfs_start_step
+
+lfs_download_extract_and_pushd  https://people.freedesktop.org/~hadess/shared-mime-info-1.8.tar.xz
+
+
+./configure --prefix=/usr
+make -j1 # -j1: If not using a very recent intel processor
+make install
+
+lfs_end_step

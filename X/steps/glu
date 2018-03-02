@@ -1,0 +1,14 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/x/glu.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.freedesktop.org/pub/mesa/glu/glu-9.0.0.tar.bz2
+
+./configure --prefix=$XORG_PREFIX --disable-static
+make
+make install
+
+lfs_end_step

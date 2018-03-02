@@ -1,0 +1,15 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/multimedia/alsa-lib.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.alsa-project.org/pub/lib/alsa-lib-1.1.4.1.tar.bz2
+
+./configure
+make
+make install
+
+
+lfs_end_step
