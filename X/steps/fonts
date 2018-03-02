@@ -5,44 +5,59 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd http://gsdview.appspot.com/chromeos-localmirror/distfiles/crosextrafonts-20130214.tar.gz
+# lfs_download_extract_and_pushd http://gsdview.appspot.com/chromeos-localmirror/distfiles/crosextrafonts-20130214.tar.gz
+#      install -v -d -m755 /usr/share/fonts/caldea
+#      install -v -m644 *.ttf /usr/share/fonts/caldea
+#      fc-cache -v /usr/share/fonts/caldea
+# popd
 
-popd
+# lfs_download_extract_and_pushd http://ftp.gnome.org/pub/gnome/sources/cantarell-fonts/0.0/cantarell-fonts-0.0.25.tar.xz 
+#      install -v -d -m755 /usr/share/fonts/cantarell
+#      install -v -m644 otf/*.otf /usr/share/fonts/cantarell
+#      fc-cache -v /usr/share/fonts/cantarell
+# popd
 
-lfs_download_extract_and_pushd http://ftp.gnome.org/pub/gnome/sources/cantarell-fonts/0.0/cantarell-fonts-0.0.25.tar.xz 
+# lfs_download_extract_and_pushd http://gsdview.appspot.com/chromeos-localmirror/distfiles/crosextrafonts-carlito-20130920.tar.gz
+#       install -v -d -m755 /usr/share/fonts/carlito
+#       install -v -m644 *.ttf /usr/share/fonts/carlito
+#       fc-cache -v /usr/share/fonts/carlito
+# popd
 
-popd
+# lfs_download_extract_and_pushd https://freefr.dl.sourceforge.net/project/dejavu/dejavu/2.37/dejavu-fonts-ttf-2.37.tar.bz2
+#    install -v -d -m755 /usr/share/fonts/dejavu
+#    install -v -m644 ttf/*.ttf /usr/share/fonts/dejavu
+#    fc-cache -v /usr/share/fonts/dejavu
+# popd
 
-lfs_download_extract_and_pushd http://gsdview.appspot.com/chromeos-localmirror/distfiles/crosextrafonts-carlito-20130920.tar.gz
-
-popd
-
-lfs_download_extract_and_pushd https://sourceforge.net/projects/dejavu/files/dejavu/
-   install -v -d -m755 /usr/share/fonts/dejavu
-   install -v -m644 ttf/*.ttf /usr/share/fonts/dejavu &&
-   fc-cache -v /usr/share/fonts/dejavu
-popd
-
+# TODO: the tar.gz will be extracted into a directory whose name does not match the tar.gz name.
 # TODO: There are also sfd and ttf fonts
-lfs_download_extract_and_pushd https://ftp.gnu.org/gnu/freefont/freefont-otf-20120503.tar.gz
+# lfs_download https://ftp.gnu.org/gnu/freefont/freefont-otf-20120503.tar.gz
+# pushd $lfs_extract_dir/freefont-20120503
+#     install -v -d -m755 /usr/share/fonts/gnu-freefont
+#     install -v -m644 *.otf /usr/share/fonts/gnu-freefont
+#     fc-cache -v /usr/share/fonts/gnu-freefont
+# popd
+ 
+# TODO: This is a zip file
+# lfs_download_extract_and_pushd https://fontlibrary.org/assets/downloads/gelasio/4d610887ff4d445cbc639aae7828d139/gelasio.zip
+# 
+# popd
 
-
-popd
-
-lfs_download_extract_and_pushd https://fontlibrary.org/assets/downloads/gelasio/4d610887ff4d445cbc639aae7828d139/gelasio.zip
-
-popd
-
-lfs_download_extract_and_pushd http://sources.openelec.tv/mirror/liberation-fonts-ttf/liberation-fonts-ttf-2.00.1.tar.gz
-
-popd
+# lfs_download_extract_and_pushd http://sources.openelec.tv/mirror/liberation-fonts-ttf/liberation-fonts-ttf-2.00.1.tar.gz
+#      install -v -d -m755 /usr/share/fonts/liberation
+#      install -v -m644 *.otf /usr/share/fonts/liberation
+#      fc-cache -v /usr/share/fonts/|iberation
+# popd
 
 lfs_download_extract_and_pushd https://noto-website-2.storage.googleapis.com/pkgs/Noto-hinted.zip
 
 popd
 
+# q 
+# q lfs_download_extract_and_pushd http://download.kde.org/stable/plasma/5.4.3/oxygen-fonts-5.4.3.tar.xz
+# q 
+# q popd
 
-lfs_download_extract_and_pushd http://download.kde.org/stable/plasma/5.4.3/oxygen-fonts-5.4.3.tar.xz
+cd /foo/bar
 
-popd
 lfs_end_step

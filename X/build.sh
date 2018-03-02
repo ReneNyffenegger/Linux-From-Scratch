@@ -67,10 +67,7 @@ export -f lfs_download
 
 lfs_download_and_extract() {
   local download_url=$1
-# local dest_dir=$2
   local dest_dir=$lfs_extract_dir
-
-# trap 'return -1' ERR
 
 
   if [ -z "$dest_dir" ]; then
@@ -90,11 +87,21 @@ lfs_download_and_extract() {
   #
   #  Find last part of downloaded file
   #
-  local extracted_dir=$(basename $download_file_name .gz ) 
-        extracted_dir=$(basename $extracted_dir      .xz ) 
-        extracted_dir=$(basename $extracted_dir      .bz2) 
-        extracted_dir=$(basename $extracted_dir      .tar) 
-        extracted_dir=$(basename $extracted_dir      .tgz) 
+
+  if [ ${download_file_name: -4} == '.zip' ]; then
+    lfs_log "$download_file_name is a zip file"
+    local isZip=yes
+    local extracted_dir=$(basename $download_file_name .zip)
+  else
+    lfs_log "$download_file_name is NOT a zip file"
+    local isZip=no
+
+    local extracted_dir=$(basename $download_file_name .gz ) 
+          extracted_dir=$(basename $extracted_dir      .xz ) 
+          extracted_dir=$(basename $extracted_dir      .bz2) 
+          extracted_dir=$(basename $extracted_dir      .tar) 
+          extracted_dir=$(basename $extracted_dir      .tgz) 
+  fi
 
   #
   #  Extract the file, if necessary
@@ -102,10 +109,14 @@ lfs_download_and_extract() {
   lfs_log "Going to check whether extract dir $dest_dir/$extracted_dir exists"
   if [ ! -d $dest_dir/$extracted_dir ]; then
     lfs_log "Directory does not exist, trying to untar $lfs_download_dir/$extracted_dir into $dest_dir, PWD=$PWD"
-    if [ ! -d $dest/$extracted_dir ]; then
-       lfs_log "! $dest/$extracted_dir is not a directory"
+#   if [ ! -d $dest/$extracted_dir ]; then
+#      lfs_log "! $dest/$extracted_dir is not a directory"
+#   fi
+    if [ $isZip == yes ]; then
+      unzip  $lfs_download_dir/$download_file_name -d $dest_dir
+    else
+      tar xf $lfs_download_dir/$download_file_name -C $dest_dir
     fi
-    tar xf $lfs_download_dir/$download_file_name -C $dest_dir
   else
     lfs_log "directory $dest_dir/$extracted_dir already exists"
   fi
