@@ -172,6 +172,8 @@ lfs_x_step() {
 
 lfs_x_step which
 
+lfs_x_step unzip         # required to unzip *.zip files (?)
+
 lfs_x_step FreeType2     # required for fontconfig
 
 lfs_x_step MarkupSafe    # required for beaker
