@@ -11,6 +11,11 @@ cat > /etc/X11/xorg.conf.d/xkb-defaults.conf <<"EOF"
 # made with localectl because localectl will overwrite
 # this file on the next start.
 #
+#
+# TODO:
+#   https://unix.stackexchange.com/questions/212573/how-can-i-make-backspace-act-as-escape-using-setxkbmap
+#   https://unix.stackexchange.com/questions/427429/how-can-i-assign-control-functionality-to-the-right-super-windows-key-in-us?noredirect=1#comment771393_427429
+#
 # ---------------------------------------------------
 #
 
