@@ -315,6 +315,7 @@ lfs_x_step libtiff              # required for gdk-pixbuf
 lfs_x_step jasper               # option for gdk-pixbuf
 
 lfs_x_step gdk-pixbuf           # required for gtk-2
+lfs_x_step cairo                # recommended for pango
 lfs_x_step pango                # required for gtk-2
 
 lfs_x_step gtk-2                # required for firefox

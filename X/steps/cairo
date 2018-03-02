@@ -1,0 +1,16 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/x/pango.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://www.cairographics.org/releases/cairo-1.14.10.tar.xz
+
+./configure --prefix=/usr    \
+            --disable-static \
+            --enable-tee
+make
+make install
+
+lfs_end_step
