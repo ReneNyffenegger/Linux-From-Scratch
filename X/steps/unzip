@@ -1,0 +1,14 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/general/unzip.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.info-zip.org/pub/infozip/src/unzip60.tgz
+
+make -f unix/Makefile generic
+make prefix=/usr MANDIR=/usr/share/man/man1 \
+   -f unix/Makefile install
+
+lfs_end_step
