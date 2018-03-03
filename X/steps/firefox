@@ -2,7 +2,10 @@
 #
 # http://www.linuxfromscratch.org/blfs/view/stable/xsoft/firefox.html
 #
+# TODO: does Python need to be rebuilt prior to this step?
+#
 # TODO: configuration etc.
+#
 
 lfs_start_step
 

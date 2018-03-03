@@ -128,14 +128,22 @@ lfs_download_and_extract() {
 	return 1
       fi
       
-      
-
       lfs_log "mkdir $dest_dir/$extracted_dir"
       mkdir $dest_dir/$extracted_dir
 
       if [ $(ls /tmp/lfs_extract_dir | wc -l) == 1 ]; then
         lfs_log "$download_file_name contains a directory"
-	mv /tmp/lfs_extract_dir/*/* $dest_dir/$extracted_dir
+      # Subshell so that the effect of shopt -s dotglob is undone.
+      # shopt -s dotglob also matches dot files (but not . and .. )
+      ( shopt -s dotglob; mv /tmp/lfs_extract_dir/*/* $dest_dir/$extracted_dir )
+      # mv /tmp/lfs_extract_dir/*/.[!.]* $dest_dir/$extracted_dir
+      # mv /tmp/lfs_extract_dir/*/*  $dest_dir/$extracted_dir
+      # mv /tmp/lfs_extract_dir/*/.* $dest_dir/$extracted_dir
+      # pushd /tmp/lfs_extract_dir/*
+      #   mv *         $dest_dir/$extracted_dir
+      # #       .[!.]* -> https://askubuntu.com/a/259386/242303
+      #   mv -f .[!.]* $dest_dir/$extracted_dir
+      # popd
       else
         lfs_log "$download_file_name contains multiple files"
 	mv /tmp/lfs_extract_dir/* $dest_dir/$extracted_dir
