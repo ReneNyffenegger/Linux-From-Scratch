@@ -1,0 +1,14 @@
+# vi: ft=sh
+#
+# https://developers.hp.com/hp-linux-imaging-and-printing
+#
+
+lfs_start_step
+
+lfs_download                   https://newcontinuum.dl.sourceforge.net/project/hplip/hplip/3.17.11/hplip-3.17.11.run
+lfs_download_extract_and_pushd https://ayera.dl.sourceforge.net/project/hplip/hplip/3.17.11/hplip-3.17.11.tar.gz
+
+# cd /abc/def/ghi
+
+
+lfs_end_step

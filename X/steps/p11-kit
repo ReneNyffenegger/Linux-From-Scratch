@@ -1,0 +1,23 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/postlfs/p11-kit.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd 
+
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --with-trust-paths=/etc/pki/anchors
+make
+make install
+
+if [ -e /usr/lib/libnssckbi.so ]; then
+  readlink /usr/lib/libnssckbi.so ||
+  rm -v /usr/lib/libnssckbi.so    &&
+  ln -sfv ./pkcs11/p11-kit-trust.so /usr/lib/libnssckbi.so
+fi
+
+
+lfs_end_step

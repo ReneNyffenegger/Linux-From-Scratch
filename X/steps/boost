@@ -1,0 +1,18 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/boost.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.tar.bz2
+
+sed -e '/using python/ s@;@: /usr/include/python${PYTHON_VERSION/3*/${PYTHON_VERSION}m} ;@' \
+    -i bootstrap.sh
+
+./bootstrap.sh --prefix=/usr
+./b2 stage threading=multi link=shared
+
+./b2 install threading=multi link=shared
+
+lfs_end_step

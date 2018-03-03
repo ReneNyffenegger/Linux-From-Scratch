@@ -1,0 +1,14 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/perl-modules.html#perl-archive-zip
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://www.cpan.org/authors/id/P/PH/PHRED/Archive-Zip-1.59.tar.gz
+
+perl Makefile.PL
+make
+make install
+
+lfs_end_step

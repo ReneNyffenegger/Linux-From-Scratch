@@ -1,0 +1,16 @@
+# vi: ft=sh
+#
+# http://scripts.sil.org/cms/scripts/page.php?site_id=projects&item_id=graphite_fonts
+#
+
+lfs_start_step
+
+lfs_download_extract https://software.sil.org/downloads/r/andika/Andika-5.000.zip
+lfs_download_extract https://software.sil.org/downloads/r/charis/CharisSIL-5.000.zip
+lfs_download_extract https://software.sil.org/downloads/r/doulos/DoulosSIL-5.000-web.zip
+lfs_download_extract https://software.sil.org/downloads/r/gentium/GentiumPlus-5.000.zip
+
+
+
+lfs_end_step
+

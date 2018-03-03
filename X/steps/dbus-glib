@@ -1,0 +1,16 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/dbus-glib.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.108.tar.gz
+
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --disable-static
+make
+make install
+
+lfs_end_step

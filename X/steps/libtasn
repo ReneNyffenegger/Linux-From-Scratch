@@ -1,0 +1,14 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/libtasn1.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.gnu.org/gnu/libtasn1/libtasn1-4.12.tar.gz
+
+./configure --prefix=/usr --disable-static
+make
+make install
+
+lfs_end_step

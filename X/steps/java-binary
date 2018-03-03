@@ -1,0 +1,17 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/java.html#java-bin
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd http://anduin.linuxfromscratch.org/BLFS/OpenJDK/OpenJDK-1.8.0.141/OpenJDK-1.8.0.141-x86_64-bin.tar.xz
+
+install -vdm755 /opt/OpenJDK-1.8.0.141-bin 
+mv -v * /opt/OpenJDK-1.8.0.141-bin  
+chown -R root:root /opt/OpenJDK-1.8.0.141-bin
+
+ln -sfn OpenJDK-1.8.0.141-bin /opt/jdk
+
+
+lfs_end_step

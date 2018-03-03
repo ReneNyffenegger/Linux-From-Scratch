@@ -1,0 +1,16 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/libunistring.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.gnu.org/gnu/libunistring/libunistring-0.9.7.tar.xz
+
+./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/libunistring-0.9.7
+make
+make install
+
+lfs_end_step

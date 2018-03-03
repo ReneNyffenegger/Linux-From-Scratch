@@ -1,0 +1,19 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/apr.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.mirrorservice.org/sites/ftp.apache.org/apr/apr-1.6.2.tar.bz2
+
+./configure --prefix=/usr    \
+            --disable-static \
+            --with-installbuilddir=/usr/share/apr-1/build
+make
+make install
+
+
+
+lfs_end_step
+

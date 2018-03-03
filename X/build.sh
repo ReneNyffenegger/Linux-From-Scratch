@@ -180,6 +180,24 @@ lfs_download_extract_and_pushd() {
 }
 export -f lfs_download_extract_and_pushd
 
+lfs_check_kernel_config_param() {
+  local param=$1
+
+# Function can be called with CONFIG_XYZ or just XYZ
+  param=CONFIC_$(param#CONFIG_)
+
+  local value=$(gunzip < /proc/config.gz | grep "\\<$param\\>")
+
+  if [ "$value" == "$param=y" ]; then
+    echo "$param is set to y, returning 0"
+    return 0
+  fi
+
+  echo "$param is not set to y, returning 1"
+
+  return 1
+}
+
 lfs_x_step() {
 
   trap 'echo Error at line $LINENO; exit 1' ERR
@@ -209,8 +227,11 @@ lfs_x_step() {
 
 lfs_x_step which
 
+lfs_x_step perl-archive-zip
+
 lfs_x_step unzip                    # required to unzip *.zip files (?)
 lfs_x_step zip                      # required for firefox
+
 
 lfs_x_step FreeType2                # required for fontconfig
 lfs_x_step libxml                   # required for shared-mime-info, option for fontconfig
@@ -220,6 +241,8 @@ lfs_x_step libffi                   # required for glib
 lfs_x_step pcre                     # required for glib
 
 lfs_x_step glib                     # required for atk
+
+
 
 lfs_x_step icu                      # required for harfbuzz
 lfs_x_step harfbuzz                 # required for pango
@@ -346,14 +369,54 @@ lfs_x_step nss                  # required for firefox
 lfs_x_step json-c               # required for pulse-audio
 lfs_x_step libsndfile           # required for pulse-audio
 
-lfs_x_step alsa-lib             # recommended for pulse-audio
+lfs_x_step alsa-lib             # recommended for pulse-audio, runtime dependency of java
 lfs_x_step fftw                 # recommended for pulse-audio
 lfs_x_step libsamplerate        # recommended for pulse-audio
+
+lfs_x_step libunistring
+lfs_x_step libtasn
+lfs_x_step p11-kit
+lfs_x_step nettle               # required for gnu-tls
+lfs_x_step gnu-tls              # required for cups
+lfs_x_step hplib
+lfs_x_step cups-filters         # required for cups (postinstall)
+lfs_x_step cups                 # runtime dependency of java
+
+lfs_x_step giflib               # required for java-binary
+
+lfs_x_step gutenprint
+
+lfs_x_step java-binary          # required for ant
+lfs_x_step java-conf            # recommended for ant
+lfs_x_step ant
+
+lfs_x_step apr                  # recommended for libre-office
+lfs_x_step python3              # required for libre-office
+lfs_x_step boost                # recommended for libre-office
+lfs_x_step clucene              # recommended for libre-office
+lfs_x_step dbus-glib            # recommended for libre-office
+lfs_x_step graphite-fonts       # required for graphite2
+lfs_x_step graphite2            # recommended for libre-office
+
+lfs_x_step gst10-plugins-base   # recommended for libre-office
+lfs_x_step libatomic_ops        # recommended for libre-office
+lfs_x_step lcms2                # recommended for libre-office (Little CMS)
+lfs_x_step librsvg              # recommended for libre-office
+lfs_x_step libxslt              # recommended for libre-office
+lfs_x_step neon                 # recommended for libre-office
+# lfs_x_step openldap             # recommended for libre-office
+lfs_x_step poppler              # recommended for libre-office
+lfs_x_step postgresql           # required for libre-office
+lfs_x_step redland              # required for libre-office
+lfs_x_step serf                 # required for libre-office
+# lfs_x_step unixodbc             # required for libre-office
 
 lfs_x_step pulse-audio          # required for firefox
 lfs_x_step rust                 # required for firefox
 
 lfs_x_step firefox
+
+lfs_x_step libre-office
 
 # lfs_x_step  one
 # lfs_x_step  two

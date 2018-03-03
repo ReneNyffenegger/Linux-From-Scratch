@@ -1,0 +1,19 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/graphite2.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://github.com/silnrsi/graphite/releases/download/1.3.10/graphite2-1.3.10.tgz
+
+sed -i '/cmptest/d' tests/CMakeLists.txt
+
+mkdir build
+cd    build
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+make
+make install
+
+lfs_end_step

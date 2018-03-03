@@ -1,0 +1,24 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/python3.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tar.xz
+
+CXX="/usr/bin/g++"              \
+./configure --prefix=/usr       \
+            --enable-shared     \
+            --with-system-expat \
+            --with-system-ffi   \
+            --with-ensurepip=yes
+make
+
+make install
+chmod -v 755 /usr/lib/libpython3.6m.so
+chmod -v 755 /usr/lib/libpython3.so
+
+
+lfs_end_step
+

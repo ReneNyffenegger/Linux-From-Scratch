@@ -1,0 +1,15 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/giflib.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://downloads.sourceforge.net/giflib/giflib-5.1.4.tar.bz2
+
+./configure --prefix=/usr --disable-static &&
+make
+make install
+
+
+lfs_end_step

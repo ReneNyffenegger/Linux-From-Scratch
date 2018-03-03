@@ -1,0 +1,21 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/xsoft/libreoffice.html
+#
+
+lfs_start_step
+
+cd /foo/bar/baz # Unlike the other packages, we assume that you have not yet unpacked the package. This is because the --no-overwrite-dir switch is needed in case you unpack as the root user. 
+
+lfs_download_extract_and_pushd http://download.documentfoundation.org/libreoffice/src/5.4.0/libreoffice-5.4.0.3.tar.xz
+
+# TODO: really necessary? See
+#   http://www.linuxfromscratch.org/blfs/view/8.1/general/apache-ant.html
+#   http://www.linuxfromscratch.org/blfs/view/8.1/general/ojdk-conf.html
+#   steps/java-conf
+#
+export PATH=/opt/ant/bin;$PATH
+export ANT_HOME=/opt/ant
+. /etc/profile.d/openjdk.sh
+
+lfs_end_step

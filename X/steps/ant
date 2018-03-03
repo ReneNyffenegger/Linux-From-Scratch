@@ -1,0 +1,25 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/apache-ant.html
+#
+
+lfs_start_step
+
+lfs_download                   http://repo1.maven.org/maven2/junit/junit/4.11/junit-4.11.jar
+lfs_download                   http://repo1.maven.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar
+lfs_download_extract_and_pushd https://archive.apache.org/dist/ant/source/apache-ant-1.10.1-src.tar.xz
+
+# TODO: really necessary? See
+#   http://www.linuxfromscratch.org/blfs/view/8.1/general/apache-ant.html
+#   http://www.linuxfromscratch.org/blfs/view/8.1/general/ojdk-conf.html
+#   steps/java-conf
+#
+. /etc/profile.d/openjdk.sh
+
+cp -v $lfs_download_dir/junit-4.11.jar \
+      $lfs_download_dir/hamcrest-core-1.3.jar lib/optional
+
+./build.sh -Ddist.dir=/opt/ant-1.10.1 dist
+ln -v -sfn ant-1.10.1 /opt/ant
+
+lfs_end_step

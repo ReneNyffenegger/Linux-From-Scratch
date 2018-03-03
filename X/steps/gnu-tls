@@ -1,0 +1,19 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/postlfs/gnutls.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.gnupg.org/gcrypt/gnutls/v3.5/gnutls-3.5.14.tar.xz
+
+
+./configure --prefix=/usr \
+            --with-default-trust-store-pkcs11="pkcs11:"
+make
+
+make install
+
+
+lfs_end_step
+
