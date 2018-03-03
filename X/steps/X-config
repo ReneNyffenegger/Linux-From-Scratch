@@ -77,6 +77,7 @@ Section "InputClass"
 
 # XkbOptions allows to define how layouts can be switched, how keys are
 #            composed etc.
+#            Multiple options are seperated by a comma.
   Option "XkbOptions"  "caps:swapescape,ctrl:swap_rwin_rctl"  # Found in /usr/share/X11/xkb/rules/base.lst AND /usr/share/X11/xkb/rules/event
 # Option "XkbOptions"  "terminate:ctrl_alt_bksp"  # "grp:menu_toggle"
 
