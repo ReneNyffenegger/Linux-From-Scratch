@@ -1,0 +1,15 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/desktop-file-utils.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd  https://www.freedesktop.org/software/desktop-file-utils/releases/desktop-file-utils-0.23.tar.xz
+
+./configure --prefix=/usr
+make
+make install
+
+
+lfs_end_step

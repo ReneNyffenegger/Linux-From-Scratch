@@ -1,0 +1,117 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/xsoft/libreoffice.html
+#
+
+lfs_start_step
+
+lfs_download_and_extract http://download.documentfoundation.org/libreoffice/src/5.4.0/libreoffice-dictionaries-5.4.0.3.tar.xz
+lfs_download_and_extract http://download.documentfoundation.org/libreoffice/src/5.4.0/libreoffice-help-5.4.0.3.tar.xz
+lfs_download_and_extract http://download.documentfoundation.org/libreoffice/src/5.4.0/libreoffice-translations-5.4.0.3.tar.xz
+
+lfs_download_and_extract http://download.documentfoundation.org/libreoffice/src/5.4.0/libreoffice-5.4.0.3.tar.xz
+
+cd /foo/bar/baz # Unlike the other packages, we assume that you have not yet unpacked the package. This is because the --no-overwrite-dir switch is needed in case you unpack as the root user. 
+
+# lfs_download_extract_and_pushd http://download.documentfoundation.org/libreoffice/src/5.4.0/libreoffice-5.4.0.3.tar.xz
+
+# TODO: really necessary? See
+#   http://www.linuxfromscratch.org/blfs/view/8.1/general/apache-ant.html
+#   http://www.linuxfromscratch.org/blfs/view/8.1/general/ojdk-conf.html
+#   steps/java-conf
+#
+export PATH=/opt/ant/bin;$PATH
+export ANT_HOME=/opt/ant
+. /etc/profile.d/openjdk.sh
+
+install -dm755 external/tarballs
+ln -sv ../../../libreoffice-dictionaries-5.4.0.3.tar.xz external/tarballs/
+ln -sv ../../../libreoffice-help-5.4.0.3.tar.xz         external/tarballs/
+
+
+tar -xf libreoffice-5.4.0.3.tar.xz --no-overwrite-dir
+cd libreoffice-5.4.0.3
+
+install -dm755 external/tarballs
+ln -sv ../../../libreoffice-dictionaries-5.4.0.3.tar.xz external/tarballs/
+ln -sv ../../../libreoffice-help-5.4.0.3.tar.xz         external/tarballs/
+
+ln -sv ../../../libreoffice-translations-5.4.0.3.tar.xz external/tarballs/
+
+export LO_PREFIX=/usr # or /opt
+
+
+sed -e "/gzip -f/d"   \
+    -e "s|.1.gz|.1|g" \
+    -i bin/distro-install-desktop-integration
+
+sed -e "/distro-install-file-lists/d" -i Makefile.in
+
+./autogen.sh --prefix=$LO_PREFIX         \
+             --sysconfdir=/etc           \
+             --with-vendor=BLFS          \
+             --with-lang='us'            \
+             --with-help                 \
+             --with-myspell-dicts        \
+             --with-alloc=system         \
+             --without-junit             \
+             --without-system-dicts      \
+             --disable-dconf             \
+             --disable-odk               \
+             --enable-release-build=yes  \
+             --enable-python=system      \
+             --with-system-apr           \
+             --with-system-boost         \
+             --with-system-cairo         \
+             --with-system-clucene       \
+             --with-system-curl          \
+             --with-system-expat         \
+             --with-system-graphite      \
+             --with-system-harfbuzz      \
+             --with-system-icu           \
+             --with-system-jpeg          \
+             --with-system-lcms2         \
+             --with-system-libatomic_ops \
+             --with-system-libpng        \
+             --with-system-libxml        \
+             --with-system-neon          \
+             --with-system-nss           \
+             --with-system-odbc          \
+             --with-system-openldap      \
+             --with-system-openssl       \
+             --with-system-poppler       \
+             --with-system-postgresql    \
+             --with-system-redland       \
+             --with-system-serf          \
+             --with-system-zlib
+
+make build-nocheck
+
+make distro-pack-install
+
+
+if [ "$LO_PREFIX" != "/usr" ]; then
+
+  # This symlink is necessary for the desktop menu entries
+  ln -svf $LO_PREFIX/lib/libreoffice/program/soffice /usr/bin/libreoffice
+
+  # Icons
+  mkdir -vp /usr/share/pixmaps
+  for i in $LO_PREFIX/share/icons/hicolor/32x32/apps/*; do
+    ln -svf $i /usr/share/pixmaps
+  done
+
+  # Desktop menu entries
+  for i in $LO_PREFIX/lib/libreoffice/share/xdg/*; do
+    ln -svf $i /usr/share/applications/libreoffice-$(basename $i)
+  done
+
+  # Man pages
+  for i in $LO_PREFIX/share/man/man1/*; do
+    ln -svf $i /usr/share/man/man1/
+  done
+
+  unset i
+fi
+
+lfs_end_step
