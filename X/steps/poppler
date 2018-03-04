@@ -1,0 +1,31 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/poppler.html
+#
+
+lfs_start_step
+
+lfs_download_and_extract       https://poppler.freedesktop.org/poppler-data-0.4.8.tar.gz
+lfs_download_extract_and_pushd https://poppler.freedesktop.org/poppler-0.57.0.tar.xz
+
+
+./configure --prefix=/usr               \
+            --sysconfdir=/etc           \
+            --disable-static            \
+            --enable-build-type=release \
+            --enable-cmyk               \
+            --enable-xpdf-headers       \
+            --with-testdatadir=$PWD/testfiles
+make
+
+make install
+
+install -v -m755 -d        /usr/share/doc/poppler-0.57.0
+install -v -m644 README*   /usr/share/doc/poppler-0.57.0
+cp -vr glib/reference/html /usr/share/doc/poppler-0.57.0
+
+tar -xf $lfs_download_dir/poppler-data-0.4.8.tar.gz
+cd poppler-data-0.4.8
+make prefix=/usr install
+
+lfs_end_step

@@ -1,0 +1,14 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/libcroco.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.gnome.org/pub/gnome/sources/libcroco/0.6/libcroco-0.6.12.tar.xz 
+
+./configure --prefix=/usr --disable-static
+make
+make install
+
+lfs_end_step

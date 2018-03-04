@@ -1,0 +1,22 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/basicnet/neon.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd http://www.webdav.org/neon/neon-0.30.2.tar.gz
+
+sed -e 's/client_set/set/'  \
+    -e 's/gnutls_retr/&2/'  \
+    -e 's/type = t/cert_&/' \
+    -i src/ne_gnutls.c
+
+./configure --prefix=/usr    \
+            --with-ssl       \
+            --enable-shared  \
+            --disable-static
+make
+make install
+
+lfs_end_step

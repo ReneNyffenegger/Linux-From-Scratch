@@ -1,0 +1,16 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/libxslt.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://xmlsoft.org/libxslt/libxslt-1.1.29.tar.gz
+
+
+sed -i '/#include <xlocale.h>/d' libxslt/xsltlocale.h
+./configure --prefix=/usr --disable-static
+make
+make install
+
+lfs_end_step
