@@ -1,0 +1,17 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/multimedia/gst10-plugins-base.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd  https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.12.2.tar.xz
+
+./configure --prefix=/usr \
+            --with-package-name="GStreamer Base Plugins 1.12.2 BLFS" \
+            --with-package-origin="http://www.linuxfromscratch.org/blfs/view/svn/"
+make
+
+make install
+
+lfs_end_step

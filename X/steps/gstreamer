@@ -1,0 +1,19 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/multimedia/gstreamer10.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.12.2.tar.xz
+
+./configure --prefix=/usr \
+            --with-package-name="GStreamer 1.12.2 BLFS" \
+            --with-package-origin="http://www.linuxfromscratch.org/blfs/view/svn/" &&
+make
+
+# TODO Remove previous installation, if any
+# rm -rf /usr/bin/gst-* /usr/{lib,libexec}/gstreamer-1.0
+make install
+
+lfs_end_step
