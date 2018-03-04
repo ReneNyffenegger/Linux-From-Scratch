@@ -1,0 +1,15 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/scons.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://downloads.sourceforge.net/scons/scons-2.5.1.tar.gz
+
+python setup.py install --prefix=/usr  \
+                        --standard-lib \
+                        --optimize=1   \
+                        --install-data=/usr/share
+
+lfs_end_step
