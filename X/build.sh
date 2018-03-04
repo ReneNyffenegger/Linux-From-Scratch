@@ -400,6 +400,8 @@ lfs_x_step dbus-glib            # recommended for libre-office
 lfs_x_step graphite-fonts       # required for graphite2
 lfs_x_step graphite2            # recommended for libre-office
 
+lfs_x_step gstreamer            # required for gst10-plugings-base
+
 lfs_x_step gst10-plugins-base   # recommended for libre-office
 lfs_x_step libatomic_ops        # recommended for libre-office
 lfs_x_step lcms2                # recommended for libre-office (Little CMS)
