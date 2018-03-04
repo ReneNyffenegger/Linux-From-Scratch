@@ -5,7 +5,8 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd ftp://ftp.mirrorservice.org/sites/ftp.apache.org/apr/apr-util-1.6.0.tar.bz2
+# lfs_download_extract_and_pushd ftp://ftp.mirrorservice.org/sites/ftp.apache.org/apr/apr-util-1.6.0.tar.bz2
+lfs_download_extract_and_pushd https://ftp.osuosl.org/pub/blfs/conglomeration/apr-util/apr-util-1.6.0.tar.bz2
 
 ./configure --prefix=/usr       \
             --with-apr=/usr     \

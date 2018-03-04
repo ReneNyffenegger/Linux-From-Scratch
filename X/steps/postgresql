@@ -5,7 +5,8 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd ftp://ftp.postgresql.org/pub/source/v9.6.4/postgresql-9.6.4.tar.bz2
+# lfs_download_extract_and_pushd ftp://ftp.postgresql.org/pub/source/v9.6.4/postgresql-9.6.4.tar.bz2
+lfs_download_extract_and_pushd  http://ftp.postgresql.org/pub/source/v9.6.4/postgresql-9.6.4.tar.bz2
 
 sed -i '/DEFAULT_PGSOCKET_DIR/s@/tmp@/run/postgresql@' src/include/pg_config_manual.h &&
 
