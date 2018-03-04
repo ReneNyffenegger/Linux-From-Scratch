@@ -416,6 +416,7 @@ lfs_x_step gst10-plugins-base   # recommended for libre-office
 lfs_x_step libatomic_ops        # recommended for libre-office
 lfs_x_step lcms2                # recommended for libre-office (Little CMS)
 lfs_x_step openjpeg             # required for poppler
+lfs_x_step openjpeg2
 lfs_x_step libcroco             # required for librsvg
 lfs_x_step librsvg              # recommended for libre-office
 lfs_x_step libxslt              # recommended for libre-office
