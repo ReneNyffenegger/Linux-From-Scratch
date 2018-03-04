@@ -1,0 +1,15 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/poppler.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://downloads.sourceforge.net/openjpeg.mirror/openjpeg-1.5.2.tar.gz
+
+autoreconf -f -i
+./configure --prefix=/usr --disable-static
+make
+make install
+
+lfs_end_step
