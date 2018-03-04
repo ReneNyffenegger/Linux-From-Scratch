@@ -1,0 +1,24 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/openjpeg2.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://github.com/uclouvain/openjpeg/archive/v2.2.0/openjpeg-2.2.0.tar.gz
+
+mkdir -v build
+cd       build
+
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr ..
+make
+
+make install
+
+pushd ../doc
+  for man in man/man?/* ; do
+      install -v -D -m 644 $man /usr/share/$man
+  done 
+popd
+
+lfs_end_step
