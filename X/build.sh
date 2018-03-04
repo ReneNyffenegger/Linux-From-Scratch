@@ -183,10 +183,12 @@ export -f lfs_download_extract_and_pushd
 lfs_check_kernel_config_param() {
   local param=$1
 
+
 # Function can be called with CONFIG_XYZ or just XYZ
-  param=CONFIC_$(param#CONFIG_)
+  param=CONFIG_${param#CONFIG_}
 
   local value=$(gunzip < /proc/config.gz | grep "\\<$param\\>")
+  lfs_log "Checking parameter $param, value is $value"
 
   if [ "$value" == "$param=y" ]; then
     echo "$param is set to y, returning 0"
@@ -197,6 +199,7 @@ lfs_check_kernel_config_param() {
 
   return 1
 }
+export -f lfs_check_kernel_config_param
 
 lfs_x_step() {
 
