@@ -1,0 +1,32 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/pst/mupdf.html
+#
+
+lfs_start_step
+
+lfs_download                   http://www.linuxfromscratch.org/patches/blfs/8.1/mupdf-1.11-shared_libs-1.patch
+lfs_download                   http://www.linuxfromscratch.org/patches/blfs/8.1/mupdf-1.11-openjpeg-2.patch
+lfs_download_extract_and_pushd http://www.mupdf.com/downloads/archive/mupdf-1.11-source.tar.gz
+
+rm -rf thirdparty/curl
+rm -rf thirdparty/freetype
+rm -rf thirdparty/harfbuzz
+rm -rf thirdparty/jpeg
+rm -rf thirdparty/libjpeg
+rm -rf thirdparty/openjpeg
+rm -rf thirdparty/zlib
+
+patch -Np1 -i $lfs_download_dir/mupdf-1.11-openjpeg-2.patch
+patch -Np1 -i $lfs_download_dir/mupdf-1.11-shared_libs-1.patch
+
+make build=release
+
+make prefix=/usr                      \
+     build=release                    \
+     docdir=/usr/share/doc/mupdf-1.11 \
+     install
+
+ln -sfv mupdf-x11-curl /usr/bin/mupdf
+
+lfs_end_step

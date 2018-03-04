@@ -1,0 +1,16 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/qpdf.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://downloads.sourceforge.net/qpdf/qpdf-6.0.0.tar.gz
+
+./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/qpdf-6.0.0
+make
+make install
+
+lfs_end_step

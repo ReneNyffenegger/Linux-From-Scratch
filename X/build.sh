@@ -379,7 +379,6 @@ lfs_x_step p11-kit
 lfs_x_step nettle               # required for gnu-tls
 lfs_x_step gnu-tls              # required for cups
 lfs_x_step hplib
-lfs_x_step cups-filters         # required for cups (postinstall)
 lfs_x_step cups                 # runtime dependency of java
 
 lfs_x_step giflib               # required for java-binary
@@ -406,6 +405,13 @@ lfs_x_step libxslt              # recommended for libre-office
 lfs_x_step neon                 # recommended for libre-office
 # lfs_x_step openldap             # recommended for libre-office
 lfs_x_step poppler              # recommended for libre-office
+
+lfs_x_step qpdf                 # required for cups-filters
+lfs_x_step mupdf                # required for cups-filters
+lfs_x_step ijs                  # required for cups-filters
+lfs_x_step gs                   # required for cups-filters (ghostscript)
+lfs_x_step cups-filters         # required for cups (postinstall)
+
 lfs_x_step postgresql           # required for libre-office
 lfs_x_step redland              # required for libre-office
 lfs_x_step serf                 # required for libre-office

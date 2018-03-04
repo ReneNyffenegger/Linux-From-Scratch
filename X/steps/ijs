@@ -1,0 +1,17 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/ijs.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://www.openprinting.org/download/ijs/download/ijs-0.35.tar.bz2
+
+./configure --prefix=/usr \
+            --mandir=/usr/share/man \
+            --enable-shared \
+            --disable-static
+make
+make install
+
+lfs_end_step

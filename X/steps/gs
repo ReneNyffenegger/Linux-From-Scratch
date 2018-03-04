@@ -1,0 +1,43 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/pst/gs.html
+#
+
+lfs_start_step
+
+# TODO Install these fonts
+#
+# tar -xvf ../<font-tarball> -C /usr/share/ghostscript --no-same-owner &&
+# fc-cache -v /usr/share/ghostscript/fonts/
+#
+lfs_download                   https://downloads.sourceforge.net/gs-fonts/ghostscript-fonts-std-8.11.tar.gz
+lfs_download                   https://downloads.sourceforge.net/gs-fonts/gnu-gs-fonts-other-6.0.tar.gz
+
+lfs_download_extract_and_pushd https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs921/ghostscript-9.21.tar.gz
+
+
+rm -rf freetype lcms2 jpeg libpng
+
+rm -rf zlib
+
+./configure --prefix=/usr           \
+            --disable-compile-inits \
+            --enable-dynamic        \
+            --with-system-libtiff
+make
+make so
+make install
+
+make soinstall
+install -v -m644 base/*.h /usr/include/ghostscript
+ln -v -s ghostscript /usr/include/ps
+
+ln -sfvn ../ghostscript/9.21/doc /usr/share/doc/ghostscript-9.21
+
+#
+# TODO: Test this:
+#
+#   gs -q -dBATCH /usr/share/ghostscript/9.21/examples/tiger.eps
+
+lfs_end_step
+
