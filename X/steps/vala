@@ -1,0 +1,14 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/general/vala.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.gnome.org/pub/gnome/sources/vala/0.36/vala-0.36.4.tar.xz
+
+./configure --prefix=/usr
+make
+make install
+
+lfs_end_step

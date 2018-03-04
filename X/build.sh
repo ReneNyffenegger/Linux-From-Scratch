@@ -246,6 +246,7 @@ lfs_x_step pcre                     # required for glib
 lfs_x_step glib                     # required for atk
 
 lfs_x_step gobject-introspection    # recommened for librsvg
+lfs_x_step vala                     # recommened for librsvg
 
 lfs_x_step icu                      # required for harfbuzz
 lfs_x_step harfbuzz                 # required for pango
