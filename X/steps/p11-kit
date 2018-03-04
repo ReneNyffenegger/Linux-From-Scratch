@@ -5,7 +5,7 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd 
+lfs_download_extract_and_pushd https://github.com/p11-glue/p11-kit/releases/download/0.23.8/p11-kit-0.23.8.tar.gz
 
 ./configure --prefix=/usr     \
             --sysconfdir=/etc \

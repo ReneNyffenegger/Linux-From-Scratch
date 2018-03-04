@@ -7,9 +7,9 @@
 lfs_start_step
 
 lfs_check_kernel_config_param CONFIG_USB_SUPPORT
-lfs_check_kernel_config_param CONIFG_USB_OHCI_HCD
-lfs_check_kernel_config_param CONIFG_USB_UHCI_HCD
-lfs_check_kernel_config_param CONIFG_USB_PRINTER
+lfs_check_kernel_config_param CONFIG_USB_OHCI_HCD
+lfs_check_kernel_config_param CONFIG_USB_UHCI_HCD
+lfs_check_kernel_config_param CONFIG_USB_PRINTER
 
 lfs_download_extract_and_pushd  https://github.com/apple/cups/releases/download/v2.2.4/cups-2.2.4-source.tar.gz
 

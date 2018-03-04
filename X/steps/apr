@@ -5,7 +5,8 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd ftp://ftp.mirrorservice.org/sites/ftp.apache.org/apr/apr-1.6.2.tar.bz2
+# lfs_download_extract_and_pushd ftp://ftp.mirrorservice.org/sites/ftp.apache.org/apr/apr-1.6.2.tar.bz2
+lfs_download_extract_and_pushd https://archive.apache.org/dist/apr/apr-1.6.2.tar.bz2
 
 ./configure --prefix=/usr    \
             --disable-static \

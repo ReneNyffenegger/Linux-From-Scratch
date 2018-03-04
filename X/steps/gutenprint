@@ -5,7 +5,7 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd https://ftp.osuosl.org/pub/blfs/conglomeration/gutenprint/U
+lfs_download_extract_and_pushd https://ftp.osuosl.org/pub/blfs/conglomeration/gutenprint/gutenprint-5.2.12.tar.bz2
 
 sed -i 's|$(PACKAGE)/doc|doc/$(PACKAGE)-$(VERSION)|' \
        {,doc/,doc/developer/}Makefile.in
