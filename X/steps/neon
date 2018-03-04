@@ -5,7 +5,8 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd http://www.webdav.org/neon/neon-0.30.2.tar.gz
+# lfs_download_extract_and_pushd http://www.webdav.org/neon/neon-0.30.2.tar.gz
+lfs_download_extract_and_pushd https://ftp.osuosl.org/pub/blfs/conglomeration/neon/neon-0.30.2.tar.gz
 
 sed -e 's/client_set/set/'  \
     -e 's/gnutls_retr/&2/'  \

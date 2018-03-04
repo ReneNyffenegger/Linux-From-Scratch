@@ -60,7 +60,8 @@ lfs_download() {
   if [ ! -f $lfs_download_dir/$download_file_name ]; then
     lfs_log "downloading $download_url to $lfs_download_dir"
     if ! wget $download_url -P $lfs_download_dir; then
-      lfs_log "wget reported a problem downloading $download_url, \$? = $?"
+      local wget_exit_val=$?
+      lfs_log "wget reported a problem downloading $download_url, \$? = $wget_exit_val"
       return 1
     fi
 
@@ -75,17 +76,21 @@ lfs_download_and_extract() {
   local dest_dir=$lfs_extract_dir
 
   if [ -z "$dest_dir" ]; then
-    lfs_log "lfs_download_and_extract: $dest_dir is zero"
+    lfs_log "$dest_dir is zero"
     return 1
   fi
 
   if [ ! -d "$dest_dir" ]; then
-    lfs_log "lfs_download_and_extract: dest dir $dest_dir does not exist"
+    lfs_log "dest dir $dest_dir does not exist"
     return 1
   fi
 
 
-  lfs_download $download_url
+  if ! lfs_download $download_url; then
+    lfs_log "Apparently, $download_url could not be downloaded"
+    echo "?"
+    return 1
+  fi
 
   local download_file_name=$(basename $download_url)
   #
@@ -172,7 +177,11 @@ lfs_download_extract_and_pushd() {
 
   if [[ -z $extracted_dir ]]; then
     lfs_log "extracted_dir is zero"
-    return -1
+    return 1
+  fi
+  if [ $extracted_dir = "?" ]; then
+    lfs_log "extracted_dir = ? which indicates an error"
+    return 1
   fi
   lfs_log "lfs_download_extract_and_pushd: extracted_dir=$extracted_dir, pushd into it"
   pushd $extracted_dir

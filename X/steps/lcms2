@@ -5,7 +5,7 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd https://ftp.osuosl.org/pub/blfs/conglomeration/lcms2/cms2-2.8.tar.gz
+lfs_download_extract_and_pushd https://ftp.osuosl.org/pub/blfs/conglomeration/lcms2/lcms2-2.8.tar.gz
 
 ./configure --prefix=/usr --disable-static
 make
