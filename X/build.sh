@@ -420,9 +420,12 @@ lfs_x_step mupdf                # required for cups-filters
 lfs_x_step ijs                  # required for cups-filters
 lfs_x_step gs                   # required for cups-filters (ghostscript)
 lfs_x_step cups-filters         # required for cups (postinstall)
-
 lfs_x_step postgresql           # required for libre-office
+lfs_x_step raptor               # required for rasqal
+lfs_x_step rasqal               # required for redland
 lfs_x_step redland              # required for libre-office
+lfs_x_step ssconf               # required for serf
+lfs_x_step apr-util             # required for serf
 lfs_x_step serf                 # required for libre-office
 # lfs_x_step unixodbc             # required for libre-office
 
