@@ -444,6 +444,8 @@ lfs_x_step serf                 # required for libre-office
 # lfs_x_step unixodbc             # required for libre-office
 
 lfs_x_step pulse-audio          # required for firefox
+lfs_x_step alsa-plugins
+lfs_x_step alsa-tools
 lfs_x_step rust                 # required for firefox
 
 lfs_x_step desktop-file-utils
