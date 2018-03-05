@@ -14,5 +14,7 @@ lfs_download_extract_and_pushd ftp://ftp.alsa-project.org/pub/utils/alsa-utils-1
 make
 make install
 
+usermod -a -G audio rene
+
 lfs_end_step
 
