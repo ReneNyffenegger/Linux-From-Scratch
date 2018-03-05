@@ -47,5 +47,6 @@ unset AUTO_CLASSPATH_DIR dir jar
 # End /etc/profile.d/openjdk.sh
 EOF
 
+chmod 755 /etc/profile.d/openjdk.sh
 
 lfs_end_step

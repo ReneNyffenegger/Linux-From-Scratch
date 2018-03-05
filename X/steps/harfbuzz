@@ -7,7 +7,12 @@ lfs_start_step
 
 lfs_download_extract_and_pushd https://www.freedesktop.org/software/harfbuzz/release/harfbuzz-1.4.8.tar.bz2
 
-./configure --prefix=/usr --with-gobject
+  with_options=""
+  with_options="$with_options --with-gobject"    # Needs glib
+  with_options="$with_options --with-graphite2"  # Needs graphite2
+# with_options="$with_options --with-gtk-doc"
+
+./configure --prefix=/usr $with_options
 make
 make install
 

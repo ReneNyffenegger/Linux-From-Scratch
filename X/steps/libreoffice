@@ -2,43 +2,57 @@
 #
 # http://www.linuxfromscratch.org/blfs/view/8.1/xsoft/libreoffice.html
 #
+# TODO
+#  had to manually
+#    chmod 644 /usr/include/asm/*
+#    chmod 755 /usr/include/asm-gener
+#    chmod 644 /usr/include/asm-generic/*
+#    chmod 755 /usr/include/X11
+#    chmod -R a=r,u+w,a+X /usr/include/X11
+#    chmod 644 /usr/lib/pkgconfig/*.pc
+#  to make it compile
+#
 
 lfs_start_step
 
-lfs_download_and_extract http://download.documentfoundation.org/libreoffice/src/5.4.0/libreoffice-dictionaries-5.4.0.3.tar.xz
-lfs_download_and_extract http://download.documentfoundation.org/libreoffice/src/5.4.0/libreoffice-help-5.4.0.3.tar.xz
-lfs_download_and_extract http://download.documentfoundation.org/libreoffice/src/5.4.0/libreoffice-translations-5.4.0.3.tar.xz
+lfs_download                   http://download.documentfoundation.org/libreoffice/src/5.4.0/libreoffice-dictionaries-5.4.0.3.tar.xz
+lfs_download                   http://download.documentfoundation.org/libreoffice/src/5.4.0/libreoffice-help-5.4.0.3.tar.xz
+lfs_download                   http://download.documentfoundation.org/libreoffice/src/5.4.0/libreoffice-translations-5.4.0.3.tar.xz
 
-lfs_download_and_extract http://download.documentfoundation.org/libreoffice/src/5.4.0/libreoffice-5.4.0.3.tar.xz
-
-cd /foo/bar/baz # Unlike the other packages, we assume that you have not yet unpacked the package. This is because the --no-overwrite-dir switch is needed in case you unpack as the root user. 
-
+lfs_download                   http://download.documentfoundation.org/libreoffice/src/5.4.0/libreoffice-5.4.0.3.tar.xz
 # lfs_download_extract_and_pushd http://download.documentfoundation.org/libreoffice/src/5.4.0/libreoffice-5.4.0.3.tar.xz
+
+# cd /foo/bar/baz # Unlike the other packages, we assume that you have not yet unpacked the package. This is because the --no-overwrite-dir switch is needed in case you unpack as the root user. 
+
+chmod 644 $lfs_download_dir/libreoffice-*
+
+su rene <<EXEC_NOT_AS_ROOT
+set -e
+
+tar xf $lfs_download_dir/libreoffice-5.4.0.3.tar.xz -C $lfs_extract_dir --no-overwrite-dir
+
+cd $lfs_extract_dir/libreoffice-5.4.0.3
 
 # TODO: really necessary? See
 #   http://www.linuxfromscratch.org/blfs/view/8.1/general/apache-ant.html
 #   http://www.linuxfromscratch.org/blfs/view/8.1/general/ojdk-conf.html
 #   steps/java-conf
 #
-export PATH=/opt/ant/bin;$PATH
+export PATH=/opt/ant/bin:$PATH
 export ANT_HOME=/opt/ant
 . /etc/profile.d/openjdk.sh
 
 install -dm755 external/tarballs
-ln -sv ../../../libreoffice-dictionaries-5.4.0.3.tar.xz external/tarballs/
-ln -sv ../../../libreoffice-help-5.4.0.3.tar.xz         external/tarballs/
+ln -sv $lfs_download_dir/libreoffice-dictionaries-5.4.0.3.tar.xz external/tarballs/
+ln -sv $lfs_download_dir/libreoffice-help-5.4.0.3.tar.xz         external/tarballs/
+ln -sv $lfs_download_dir/libreoffice-translations-5.4.0.3.tar.xz external/tarballs/
 
 
-tar -xf libreoffice-5.4.0.3.tar.xz --no-overwrite-dir
-cd libreoffice-5.4.0.3
 
-install -dm755 external/tarballs
-ln -sv ../../../libreoffice-dictionaries-5.4.0.3.tar.xz external/tarballs/
-ln -sv ../../../libreoffice-help-5.4.0.3.tar.xz         external/tarballs/
 
-ln -sv ../../../libreoffice-translations-5.4.0.3.tar.xz external/tarballs/
 
 export LO_PREFIX=/usr # or /opt
+
 
 
 sed -e "/gzip -f/d"   \
@@ -47,10 +61,47 @@ sed -e "/gzip -f/d"   \
 
 sed -e "/distro-install-file-lists/d" -i Makefile.in
 
+
+  configure_opts=""
+  configure_opts="$configure_opts --with-system-apr"
+  configure_opts="$configure_opts --with-system-boost"
+  configure_opts="$configure_opts --with-system-cairo"
+  configure_opts="$configure_opts --with-system-clucene"
+  configure_opts="$configure_opts --with-system-curl"
+  configure_opts="$configure_opts --with-system-expat"
+  configure_opts="$configure_opts --with-system-graphite"
+  configure_opts="$configure_opts --with-system-harfbuzz"
+  configure_opts="$configure_opts --with-system-icu"
+  configure_opts="$configure_opts --with-system-jpeg"
+  configure_opts="$configure_opts --with-system-lcms2"
+  configure_opts="$configure_opts --with-system-libatomic_ops"
+  configure_opts="$configure_opts --with-system-libpng"
+  configure_opts="$configure_opts --with-system-libxml"
+  configure_opts="$configure_opts --with-system-neon"
+  configure_opts="$configure_opts --with-system-nss"
+# TQ84: removed
+# configure_opts="$configure_opts --with-system-odbc"
+# configure_opts="$configure_opts --with-system-openldap"
+  configure_opts="$configure_opts --with-system-openssl"
+  configure_opts="$configure_opts --with-system-poppler"
+  configure_opts="$configure_opts --with-system-postgresql"
+  configure_opts="$configure_opts --with-system-redland"
+  configure_opts="$configure_opts --with-system-serf"
+  configure_opts="$configure_opts --with-system-zlib"
+
+# TQ84: added
+  configure_opts="$configure_opts --without-doxygen"
+# configure_opts="$configure_opts --without-krb5"         # Apparently, has no effect
+
+
+
+#
+# TODO: this should probably be run as user lfs
+#
 ./autogen.sh --prefix=$LO_PREFIX         \
              --sysconfdir=/etc           \
              --with-vendor=BLFS          \
-             --with-lang='us'            \
+             --with-lang='en-US'         \
              --with-help                 \
              --with-myspell-dicts        \
              --with-alloc=system         \
@@ -60,36 +111,46 @@ sed -e "/distro-install-file-lists/d" -i Makefile.in
              --disable-odk               \
              --enable-release-build=yes  \
              --enable-python=system      \
-             --with-system-apr           \
-             --with-system-boost         \
-             --with-system-cairo         \
-             --with-system-clucene       \
-             --with-system-curl          \
-             --with-system-expat         \
-             --with-system-graphite      \
-             --with-system-harfbuzz      \
-             --with-system-icu           \
-             --with-system-jpeg          \
-             --with-system-lcms2         \
-             --with-system-libatomic_ops \
-             --with-system-libpng        \
-             --with-system-libxml        \
-             --with-system-neon          \
-             --with-system-nss           \
-             --with-system-odbc          \
-             --with-system-openldap      \
-             --with-system-openssl       \
-             --with-system-poppler       \
-             --with-system-postgresql    \
-             --with-system-redland       \
-             --with-system-serf          \
-             --with-system-zlib
+             $configure_opts
 
+#              --with-system-apr           \
+#              --with-system-boost         \
+#              --with-system-cairo         \
+#              --with-system-clucene       \
+#              --with-system-curl          \
+#              --with-system-expat         \
+#              --with-system-graphite      \
+#              --with-system-harfbuzz      \
+#              --with-system-icu           \
+#              --with-system-jpeg          \
+#              --with-system-lcms2         \
+#              --with-system-libatomic_ops \
+#              --with-system-libpng        \
+#              --with-system-libxml        \
+#              --with-system-neon          \
+#              --with-system-nss           \
+#              --with-system-odbc          \
+#              --with-system-openldap      \
+#              --with-system-openssl       \
+#              --with-system-poppler       \
+#              --with-system-postgresql    \
+#              --with-system-redland       \
+#              --with-system-serf          \
+#              --with-system-zlib
+
+
+#
+# TODO: this should probably be run as user lfs
+#
+# lfs_log "calling make build-nocheck"
 make build-nocheck
+EXEC_NOT_AS_ROOT
 
+lfs_log "calling make distro-pack-install"
 make distro-pack-install
 
 
+lfs_log "finished make distro-pack-install"
 if [ "$LO_PREFIX" != "/usr" ]; then
 
   # This symlink is necessary for the desktop menu entries
