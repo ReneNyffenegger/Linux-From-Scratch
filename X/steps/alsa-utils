@@ -1,0 +1,18 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/multimedia/alsa-utils.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.alsa-project.org/pub/utils/alsa-utils-1.1.4.tar.bz2
+
+./configure --disable-alsaconf \
+            --disable-bat   \
+            --disable-xmlto \
+            --with-curses=ncursesw
+make
+make install
+
+lfs_end_step
+
