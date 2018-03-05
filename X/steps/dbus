@@ -29,4 +29,9 @@ make
 
 make install
 
+mv -v /usr/lib/libdbus-1.so* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libdbus-glib-1.so) /usr/lib/libdbus-1.la
+
+ln -sfv /etc/machine-id /usr/lib/dbus
+
 lfs_end_step

@@ -10,6 +10,8 @@ export lfs_dir=/etc/lfs
 export lfs_download_dir=${lfs_dir}/downloads
 export lfs_extract_dir=${lfs_dir}/extracted
 
+umask 022
+
 if [ ! -d done ]; then
    mkdir 'done' # Without quote: syntax highlighting is really annoying
 fi
@@ -35,6 +37,7 @@ export -f lfs_log
 
 lfs_start_step() {
   trap 'echo Error in $lfs_cur_step_name at line $LINENO; exit 1' ERR
+  lfs_log "Start step $lfs_cur_step_name, umask=$(umask)"
 }
 export -f lfs_start_step
 

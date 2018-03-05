@@ -5,6 +5,10 @@
 
 lfs_start_step
 
+lfs_check_kernel_config_param SOUND
+lfs_check_kernel_config_param SND
+lfs_check_kernel_config_param SOUND_PRIME
+
 lfs_download_extract_and_pushd ftp://ftp.alsa-project.org/pub/lib/alsa-lib-1.1.4.1.tar.bz2
 
 ./configure

@@ -8,8 +8,14 @@
 #    chmod 755 /usr/include/asm-gener
 #    chmod 644 /usr/include/asm-generic/*
 #    chmod 755 /usr/include/X11
-#    chmod -R a=r,u+w,a+X /usr/include/X11
-#    chmod 644 /usr/lib/pkgconfig/*.pc
+#    chmod -R a=r,u+w,a+X /usr/include
+# .  chmod -R a=r,u+w,a+X /usr/include/X11
+# .  chmod -R a=r,u+w,a+X /usr/include/linux
+# .  chmod -R a=r,u+w,a+X /usr/include/libxml2/
+#    chmod 644 /usr/lib/pkgconfig/*.p| grep -v '*.h'c
+#    chmod 755 /usr/lib/dbus-1.0/ bis /usr/lib/dbus-1.0/include/dbus/
+#    chmod 755 /usr/lib/glib-2.0/ ...
+#    ln -s locale.h /usr/include/xlocale.h
 #  to make it compile
 #
 
@@ -173,6 +179,18 @@ if [ "$LO_PREFIX" != "/usr" ]; then
   done
 
   unset i
+fi
+
+
+#
+# TODO: added by tq84:
+#   Apparently, the file /etc/machine-id must contain a unique machine id.
+#
+if [ ! -e /etc/machine-id ]; then
+  echo "ffffffffffffffffffffffffffffffff" > /etc/machine-id
+  lfs_log "TQ84 /etc/machine-id did not exist, wrote 32 f into it"
+else
+  lfs_log "TQ84 /etc/machine-id already existed, not written anyhing"
 fi
 
 lfs_end_step
