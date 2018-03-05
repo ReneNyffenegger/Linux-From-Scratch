@@ -389,6 +389,7 @@ lfs_x_step libsamplerate        # recommended for pulse-audio
 lfs_x_step libunistring
 lfs_x_step libtasn
 lfs_x_step p11-kit
+lfs_x_step mitkrb
 lfs_x_step nettle               # required for gnu-tls
 lfs_x_step gnu-tls              # required for cups
 lfs_x_step hplib
