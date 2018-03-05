@@ -258,7 +258,10 @@ lfs_x_step gobject-introspection    # recommened for librsvg
 lfs_x_step vala                     # recommened for librsvg
 
 lfs_x_step icu                      # required for harfbuzz
-lfs_x_step harfbuzz                 # required for pango
+
+lfs_x_step graphite-fonts           # required for graphite2
+lfs_x_step graphite2                # recommended for libre-office
+lfs_x_step harfbuzz                 # required for pango, for libre office, harfbuzz apparently needs to be built with graphite
 
 lfs_x_step MarkupSafe               # required for beaker
 lfs_x_step funcsigs                 # required for beaker
@@ -407,8 +410,6 @@ lfs_x_step python3              # required for libre-office
 lfs_x_step boost                # recommended for libre-office
 lfs_x_step clucene              # recommended for libre-office
 lfs_x_step dbus-glib            # recommended for libre-office
-lfs_x_step graphite-fonts       # required for graphite2
-lfs_x_step graphite2            # recommended for libre-office
 
 lfs_x_step gstreamer            # required for gst10-plugings-base
 
