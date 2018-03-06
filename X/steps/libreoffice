@@ -190,7 +190,7 @@ if [ ! -e /etc/machine-id ]; then
   echo "ffffffffffffffffffffffffffffffff" > /etc/machine-id
   lfs_log "TQ84 /etc/machine-id did not exist, wrote 32 f into it"
 else
-  lfs_log "TQ84 /etc/machine-id already existed, not written anyhing"
+  lfs_log "TQ84 /etc/machine-id already existed, not written anything"
 fi
 
 lfs_end_step
