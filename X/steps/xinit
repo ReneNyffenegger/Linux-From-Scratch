@@ -8,6 +8,14 @@ lfs_start_step
 lfs_download_extract_and_pushd ftp://ftp.x.org/pub/individual/app/xinit-1.3.4.tar.bz2
 
 
+#
+#  startx.cpp seems to be a file that is passed through the preprocessor
+#  and than placed into /usr/bin/startx
+#
+#  TODO: in LFS_1, I had to
+#    o change enable_xauth=1 to enable_xauth=0
+#    o explicitely set hostname to localhost (hostname=localhost)
+#
 sed -e '/$serverargs $vtarg/ s/serverargs/: #&/' \
     -i startx.cpp
 
