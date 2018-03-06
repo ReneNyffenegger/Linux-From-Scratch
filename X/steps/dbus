@@ -15,22 +15,22 @@ lfs_download_extract_and_pushd https://dbus.freedesktop.org/releases/dbus/dbus-1
 # useradd -c "D-Bus Message Daemon User" -d /var/run/dbus \
 #         -u 18 -g messagebus -s /bin/false messagebus
 
-./configure --prefix=/usr                        \
-            --sysconfdir=/etc                    \
-            --localstatedir=/var                 \
-            --disable-doxygen-docs               \
-            --disable-xml-docs                   \
-            --disable-static                     \
-            --docdir=/usr/share/doc/dbus-1.10.22 \
-            --with-console-auth-dir=/run/console \
-            --with-system-pid-file=/run/dbus/pid \
-            --with-system-socket=/run/dbus/system_bus_socket
-make
-
-make install
-
-mv -v /usr/lib/libdbus-1.so* /lib
-ln -sfv ../../lib/$(readlink /usr/lib/libdbus-glib-1.so) /usr/lib/libdbus-1.la
+#q ./configure --prefix=/usr                        \
+#q             --sysconfdir=/etc                    \
+#q             --localstatedir=/var                 \
+#q             --disable-doxygen-docs               \
+#q             --disable-xml-docs                   \
+#q             --disable-static                     \
+#q             --docdir=/usr/share/doc/dbus-1.10.22 \
+#q             --with-console-auth-dir=/run/console \
+#q             --with-system-pid-file=/run/dbus/pid \
+#q             --with-system-socket=/run/dbus/system_bus_socket
+#q make
+#q 
+#q make install
+#q 
+#q mv -v /usr/lib/libdbus-1.so* /lib
+#q ln -sfv ../../lib/$(readlink /usr/lib/libdbus-glib-1.so) /usr/lib/libdbus-1.la
 
 if [ -e /var/lib/dbus/machine-id ]; then
   lfs_log "TQ84: /var/lib/dbus/machine-id exists"
@@ -52,6 +52,19 @@ else
   lfs_log "TQ84: /etc/machine-id does not exist"
 fi
 
+cat > /etc/dbus-1/session-local.conf << "EOF"
+<!DOCTYPE busconfig PUBLIC
+ "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
+<busconfig>
+
+  <!-- Search for .service files in /usr/local -->
+  <servicedir>/usr/local/share/dbus-1/services</servicedir>
+
+</busconfig>
+EOF
+
+lfs_install_bootscript dbus
 
 # ?? ln -sfv /etc/machine-id /usr/lib/dbus
 

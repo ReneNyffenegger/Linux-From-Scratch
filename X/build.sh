@@ -10,6 +10,11 @@ export lfs_dir=/etc/lfs
 export lfs_download_dir=${lfs_dir}/downloads
 export lfs_extract_dir=${lfs_dir}/extracted
 
+#
+# TODO: This directory probably should also go under /etc/lfs somewhere.
+#
+export lfs_bootscript_dir=~/github/github/Linux-From-Scratch/blfs/bootscripts
+
 umask 022
 
 if [ ! -d done ]; then
@@ -191,6 +196,26 @@ lfs_download_extract_and_pushd() {
 
 }
 export -f lfs_download_extract_and_pushd
+
+lfs_install_bootscript() {
+  local bootscript_name=$1
+
+  if [ ! -d $lfs_bootscript_dir ]; then
+    lfs_log "Bootscript directory $lfs_bootscript_dir does not exist"
+    return 1
+  fi
+
+  pushd $lfs_bootscript_dir
+    lfs_log "make install-$bootscript_name in $PWD"
+    if ! make install-$bootscript_name; then
+      lfs_log "make install-$bootscript_name returned $?"
+      return 1
+    fi
+  popd
+
+  return 0
+}
+export -f lfs_install_bootscript
 
 lfs_check_kernel_config_param() {
   local param=$1
