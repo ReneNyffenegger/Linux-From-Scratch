@@ -1,0 +1,19 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/general/babl.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://download.gimp.org/pub/babl/0.1/babl-0.1.42.tar.bz2
+
+./configure --prefix=/usr
+make
+
+make install
+
+install -v -m755 -d /usr/share/gtk-doc/html/babl/graphics
+install -v -m644 docs/*.{css,html} /usr/share/gtk-doc/html/babl
+install -v -m644 docs/graphics/*.{html,png,svg} /usr/share/gtk-doc/html/babl/graphics
+
+lfs_end_step

@@ -1,0 +1,20 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/pst/sane.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd  http://alioth.debian.org/frs/download.php/file/1140/sane-frontends-1.0.14.tar.gz
+
+sed -i -e "/SANE_CAP_ALWAYS_SETTABLE/d" src/gtkglue.c
+./configure --prefix=/usr --mandir=/usr/share/man
+make
+
+make install
+install -v -m644 doc/sane.png xscanimage-icon-48x48-2.png \
+    /usr/share/sane
+
+ln -v -s ../../../../bin/xscanimage /usr/lib/gimp/2.0/plug-ins
+
+lfs_end_step

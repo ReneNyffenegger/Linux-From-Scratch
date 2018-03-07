@@ -1,0 +1,43 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/general/ninja.html
+#
+# TODO:
+#  ninja is apparently also used in LFS (not only BLFS)
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd http://www.linuxfromscratch.org/blfs/view/stable/general/ninja.html
+
+python3 configure.py --bootstrap
+# emacs -Q --batch -f batch-byte-compile misc/ninja-mode.el
+
+python3 configure.py
+./ninja ninja_test
+./ninja_test --gtest_filter=-SubprocessTest.SetWithLots
+
+install -vm755 ninja /usr/bin/
+install -vDm644 misc/ninja.vim \
+                /usr/share/vim/vim80/syntax/ninja.vim
+install -vDm644 misc/bash-completion \
+                /usr/share/bash-completion/completions/ninja
+install -vDm644 misc/zsh-completion \
+                /usr/share/zsh/site-functions/_ninja
+
+# install -vDm644 misc/ninja-mode.el \
+#                 /usr/share/emacs/site-lisp/ninja-mode.el
+# 
+# install -vDm644 misc/ninja-mode.elc \
+#                 /usr/share/emacs/site-lisp/ninja-mode.elc
+
+# with asciidoc
+#
+# ninja manual
+# install -vDm644 doc/manual.html /usr/share/doc/ninja-1.8.2/manual.html
+
+
+# ninja doxygen
+# install -vDm644 -t /usr/share/doc/ninja-1.8.2/ doc/doxygen/html/*
+
+lfs_end_step

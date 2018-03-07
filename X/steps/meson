@@ -1,0 +1,14 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/development/chapter06/meson.html
+#
+
+lfs_start_step
+
+# Found package via http://www.linuxfromscratch.org/lfs/view/development/chapter03/packages.html
+lfs_download_extract_and_pushd https://github.com/mesonbuild/meson/releases/download/0.44.1/meson-0.44.1.tar.gz
+
+python3 setup.py build
+python3 setup.py install
+
+lfs_end_step

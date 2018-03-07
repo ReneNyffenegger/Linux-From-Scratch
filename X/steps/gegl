@@ -1,0 +1,18 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/general/gegl.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://download.gimp.org/pub/gegl/0.3/gegl-0.3.28.tar.bz2
+
+./configure --prefix=/usr
+
+make
+make install
+
+install -v -m644 docs/*.{css,html} /usr/share/gtk-doc/html/gegl
+install -v -m644 docs/images/*.{png,ico,svg} /usr/share/gtk-doc/html/gegl/images
+
+lfs_end_step

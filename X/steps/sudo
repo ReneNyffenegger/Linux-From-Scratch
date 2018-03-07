@@ -1,0 +1,47 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/postlfs/sudo.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.sudo.ws/pub/sudo/sudo-1.8.22.tar.gz
+
+./configure --prefix=/usr              \
+            --libexecdir=/usr/lib      \
+            --with-secure-path         \
+            --with-all-insults         \
+            --with-env-editor          \
+            --docdir=/usr/share/doc/sudo-1.8.22 \
+            --with-passprompt="[sudo] password for %p: " &&
+make
+
+make install
+
+ln -sfv libsudo_util.so.0.0.0 /usr/lib/sudo/libsudo_util.so.0
+
+
+# https://stackoverflow.com/questions/32126653/how-does-end-work-in-bash-to-create-a-multi-line-comment-block
+: <<'ONLY_WITH_PAM'
+
+cat > /etc/pam.d/sudo << "EOF"
+# Begin /etc/pam.d/sudo
+
+# include the default auth settings
+auth      include     system-auth
+
+# include the default account settings
+account   include     system-account
+
+# Set default environment variables for the service user
+session   required    pam_env.so
+
+# include system session defaults
+session   include     system-session
+
+# End /etc/pam.d/sudo
+EOF
+chmod 644 /etc/pam.d/sudo
+ONLY_WITH_PAM
+
+lfs_end_step

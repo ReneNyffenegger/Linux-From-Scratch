@@ -282,8 +282,10 @@ lfs_x_step pcre                     # required for glib
 
 lfs_x_step glib                     # required for atk
 
+
 lfs_x_step gobject-introspection    # recommened for librsvg
 lfs_x_step vala                     # recommened for librsvg
+lfs_x_step json-glib
 
 lfs_x_step icu                      # required for harfbuzz
 
@@ -304,6 +306,7 @@ lfs_x_step pixman                   # requried for Xorg-server
 
 lfs_x_step libarchive               # optionally required by CMake
 lfs_x_step CMake
+lfs_x_step doxygen
 
 lfs_x_step fribidi                  # required by libass
 lfs_x_step libass                   # optionally required by ffmpeg
@@ -406,6 +409,10 @@ lfs_x_step at-spi-core          # required for at-spi-atk
 lfs_x_step at-spi-atk           # required for gtk-3
 lfs_x_step gtk-3                # required for firefox
 
+lfs_x_step libglade
+lfs_x_step libdaemon
+lfs_x_step ahavi
+
 lfs_x_step nspr                 # required for nss
 
 lfs_x_step nss                  # required for firefox
@@ -420,7 +427,8 @@ lfs_x_step libsamplerate        # recommended for pulse-audio
 lfs_x_step libunistring
 lfs_x_step libtasn
 lfs_x_step p11-kit
-lfs_x_step mitkrb
+lfs_x_step mitkrb               # Kerberos
+lfs_x_step sudo
 lfs_x_step nettle               # required for gnu-tls
 lfs_x_step gnu-tls              # required for cups
 lfs_x_step hplib
@@ -430,12 +438,22 @@ lfs_x_step giflib               # required for java-binary
 
 lfs_x_step gutenprint
 
+lfs_x_step babl
+lfs_x_step gegl
+lfs_x_step gimp
+lfs_x_step gimp-help
+
+lfs_x_step sane-backend
+lfs_x_step sane-frontend
+
 lfs_x_step java-binary          # required for ant
 lfs_x_step java-conf            # recommended for ant
 lfs_x_step ant
 
 lfs_x_step apr                  # recommended for libre-office
 lfs_x_step python3              # required for libre-office
+lfs_x_step meson
+lfs_x_step ninja
 lfs_x_step boost                # recommended for libre-office
 lfs_x_step clucene              # recommended for libre-office
 lfs_x_step dbus-glib            # recommended for libre-office

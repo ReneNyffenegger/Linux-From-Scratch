@@ -1,0 +1,24 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/xsoft/gimp.html
+#
+
+lfs_start_step
+
+lfs_download_and_extract       https://download.gimp.org/pub/gimp/help/gimp-help-2.8.2.tar.bz2
+lfs_download_extract_and_pushd https://download.gimp.org/pub/gimp/v2.8/gimp-2.8.22.tar.bz2
+
+sed -i '/gegl/s/2/3/' configure
+sed -i '70,75 d' app/core/gimpparamspecs-duplicate.c
+
+./configure --prefix=/usr \
+            --sysconfdir=/etc \
+            --without-gvfs
+make
+
+make install
+
+gtk-update-icon-cache
+update-desktop-database
+
+lfs_end_step

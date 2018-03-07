@@ -1,0 +1,17 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/general/json-glib.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.gnome.org/pub/gnome/sources/json-glib/1.4/json-glib-1.4.2.tar.xz
+
+mkdir build
+cd    build
+
+meson --prefix=/usr ..
+ninja
+ninja install
+
+lfs_end_step

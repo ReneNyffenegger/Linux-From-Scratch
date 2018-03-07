@@ -1,0 +1,19 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/xsoft/gimp.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://download.gimp.org/pub/gimp/help/gimp-help-2.8.2.tar.bz2
+
+# ALL_LINGUAS="ca da de el en en_GB es fr it ja ko nl nn pt_BR ru sl sv zh_CN" \
+ALL_LINGUAS="en"
+
+./configure --prefix=/usr
+make
+make install
+chown -R root:root /usr/share/gimp/2.0/help
+
+
+lfs_end_step

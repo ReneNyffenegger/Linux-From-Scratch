@@ -1,0 +1,25 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/general/doxygen.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://ftp.stack.nl/pub/doxygen/doxygen-1.8.14.src.tar.gz
+
+
+mkdir -v build
+cd       build
+
+cmake -G "Unix Makefiles"         \
+      -DCMAKE_BUILD_TYPE=Release  \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -Wno-dev ..
+
+make
+
+make install
+install -vm644 ../doc/*.1 /usr/share/man/man1
+
+
+lfs_end_step

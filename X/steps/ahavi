@@ -1,0 +1,34 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/basicnet/avahi.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://github.com/lathiat/avahi/releases/download/v0.7/avahi-0.7.tar.gz
+
+groupadd -fg 84 avahi
+
+useradd -c "Avahi Daemon Owner" -d /var/run/avahi-daemon -u 84 \
+        -g avahi -s /bin/false avahi
+
+groupadd -fg 86 netdev
+
+./configure --prefix=/usr        \
+            --sysconfdir=/etc    \
+            --localstatedir=/var \
+            --disable-static     \
+            --disable-mono       \
+            --disable-monodoc    \
+            --disable-python     \
+            --disable-qt3        \
+            --disable-qt4        \
+            --enable-core-docs   \
+            --with-distro=none   \
+            --with-systemdsystemunitdir=no
+make
+make install
+
+lfs_install_bootscript ahavi
+
+lfs_end_step

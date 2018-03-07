@@ -1,0 +1,28 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/pst/sane.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd TODO
+lfs_download_extract_and_pushd  http://alioth.debian.org/frs/download.php/file/1140/sane-frontends-1.0.14.tar.gz
+
+groupadd -g 70 scanner
+
+# usermod -a G scanner root
+
+./configure --prefix=/usr        \
+            --sysconfdir=/etc    \
+            --localstatedir=/var \
+            --with-group=scanner \
+            --with-docdir=/usr/share/doc/sane-backends-1.0.27
+make
+
+
+make install
+install -m 644 -v tools/udev/libsane.rules           \
+                  /etc/udev/rules.d/65-scanner.rules
+chgrp -v scanner  /var/lock/sane
+
+lfs_end_step
