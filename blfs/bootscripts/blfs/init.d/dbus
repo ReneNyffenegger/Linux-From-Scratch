@@ -28,6 +28,14 @@
 #$LastChangedBy: bdubbs $
 #$Date: 2012-05-02 15:39:55 -0500 (Wed, 02 May 2012) $
 
+# TQ84: Note that this boot script only starts the system-wide D-Bus daemon.
+# Each user requiring access to D-Bus services will also need to run a session
+# daemon as well.
+# The session bus is apparently initiated via dbus-launch
+#   (possibly in ~/.profile)
+#
+#
+
 pidfile=/run/dbus/pid
 socket=/run/dbus/system_bus_socket
 
