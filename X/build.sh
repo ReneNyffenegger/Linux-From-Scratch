@@ -451,6 +451,9 @@ lfs_x_step meson
 lfs_x_step ninja
 lfs_x_step json-glib
 lfs_x_step gegl
+lfs_x_step python-pycairo
+lfs_x_step python-pygobject2
+lfs_x_step python-pygtk
 lfs_x_step gimp
 lfs_x_step sane-backend
 lfs_x_step sane-frontend

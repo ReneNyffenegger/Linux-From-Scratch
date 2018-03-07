@@ -1,0 +1,14 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/stable/general/python-modules.html#pygobject2
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd  ftp://ftp.gnome.org/pub/gnome/sources/pygobject/2.28/pygobject-2.28.7.tar.xz
+
+./configure --prefix=/usr --disable-introspection
+make
+make install
+
+lfs_end_step
