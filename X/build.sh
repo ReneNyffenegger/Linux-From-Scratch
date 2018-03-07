@@ -208,7 +208,8 @@ lfs_install_bootscript() {
   pushd $lfs_bootscript_dir
     lfs_log "make install-$bootscript_name in $PWD"
     if ! make install-$bootscript_name; then
-      lfs_log "make install-$bootscript_name returned $?"
+      local rc=$?
+      lfs_log "make install-$bootscript_name returned $rc"
       return 1
     fi
   popd
@@ -410,7 +411,7 @@ lfs_x_step gtk-3                # required for firefox
 
 lfs_x_step libglade
 lfs_x_step libdaemon
-lfs_x_step ahavi
+lfs_x_step avahi
 
 lfs_x_step nspr                 # required for nss
 

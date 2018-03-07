@@ -29,6 +29,6 @@ groupadd -fg 86 netdev
 make
 make install
 
-lfs_install_bootscript ahavi
+lfs_install_bootscript avahi
 
 lfs_end_step
