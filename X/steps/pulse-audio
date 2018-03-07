@@ -16,6 +16,13 @@ lfs_download_extract_and_pushd https://www.freedesktop.org/software/pulseaudio/r
 make
 
 make install
-rm /etc/dbus-1/system.d/pulseaudio-system.conf
+
+if [ -e /etc/dbus-1/system.d/pulseaudio-system.conf ]; then
+  lfs_log "Removing /etc/dbus-1/system.d/pulseaudio-system.conf"
+  rm /etc/dbus-1/system.d/pulseaudio-system.conf
+fi
+
+sed -i '/load-module module-console-kit/s/^/#/' /etc/pulse/default.pa
+
 
 lfs_end_step
