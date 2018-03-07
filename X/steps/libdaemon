@@ -11,7 +11,9 @@ lfs_download_extract_and_pushd http://0pointer.de/lennart/projects/libdaemon/lib
 make
 
 # make -C doc doxygen
-# make docdir=/usr/share/doc/libdaemon-0.14 install
+
+make docdir=/usr/share/doc/libdaemon-0.14 install
+
 # install -v -m755 -d /usr/share/doc/libdaemon-0.14/api
 # install -v -m644 doc/reference/html/* /usr/share/doc/libdaemon-0.14/api
 # install -v -m644 doc/reference/man/man3/* /usr/share/man/man3
