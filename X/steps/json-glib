@@ -5,7 +5,8 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd ftp://ftp.gnome.org/pub/gnome/sources/json-glib/1.4/json-glib-1.4.2.tar.xz
+# lfs_download_extract_and_pushd ftp://ftp.gnome.org/pub/gnome/sources/json-glib/1.4/json-glib-1.4.2.tar.xz
+  lfs_download_extract_and_pushd ftp://ftp.gnome.org/pub/gnome/sources/json-glib/1.2/json-glib-1.2.8.tar.xz
 
 mkdir build
 cd    build

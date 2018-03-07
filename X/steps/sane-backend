@@ -5,8 +5,7 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd TODO
-lfs_download_extract_and_pushd  http://alioth.debian.org/frs/download.php/file/1140/sane-frontends-1.0.14.tar.gz
+lfs_download_extract_and_pushd  http://fossies.org/linux/misc/sane-backends-1.0.27.tar.gz
 
 groupadd -g 70 scanner
 

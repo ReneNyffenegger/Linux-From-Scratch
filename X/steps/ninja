@@ -8,7 +8,7 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd http://www.linuxfromscratch.org/blfs/view/stable/general/ninja.html
+lfs_download_extract_and_pushd https://github.com/ninja-build/ninja/archive/v1.8.2/ninja-1.8.2.tar.gz
 
 python3 configure.py --bootstrap
 # emacs -Q --batch -f batch-byte-compile misc/ninja-mode.el

@@ -439,12 +439,7 @@ lfs_x_step giflib               # required for java-binary
 lfs_x_step gutenprint
 
 lfs_x_step babl
-lfs_x_step gegl
-lfs_x_step gimp
-lfs_x_step gimp-help
 
-lfs_x_step sane-backend
-lfs_x_step sane-frontend
 
 lfs_x_step java-binary          # required for ant
 lfs_x_step java-conf            # recommended for ant
@@ -455,6 +450,11 @@ lfs_x_step python3              # required for libre-office
 lfs_x_step meson
 lfs_x_step ninja
 lfs_x_step json-glib
+lfs_x_step gegl
+lfs_x_step gimp
+lfs_x_step sane-backend
+lfs_x_step sane-frontend
+lfs_x_step gimp-help
 lfs_x_step boost                # recommended for libre-office
 lfs_x_step clucene              # recommended for libre-office
 lfs_x_step dbus-glib            # recommended for libre-office

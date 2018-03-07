@@ -5,7 +5,8 @@
 
 lfs_start_step
 
-lfs_download_extract_and_pushd https://download.gimp.org/pub/gegl/0.3/gegl-0.3.28.tar.bz2
+# lfs_download_extract_and_pushd https://download.gimp.org/pub/gegl/0.3/gegl-0.3.28.tar.bz2
+lfs_download_extract_and_pushd https://download.gimp.org/pub/gegl/0.3/gegl-0.3.20.tar.bz2
 
 ./configure --prefix=/usr
 
