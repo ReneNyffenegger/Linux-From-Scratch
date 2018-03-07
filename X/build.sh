@@ -197,6 +197,20 @@ lfs_download_extract_and_pushd() {
 }
 export -f lfs_download_extract_and_pushd
 
+lfs_patch() {
+  local patch_file=$lfs_download_dir$1
+
+  if [ ! -r $patch_file ]; then
+    lfs_log "patch file $patch_file is not readable"
+    return 1
+  fi
+
+  lfs_log "Patching with patch file $patch_file in $PWD"
+
+  patch -Np1 -i $patch_file
+  return 0
+}
+
 lfs_install_bootscript() {
   local bootscript_name=$1
 
@@ -277,6 +291,13 @@ lfs_x_step zip                      # required for firefox
 lfs_x_step FreeType2                # required for fontconfig
 lfs_x_step libxml                   # required for shared-mime-info, option for fontconfig
 lfs_x_step fontconfig
+
+lfs_x_step sgml-common
+lfs_x_step sgml-dtd-3               # docbook 3.1
+lfs_x_step sgml-dtd                 # docbook 4.5
+lfs_x_step docbook                  # docbook-xml
+lfs_x_step docbook-xsl
+
 
 lfs_x_step libffi                   # required for glib
 lfs_x_step pcre                     # required for glib
