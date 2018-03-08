@@ -1,13 +1,44 @@
 # vi: ft=sh
 #
 # http://www.linuxfromscratch.org/blfs/view/8.1/pst/docbook-xsl.html
-#
-# This is the 1st part of docbook-xsl, the 2nd is docbook-xsl-doc
 
 lfs_start_step
 
+lfs_download                   https://downloads.sourceforge.net/docbook/docbook-xsl-doc-1.79.1.tar.bz2
 lfs_download_extract_and_pushd https://downloads.sourceforge.net/docbook/docbook-xsl-1.79.1.tar.bz2
 
+#
+#   Note the --strip-components: It causes the contents of the tar's (only) root directory 'doc'
+#   to be written directly into the current directory (without creating the doc directory)
+#
+lfs_log "tar xf ... xsl-doc ..."
+tar xf ${lfs_download_dir}docbook-xsl-doc-1.79.1.tar.bz2 --strip-components=1
+
+lfs_log "install xsl-stylesheets"
+install -v -m755 -d /usr/share/xml/docbook/xsl-stylesheets-1.79.1
+
+
+lfs_log "cp -v -R, PWD=$PWD"
+cp -v -R VERSION assembly common eclipse epub epub3 extensions fo        \
+         highlighting html htmlhelp images javahelp lib manpages params  \
+         profiling roundtrip slides template tests tools webhelp website \
+         xhtml xhtml-1_1 xhtml5                                          \
+    /usr/share/xml/docbook/xsl-stylesheets-1.79.1
+
+lfs_log "ln -s VERSION ..."
+ln -s VERSION /usr/share/xml/docbook/xsl-stylesheets-1.79.1/VERSION.xsl
+
+lfs_log "install README"
+install -v -m644 -D README \
+                    /usr/share/doc/docbook-xsl-1.79.1/README.txt
+
+lfs_log "install RELEASE-NOTES, NEWS"
+install -v -m644    RELEASE-NOTES* NEWS* \
+                    /usr/share/doc/docbook-xsl-1.79.1
+
+lfs_log "cp -v -R doc"
+cp -v -R doc/* /usr/share/doc/docbook-xsl-1.79.1
+ 
 if [ ! -d /etc/xml ]; then install -v -m755 -d /etc/xml; fi
 
 if [ ! -f /etc/xml/catalog ]; then

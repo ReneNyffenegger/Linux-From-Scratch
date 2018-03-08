@@ -5,7 +5,6 @@
 
 lfs_start_step
 
-lfs_download_and_extract       https://download.gimp.org/pub/gimp/help/gimp-help-2.8.2.tar.bz2
 lfs_download_extract_and_pushd https://download.gimp.org/pub/gimp/v2.8/gimp-2.8.22.tar.bz2
 
 sed -i '/gegl/s/2/3/' configure
@@ -19,6 +18,8 @@ make
 make install
 
 gtk-update-icon-cache
+gtk-update-icon-cache
+update-desktop-database
 update-desktop-database
 
 lfs_end_step

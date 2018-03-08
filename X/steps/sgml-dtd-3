@@ -10,7 +10,6 @@ lfs_download_extract_and_pushd http://www.docbook.org/sgml/3.1/docbk31.zip
 
 
 lfs_log "sgml-dtd-3: I am in $PWD"
-cd /foo/bar/baz
 
 sed -i -e '/ISO 8879/d' \
        -e 's|DTDDECL "-//OASIS//DTD DocBook V3.1//EN"|SGMLDECL|g' \

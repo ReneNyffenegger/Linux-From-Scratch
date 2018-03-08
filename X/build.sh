@@ -6,9 +6,9 @@
 export XORG_PREFIX=/usr
 export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
 
-export lfs_dir=/etc/lfs
+export lfs_dir=/etc/lfs/
 export lfs_download_dir=${lfs_dir}downloads/
-export lfs_extract_dir=${lfs_dir}/extracted
+export lfs_extract_dir=${lfs_dir}extracted
 
 #
 # TODO: This directory probably should also go under /etc/lfs somewhere.
@@ -33,10 +33,10 @@ trap 'exit 1' ERR
 
 lfs_log() {
   local text="$1"
-# echo $text >> $lfs_dir/log
+# echo $text >> ${lfs_dir}log
 
   # Note: using UTF so that all log messages are consistent.
-  printf "%s: %-20s %-32s %s\n" "$(TZ=UTF date +'%Y-%m-%d %H:%M:%S')" $lfs_cur_step_name ${FUNCNAME[1]}  "$text" >> $lfs_dir/log
+  printf "%s: %-20s %-32s %s\n" "$(TZ=UTF date +'%Y-%m-%d %H:%M:%S')" $lfs_cur_step_name ${FUNCNAME[1]}  "$text" >> ${lfs_dir}log
 }
 export -f lfs_log
 
@@ -301,7 +301,6 @@ lfs_x_step sgml-dtd                 # docbook 4.5
 lfs_x_step docbook                  # docbook-xml
 
 lfs_x_step docbook-xsl              # 1st part of docbook-xsl
-lfs_x_step docbook-xsl-doc          # 2nd part of docbook-xsl
 
 lfs_x_step libffi                   # required for glib
 lfs_x_step pcre                     # required for glib
