@@ -7,7 +7,7 @@ export XORG_PREFIX=/usr
 export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
 
 export lfs_dir=/etc/lfs
-export lfs_download_dir=${lfs_dir}/downloads
+export lfs_download_dir=${lfs_dir}downloads/
 export lfs_extract_dir=${lfs_dir}/extracted
 
 #
@@ -64,8 +64,8 @@ lfs_download() {
   #
   #  Download the file, if necessary
   #
-  lfs_log "going to check wheather $lfs_download_dir/$download_file_name already exists"
-  if [ ! -f $lfs_download_dir/$download_file_name ]; then
+  lfs_log "going to check wheather $lfs_download_dir$download_file_name already exists"
+  if [ ! -f $lfs_download_dir$download_file_name ]; then
     lfs_log "downloading $download_url to $lfs_download_dir"
     if ! wget $download_url -P $lfs_download_dir; then
       local wget_exit_val=$?
@@ -108,6 +108,7 @@ lfs_download_and_extract() {
   if [ ${download_file_name: -4} == '.zip' ]; then
     local isZip=yes
     local extracted_dir=$(basename $download_file_name .zip)
+    lfs_log "isZip, extracted_dir = $extracted_dir"
   else
     local isZip=no
 
@@ -126,7 +127,8 @@ lfs_download_and_extract() {
     lfs_log "Extraction directory $dest_dir/$extracted_dir does not exist"
     if [ $isZip == yes ]; then
     # TODO 2018-03-02: because of Noto-hinted.zip
-      unzip  $lfs_download_dir/$download_file_name -d $dest_dir/$extracted_dir
+      lfs_log "unzip $lfs_download_dir$download_file_name to $dest_dir/$extracted_dir"
+      unzip  $lfs_download_dir$download_file_name -d $dest_dir/$extracted_dir > /dev/null
     else
     #
     # Extract the downloaded file into an empty tmp directory first, so that
@@ -135,8 +137,8 @@ lfs_download_and_extract() {
     #
       rm -rf /tmp/lfs_extract_dir
       mkdir  /tmp/lfs_extract_dir
-      if ! tar xf $lfs_download_dir/$download_file_name -C /tmp/lfs_extract_dir; then
-        lfs_log "$lfs_download_dir/$download_file_name does not seem to be a tar file"
+      if ! tar xf $lfs_download_dir$download_file_name -C /tmp/lfs_extract_dir; then
+        lfs_log "$lfs_download_dir$download_file_name does not seem to be a tar file"
 	echo "?"
 	return 1
       fi
@@ -163,7 +165,7 @@ lfs_download_and_extract() {
       fi
 
 
-    # tar xf $lfs_download_dir/$download_file_name -C $dest_dir
+    # tar xf $lfs_download_dir$download_file_name -C $dest_dir
     fi
   else
     lfs_log "directory $dest_dir/$extracted_dir already exists"
@@ -210,6 +212,7 @@ lfs_patch() {
   patch -Np1 -i $patch_file
   return 0
 }
+export -f lfs_patch
 
 lfs_install_bootscript() {
   local bootscript_name=$1
