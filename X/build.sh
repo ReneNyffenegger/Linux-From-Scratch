@@ -342,8 +342,8 @@ lfs_x_step pixman                   # requried for Xorg-server
 lfs_x_step libarchive               # optionally required by CMake
 lfs_x_step CMake
 lfs_x_step doxygen                  # requires CMake
-lfx_x_step popt                     # required for rpm
-lfx_x_step rpm                      # requires popt
+lfs_x_step popt                     # required for rpm
+lfs_x_step rpm                      # requires popt
 
 lfs_x_step fribidi                  # required by libass
 lfs_x_step libass                   # optionally required by ffmpeg
