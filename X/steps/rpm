@@ -1,0 +1,15 @@
+# vi: ft=sh
+#
+# This is not an LFS instruction
+#
+# Requires popt
+
+lfs_start_step
+
+lfs_download_extract_and_pushd http://ftp.rpm.org/releases/rpm-4.14.x/rpm-4.14.1.tar.bz2
+
+./configure
+make
+make install
+
+lfs_end_step

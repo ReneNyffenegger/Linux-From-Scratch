@@ -1,0 +1,18 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/svn/general/popt.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd ftp://anduin.linuxfromscratch.org/BLFS/popt/popt-1.16.tar.gz
+
+./configure --prefix=/usr --disable-static
+make
+doxygen
+make install
+
+install -v -m755 -d /usr/share/doc/popt-1.16
+install -v -m644 doxygen/html/* /usr/share/doc/popt-1.16
+
+lfs_end_step
