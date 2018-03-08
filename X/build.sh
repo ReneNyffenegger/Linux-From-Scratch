@@ -343,6 +343,7 @@ lfs_x_step libarchive               # optionally required by CMake
 lfs_x_step CMake
 lfs_x_step doxygen                  # requires CMake
 lfs_x_step popt                     # required for rpm
+lfs_x_step db                       # required for rpm
 lfs_x_step rpm                      # requires popt
 
 lfs_x_step fribidi                  # required by libass

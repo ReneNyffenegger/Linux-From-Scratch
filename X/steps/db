@@ -1,0 +1,27 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/blfs/view/8.1/server/db.html
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd http://download.oracle.com/berkeley-db/db-6.2.32.tar.gz
+
+cd build_unix
+../dist/configure --prefix=/usr      \
+                  --enable-compat185 \
+                  --enable-dbm       \
+                  --disable-static   \
+                  --enable-cxx
+make
+
+
+make docdir=/usr/share/doc/db-6.2.32 install
+
+chown -v -R root:root                        \
+      /usr/bin/db_*                          \
+      /usr/include/db{,_185,_cxx}.h          \
+      /usr/lib/libdb*.{so,la}                \
+      /usr/share/doc/db-6.2.32
+
+lfs_end_step
