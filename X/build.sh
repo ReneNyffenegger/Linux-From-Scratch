@@ -223,6 +223,7 @@ lfs_download_and_apply_patch() {
   lfs_patch $(basename $download_url)
 
 }
+export -f lfs_download_and_apply_patch
 
 lfs_install_bootscript() {
   local bootscript_name=$1
