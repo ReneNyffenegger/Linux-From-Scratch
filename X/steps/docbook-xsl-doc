@@ -1,0 +1,31 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/8.1/pst/docbook-xsl.html
+#
+# This is the 2nd part of docbook-xsl
+#
+# TODO: Is the order correct?
+
+lfs_start_step
+
+lfs_download_extract_and_pushd  https://downloads.sourceforge.net/docbook/docbook-xsl-doc-1.79.1.tar.bz2
+
+install -v -m755 -d /usr/share/xml/docbook/xsl-stylesheets-1.79.1
+
+cp -v -R VERSION assembly common eclipse epub epub3 extensions fo        \
+         highlighting html htmlhelp images javahelp lib manpages params  \
+         profiling roundtrip slides template tests tools webhelp website \
+         xhtml xhtml-1_1 xhtml5                                          \
+    /usr/share/xml/docbook/xsl-stylesheets-1.79.1
+
+ln -s VERSION /usr/share/xml/docbook/xsl-stylesheets-1.79.1/VERSION.xsl
+
+install -v -m644 -D README \
+                    /usr/share/doc/docbook-xsl-1.79.1/README.txt
+
+install -v -m644    RELEASE-NOTES* NEWS* \
+                    /usr/share/doc/docbook-xsl-1.79.1
+
+cp -v -R doc/* /usr/share/doc/docbook-xsl-1.79.1
+
+lfs_end_step

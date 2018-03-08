@@ -296,8 +296,9 @@ lfs_x_step sgml-common
 lfs_x_step sgml-dtd-3               # docbook 3.1
 lfs_x_step sgml-dtd                 # docbook 4.5
 lfs_x_step docbook                  # docbook-xml
-lfs_x_step docbook-xsl
 
+lfs_x_step docbook-xsl              # 1st part of docbook-xsl
+lfs_x_step docbook-xsl-doc          # 2nd part of docbook-xsl
 
 lfs_x_step libffi                   # required for glib
 lfs_x_step pcre                     # required for glib
