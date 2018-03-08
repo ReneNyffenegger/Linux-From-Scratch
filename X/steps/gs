@@ -34,6 +34,9 @@ ln -v -s ghostscript /usr/include/ps
 
 ln -sfvn ../ghostscript/9.21/doc /usr/share/doc/ghostscript-9.21
 
+# TODO: Check if cups device is installed
+gs --help | sed -n '/Available devices:/,/Search path:/ p' | grep '\<cups\>'
+
 #
 # TODO: Test this:
 #
