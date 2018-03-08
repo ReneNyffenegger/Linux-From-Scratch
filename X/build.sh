@@ -214,6 +214,16 @@ lfs_patch() {
 }
 export -f lfs_patch
 
+lfs_download_and_apply_patch() {
+  local download_url=$1
+
+  lfs_log "downloding and apply patch: $download_url"
+  lfs_download $download_url
+
+  lfs_patch $(basename $download_url)
+
+}
+
 lfs_install_bootscript() {
   local bootscript_name=$1
 

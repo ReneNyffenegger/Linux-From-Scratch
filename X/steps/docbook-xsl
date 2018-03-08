@@ -1,18 +1,30 @@
 # vi: ft=sh
 #
 # http://www.linuxfromscratch.org/blfs/view/8.1/pst/docbook-xsl.html
+#
+# See http://lists.linuxfromscratch.org/pipermail/blfs-support/2018-March/079947.html
+#
 
 lfs_start_step
+
+
+TODO: Change version number
 
 lfs_download                   https://downloads.sourceforge.net/docbook/docbook-xsl-doc-1.79.1.tar.bz2
 lfs_download_extract_and_pushd https://downloads.sourceforge.net/docbook/docbook-xsl-1.79.1.tar.bz2
 
 #
-#   Note the --strip-components: It causes the contents of the tar's (only) root directory 'doc'
-#   to be written directly into the current directory (without creating the doc directory)
+# TODO this patch only since 8.2
+#
+lfs_download_and_apply_patch   http://www.linuxfromscratch.org/patches/blfs/svn/docbook-xsl-1.79.2-stack_fix-1.patch
+
+#
+#   Note the --strip-components: It causes the contents of the tar's (only) root directory docbook-xsl-1.79.2
+#   to be written directly into the current directory (without creating this docbook-xsl-1.79.2 directory)
 #
 lfs_log "tar xf ... xsl-doc ..."
 tar xf ${lfs_download_dir}docbook-xsl-doc-1.79.1.tar.bz2 --strip-components=1
+
 
 lfs_log "install xsl-stylesheets"
 install -v -m755 -d /usr/share/xml/docbook/xsl-stylesheets-1.79.1
