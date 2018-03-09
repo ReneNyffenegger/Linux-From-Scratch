@@ -137,8 +137,8 @@ lfs_download_and_extract() {
       mkdir  /tmp/lfs_extract_dir
       if ! tar xf $lfs_download_dir$download_file_name -C /tmp/lfs_extract_dir; then
         lfs_log "$lfs_download_dir$download_file_name does not seem to be a tar file"
-	echo "?"
-	return 1
+        echo "?"
+        return 1
       fi
       
       lfs_log "mkdir $dest_dir/$extracted_dir"
@@ -159,9 +159,8 @@ lfs_download_and_extract() {
       # popd
       else
         lfs_log "$download_file_name contains multiple files"
-	mv /tmp/lfs_extract_dir/* $dest_dir/$extracted_dir
+        mv /tmp/lfs_extract_dir/* $dest_dir/$extracted_dir
       fi
-
 
     # tar xf $lfs_download_dir$download_file_name -C $dest_dir
     fi
@@ -269,16 +268,27 @@ lfs_take_fs_snapshot() {
 
   local suffix=$1
 
-  find / -path '/proc'          -prune -o \
-         -path '/sources'       -prune -o \
-         -path '/dev'           -prune -o \
-         -path '/lfs'           -prune -o \
-         -path '/sys'           -prune -o \
-         -path '/usr/include'   -prune -o \
-         -path '/usr/lib/gconv' -prune -o \
-         -path '/usr/share'     -prune -o \
-         -path '/tools/*/*'     -prune -o \
-         -print > ${lfs_dir}fs_snapshots/$lfs_cur_step_name.$suffix
+  local out_file=${lfs_dir}fs_snapshots/$lfs_cur_step_name.$suffix
+
+  if [ -e $out_file ]; then
+    lfs_log "$out_file already exists, I am not overwriting it"
+    return 0
+  fi
+
+#        -path '/usr/lib/python2.7/*'     -prune -o \
+#        -path '/usr/lib/python3.6/*'     -prune -o \
+#        -path '/usr/lib/gconv'           -prune -o \
+  find / -path '/proc'                    -prune -o \
+         -path '/sources'                 -prune -o \
+         -path '/dev'                     -prune -o \
+         -path '/lfs'                     -prune -o \
+         -path  $lfs_dir                  -prune -o \
+         -path '/sys'                     -prune -o \
+         -path '/usr/include'             -prune -o \
+         -path '/usr/lib/*'               -prune -o \
+         -path '/usr/share'               -prune -o \
+         -path '/tools/*/*'               -prune -o \
+         -print > $out_file
 
 }
 export -f lfs_take_fs_snapshot
