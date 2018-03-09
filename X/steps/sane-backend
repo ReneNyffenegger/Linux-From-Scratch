@@ -31,7 +31,7 @@ cat >> /etc/sane.d/net.conf << "EOF"
 #  http://www.linuxfromscratch.org/blfs/view/svn/pst/sane.html
 #
 connect_timeout = 60
-<server_ip>
+localhost
 EOF
 
 lfs_end_step
