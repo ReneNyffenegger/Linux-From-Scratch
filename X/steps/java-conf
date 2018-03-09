@@ -3,24 +3,20 @@
 # http://www.linuxfromscratch.org/blfs/view/8.1/general/ojdk-conf.html
 #
 
-# TODO configure me harder!
-
 lfs_start_step
 
-
 cat > /etc/profile.d/openjdk.sh << "EOF"
-# Begin /etc/profile.d/openjdk.sh
+#
+# As per http://www.linuxfromscratch.org/blfs/view/svn/general/ojdk-conf.html
+#
 
-# Set JAVA_HOME directory
 export JAVA_HOME=/opt/jdk
 
-# Adjust PATH
-# pathappend $JAVA_HOME/bin
-PATH=$PATH:$JAVA_HOME/bin
+# PATH=$PATH:$JAVA_HOME/bin
+pathappend $JAVA_HOME/bin
 
 # Add to MANPATH
-# pathappend $JAVA_HOME/man MANPATH
-MANPATH=$MANPATH/$JAVA_HOME/man
+pathappend $JAVA_HOME/man MANPATH
 
 # Auto Java CLASSPATH: Copy jar files to, or create symlinks in, the
 # /usr/share/java directory. Note that having gcj jars with OpenJDK 8
@@ -28,24 +24,21 @@ MANPATH=$MANPATH/$JAVA_HOME/man
 
 AUTO_CLASSPATH_DIR=/usr/share/java
 
-# pathprepend . CLASSPATH
-CLASSPATH=$CLASSPATH:.
+pathprepend . CLASSPATH
 
 for dir in `find ${AUTO_CLASSPATH_DIR} -type d 2>/dev/null`; do
-#   pathappend $dir CLASSPATH
-    CLASSPATH=$CLASSPATH:$dir
+    pathappend $dir CLASSPATH
 done
 
 for jar in `find ${AUTO_CLASSPATH_DIR} -name "*.jar" 2>/dev/null`; do
-#   pathappend $jar CLASSPATH
-    CLASSPATH=$CLASSPATH:$jar
+    pathappend $jar CLASSPATH
 done
 
 export JAVA_HOME
 unset AUTO_CLASSPATH_DIR dir jar
-
-# End /etc/profile.d/openjdk.sh
 EOF
+
+lfs_log "TQ84: $(ls -l /etc/profile.d/openjdk.sh)"
 
 chmod 755 /etc/profile.d/openjdk.sh
 
