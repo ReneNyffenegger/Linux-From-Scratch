@@ -45,5 +45,6 @@ echo "ServerName /var/run/cups/cups.sock" > /etc/cups/client.conf
 
 gtk-update-icon-cache
 
+lfs_install_bootscript cups
 
 lfs_end_step
