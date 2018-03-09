@@ -2,6 +2,12 @@
 #
 # http://www.linuxfromscratch.org/blfs/view/stable/pst/sane.html
 #
+# The SANE-frontends package includes the graphical frontends xscanimage and
+# xcam, and a command-line frontend scanadf.
+# You don't need this package if you intend to use one of the more advanced
+# graphical frontends like XSane-0.999.  For a list of frontend packages, see
+# http://www.sane-project.org/sane-frontends.html. 
+#
 
 lfs_start_step
 
@@ -16,5 +22,22 @@ install -v -m644 doc/sane.png xscanimage-icon-48x48-2.png \
     /usr/share/sane
 
 ln -v -s ../../../../bin/xscanimage /usr/lib/gimp/2.0/plug-ins
+
+
+mkdir -pv /usr/share/{applications,pixmaps}
+
+cat > /usr/share/applications/xscanimage.desktop << "EOF"
+[Desktop Entry]
+Encoding=UTF-8
+Name=XScanImage - Scanning
+Comment=Acquire images from a scanner
+Exec=xscanimage
+Icon=xscanimage
+Terminal=false
+Type=Application
+Categories=Application;Graphics
+EOF
+
+ln -svf ../sane/xscanimage-icon-48x48-2.png /usr/share/pixmaps/xscanimage.png
 
 lfs_end_step
