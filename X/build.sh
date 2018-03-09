@@ -60,7 +60,6 @@ lfs_download() {
 
   lfs_log "download_url=$download_url, download_file_name=$download_file_name"
 
-
   #
   #  Download the file, if necessary
   #
@@ -92,7 +91,6 @@ lfs_download_and_extract() {
     lfs_log "dest dir $dest_dir does not exist"
     return 1
   fi
-
 
   if ! lfs_download $download_url; then
     lfs_log "Apparently, $download_url could not be downloaded"
@@ -267,6 +265,24 @@ lfs_check_kernel_config_param() {
 }
 export -f lfs_check_kernel_config_param
 
+lfs_take_fs_snapshot() {
+
+  local suffix=$1
+
+  find / -path '/proc'          -prune -o \
+         -path '/sources'       -prune -o \
+         -path '/dev'           -prune -o \
+         -path '/lfs'           -prune -o \
+         -path '/sys'           -prune -o \
+         -path '/usr/include'   -prune -o \
+         -path '/usr/lib/gconv' -prune -o \
+         -path '/usr/share'     -prune -o \
+         -path '/tools/*/*'     -prune -o \
+         -print > ${lfs_dir}fs_snapshots/$lfs_cur_step_name.$suffix
+
+}
+export -f lfs_take_fs_snapshot
+
 lfs_x_step() {
 
   trap 'echo Error at line $LINENO; exit 1' ERR
@@ -284,10 +300,14 @@ lfs_x_step() {
      return 1
   fi
 
+   
+  lfs_take_fs_snapshot before
 
-   pushd steps       > /dev/null
-   ./$name
-   popd              > /dev/null
+  pushd steps       > /dev/null
+  ./$name
+  popd              > /dev/null
+
+  lfs_take_fs_snapshot after
 
   touch done/$name
 
@@ -295,6 +315,7 @@ lfs_x_step() {
 }
 
 lfs_x_step which
+lfs_x_step profile
 
 lfs_x_step perl-archive-zip
 
@@ -303,6 +324,7 @@ lfs_x_step unzip                    # required to unzip *.zip files (?)
 lfs_x_step zip                      # required for firefox
 
 
+# TODO: FreeType2 should be named freetype2
 lfs_x_step FreeType2                # required for fontconfig
 lfs_x_step libxml                   # required for shared-mime-info, option for fontconfig
 lfs_x_step fontconfig
@@ -431,6 +453,7 @@ lfs_x_step libevent             # possibly required for firefox
 
 lfs_x_step atk                  # required for gtk-2
 
+# TODO libjpeg-turbo should be named libjpeg
 lfs_x_step libjpeg-turbo        # required for gdk-pixbuf
 lfs_x_step shared-mime-info     # required for gdk-pixbuf
 lfs_x_step glu                  # option for freeglut
@@ -506,7 +529,7 @@ lfs_x_step gstreamer            # required for gst10-plugings-base
 
 lfs_x_step gst10-plugins-base   # recommended for libre-office
 lfs_x_step libatomic_ops        # recommended for libre-office
-lfs_x_step lcms2                # recommended for libre-office (Little CMS)
+lfs_x_step lcms2                # recommended for libre-office and gs (Little CMS)
 lfs_x_step openjpeg             # required for poppler
 lfs_x_step openjpeg2
 lfs_x_step libcroco             # required for librsvg
