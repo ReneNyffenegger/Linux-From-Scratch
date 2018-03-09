@@ -282,7 +282,7 @@ lfs_take_fs_snapshot() {
          -path '/sources'                 -prune -o \
          -path '/dev'                     -prune -o \
          -path '/lfs'                     -prune -o \
-         -path  $lfs_dir                  -prune -o \
+         -path  ${lfs_dir%/}              -prune -o \
          -path '/sys'                     -prune -o \
          -path '/usr/include'             -prune -o \
          -path '/usr/lib/*'               -prune -o \
