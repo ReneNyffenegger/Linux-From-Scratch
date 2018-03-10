@@ -55,7 +55,9 @@ ln -sv ../vim/vim80/doc /usr/share/doc/vim-8.0.586
 #  TODO: Adjust /etc/vimrc
 #
 cat > /etc/vimrc << "EOF"
-" Begin /etc/vimrc
+if filereadable(expand("~/.vim/vimrc"))
+   finish
+endif
 
 set nocompatible
 set backspace=2
@@ -64,9 +66,6 @@ syntax on
 if (&term == "xterm") || (&term == "putty")
   set background=dark
 endif
-
-
-" End /etc/vimrc
 EOF
 
 # Creating an empty ~/.vimrc prevents vim from overriding settings in /etc/vimrc by using /usr/share/vim/vim80/defaults.vim. 
