@@ -278,6 +278,7 @@ lfs_take_fs_snapshot() {
 #        -path '/usr/lib/python2.7/*'     -prune -o \
 #        -path '/usr/lib/python3.6/*'     -prune -o \
 #        -path '/usr/lib/gconv'           -prune -o \
+#        -name '.git'                     -prune -o \
   find / -path '/proc'                    -prune -o \
          -path '/sources'                 -prune -o \
          -path '/dev'                     -prune -o \
@@ -288,6 +289,9 @@ lfs_take_fs_snapshot() {
          -path '/usr/lib/*'               -prune -o \
          -path '/usr/share'               -prune -o \
          -path '/tools/*/*'               -prune -o \
+         -path '/lib/libreoffice/*'       -prune -o \
+         -path '/opt/ant-*/manual'        -prune -o \
+         -path '/root'                    -prune -o \
          -print > $out_file
 
 }
