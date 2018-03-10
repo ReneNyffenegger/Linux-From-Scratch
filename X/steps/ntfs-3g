@@ -1,0 +1,28 @@
+# vi: ft=sh
+#
+# http://linuxfromscratch.org/blfs/view/svn/postlfs/ntfs-3g.html
+#
+
+lfs_start_step
+
+lfs_check_kernel_config_param FUSE_FS
+
+lfs_download_extract_and_pushd https://tuxera.com/opensource/ntfs-3g_ntfsprogs-2017.3.23.tgz
+
+./configure --prefix=/usr        \
+            --disable-static     \
+            --with-fuse=internal
+make
+
+make install
+ln -sv ../bin/ntfs-3g /sbin/mount.ntfs
+ln -sv ntfs-3g.8 /usr/share/man/man8/mount.ntfs.8
+
+#
+# If you want ordinary users to be able to mount NTFS partitions you'll need to
+# set mount.ntfs with the root user ID. Note: it is probably unsafe to do this
+# on a computer that needs to be secure (like a server). 
+#
+# chmod -v 4755 /bin/ntfs-3g
+
+lfs_end_step
