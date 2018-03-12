@@ -297,6 +297,25 @@ lfs_take_fs_snapshot() {
 }
 export -f lfs_take_fs_snapshot
 
+lfs_git_clone_and_pushd() {
+
+  local git_path=$1
+  local dir=$(basename $git_path)
+
+  lfs_log "git_path=$git_path / dir=$dir"
+
+  cd /etc/lfs/git-sources/
+
+  if [ -d $dir ]; then
+    lfs_log "$dir exists"
+  else
+    git clone $git_path
+  fi
+
+  pushd $dir
+}
+export -f lfs_git_clone_and_pushd
+
 lfs_x_step() {
 
   trap 'echo Error at line $LINENO; exit 1' ERR
@@ -384,6 +403,8 @@ lfs_x_step popt                     # required for rpm
 lfs_x_step db                       # required for rpm
 lfs_x_step lua
 lfs_x_step rpm                      # requires popt
+
+lfs_x_step libproxy
 
 lfs_x_step fribidi                  # required by libass
 lfs_x_step libass                   # optionally required by ffmpeg

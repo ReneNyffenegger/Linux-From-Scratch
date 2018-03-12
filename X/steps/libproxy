@@ -1,0 +1,16 @@
+# ft=sh
+#
+# libproxy is apparently required for Google-Earth (Pro?)
+#
+
+lfs_start_step
+
+lfs_git_clone_and_pushd https://github.com/libproxy/libproxy
+
+mkdir build
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=/usr
+make
+make install
+
+lfs_end_step
