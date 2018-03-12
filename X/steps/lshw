@@ -1,0 +1,15 @@
+# vi: ft=sh
+#
+# Apparently not in the blfs instructions
+#
+
+lfs_start_step
+
+lfs_download_extract_and_pushd https://www.ezix.org/software/files/lshw-B.02.18.tar.gz
+
+cd lshw-*
+
+make ZLIB=1
+make install
+
+lfs_end_step
