@@ -10,8 +10,15 @@ lfs_download_extract_and_pushd http://ftp.rpm.org/releases/rpm-4.14.x/rpm-4.14.1
 
 lfs_log "TODO: Should --with-external-db CCPFLAGS=-i/usr/include/db45 be added to the ./configure call?"
 
+lfs_log "TQ84: ls -l /usr/local/lib/rpm/rpmrc BEFORE: $(ls -l /usr/local/lib/rpm/rpmrc)"
+lfs_log "TQ84: ls -l /usr/lib/rpm/rpmrc       BEFORE: $(ls -l /usr/lib/rpm/rpmrc)"
+
 ./configure --prefix=/usr
 make
 make install
+
+
+lfs_log "TQ84: ls -l /usr/local/lib/rpm/rpmrc AFTER:  $(ls -l /usr/local/lib/rpm/rpmrc)"
+lfs_log "TQ84: ls -l /usr/lib/rpm/rpmrc       AFTER:  $(ls -l /usr/lib/rpm/rpmrc)"
 
 lfs_end_step
