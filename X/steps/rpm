@@ -8,6 +8,8 @@ lfs_start_step
 
 lfs_download_extract_and_pushd http://ftp.rpm.org/releases/rpm-4.14.x/rpm-4.14.1.tar.bz2
 
+lfs_log "TODO: Should --with-external-db CCPFLAGS=-i/usr/include/db45 be added to the ./configure call?"
+
 ./configure --prefix=/usr
 make
 make install
