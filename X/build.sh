@@ -291,7 +291,10 @@ lfs_take_fs_snapshot() {
          -path '/tools/*/*'               -prune -o \
          -path '/lib/libreoffice/*'       -prune -o \
          -path '/opt/ant-*/manual'        -prune -o \
+         -path '/opt/OpenJDK-*-bin/*'     -prune -o \
          -path '/root'                    -prune -o \
+         -path '/boot/grub/*'             -prune -o \
+         -path '/run/udev/*'              -prune -o \
          -print > $out_file
 
 }
