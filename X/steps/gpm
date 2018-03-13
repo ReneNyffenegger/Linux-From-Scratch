@@ -40,6 +40,8 @@ cat > /etc/sysconfig/mouse << "EOF"
 #
 #   http://www.linuxfromscratch.org/blfs/view/cvs/general/gpm.html
 #
+#   See also /var/log/daemon.log for log messages
+#
 
 MDEVICE=/dev/ttyS0          # Or /dev/input/mice for USB mice, or /dev/psaux for PS2 mice
 PROTOCOL=imps2              # Find protocol values with `gpm -m <device> -t -help` (<device> is the MDEVICE above, for example /dev/ttyS0)
