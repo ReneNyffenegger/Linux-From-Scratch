@@ -474,12 +474,17 @@ lfs_x_step  Xorg-drv-libva
 lfs_x_step  Xorg-drv-libva-intel
 lfs_x_step  Xorg-drv-libvdpau-va-gl
 
+
 lfs_x_step  twm # TODO really used
 lfs_x_step  xterm
 lfs_x_step  xclock
 lfs_x_step  xinit
 
 lfs_x_step  X-config
+
+lfs_x_step  gpm                      # TODO: does it require glib?
+lfs_x_step  rsync
+lfs_x_step  vim
 
 lfs_x_step  fonts
 
