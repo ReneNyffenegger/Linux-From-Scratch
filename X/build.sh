@@ -316,7 +316,12 @@ lfs_git_clone_and_pushd() {
     git clone $git_path
   fi
 
-  pushd $dir
+#
+#    rm possible .git at and of path
+#   (github repos usually don't have such a .git ending in
+#    order to be cloned).
+#
+  pushd ${dir%.git}
 }
 export -f lfs_git_clone_and_pushd
 
