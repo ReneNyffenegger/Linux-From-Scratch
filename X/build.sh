@@ -295,6 +295,7 @@ lfs_take_fs_snapshot() {
          -path '/root'                    -prune -o \
          -path '/boot/grub/*'             -prune -o \
          -path '/run/udev/*'              -prune -o \
+         -path '/mnt'                     -prune -o \
          -print > $out_file
 
 }
