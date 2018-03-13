@@ -602,6 +602,7 @@ lfs_x_step rust                 # required for firefox
 lfs_x_step desktop-file-utils
 
 lfs_x_step firefox
+lfs_x_step thunderbird
 
 lfs_x_step libreoffice
 
