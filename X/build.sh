@@ -398,6 +398,7 @@ lfs_x_step libedit                  # option for sqlite
 lfs_x_step sqlite
 
 lfs_x_step lshw
+lfs_x_step dmidecode
 
 lfs_x_step libpng                   # required for Xorg-applications
 lfs_x_step pixman                   # requried for Xorg-server

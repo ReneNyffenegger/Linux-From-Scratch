@@ -1,0 +1,13 @@
+# vi: ft=sh
+#
+# Apparantly not an LFS instruction
+#
+
+lfs_start_step
+
+lfs_git_clone_and_pushd https://git.savannah.nongnu.org/git/dmidecode.git
+
+make
+make install
+
+lfs_end_step
