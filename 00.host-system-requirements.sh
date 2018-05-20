@@ -34,6 +34,7 @@ echo
 echo Is gawk available?
 echo 
 
+PRINTF_FORMAT="  %-20s :  %-7s | %-5s\n"
 
 check_version() {
   local cmd=$1
@@ -43,21 +44,23 @@ check_version() {
 
   local  cmd_1st_word=$(echo $cmd | awk '{print $1}')
 
-  printf "  %-20s :  %-7s | %-5s\n" $cmd_1st_word $expected $version
+  printf "$PRINTF_FORMAT" $cmd_1st_word $expected $version
 
 }
 
+printf "$PRINTF_FORMAT" tool 'Min.' 'Act.'
+printf -- '----------------------------------------------\n'
 check_version  "bash      --version | head -n1 | sed 's/^[^[:digit:]]\\+\\([[:digit:]]\\+\\.[[:digit:]]\\+\\).*/\\1/'"  3.2
+check_version  "ld        --version | head -n1 | sed 's/^.* //'"                                                        2.17    # binutils
 check_version  "bison     --version | head -n1 | sed 's/^.* //'"                                                        2.3
 check_version  "bzip2     --version 2>&1 < /dev/null | head -n1 | cut -d\" \" -f8"                                      1.0.4
 check_version  "chown     --version | head -n1 | sed 's/^.* //'"                                                        6.9     # coreutils
-check_version  "diff      --version | head -n1 | sed 's/^.* //'"                                                        2.8
-check_version  "find      --version | head -n1 | sed 's/^.* //'"                                                        4.2.31
-check_version  "ld        --version | head -n1 | sed 's/^.* //'"                                                        2.17    # binutils
-check_version  "gawk      --version | head -n1 | sed 's/^.* //'"                                                        4.7     
-check_version  "gcc       --version | head -n1 | sed 's/^.* //'"                                                        4.7     
-check_version  "g++       --version | head -n1 | sed 's/^.* //'"                                                        4.7   
-check_version  "ldd       --version | head -n1 | sed 's/^.* //'"                                                        2.11 
+check_version  "diff      --version | head -n1 | sed 's/^.* //'"                                                        2.8     # diffutils
+check_version  "find      --version | head -n1 | sed 's/^.* //'"                                                        4.2.31  # findutils
+check_version  "gawk      --version | head -n1 | sed 's/^.* //'"                                                        4.0.1
+check_version  "gcc       --version | head -n1 | cut -d' ' -f3 "                                                        4.7     
+check_version  "g++       --version | head -n1 | cut -d' ' -f3 "                                                        4.7   
+check_version  "ldd       --version | head -n1 | sed 's/^.* //'"                                                        2.11    # glibc
 check_version  "/lib/libc.so.6      | head -n1 | /lib/libc.so.6 | head -n1 | cut -d\" \" -f9"                           2.2.5
 check_version  "grep      --version | head -n1 | sed 's/^.* //'"                                                        2.5.1a
 check_version  "gzip      --version | head -n1 | sed 's/^.* //'"                                                        1.3.12
@@ -65,7 +68,7 @@ check_version  "m4        --version | head -n1 | sed 's/^.* //'"                
 check_version  "make      --version | head -n1 | sed 's/^.* //'"                                                        3.8.1
 #? makeinfo --version | head -n1
 check_version  "patch     --version | head -n1 | sed 's/^.* //'"                                                        2.5.4
-check_version  "perl -V:version |           cut -d\"'\" -f2"                                                        5.8.8
+check_version  "perl -V:version |           cut -d\"'\" -f2"                                                            5.8.8
 check_version  "sed       --version | head -n1 | sed 's/^.* //'"                                                        4.1.5
 check_version  "tar       --version | head -n1 | sed 's/^.* //'"                                                        1.22
 check_version  "xz        --version | head -n1 | sed 's/^.* //'"                                                        5.0.0
