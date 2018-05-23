@@ -36,6 +36,10 @@ sudo chmod a+rx $lfs_root/40.in-chroot-env
 sudo chmod a+rx $lfs_root/bash-env
 
 sudo cp steps/*        $lfs_root/steps
+#
+#  TODO will this not at times overwrite
+#       the chowon in steps/changing-ownership
+#
 sudo chown lfs:lfs  -R $lfs_root
 sudo chmod a+rx        $lfs_root/steps/*
 sudo chmod a+w         $lfs_root/done

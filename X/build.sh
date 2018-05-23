@@ -196,20 +196,20 @@ lfs_download_extract_and_pushd() { # _{
 } # _}
 export -f lfs_download_extract_and_pushd
 
-lfs_patch() { # _{
-  local patch_file=$lfs_download_dir$1
-
-  if [ ! -r $patch_file ]; then
-    lfs_log "patch file $patch_file is not readable"
-    return 1
-  fi
-
-  lfs_log "Patching with patch file $patch_file in $PWD"
-
-  patch -Np1 -i $patch_file
-  return 0
-} # _}
-export -f lfs_patch
+# V.2 lfs_patch() { # _{
+# V.2   local patch_file=$lfs_download_dir$1
+# V.2 
+# V.2   if [ ! -r $patch_file ]; then
+# V.2     lfs_log "patch file $patch_file is not readable"
+# V.2     return 1
+# V.2   fi
+# V.2 
+# V.2   lfs_log "Patching with patch file $patch_file in $PWD"
+# V.2 
+# V.2   patch -Np1 -i $patch_file
+# V.2   return 0
+# V.2 } # _}
+# V.2 export -f lfs_patch
 
 lfs_download_and_apply_patch() { #_{
   local download_url=$1

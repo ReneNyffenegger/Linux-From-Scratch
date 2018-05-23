@@ -1,11 +1,15 @@
 # vi: ft=sh path=.,steps
 #
 
-. /lfs/lfs-functions
+. /usr/lfs/lfs-functions
 
 lfs_trap_err
 umask 022
 
+# When Bash is started non-interactively, to run a shell script, for example,
+# it looks for the variable BASH_ENV in the environment, expands its value if
+# it appears there, and uses the expanded value as the name of a file to read
+# and execute:
 export BASH_ENV=$lfs_root/bash-env
 
 #
@@ -18,20 +22,23 @@ export SHELLOPTS
 lfs_log "TQ84: 40.in-chroot-env (1b): \$-=$-, SHELLOPTS=$SHELLOPTS"
 
 
-if [[ ! -e /lfs ]]; then
-   lfs_log "/lfs does not exist"
+if [[ ! -e /usr/lfs ]]; then
+   lfs_log "/urs/lfs does not exist"
    exit 1
 else
-   lfs_log "/lfs exists, going on ($lfs_root=$lfs_root)"
+   lfs_log "/usr/lfs exists, going on ($lfs_root=$lfs_root)"
 fi
 
 lfs_log "Entered chroot env, id=$(id), ls / -> $(ls /)"
+
+cd /usr/lfs
 
 lfs_run_step create-dirs
 lfs_run_step essential-files-symlinks
 lfs_run_step Linux-API-headers-2
 lfs_run_step man-pages
 lfs_run_step glibc-2-a
+exit 1
 lfs_run_step glibc-2-b
 lfs_run_step glibc-2-c-install
 lfs_run_step glibc-2-d-configuring

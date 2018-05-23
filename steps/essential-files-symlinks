@@ -3,13 +3,13 @@
 #
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter06/createfiles.html
 
-lfs_trap_err
+lfs_start_step
 
 ln -sv /tools/bin/{bash,cat,dd,echo,ln,pwd,rm,stty} /bin
 ln -sv /tools/bin/{install,perl} /usr/bin
 ln -sv /tools/lib/libgcc_s.so{,.1} /usr/lib
 ln -sv /tools/lib/libstdc++.{a,so{,.6}} /usr/lib
-sed 's/tools/usr/' /tools/lib/libstdc++.la > /usr/lib/libstdc++.la
+# V.2 sed 's/tools/usr/' /tools/lib/libstdc++.la > /usr/lib/libstdc++.la
 ln -sv bash /bin/sh
 
 ln -sv /proc/self/mounts /etc/mtab
@@ -57,4 +57,4 @@ chgrp -v utmp /var/log/lastlog
 chmod -v 664  /var/log/lastlog
 chmod -v 600  /var/log/btmp
 
-exit 0
+lfs_end_step

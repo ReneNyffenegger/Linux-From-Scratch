@@ -2,13 +2,12 @@
 #
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/linux-headers.html
 
-lfs_trap_err
+lfs_start_step
 
 lfs_log "PATH=$PATH"
 unset BASH_ENV
 
 
-# lfs_cd_untarred linux
 lfs_untar_and_cd linux
 
 lfs_log "make mrproper"
@@ -16,11 +15,13 @@ make mrproper
 
 
 # TODO: temporarily untrapping errors
-trap - ERR
+# trap - ERR
+
 lfs_log "make INSTALL_HDR_PATH …"
-   make INSTALL_HDR_PATH=dest               headers_install  # ORIG
+   make INSTALL_HDR_PATH=dest               headers_install || true # ORIG
    lfs_log "TQ84 after make INSTALL_HDR_PATH … \$?=$?"
-lfs_trap_err
+
+# lfs_trap_err
 #  make INSTALL_HDR_PATH=dest SHELL='sh -x' headers_install # &> make.tq84.out # TQ84
 #  make --trace INSTALL_HDR_PATH=dest SHELL='bash -x'              headers_install # &> make.tq84.out # TQ84
 #  make INSTALL_HDR_PATH=dest     headers_install
@@ -35,3 +36,5 @@ umask 0022
 lfs_log "TQ84 BEFORE copying: ls -l /usr/include/{asm,asm-generic,drm,mtd,misc,linux,rdma,video,sound,xen}"
 cp -rv dest/include/* /usr/include
 lfs_log "TQ84 AFTER copying: ls -l /usr/include/{asm,asm-generic,drm,mtd,misc,linux,rdma,video,sound,xen}"
+
+lfs_end_step

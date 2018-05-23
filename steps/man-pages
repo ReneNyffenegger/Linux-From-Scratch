@@ -1,12 +1,10 @@
 #
 # vim: ft=sh
 
-lfs_trap_err
+lfs_start_step
 
-pushd /sources/untarred/man-pages-*
+lfs_untar_and_cd man-pages-
 
 make install
 
-popd
-
-exit 0
+lfs_end_step

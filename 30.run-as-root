@@ -3,8 +3,8 @@
 
 . ./lfs-env
 
-lfs_log "Started 30.run-as-root id=$(id)"
-
+lfs_log "Started 30.run-as-root id=$(id) PWD=$PWD"
+lfs_run_step changing-ownership
 
 lfs_run_step prep-virt-kfs
 
@@ -23,9 +23,9 @@ chroot "$LFS" /tools/bin/env -i                           \
     TERM="$TERM"                                          \
     PS1='\u:\w\$ '                                        \
     PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin         \
-    lfs_root=/lfs                                         \
-    lfs_source_dir=/sources                               \
+    lfs_root=/usr/lfs                                     \
+    lfs_source_dir=/usr/lfs/sources                       \
     lfs_in_chroot_env=yes                                 \
     lfs_partition_device=$lfs_partition_device            \
     lfs_root_partition_nr=$lfs_root_partition_nr          \
-    /tools/bin/bash --login +h -c /lfs/40.in-chroot-env
+    /tools/bin/bash --login +h -c /usr/lfs/40.in-chroot-env

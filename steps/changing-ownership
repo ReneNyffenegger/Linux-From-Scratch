@@ -1,0 +1,13 @@
+# vi: ft=sh path=.,steps
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter05/changingowner.html
+
+lfs_start_step
+
+#
+#  TODO: If you intend to keep the temporary tools for use in building future
+#  LFS systems, now is the time to back them up.
+#
+sudo chown -R root:root $LFS/tools
+
+lfs_end_step

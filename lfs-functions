@@ -227,6 +227,23 @@ lfs_cd_untarred() { #_{
 export -f lfs_cd_untarred
 #_}
 
+lfs_patch() { #_{
+# local patch_file=$lfs_download_dir$1
+  local patch_file=$LFS/usr/lfs/sources/tarred/$1
+
+  if [ ! -r $patch_file ]; then
+    lfs_log "patch file $patch_file is not readable"
+    return 1
+  fi
+
+  lfs_log "Patching with patch file $patch_file in $PWD"
+
+  patch -Np1 -i $patch_file
+  return 0
+}
+export -f lfs_patch
+#_}
+
 lfs_start_step() { #_{
 # trap 'echo Error in ${BASH_SOURCE} / $lfs_cur_step_name at line $LINENO; exit 1' ERR
   trap 'echo Error in ${BASH_SOURCE} at line $LINENO; exit 1' ERR
