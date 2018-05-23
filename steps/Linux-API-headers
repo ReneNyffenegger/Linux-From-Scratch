@@ -8,7 +8,7 @@ lfs_start_step
 
 # pushd $LFS/sources/untarred/linux-*
 # V.2 lfs_cd_untarred linux
-lfs_untar_and_cd linux
+lfs_untar_and_cd linux-
 
 lfs_log "calling make mrproper"
 make mrproper

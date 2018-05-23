@@ -14,7 +14,7 @@ lfs_start_step
 # V.2 lfs_cd_untarred binutils
 
 
-lfs_untar_and_cd binutils
+lfs_untar_and_cd binutils-
 
 
 mkdir -v build

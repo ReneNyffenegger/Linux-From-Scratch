@@ -7,10 +7,9 @@
 #
 
 
-lfs_trap_err
+lfs_start_step
 
-pushd $LFS/sources/untarred/expect*
-# ------------------------------------
+lfs_untar_and_cd expect
 
 cp -v configure{,.orig}
 sed 's:/usr/local/bin:/bin:' configure.orig > configure
@@ -27,7 +26,4 @@ fi
 
 make SCRIPTS="" install
 
-# ------------------------------------
-popd
-
-exit 0
+lfs_end_step

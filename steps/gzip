@@ -3,9 +3,9 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter05/gzip.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-pushd $LFS/sources/untarred/gzip-*
+lfs_untar_and_cd gzip-
 
 ./configure --prefix=/tools
 
@@ -18,6 +18,4 @@ fi
 
 make install
 
-popd
-
-exit 0
+lfs_end_step

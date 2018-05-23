@@ -3,10 +3,10 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter05/texinfo.html
 #
 
-lfs_trap_err
+lfs_start_step
 
 
-pushd $LFS/sources/untarred/texinfo-*
+lfs_untar_and_cd texinfo-
 
 ./configure --prefix=/tools
 
@@ -19,6 +19,4 @@ fi
 
 make install
 
-popd
-
-exit 0
+lfs_end_step

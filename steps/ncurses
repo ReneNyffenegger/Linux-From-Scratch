@@ -3,9 +3,9 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter05/ncurses.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-pushd $LFS/sources/untarred/ncurses-*
+lfs_untar_and_cd ncurses-
 
 sed -i s/mawk// configure
 
@@ -19,7 +19,4 @@ sed -i s/mawk// configure
 make
 make install
 
-
-popd
-
-exit 0
+lfs_end_step

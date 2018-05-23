@@ -4,7 +4,7 @@
 
 lfs_start_step
 
-lfs_untar_and_cd glibc
+lfs_untar_and_cd glibc-
 
 
 mkdir -v build

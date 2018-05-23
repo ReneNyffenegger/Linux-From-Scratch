@@ -7,7 +7,7 @@ lfs_start_step
 
 
 # V.2 lfs_cd_untarred gcc
-lfs_untar_and_cd gcc
+lfs_untar_and_cd gcc-
 
 # pushd $LFS/sources/untarred
 # rm -rf gcc-*

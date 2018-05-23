@@ -4,7 +4,7 @@
 #
 
 
-pushd $LFS/sources/untarred/check-*
+pushd $LFS/sources/untarred/check-
 
 PKG_CONFIG= ./configure --prefix=/tools
 

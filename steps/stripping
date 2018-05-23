@@ -5,15 +5,22 @@
 
 # TODO: This   lfs_trap_err  causes this step to fail
 
+lfs_start_step
+
+# Using 
+#  || true
+# after the commands because they exit
+# with $? = 1
 
 lfs_log         "strip-debug"
-strip          --strip-debug     /tools/lib/*
-lfs_log         "strip-unneeded"
+strip          --strip-debug     /tools/lib/* || true
 
+lfs_log         "strip-unneeded"
 lfs_log "call strip --strip-uneeded, causes warning/error messages"
-/usr/bin/strip --strip-unneeded /tools/{,s}bin/*
+/usr/bin/strip --strip-unneeded /tools/{,s}bin/* || true
 
 rm -rf /tools/{,share}/{info,man,doc}
 
-lfs_log "exit 0"
-exit 0
+find /tools/{lib,libexec} -name \*.la -delete
+
+lfs_end_step

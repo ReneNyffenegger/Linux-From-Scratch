@@ -20,11 +20,11 @@ lfs_run_step glibc
 lfs_run_step libstdc++
 lfs_run_step binutils-pass-2
 lfs_run_step GCC-pass-2
-exit 1
 lfs_run_step tcl-core
 lfs_run_step expect
 lfs_run_step DejaGNU
 lfs_run_step check
+lfs_run_step m4
 lfs_run_step ncurses
 lfs_run_step bash
 lfs_run_step bison
@@ -37,7 +37,6 @@ lfs_run_step gawk
 lfs_run_step gettext
 lfs_run_step grep
 lfs_run_step gzip
-lfs_run_step m4
 lfs_run_step make
 lfs_run_step patch
 lfs_run_step perl
@@ -47,6 +46,7 @@ lfs_run_step texinfo
 lfs_run_step util-linux
 lfs_run_step xz
 lfs_run_step stripping
+exit 1
 
 lfs_log "exiting from 20.run-as-lfs to become a user in sudo group"
 

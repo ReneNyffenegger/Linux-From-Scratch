@@ -3,12 +3,9 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter05/util-linux.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-#
-#  TODO: can lfs_cd_untarred be used?
-#
-cd $LFS/sources/untarred/util-linux-*
+lfs_untar_and_cd util-linux-
 
 ./configure --prefix=/tools                \
             --without-python               \
@@ -20,4 +17,4 @@ cd $LFS/sources/untarred/util-linux-*
 make
 make install
 
-exit 0
+lfs_end_step

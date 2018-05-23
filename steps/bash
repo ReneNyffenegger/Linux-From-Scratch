@@ -3,12 +3,9 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter05/bash.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-#
-#  TODO: use lfs_cd_untarred here?
-#
-cd $LFS/sources/untarred/bash-*
+lfs_untar_and_cd bash-
 
 
 type_bash=$(type bash)
@@ -29,5 +26,4 @@ lfs_log "TQ84: ls -l /tools/bin/bash after: $(ls -l /tools/bin/bash)"
 
 ln -sv bash /tools/bin/sh
 
-
-exit 0
+lfs_end_step

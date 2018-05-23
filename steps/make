@@ -3,10 +3,12 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter05/make.html
 #
 
-lfs_trap_err
+lfs_start_step
 
+lfs_untar_and_cd make-
 
-pushd $LFS/sources/untarred/make-*
+# First, work around an error caused by glibc-2.27: 
+sed -i '211,217 d; 219,229 d; 232 d' glob/glob.c
 
 ./configure --prefix=/tools --without-guile
 
@@ -19,6 +21,4 @@ fi
 
 make install
 
-popd
-
-exit 0
+lfs_end_step

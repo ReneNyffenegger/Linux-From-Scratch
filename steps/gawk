@@ -3,9 +3,9 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter05/gawk.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-pushd $LFS/sources/untarred/gawk-*
+lfs_untar_and_cd gawk-
 
 ./configure --prefix=/tools
 
@@ -18,6 +18,4 @@ fi
 
 make install
 
-popd
-
-exit 0
+lfs_end_step

@@ -6,7 +6,7 @@
 lfs_start_step
 
 # 2018-02-12 Apparently, gcc-* is already used in step GCC-pass-1
-lfs_untar_and_cd gcc
+lfs_untar_and_cd gcc-
 
 mkdir -v build
 cd       build

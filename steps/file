@@ -3,9 +3,9 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter05/file.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-pushd $LFS/sources/untarred/file-*
+lfs_untar_and_cd file-
 
 
 ./configure --prefix=/tools
@@ -19,6 +19,4 @@ fi
 
 make install
 
-popd
-
-exit 0
+lfs_end_step

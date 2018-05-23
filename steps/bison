@@ -3,9 +3,9 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter05/bison.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-cd $LFS/sources/untarred/bison-*
+lfs_untar_and_cd bison-
 
 lfs_log "calling ./configure, PWD=$PWD"
 ./configure --prefix=/tools
@@ -19,8 +19,6 @@ make
 # TODO fi
 
 lfs_log "calling make install"
-lfs_log "make install"
 make install
 
-
-exit 0
+lfs_end_step

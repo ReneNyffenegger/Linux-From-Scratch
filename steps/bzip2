@@ -3,13 +3,11 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter05/bzip2.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-pushd $LFS/sources/untarred/bzip2-*
+lfs_untar_and_cd bzip2-
 
 make
 make PREFIX=/tools install
 
-popd
-
-exit 0
+lfs_end_step

@@ -5,7 +5,7 @@
 
 lfs_start_step
 
-lfs_untar_and_cd gcc
+lfs_untar_and_cd gcc-
 
 
 cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \

@@ -191,16 +191,16 @@ lfs_untar_and_cd() { #_{
 
   lfs_log_ $script_name "  I am in PWD=$PWD"
 
-  if [ -d untarred/$tar_pattern-* ]; then
+  if [ -d untarred/$tar_pattern* ]; then
     lfs_log_ $script_name "  lfs_untar_and_cd, untarred/$tar_pattern exists, removing it. PWD=$PWD"
-    rm -rf untarred/$tar_pattern-*
+    rm -rf untarred/$tar_pattern*
   else
     lfs_log_ $script_name "  lfs_untar_and_cd, untarred/$tar_pattern does not exist. PWD=$PWD"
   fi
 
-  lfs_log "ls -l tarred/$tar_pattern-*.tar.*: $(ls -l $tar_pattern-*.tar.* 2>/dev/null), PWD=$PWD"
-  lfs_log "untarring $tar_pattern-*, PWD=$PWD"
-  if ! tar xf tarred/$tar_pattern-*.tar.* -C untarred ; then
+  lfs_log "ls -l tarred/$tar_pattern*.tar.*: $(ls -l $tar_pattern-*.tar.* 2>/dev/null), PWD=$PWD"
+  lfs_log "untarring $tar_pattern*, PWD=$PWD"
+  if ! tar xf tarred/$tar_pattern*.tar.* -C untarred ; then
     lfs_log "tar returned $?"
     return 1
   fi
@@ -220,8 +220,8 @@ lfs_cd_untarred() { #_{
      
 # V.2  lfs_log_ $script_name "  lfs_cd_untarred: cd'ing into $lfs_source_dir/untarred/$tar_pattern-*"
 # V.2  cd $lfs_source_dir/untarred/$tar_pattern-*
-  lfs_log_ $script_name "  lfs_cd_untarred: cd'ing into $lfs_root/sources/untarred/$tar_pattern-*"
-  cd $lfs_root/sources/untarred/$tar_pattern-*
+  lfs_log_ $script_name "  lfs_cd_untarred: cd'ing into $lfs_root/sources/untarred/$tar_pattern*"
+  cd $lfs_root/sources/untarred/$tar_pattern*
   lfs_log_ $script_name "  I am in PWD=$PWD"
 }
 export -f lfs_cd_untarred

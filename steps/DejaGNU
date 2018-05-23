@@ -6,10 +6,9 @@
 #  TODO: Tcl, Expect and DejaGNU are apparently (only) needed to run the toolchain tests.
 #
 
-lfs_trap_err
+lfs_start_step
 
-pushd $LFS/sources/untarred/dejagnu-*
-
+lfs_untar_and_cd dejagnu-*
 
 ./configure --prefix=/tools
 
@@ -20,7 +19,4 @@ if [ ${RUN_TESTS_CHAPTER_5-NO} == "YES" ]; then
   make check
 fi
 
-
-popd
-
-exit 0
+lfs_end_step
