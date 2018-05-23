@@ -3,21 +3,10 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter05/gcc-libstdc++.html
 #
 
-lfs_trap_err
-
-# pushd $LFS/sources/untarred
+lfs_start_step
 
 # 2018-02-12 Apparently, gcc-* is already used in step GCC-pass-1
 lfs_untar_and_cd gcc
-
-# lfs_log "rm -rf gcc-* in $PWD"
-# rm -rf gcc-*
-# 
-# cd ..
-# lfs_log "tar xf gcc-* -C untarred in $PWD"
-# tar xf gcc-* -C untarred
-# 
-# cd untarred/gcc-*
 
 mkdir -v build
 cd       build
@@ -31,10 +20,9 @@ lfs_log "calling ../libstdc++-v3/configure, PWD=$PWD"
     --disable-nls                   \
     --disable-libstdcxx-threads     \
     --disable-libstdcxx-pch         \
-    --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/7.2.0
+    --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/7.3.0
 
 make
 make install
 
-
-exit 0
+lfs_end_step

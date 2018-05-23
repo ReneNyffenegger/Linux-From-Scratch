@@ -17,10 +17,10 @@ lfs_run_step binutils-pass-1
 lfs_run_step GCC-pass-1
 lfs_run_step Linux-API-headers
 lfs_run_step glibc
-exit 1
 lfs_run_step libstdc++
 lfs_run_step binutils-pass-2
 lfs_run_step GCC-pass-2
+exit 1
 lfs_run_step tcl-core
 lfs_run_step expect
 lfs_run_step DejaGNU

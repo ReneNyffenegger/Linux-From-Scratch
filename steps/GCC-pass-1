@@ -36,6 +36,12 @@ tar -xf ../../tarred/mpfr-*
 tar -xf ../../tarred/gmp-*  
 tar -xf ../../tarred/mpc-*  
 
+# 2018-05-23: Following three lines added after 
+#             building GCC-pass-1 
+mv mpfr-* mpfr
+mv gmp-*  gmp 
+mv mpc-*  mpc 
+
 lfs_log "files were untarred"
 
 for file in gcc/config/{linux,i386/linux{,64}}.h

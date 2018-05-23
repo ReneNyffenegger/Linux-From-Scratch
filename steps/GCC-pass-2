@@ -3,21 +3,9 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter05/gcc-pass2.html
 #
 
-lfs_trap_err
+lfs_start_step
 
 lfs_untar_and_cd gcc
-# pushd $LFS/sources/untarred
-# 
-# lfs_log "Trying to remove gcc-* in $PWD"
-# rm -rf gcc-*
-# 
-# cd ..
-# 
-# lfs_log "Trying to tar xf gcc-* in $PWD"
-# tar xf gcc-* -C untarred
-# 
-# cd untarred/gcc-*
-# # ------------------------------
 
 
 cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
@@ -46,9 +34,13 @@ case $(uname -m) in
 esac
 
 
-cp -pr ../mpfr-* ./mpfr
-cp -pr ../gmp-*  ./gmp
-cp -pr ../mpc-*  ./mpc
+tar -xf ../../tarred/mpfr-* 
+tar -xf ../../tarred/gmp-*  
+tar -xf ../../tarred/mpc-*  
+
+mv mpfr-* mpfr
+mv gmp-*  gmp
+mv mpc-*  mpc
 
 
 mkdir -v  build
@@ -87,4 +79,4 @@ lfs_log "$(readelf -l a.out | grep ': /tools')"
 
 rm -v dummy.c a.out
 
-exit 0
+lfs_end_step
