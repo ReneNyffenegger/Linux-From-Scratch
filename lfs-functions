@@ -23,10 +23,7 @@ lfs_take_fs_snapshot() { #_{
   local step_name=$1
   local suffix=$2
 
-# local out_file=${lfs_dir}fs_snapshots/$lfs_cur_step_name.$suffix
   local out_file=${lfs_root}/fs_snapshots/$step_name.$suffix
-
-  lfs_log "lfs_take_fs_snapshot: out_file = $out_file, LFS=$LFS"
 
   if [ -e $out_file ]; then
     lfs_log "$out_file already exists, I am not overwriting it, I return."

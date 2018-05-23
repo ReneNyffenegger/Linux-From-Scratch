@@ -15,8 +15,8 @@ lfs_log "I should be lfs and I am $(id)"
 lfs_run_step general-instructions
 lfs_run_step binutils-pass-1
 lfs_run_step GCC-pass-1
-exit 1
 lfs_run_step Linux-API-headers
+exit 1
 lfs_run_step glibc
 lfs_run_step libstdc++
 lfs_run_step binutils-pass-2

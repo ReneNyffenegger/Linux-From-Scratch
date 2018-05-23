@@ -3,10 +3,12 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter05/linux-headers.html
 #
 
-lfs_trap_err
+# V.2 lfs_trap_err
+lfs_start_step
 
 # pushd $LFS/sources/untarred/linux-*
-lfs_cd_untarred linux
+# V.2 lfs_cd_untarred linux
+lfs_untar_and_cd linux
 
 lfs_log "calling make mrproper"
 make mrproper
@@ -22,5 +24,4 @@ make INSTALL_HDR_PATH=dest headers_install
 
 cp -rv dest/include/* /tools/include
 
-
-exit 0
+lfs_end_step
