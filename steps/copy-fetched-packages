@@ -3,9 +3,9 @@
 lfs_trap_err
 
 # TODO: Same variable also in steps/fetch-packages-and-patches
-lfs_package_depot_dir=~/lfs.sources
+# 2018-05-20 lfs_package_depot_dir=~/lfs.sources
 
-if [[ ! -d ~/lfs.sources ]]; then
+if [[ ! -d $lfs_package_depot_dir ]]; then
   lfs_log "Copying packages from $LFS/sources to $lfs_package_depot_dir"
   cp -r $LFS/sources $lfs_package_depot_dir
 else

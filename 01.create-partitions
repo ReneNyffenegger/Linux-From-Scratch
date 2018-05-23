@@ -2,6 +2,10 @@
 #
 # http://www.linuxfromscratch.org/lfs/view/development/chapter02/creatingpartition.html
 
+#
+#  TODO 2018-05-20 : Used 01.b.create-partitions instead!
+#
+
 . ./lfs-env
 
 #

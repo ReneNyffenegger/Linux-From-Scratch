@@ -30,12 +30,12 @@ lfs_trap_err
 # fi
 
 sudo chown -v  lfs $LFS/tools
-sudo chown -Rv lfs $LFS/sources
+sudo chown -Rv lfs $lfs_root/sources
 sudo chown -R  lfs $lfs_root
 
 # sudo chmod    755 $LFS/tools
-sudo chmod    755 $LFS/sources
-sudo chmod    655 $LFS/sources/*
+sudo chmod    755 $lfs_root/sources
+sudo chmod    655 $lfs_root/sources/*
 sudo chmod -R 777 $lfs_root
 
 exit 0

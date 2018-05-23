@@ -13,7 +13,9 @@ if [[ ! -d $LFS ]];then
     mkdir $LFS
 fi
 
-sudo mount /dev/${lfs_partition_device}${lfs_root_partition_nr} $LFS
+# 2018-05-20 sudo mount /dev/${lfs_partition_device}${lfs_root_partition_nr} $LFS
+sudo mount /dev/${lfs_partition_device}1 $LFS
+
 sudo chown $USER:$USER $LFS
 
 # ? if [[ $(ls $LFS) != 'lost+found' ]]; then

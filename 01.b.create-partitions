@@ -1,0 +1,32 @@
+# vi: ft=sh
+
+
+trap 'exit 1' ERR
+
+. ./lfs-env
+
+echo_or_sudo=sudo
+
+check_if_mounted() {
+  if mount | grep /dev/$lfs_partition_device$1 > /dev/null ; then
+     echo Error: /dev/$lfs_partition_device$1 is already mounted
+     exit 1
+  fi
+}
+
+check_if_mounted 1
+check_if_mounted 2
+
+$echo_or_sudo dd bs=1024 count=$((1024 * 25 )) if=/dev/zero of=/dev/$lfs_partition_device
+
+$echo_or_sudo parted /dev/$lfs_partition_device -s mklabel msdos 
+
+$echo_or_sudo parted -s /dev/$lfs_partition_device \
+   mkpart  primary ext4   1MiB      460.0GiB       \
+   mkpart  primary ext4   460.0GiB  465.7GiB       \
+   print
+
+sleep 0.1  # Take a brief nap in order to prevent »The file /dev/... does not exist and no size was specified.«
+
+$echo_or_sudo mkfs -F -t ext4 /dev/${lfs_partition_device}1
+$echo_or_sudo mkswap          /dev/${lfs_partition_device}2

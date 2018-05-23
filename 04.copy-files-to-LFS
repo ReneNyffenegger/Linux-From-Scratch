@@ -6,13 +6,17 @@ umask 022
 
 if [[ ! -d $lfs_root ]]; then
   echo "lfs_root ($lfs_root) does not exist, creating"
-  mkdir $lfs_root
-  mkdir $lfs_root/done
-  mkdir $lfs_root/steps
-  touch $lfs_root/log
+  mkdir -p $lfs_root
+  mkdir    $lfs_root/done
+  mkdir    $lfs_root/steps
+  mkdir    $lfs_root/sources
+  mkdir    $lfs_root/sources/tarred
+  mkdir    $lfs_root/sources/untarred
+  mkdir    $lfs_root/fs_snapshots
+  touch    $lfs_root/log
 
   sudo chown -R lfs:lfs $lfs_root
-# sudo chmod 755 $LFS/sources
+  sudo chmod -R 777 $lfs_root/sources
   sudo chmod 666 $lfs_root/log
 # sudo chmod 777 $lfs_root/steps
 fi

@@ -6,6 +6,8 @@
 lfs_trap_err
 umask 022
 
+lfs_log "10.run - PWD=${PWD}"
+
 if  mount | grep -q $LFS ; then
   lfs_log "$LFS is mounted, OK"
 else

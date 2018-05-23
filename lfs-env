@@ -11,20 +11,24 @@
 # Used to create partitions. ADAPT MANUALLY!!!
 #
 export lfs_partition_device=sdb
-export lfs_boot_partition_nr=1
-export lfs_root_partition_nr=2
-export lfs_swap_partition_nr=3
-export lfs_root_partition_size_gib=20
+
+lfs_root_partition_nr=1  # TODO: currently needed to determine free space (see lfs-functions / lfs_run_step
+# V.2 export lfs_boot_partition_nr=2
+# V.2 export lfs_swap_partition_nr=3
+# V.2 export lfs_root_partition_size_gib=20
 
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter02/aboutlfs.html
 #
 
-export LFS=$(realpath $PWD/mnt-lfs)
+# V.2 export LFS=$(realpath $PWD/mnt-lfs)
+export LFS=/mnt/lfs
 
 #
 # 2018-02-12 export lfs_root=$(realpath $PWD)
-export lfs_root=$LFS/lfs
-export lfs_source_dir=$LFS/sources
+export lfs_root=$LFS/usr/lfs
+export lfs_package_depot_dir=~/lfs.depot
+# V.2 export lfs_source_dir=$LFS/sources
+# export lfs_source_dir=
 
 # Functions
 #

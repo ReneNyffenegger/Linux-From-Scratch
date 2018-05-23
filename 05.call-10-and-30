@@ -10,6 +10,8 @@ lfs_log "Calling ./10.run"
 umask 022
 ./10.run
 
+exit 1
+
 if [[ -f $lfs_root/done/20 ]]; then
    lfs_log "$lfs_root/done/20 found"
    lfs_log "changing ownership $LFS/tools"

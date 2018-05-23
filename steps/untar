@@ -2,6 +2,8 @@
 
 lfs_trap_err
 
+exit 0 # 2018-05-20 / Should not be used anymore
+
 cd $LFS/sources
 mkdir untarred
 

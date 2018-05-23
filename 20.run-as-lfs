@@ -2,10 +2,19 @@
 
 . $lfs_root/lfs-functions
 
+
+
+lfs_log "20.run - PWD=${PWD}, lfs_root=${lfs_root}"
+
 lfs_trap_err
 
-lfs_run_step untar
+lfs_log "I should be lfs and I am $(id)"
+
+# 2018-05-20 lfs_run_step untar
+
+lfs_run_step general-instructions
 lfs_run_step binutils-pass-1
+exit 1
 lfs_run_step GCC-pass-1
 lfs_run_step Linux-API-headers
 lfs_run_step glibc

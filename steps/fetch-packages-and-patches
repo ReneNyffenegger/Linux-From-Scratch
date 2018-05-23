@@ -3,13 +3,18 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter03/introduction.html
 #
 # TODO
+#   - if the package_depot_dir does not exist, it should be
+#     created and downloaded into.
+#
+#
 #   There are optional packages at
 #     http://www.linuxfromscratch.org/lfs/view/stable/chapter03/patches.html
 
 lfs_trap_err
 
+
 # TODO: Same variable also in steps/copy-fetched-packages
-lfs_package_depot_dir=~/lfs.sources
+# 2018-05-20 lfs_package_depot_dir=~/lfs.sources
 
 
 if [[ -d $lfs_package_depot_dir ]]; then # { copy from depot dir, if available
@@ -21,26 +26,27 @@ if [[ -d $lfs_package_depot_dir ]]; then # { copy from depot dir, if available
 #      exit -1
 #  fi
 
-   cp -r $lfs_package_depot_dir $lfs_source_dir
+   cp -r $lfs_package_depot_dir/. $lfs_root/sources/tarred
    exit 0
 fi # }
 
 
-if [[ ! -d $LFS/sources ]]; then
-    lfs_log "$LFS/sources does not exist. Creating"
-    mkdir -pv $LFS/sources
+if [[ ! -d $lfs_root/sources/tarred ]]; then
+    lfs_log "$lfs_root/sources/tarred does not exist. Creating"
+    mkdir -pv $lfs_root/sources/tarred
 fi
-chmod -v a+wt $LFS/sources
+chmod -v a+wt $lfs_root/sources/tarred
 
 lfs_log "downloading sources"
 
-if [[ ! -f $LFS/sources/wget-list ]]; then
-  wget -nc http://www.linuxfromscratch.org/lfs/view/stable/wget-list  -O$LFS/sources/wget-list
+if [[ ! -f $lfs_root/sources/wget-list ]]; then
+  wget -nc http://www.linuxfromscratch.org/lfs/view/stable/wget-list  -O$lfs_root/sources/wget-list
 else
   lfs_log "wget-list apparently already downloaded"
 fi
-if [[ ! -f $LFS/sources/md5sums ]]; then
-  wget -nc http://www.linuxfromscratch.org/lfs/view/stable/md5sums    -O$LFS/sources/md5sums
+
+if [[ ! -f $lfs_root/sources/md5sums ]]; then
+  wget -nc http://www.linuxfromscratch.org/lfs/view/stable/md5sums    -O$lfs_root/sources/tarred/md5sums
 else
   lfs_log "md5sums apparently already downloaded"
 fi
@@ -49,18 +55,18 @@ fi
 #
 #    2018-02-12: Downloading from multiprecision causes 500 Internal Server Error!
 #
-sed -i s@http://www.multiprecision.org/mpc/download/mpc-1.0.3.tar.gz@https://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz@ $LFS/sources/wget-list
+# q sed -i s@http://www.multiprecision.org/mpc/download/mpc-1.0.3.tar.gz@https://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz@ $lfs_root/sources/wget-list
 
 
 #
 #   TQ84: added --show-progress
 #
-wget --input-file=$LFS/sources/wget-list -nc --show-progress --continue --directory-prefix=$LFS/sources -o $LFS/sources/wget-sources.log
+wget --input-file=$lfs_root/sources/wget-list -nc --show-progress --continue --directory-prefix=$lfs_root/sources/tarred -o $lfs_root/sources/wget-sources.log
 
 #
 #  TODO: pushd could be made at the start of the script
 #
-pushd $LFS/sources
+pushd $lfs_root/sources/tarred
 
    lfs_log "should be in sources directory, PWD=$PWD"
 

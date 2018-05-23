@@ -33,9 +33,9 @@ set +h
 umask 022
 export LFS=$LFS
 export lfs_root=$lfs_root
-export lfs_partition_device=$lfs_partition_device
+# 2018-05-20 export lfs_partition_device=$lfs_partition_device
 export lfs_root_partition_nr=$lfs_root_partition_nr
-export lfs_source_dir=$lfs_source_dir
+# 2018-05-20 export lfs_source_dir=$lfs_source_dir
 export LC_ALL=POSIX
 export LFS_TGT=$(uname -m)-lfs-linux-gnu
 export PATH=/tools/bin:/bin:/usr/bin

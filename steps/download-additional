@@ -5,69 +5,69 @@ lfs_trap_err
 
 exit 0
 
-todo 
-
-# sudo wget ftp://roy.marples.name/pub/dhcpcd/dhcpcd-6.11.5.tar.xz -P $LFS/sources
-sudo wget   http://roy.marples.name/downloads/dhcpcd/dhcpcd-6.11.5.tar.xz                    -P $LFS/sources
-
-sudo wget  https://github.com//libusb/libusb/releases/download/v1.0.21/libusb-1.0.21.tar.bz2 -P $LFS/sources
-
-# PCI and USB utils
-sudo mkdir                                                                                      $LFS/usr/share/hwdata
-sudo wget  https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-009.tar.xz           -P $LFS/sources
-sudo wget  https://www.kernel.org/pub/software/utils/pciutils/pciutils-3.5.5.tar.xz          -P $LFS/sources
-sudo wget  https://pci-ids.ucw.cz/v2.2/pci.ids                                               -O $LFS/usr/share/hwdata/pci.ids
-sudo wget   http://www.linux-usb.org/usb.ids                                                 -O $LFS/usr/share/hwdata/usb.ids
-
-# OpenSSL
-sudo wget  https://openssl.org/source/openssl-1.1.0f.tar.gz                                  -P $LFS/sources
-
-# OpenSSL Libraries
-#
-# Note: special name to make problems hopefully smaller.
-sudo wget  https://openssl.org/source/openssl-1.0.2l.tar.gz                                                  -O $LFS/sources/OPENSSL_LIB.tar.gz
-sudo wget  http://www.linuxfromscratch.org/patches/blfs/8.1/openssl-1.0.2l-compat_versioned_symbols-1.patch  -P $LFS/sources
-
-# libnl
-sudo wget  https://github.com/thom311/libnl/releases/download/libnl3_3_0/libnl-3.3.0.tar.gz  -P $LFS/sources
-
-# wpa_supplicant
-sudo wget  https://w1.fi/releases/wpa_supplicant-2.6.tar.gz                                  -P $LFS/sources
-
-# wget
-sudo wget  https://ftp.gnu.org/gnu/wget/wget-1.19.1.tar.xz                                   -P $LFS/sources
-
-# libatomic_ops
-sudo wget  https://github.com/ivmai/libatomic_ops/releases/download/v7.4.6/libatomic_ops-7.4.6.tar.gz -P $LFS/sources
-
-# gc
-sudo wget  http://www.hboehm.info/gc/gc_source/gc-7.6.0.tar.gz                               -P $LFS/sources
-
-# W3m text browser
-sudo wget  https://downloads.sourceforge.net/w3m/w3m-0.5.3.tar.gz                            -P $LFS/sources
-sudo wget  http://www.linuxfromscratch.org/patches/blfs/8.1/w3m-0.5.3-bdwgc72-1.patch        -P $LFS/sources
-
-# Curl
-sudo wget  https://curl.haxx.se/download/curl-7.55.1.tar.xz                                  -P $LFS/sources
-
-# libffi
-sudo wget  https://sourceware.org/ftp/libffi/libffi-3.2.1.tar.gz                             -P $LFS/sources
-
-# python 2
-sudo wget  https://www.python.org/ftp/python/2.7.13/Python-2.7.13.tar.xz                     -P $LFS/sources
-
-# git
-sudo wget  https://www.kernel.org/pub/software/scm/git/git-2.14.1.tar.xz                     -P $LFS/sources
-
-#
-# http://www.linuxfromscratch.org/blfs/view/stable/introduction/bootscripts.html
-#    wget http://anduin.linuxfromscratch.org/BLFS/blfs-bootscripts/blfs-bootscripts-20170731.tar.xz
-# 
-# However, the bootscripts are already located under
-#   blfs/bootscripts
-# So, they can be copied
-#
-sudo cp -r blfs/bootscripts/ $LFS/lfs/bootscripts
-
-
-todo download cpio etc.
+# q todo 
+# q 
+# q # sudo wget ftp://roy.marples.name/pub/dhcpcd/dhcpcd-6.11.5.tar.xz -P $LFS/sources
+# q sudo wget   http://roy.marples.name/downloads/dhcpcd/dhcpcd-6.11.5.tar.xz                    -P $LFS/sources
+# q 
+# q sudo wget  https://github.com//libusb/libusb/releases/download/v1.0.21/libusb-1.0.21.tar.bz2 -P $LFS/sources
+# q 
+# q # PCI and USB utils
+# q sudo mkdir                                                                                      $LFS/usr/share/hwdata
+# q sudo wget  https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-009.tar.xz           -P $LFS/sources
+# q sudo wget  https://www.kernel.org/pub/software/utils/pciutils/pciutils-3.5.5.tar.xz          -P $LFS/sources
+# q sudo wget  https://pci-ids.ucw.cz/v2.2/pci.ids                                               -O $LFS/usr/share/hwdata/pci.ids
+# q sudo wget   http://www.linux-usb.org/usb.ids                                                 -O $LFS/usr/share/hwdata/usb.ids
+# q 
+# q # OpenSSL
+# q sudo wget  https://openssl.org/source/openssl-1.1.0f.tar.gz                                  -P $LFS/sources
+# q 
+# q # OpenSSL Libraries
+# q #
+# q # Note: special name to make problems hopefully smaller.
+# q sudo wget  https://openssl.org/source/openssl-1.0.2l.tar.gz                                                  -O $LFS/sources/OPENSSL_LIB.tar.gz
+# q sudo wget  http://www.linuxfromscratch.org/patches/blfs/8.1/openssl-1.0.2l-compat_versioned_symbols-1.patch  -P $LFS/sources
+# q 
+# q # libnl
+# q sudo wget  https://github.com/thom311/libnl/releases/download/libnl3_3_0/libnl-3.3.0.tar.gz  -P $LFS/sources
+# q 
+# q # wpa_supplicant
+# q sudo wget  https://w1.fi/releases/wpa_supplicant-2.6.tar.gz                                  -P $LFS/sources
+# q 
+# q # wget
+# q sudo wget  https://ftp.gnu.org/gnu/wget/wget-1.19.1.tar.xz                                   -P $LFS/sources
+# q 
+# q # libatomic_ops
+# q sudo wget  https://github.com/ivmai/libatomic_ops/releases/download/v7.4.6/libatomic_ops-7.4.6.tar.gz -P $LFS/sources
+# q 
+# q # gc
+# q sudo wget  http://www.hboehm.info/gc/gc_source/gc-7.6.0.tar.gz                               -P $LFS/sources
+# q 
+# q # W3m text browser
+# q sudo wget  https://downloads.sourceforge.net/w3m/w3m-0.5.3.tar.gz                            -P $LFS/sources
+# q sudo wget  http://www.linuxfromscratch.org/patches/blfs/8.1/w3m-0.5.3-bdwgc72-1.patch        -P $LFS/sources
+# q 
+# q # Curl
+# q sudo wget  https://curl.haxx.se/download/curl-7.55.1.tar.xz                                  -P $LFS/sources
+# q 
+# q # libffi
+# q sudo wget  https://sourceware.org/ftp/libffi/libffi-3.2.1.tar.gz                             -P $LFS/sources
+# q 
+# q # python 2
+# q sudo wget  https://www.python.org/ftp/python/2.7.13/Python-2.7.13.tar.xz                     -P $LFS/sources
+# q 
+# q # git
+# q sudo wget  https://www.kernel.org/pub/software/scm/git/git-2.14.1.tar.xz                     -P $LFS/sources
+# q 
+# q #
+# q # http://www.linuxfromscratch.org/blfs/view/stable/introduction/bootscripts.html
+# q #    wget http://anduin.linuxfromscratch.org/BLFS/blfs-bootscripts/blfs-bootscripts-20170731.tar.xz
+# q # 
+# q # However, the bootscripts are already located under
+# q #   blfs/bootscripts
+# q # So, they can be copied
+# q #
+# q sudo cp -r blfs/bootscripts/ $LFS/lfs/bootscripts
+# q 
+# q 
+# q todo download cpio etc.

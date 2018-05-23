@@ -1,0 +1,36 @@
+# vim: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter05/generalinstructions.html
+#
+
+lfs_start_step
+
+lfs_log "General instructions, LFS=$LFS"
+
+if [ -z $LFS ]; then
+  lfs_log "LFS is empty!"
+  return 1
+fi
+
+sh_points_to=$(readlink $(which sh))
+
+lfs_log "sh_points_to = $sh_points_to"
+
+if [[ $sh_points_to != 'bash' ]]; then
+  lfs_log "sh_points_to = $sh_points_to (!= bash, returning)"
+  exit 1
+fi
+
+awk_points_to=$(readlink $(which awk))
+if [[ $awk_points_to != 'gawk' ]]; then
+  lfs_log "awk_points_to = $awk_points_to (!= gawk, returning)"
+  exit 1
+fi
+
+yacc_is=$(yacc -V | head -n 1 | cut -d ' ' -f1 )
+if [[ $yacc_is != 'bison' ]]; then
+  lfs_log "yacc_is = $yacc_is (!= bison, returning)"
+  exit 1
+fi
+
+lfs_end_step

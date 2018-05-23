@@ -1,7 +1,7 @@
-# vim: ft=sh
+# vi: ft=sh foldmarker=_{,_} foldmethod=marker
 #
 
-lfs_log_() {
+lfs_log_() { #_{
   local script_file=$(basename "$1")
   local text="$2"
 
@@ -9,15 +9,68 @@ lfs_log_() {
   printf "%s: %-29s %s\n" "$(TZ=UTF date +'%Y-%m-%d %H:%M:%S')" $script_file      "$text" >> $lfs_root/log
 }
 export -f lfs_log_
+#_}
 
-lfs_log() {
+lfs_log() { #_{
   local text="$1"
   lfs_log_ "${BASH_SOURCE[1]}" "  $text"
 }
 export -f lfs_log
+#_}
 
+lfs_take_fs_snapshot() { #_{
 
-lfs_run_step() {
+  local step_name=$1
+  local suffix=$2
+
+# local out_file=${lfs_dir}fs_snapshots/$lfs_cur_step_name.$suffix
+  local out_file=${lfs_root}/fs_snapshots/$step_name.$suffix
+
+  lfs_log "lfs_take_fs_snapshot: out_file = $out_file, LFS=$LFS"
+
+  if [ -e $out_file ]; then
+    lfs_log "$out_file already exists, I am not overwriting it, I return."
+    return 0
+  fi
+
+#        -path '/usr/lib/python2.7/*'     -prune -o \
+#        -path '/usr/lib/python3.6/*'     -prune -o \
+#        -path '/usr/lib/gconv'           -prune -o \
+#        -name '.git'                     -prune -o \
+
+  #      -path  ${lfs_dir%/}                  -prune -o \
+
+  find $LFS                                             \
+         -path "$LFS/proc"                    -prune -o \
+         -path "$LFS/sources"                 -prune -o \
+         -path "$LFS/dev"                     -prune -o \
+         -path "$LFS/lfs"                     -prune -o \
+         -path "$LFS/sys"                     -prune -o \
+         -path "$LFS/usr/include"             -prune -o \
+         -path "$LFS/usr/lib/*"               -prune -o \
+         -path "$LFS/usr/lfs"                 -prune -o \
+         -path "$LFS/usr/share"               -prune -o \
+         -path "$LFS/lost+found"              -prune -o \
+         -path "$LFS/tools/*/*"               -prune -o \
+         -path "$LFS/lib/libreoffice/*"       -prune -o \
+         -path "$LFS/opt/ant-*/manual"        -prune -o \
+         -path "$LFS/opt/OpenJDK-*-bin/*"     -prune -o \
+         -path "$LFS/root"                    -prune -o \
+         -path "$LFS/tmp"                     -prune -o \
+         -path "$LFS/boot/grub/*"             -prune -o \
+         -path "$LFS/run/udev/*"              -prune -o \
+         -path "$LFS/mnt"                     -prune -o \
+         -print > $out_file
+
+}
+export -f lfs_take_fs_snapshot
+#_}
+
+lfs_run_step() { #_{
+
+  # V.2:
+  trap 'echo Error at line $LINENO; exit 1' ERR
+
   local step_name=$1
   local script_name=${BASH_SOURCE[1]}
 
@@ -28,76 +81,111 @@ lfs_run_step() {
 # lfs_log_ $script_name "lfs_run_step ls -l \$lfs_root/done: $(lfs_root/done)"
 
   if [[ -f $lfs_root/done/$step_name ]]; then
-    lfs_log_ $script_name "already done: $step_name"
+    lfs_log_ $script_name "already done: $step_name ($lfs_root/done/$step_name exists)"
     return
   fi
 
-  lfs_log_ $script_name "doing step   : $step_name, id=$(id)"
+  lfs_log_ $script_name "doing step   : $step_name, id=$(id) PWD=${PWD}"
 
-  if [[ $lfs_in_chroot_env == 'yes' ]]; then #_{
+  lfs_take_fs_snapshot $step_name before
 
-     find / -path '/proc'          -prune -o \
-            -path '/sources'       -prune -o \
-            -path '/dev'           -prune -o \
-            -path '/lfs'           -prune -o \
-            -path '/sys'           -prune -o \
-            -path '/usr/include'   -prune -o \
-            -path '/usr/lib/gconv' -prune -o \
-            -path '/usr/share'     -prune -o \
-            -path '/tools/*/*'     -prune -o \
-            -print > $lfs_root/done/$step_name.tree.before
-  fi #_}
+# V.2  if [[ $lfs_in_chroot_env == 'yes' ]]; then #_{
+# V.2
+# V.2     find / -path '/proc'          -prune -o \
+# V.2            -path '/sources'       -prune -o \
+# V.2            -path '/dev'           -prune -o \
+# V.2            -path '/lfs'           -prune -o \
+# V.2            -path '/sys'           -prune -o \
+# V.2            -path '/usr/include'   -prune -o \
+# V.2            -path '/usr/lib/gconv' -prune -o \
+# V.2            -path '/usr/share'     -prune -o \
+# V.2            -path '/tools/*/*'     -prune -o \
+# V.2            -print > $lfs_root/done/$step_name.tree.before
+# V.2  fi #_}
 
   local start_time=$SECONDS
-  lfs_log_ $script_name "lfs_run_step \$-=$-, SHELLOPTS=$SHELLOPTS, BASH_ENV=$BASH_ENV id=$(id)"
-  if $lfs_root/steps/$step_name; then
-    if ! touch $lfs_root/done/$step_name; then
-      lfs_log_ $script_name "!!! Could not touch $lfs_root/done/$step_name"
-    fi
-    
-#   lfs_log_ "TOUCH_INFO", "$lfs_root/done/$step_name"
-#   lfs_log_ "DONE-INFO-1", "ls -l $(ls -l /var/tmp/Linux-From-Scratch/mnt-lfs/lfs/done/fetch-pacakges-and-patches)"
-#   lfs_log_ "DONE-INFO-a", "ls -l $(ls -l $lfs_root/done/$step_name)"
-    local diff_time=$(( $SECONDS - $start_time ))
 
-    local space_free=$(df | grep "/dev/$lfs_partition_device$lfs_root_partition_nr" | awk '{ print $5 }')
-    lfs_log_ $script_name "step $step_name done, took $diff_time seconds, mount LFS used: $space_free"
-#   lfs_log_ "DONE-INFO-2", "ls -l $(ls -l /var/tmp/Linux-From-Scratch/mnt-lfs/lfs/done/fetch-pacakges-and-patches)"
-  else
-    lfs_log_ $script_name "step $step_name failed"
-    exit 1
+  lfs_log "Trying to pushd into steps, PWD=${PWD}"
+  pushd steps > /dev/null
+  lfs_log "Trying to execute step $step_name, PWD=${PWD}"
+
+  if [[ ! -r ./$step_name ]]; then
+
+    lfs_log "$step_name does not exist, PWD=${PWD}"
+    popd
+    return -1
+
   fi
 
-  if [[ $lfs_in_chroot_env == 'yes' ]]; then #_{
+  trap 'echo ./$step_name caused an error in $script_name at line $LINENO; exit 1' ERR
+  ./$step_name
+  trap 'echo Error at line $LINENO; exit 1' ERR
+  popd        > /dev/null
 
-     find / -path '/proc'          -prune -o \
-            -path '/sources'       -prune -o \
-            -path '/dev'           -prune -o \
-            -path '/lfs'           -prune -o \
-            -path '/sys'           -prune -o \
-            -path '/usr/include'   -prune -o \
-            -path '/usr/lib/gconv' -prune -o \
-            -path '/usr/share'     -prune -o \
-            -path '/tools/*/*'     -prune -o \
-            -print > $lfs_root/done/$step_name.tree.after
-  fi #_}
+  if ! touch $lfs_root/done/$step_name; then
+    lfs_log_ $script_name "!!! Could not touch $lfs_root/done/$step_name"
+  fi
+
+# V.2  lfs_log_ $script_name "lfs_run_step \$-=$-, SHELLOPTS=$SHELLOPTS, BASH_ENV=$BASH_ENV id=$(id)"
+# V.2  if $lfs_root/steps/$step_name; then #_{ Try to run step
+# V.2    if ! touch $lfs_root/done/$step_name; then
+# V.2      lfs_log_ $script_name "!!! Could not touch $lfs_root/done/$step_name"
+# V.2    fi
+# V.2    
+# V.2#   lfs_log_ "TOUCH_INFO", "$lfs_root/done/$step_name"
+# V.2#   lfs_log_ "DONE-INFO-1", "ls -l $(ls -l /var/tmp/Linux-From-Scratch/mnt-lfs/lfs/done/fetch-pacakges-and-patches)"
+# V.2#   lfs_log_ "DONE-INFO-a", "ls -l $(ls -l $lfs_root/done/$step_name)"
+# V.2    local diff_time=$(( $SECONDS - $start_time ))
+# V.2
+# V.2    local space_free=$(df | grep "/dev/$lfs_partition_device$lfs_root_partition_nr" | awk '{ print $5 }')
+# V.2    lfs_log_ $script_name "step $step_name done, took $diff_time seconds, mount LFS used: $space_free<"
+# V.2#   lfs_log_ "DONE-INFO-2", "ls -l $(ls -l /var/tmp/Linux-From-Scratch/mnt-lfs/lfs/done/fetch-pacakges-and-patches)"
+# V.2  #_}
+# V.2  else #_{
+# V.2    lfs_log_ $script_name "step $step_name failed"
+# V.2    exit 1
+# V.2  fi #_}
+
+  local diff_time=$(( $SECONDS - $start_time ))
+  lfs_log           "df | grep "/dev/$lfs_partition_device$lfs_root_partition_nr" | awk '{ print $5 }'"
+  local space_free=$(df | grep "/dev/$lfs_partition_device$lfs_root_partition_nr" | awk '{ print $5 }')
+  lfs_log_ $script_name "step $step_name done, took $diff_time seconds, mount LFS used: $space_free"
+
+  lfs_take_fs_snapshot $step_name after
+
+# V.2  if [[ $lfs_in_chroot_env == 'yes' ]]; then #_{
+# V.2
+# V.2     find / -path '/proc'          -prune -o \
+# V.2            -path '/sources'       -prune -o \
+# V.2            -path '/dev'           -prune -o \
+# V.2            -path '/lfs'           -prune -o \
+# V.2            -path '/sys'           -prune -o \
+# V.2            -path '/usr/include'   -prune -o \
+# V.2            -path '/usr/lib/gconv' -prune -o \
+# V.2            -path '/usr/share'     -prune -o \
+# V.2            -path '/tools/*/*'     -prune -o \
+# V.2            -print > $lfs_root/done/$step_name.tree.after
+# V.2  fi #_}
 }
 export -f lfs_run_step
+#_}
 
-lfs_trap_err_handler() {
+lfs_trap_err_handler() { #_{
   local line=$1
   local script_name=${BASH_SOURCE[1]}
   lfs_log_ $script_name "  trapped error at line $line"
   exit 1
 }
 export -f lfs_trap_err_handler
+#_}
 
-lfs_trap_err() {
+lfs_trap_err() { #_{
   trap 'lfs_trap_err_handler $LINENO' ERR
 }
 export -f lfs_trap_err
+#_}
 
-lfs_untar_and_cd() {
+lfs_untar_and_cd() { #_{
   local tar_pattern=$1
   local script_name=${BASH_SOURCE[1]}
   lfs_log_ $script_name "  lfs_untar_and_cd, tar_pattern=$tar_pattern"
@@ -123,8 +211,9 @@ lfs_untar_and_cd() {
 
 }
 export -f lfs_untar_and_cd
+#_}
 
-lfs_cd_untarred() {
+lfs_cd_untarred() { #_{
   local tar_pattern=$1
   local script_name=${BASH_SOURCE[1]}
 
@@ -138,3 +227,18 @@ lfs_cd_untarred() {
   cd $lfs_source_dir/untarred/$tar_pattern-*
 }
 export -f lfs_cd_untarred
+#_}
+
+lfs_start_step() { #_{
+# trap 'echo Error in ${BASH_SOURCE} / $lfs_cur_step_name at line $LINENO; exit 1' ERR
+  trap 'echo Error in ${BASH_SOURCE} at line $LINENO; exit 1' ERR
+  lfs_log "Start step $lfs_cur_step_name, umask=$(umask)"
+}
+export -f lfs_start_step
+#_}
+
+lfs_end_step() { #_{
+   return 0
+}
+export -f lfs_end_step
+#_}
