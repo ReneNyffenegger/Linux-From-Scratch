@@ -33,7 +33,7 @@ set +h
 umask 022
 export LFS=$LFS
 export lfs_root=$lfs_root
-# 2018-05-20 export lfs_partition_device=$lfs_partition_device
+export lfs_partition_device=$lfs_partition_device
 export lfs_root_partition_nr=$lfs_root_partition_nr
 # 2018-05-20 export lfs_source_dir=$lfs_source_dir
 export LC_ALL=POSIX

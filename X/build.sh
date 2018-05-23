@@ -1,4 +1,4 @@
-# vi: path=steps foldmarker=_{,_} foldmethod=marker
+# vi: path=steps foldmarker=\ _{,\ _} foldmethod=marker
 #
 #      TODO: The book suggests to store these variabls
 #            in /etc/profile.d/xorg.sh
@@ -31,14 +31,14 @@ fi
 trap 'exit 1' ERR
 
 
-lfs_log() { #_{
-  local text="$1"
-# echo $text >> ${lfs_dir}log
-
-  # Note: using UTF so that all log messages are consistent.
-  printf "%s: %-20s %-32s %s\n" "$(TZ=UTF date +'%Y-%m-%d %H:%M:%S')" $lfs_cur_step_name ${FUNCNAME[1]}  "$text" >> ${lfs_dir}log
-} #_}
-export -f lfs_log
+# V.2 lfs_log() { #_{
+# V.2   local text="$1"
+# V.2 # echo $text >> ${lfs_dir}log
+# V.2 
+# V.2   # Note: using UTF so that all log messages are consistent.
+# V.2   printf "%s: %-20s %-32s %s\n" "$(TZ=UTF date +'%Y-%m-%d %H:%M:%S')" $lfs_cur_step_name ${FUNCNAME[1]}  "$text" >> ${lfs_dir}log
+# V.2 } #_}
+# V.2 export -f lfs_log
 
 # V.2 lfs_start_step() { #_{
 # V.2   trap 'echo Error in $lfs_cur_step_name at line $LINENO; exit 1' ERR
@@ -51,7 +51,7 @@ export -f lfs_log
 # V.2 } #_}
 # V.2 export -f lfs_end_step
 
-lfs_download() { #_{
+lfs_download() { # _{
 
 # trap 'return -1' ERR
 
@@ -75,10 +75,10 @@ lfs_download() { #_{
   else
     lfs_log "$download_file_name already downloaded"
   fi
-} #_}
+} # _}
 export -f lfs_download
 
-lfs_download_and_extract() { #_{
+lfs_download_and_extract() { # _{
   local download_url=$1
   local dest_dir=$lfs_extract_dir
 
@@ -173,10 +173,10 @@ lfs_download_and_extract() { #_{
 # via $(lfs_download_and_extract ... )
   echo "$dest_dir/$extracted_dir"
 
-} #_}
+} # _}
 export -f lfs_download_and_extract
 
-lfs_download_extract_and_pushd() { #_{
+lfs_download_extract_and_pushd() { # _{
 
   local download_url=$1
 
@@ -193,10 +193,10 @@ lfs_download_extract_and_pushd() { #_{
   lfs_log "lfs_download_extract_and_pushd: extracted_dir=$extracted_dir, pushd into it"
   pushd $extracted_dir
 
-} #_}
+} # _}
 export -f lfs_download_extract_and_pushd
 
-lfs_patch() { #_{
+lfs_patch() { # _{
   local patch_file=$lfs_download_dir$1
 
   if [ ! -r $patch_file ]; then
@@ -208,7 +208,7 @@ lfs_patch() { #_{
 
   patch -Np1 -i $patch_file
   return 0
-} #_}
+} # _}
 export -f lfs_patch
 
 lfs_download_and_apply_patch() { #_{
@@ -222,7 +222,7 @@ lfs_download_and_apply_patch() { #_{
 } #_}
 export -f lfs_download_and_apply_patch
 
-lfs_install_bootscript() { #_{
+lfs_install_bootscript() { # _{
   local bootscript_name=$1
 
   if [ ! -d $lfs_bootscript_dir ]; then
@@ -240,10 +240,10 @@ lfs_install_bootscript() { #_{
   popd
 
   return 0
-} #_}
+} # _}
 export -f lfs_install_bootscript
 
-lfs_check_kernel_config_param() { #_{
+lfs_check_kernel_config_param() { # _{
   local param=$1
 
 
@@ -263,7 +263,7 @@ lfs_check_kernel_config_param() { #_{
   return 1
 }
 export -f lfs_check_kernel_config_param
-#_}
+# _}
 # V.2 lfs_take_fs_snapshot() { #_{
 # V.2 
 # V.2   local suffix=$1

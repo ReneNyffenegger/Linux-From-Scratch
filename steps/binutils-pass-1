@@ -3,14 +3,18 @@
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter05/binutils-pass1.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-#  TODO: as soon as everything compiles, this untar hack should not be necessary anymore
-# pushd $LFS/sources/untarred/binutils-*
+# V.2 lfs_trap_err
 
-# pushd $LFS/sources/untarred
-lfs_cd_untarred binutils
+# V.2 #  TODO: as soon as everything compiles, this untar hack should not be necessary anymore
+# V.2 # pushd $LFS/sources/untarred/binutils-*
+# V.2 
+# V.2 # pushd $LFS/sources/untarred
+# V.2 lfs_cd_untarred binutils
 
+
+lfs_untar_and_cd binutils
 
 
 mkdir -v build
@@ -27,6 +31,7 @@ lfs_log "calling configure, PWD=$PWD, LFS=$LFS, LFS_TGT=$LFS_TGT"
 
 
 make
+lfs_log "TODO make install: \$? = $?"
 
 case $(uname -m) in
   x86_64) mkdir -v /tools/lib && ln -sv lib /tools/lib64 ;;
@@ -35,7 +40,10 @@ esac
 lfs_log "TQ84 BEFORE make install ls -ld /tools/lib:   $(ls -ld /tools/lib)"
 lfs_log "TQ84 BEFORE make install ls -ld /tools/lib64: $(ls -ld /tools/lib64)"
 lfs_log "TQ84 BEFORE make install: which $LFS_TGT-ld: $(which $LFS_TGT-ld)"
+
 make install
+lfs_log "TODO make install: \$? = $?"
+
 lfs_log "TQ84 AFTER  make install: which $LFS_TGT-ld: $(which $LFS_TGT-ld)"
 lfs_log "TQ84 AFTER  make install ls -ld /tools/lib:   $(ls -ld /tools/lib)"
 lfs_log "TQ84 AFTER  make install ls -ld /tools/lib64: $(ls -ld /tools/lib64)"
@@ -45,3 +53,5 @@ lfs_log "readelf ... $(readelf -l /tools/bin/$LFS_TGT-ld | grep interpreter)"
 
 # TODO
 #  Check if /tools/lib or /tools/bin was populated with make install
+
+lfs_end_step
