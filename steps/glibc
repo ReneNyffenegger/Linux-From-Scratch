@@ -1,50 +1,17 @@
 # vim: ft=sh
 #
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter05/glibc.html
-#
-# TODO: There is also a glibc patch. Does it have to be applied somehow?
 
-lfs_trap_err
+lfs_start_step
 
-#
-# TODO: this removing should not be necessary once
-# the build completes.
-#
+lfs_untar_and_cd glibc
 
-lfs_cd_untarred glibc
-
-# pushd $LFS/sources/untarred
-# rm -rf glibc-*
-# cd ..
-# lfs_log "tar xf glibc-* in $PWD"
-# tar xf glibc-*.tar.xz -C untarred
-# cd untarred/glibc-*
-
-# lfs_log "Applying patch"
-# patch -Np1 -i ../../glibc-2.26-fhs-1.patch
 
 mkdir -v build
 cd       build 
 
 lfs_log "calling ../configure, PWD=$PWD"
 
-#
-#  TODO TQ84
-#    adding libc_cv_ctors_header=yes
-#  because of 
-#    missing __attribute__ ((constructor)) support
-#  ?
-#
-
-# ../configure                             \
-#       --prefix=/tools                    \
-#       --host=$LFS_TGT                    \
-#       --build=$(../scripts/config.guess) \
-#       --enable-kernel=3.2                \
-#       --with-headers=/tools/include      \
-#       libc_cv_forced_unwind=yes          \
-#       libc_cv_c_cleanup=yes              \
-#       libc_cv_ctors_header=yes
 
 ../configure                             \
       --prefix=/tools                    \
@@ -64,9 +31,9 @@ make
 #
 # make -j1
 
-lfs_log "ls -l /tools/lib before make install: $(ls -l /tools/lib)"
+lfs_log "TQ84 ls -l /tools/lib before make install: $(ls -l /tools/lib)"
 make install
-lfs_log "ls -l /tools/lib after  make install: $(ls -l /tools/lib)"
+lfs_log "TQ84 ls -l /tools/lib after  make install: $(ls -l /tools/lib)"
 
 #
 # Sanity check
@@ -88,6 +55,4 @@ fi
 
 rm -v dummy.c a.out
 
-popd
-
-exit 0
+lfs_end_step

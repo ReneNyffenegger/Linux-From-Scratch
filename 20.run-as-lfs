@@ -16,8 +16,8 @@ lfs_run_step general-instructions
 lfs_run_step binutils-pass-1
 lfs_run_step GCC-pass-1
 lfs_run_step Linux-API-headers
-exit 1
 lfs_run_step glibc
+exit 1
 lfs_run_step libstdc++
 lfs_run_step binutils-pass-2
 lfs_run_step GCC-pass-2
