@@ -24,6 +24,7 @@ mount -vt sysfs  sysfs  $LFS/sys
 mount -vt tmpfs  tmpfs  $LFS/run
 
 if [ -h $LFS/dev/shm ]; then
+  lfs_log "-h $LFS/dev/shm is true: mkdir -pv $LFS/$(readlink $LFS/dev/shm)"
   mkdir -pv $LFS/$(readlink $LFS/dev/shm)
 fi
 
