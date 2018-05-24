@@ -4,14 +4,14 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/mpfr.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-cd /sources/untarred/mpfr-*
+lfs_untar_and_cd mpfr-
 
 ./configure --prefix=/usr        \
             --disable-static     \
             --enable-thread-safe \
-            --docdir=/usr/share/doc/mpfr-3.1.5
+            --docdir=/usr/share/doc/mpfr-4.0.1
 
 make
 # make html
@@ -20,3 +20,5 @@ make check
 
 make install
 # make install-html
+
+lfs_end_step

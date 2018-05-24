@@ -3,10 +3,9 @@
 #
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter06/glibc.html
 
-lfs_trap_err
+lfs_start_step
 
-
-lfs_cd_untarred glibc
+lfs_cd_untarred glibc-
 
 cd build
 
@@ -31,4 +30,4 @@ else
 
 fi
 
-exit 0
+lfs_end_step

@@ -4,13 +4,9 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/gcc.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-lfs_untar_and_cd gcc
-# lfs_cd_untarred gcc
-
-
-
+lfs_untar_and_cd gcc-
 
 case $(uname -m) in
   x86_64)
@@ -70,9 +66,9 @@ lfs_log "TODO / TQ84 skipping make check -k, for once"
 lfs_log "executing make install"
 
 # TODO: temporarily untrapping errors // cannot stat 'de.mo': No such file or directory
-trap - ERR
-make install
-lfs_trap_err
+# V.2 trap - ERR
+make install || true
+# V.2 lfs_trap_err
 
 type_gcc=$(type gcc)
 lfs_log "TQ84 type_gcc after make install: $type_gcc"
@@ -84,7 +80,7 @@ ln -sv ../usr/bin/cpp /lib
 ln -sv gcc /usr/bin/cc
 
 install -v -dm755 /usr/lib/bfd-plugins
-ln -sfv ../../libexec/gcc/$(gcc -dumpmachine)/7.2.0/liblto_plugin.so \
+ln -sfv ../../libexec/gcc/$(gcc -dumpmachine)/7.3.0/liblto_plugin.so \
         /usr/lib/bfd-plugins/
 
 
@@ -105,15 +101,15 @@ dummy_grepped_1=$( grep -o '/usr/lib/.*/crt1.*succeeded' dummy.log )
 dummy_grepped_i=$( grep -o '/usr/lib/.*/crti.*succeeded' dummy.log )
 dummy_grepped_n=$( grep -o '/usr/lib/.*/crtn.*succeeded' dummy.log )
 
-if [[ $dummy_grepped_1 != '/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/../../../../lib/crt1.o succeeded' ]]; then
+if [[ $dummy_grepped_1 != '/usr/lib/gcc/x86_64-pc-linux-gnu/7.3.0/../../../../lib/crt1.o succeeded' ]]; then
    lfs_log "dummy_grepped_1 = $dummy_grepped_1, exiting"
    exit 1
 fi
-if [[ $dummy_grepped_i != '/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/../../../../lib/crti.o succeeded' ]]; then
+if [[ $dummy_grepped_i != '/usr/lib/gcc/x86_64-pc-linux-gnu/7.3.0/../../../../lib/crti.o succeeded' ]]; then
    lfs_log "dummy_grepped_i = $dummy_grepped_i, exiting"
    exit 1
 fi
-if [[ $dummy_grepped_n != '/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/../../../../lib/crtn.o succeeded' ]]; then
+if [[ $dummy_grepped_n != '/usr/lib/gcc/x86_64-pc-linux-gnu/7.3.0/../../../../lib/crtn.o succeeded' ]]; then
    lfs_log "dummy_grepped_n = $dummy_grepped_n, exiting"
    exit 1
 fi
@@ -121,9 +117,9 @@ fi
 headers=$(grep -B4 '^ /usr/include' dummy.log)
 
 if [[ $headers != '#include <...> search starts here:
- /usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/include
+ /usr/lib/gcc/x86_64-pc-linux-gnu/7.3.0/include
  /usr/local/include
- /usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/include-fixed
+ /usr/lib/gcc/x86_64-pc-linux-gnu/7.3.0/include-fixed
  /usr/include'
 ]]; then
 
@@ -172,6 +168,8 @@ mkdir -pv /usr/share/gdb/auto-load/usr/lib
 lfs_log "TQ84: ls -l /usr/lib/*gdb.py: $(ls -l /usr/lib/*gdb.py)"
 
 # TODO: temporarily untrapping errors
-trap - ERR
-mv -v /usr/lib/*gdb.py /usr/share/gdb/auto-load/usr/lib
-lfs_trap_err
+# V.2 trap - ERR
+mv -v /usr/lib/*gdb.py /usr/share/gdb/auto-load/usr/lib || true
+# V.2 lfs_trap_err
+
+lfs_end_step

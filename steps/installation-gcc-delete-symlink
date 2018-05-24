@@ -3,7 +3,8 @@
 #
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/gcc.html
 
-lfs_trap_err
+lfs_start_step
+
 
 #
 # Remove symlink that was created in steps/glibc-2-a (?)
@@ -11,3 +12,4 @@ lfs_log "before deletion of symlink ls -ld /usr/lib/gcc = $(ls -ld /usr/lib/gcc)
 rm -f /usr/lib/gcc
 lfs_log "after  deletion of symlink ls -ld /usr/lib/gcc = $(ls -ld /usr/lib/gcc)"
 
+lfs_end_step

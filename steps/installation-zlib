@@ -1,6 +1,7 @@
 lfs_trap_err
 
-cd /sources/untarred/zlib-*
+lfs_start_step
+lfs_untar_and_cd zlib-
 
 ./configure --prefix=/usr
 
@@ -10,3 +11,5 @@ make install
 
 mv -v /usr/lib/libz.so.* /lib
 ln -sfv ../../lib/$(readlink /usr/lib/libz.so) /usr/lib/libz.so
+
+lfs_end_step

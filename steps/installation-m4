@@ -4,21 +4,22 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/m4.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-mkdir -p /lfs/logs
+# TODO create /lfs/logs earlier
+mkdir -p /usr/lfs/logs
 
-lfs_untar_and_cd m4
-# cd /sources/untarred/m4-*
+lfs_untar_and_cd m4-
 
-./configure --prefix=/usr &> /lfs/logs/m4.configure
+./configure --prefix=/usr &> /usr/lfs/logs/m4.configure
 
-make             &> /lfs/logs.m4.make
+make             &> /usr/lfs/logs.m4.make
 
 # TODO: temporarily untrapping errors
-trap - ERR
-make check       &> /lfs/logs.m4.make-check
-lfs_trap_err
+# V.2 trap - ERR
+make check       &> /usr/lfs/logs.m4.make-check || true
+# V.2 lfs_trap_err
 
+make install     &> /usr/lfs/logs.m4.make-install
 
-make install     &> /lfs/logs.m4.make-install
+lfs_end_step

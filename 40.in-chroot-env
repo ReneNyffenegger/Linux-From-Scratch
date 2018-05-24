@@ -38,7 +38,6 @@ lfs_run_step essential-files-symlinks
 lfs_run_step Linux-API-headers-2
 lfs_run_step man-pages
 lfs_run_step glibc-2-a
-exit 1
 lfs_run_step glibc-2-b
 lfs_run_step glibc-2-c-install
 lfs_run_step glibc-2-d-configuring
@@ -59,6 +58,7 @@ lfs_run_step installation-bzip2
 lfs_run_step installation-pkg-config
 lfs_run_step installation-ncurses
 lfs_run_step installation-attr
+exit 1
 lfs_run_step installation-acl
 lfs_run_step installation-libcap
 lfs_run_step installation-sed

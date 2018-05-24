@@ -1,9 +1,11 @@
-lfs_trap_err
+lfs_start_step
 
-cd /sources/untarred/file-*
+lfs_untar_and_cd file-
 
 ./configure --prefix=/usr
 
 make
 make check
 make install
+
+lfs_end_step

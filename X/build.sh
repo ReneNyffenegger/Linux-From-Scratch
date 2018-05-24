@@ -103,70 +103,72 @@ lfs_download_and_extract() { # _{
   #  Find last part of downloaded file
   #
 
-  if [ ${download_file_name: -4} == '.zip' ]; then
-    local isZip=yes
-    local extracted_dir=$(basename $download_file_name .zip)
-    lfs_log "isZip, extracted_dir = $extracted_dir"
-  else
-    local isZip=no
-
-    local extracted_dir=$(basename $download_file_name .gz ) 
-          extracted_dir=$(basename $extracted_dir      .xz ) 
-          extracted_dir=$(basename $extracted_dir      .bz2) 
-          extracted_dir=$(basename $extracted_dir      .tar) 
-          extracted_dir=$(basename $extracted_dir      .tgz) 
-  fi
-
-  #
-  #  Extract the file, if necessary
-  #
-# lfs_log "Going to check whether extract dir $dest_dir/$extracted_dir exists"
-  if [ ! -d $dest_dir/$extracted_dir ]; then
-    lfs_log "Extraction directory $dest_dir/$extracted_dir does not exist"
-    if [ $isZip == yes ]; then
-    # TODO 2018-03-02: because of Noto-hinted.zip
-      lfs_log "unzip $lfs_download_dir$download_file_name to $dest_dir/$extracted_dir"
-      unzip  $lfs_download_dir$download_file_name -d $dest_dir/$extracted_dir > /dev/null
-    else
-    #
-    # Extract the downloaded file into an empty tmp directory first, so that
-    # we can make sure that the entire content of the tar file goes under
-    # $extracted_dir
-    #
-      rm -rf /tmp/lfs_extract_dir
-      mkdir  /tmp/lfs_extract_dir
-      if ! tar xf $lfs_download_dir$download_file_name -C /tmp/lfs_extract_dir; then
-        lfs_log "$lfs_download_dir$download_file_name does not seem to be a tar file"
-        echo "?"
-        return 1
-      fi
-      
-      lfs_log "mkdir $dest_dir/$extracted_dir"
-      mkdir $dest_dir/$extracted_dir
-
-      if [ $(ls /tmp/lfs_extract_dir | wc -l) == 1 ]; then
-        lfs_log "$download_file_name contains a directory"
-      # Subshell so that the effect of shopt -s dotglob is undone.
-      # shopt -s dotglob also matches dot files (but not . and .. )
-      ( shopt -s dotglob; mv /tmp/lfs_extract_dir/*/* $dest_dir/$extracted_dir )
-      # mv /tmp/lfs_extract_dir/*/.[!.]* $dest_dir/$extracted_dir
-      # mv /tmp/lfs_extract_dir/*/*  $dest_dir/$extracted_dir
-      # mv /tmp/lfs_extract_dir/*/.* $dest_dir/$extracted_dir
-      # pushd /tmp/lfs_extract_dir/*
-      #   mv *         $dest_dir/$extracted_dir
-      # #       .[!.]* -> https://askubuntu.com/a/259386/242303
-      #   mv -f .[!.]* $dest_dir/$extracted_dir
-      # popd
-      else
-        lfs_log "$download_file_name contains multiple files"
-        mv /tmp/lfs_extract_dir/* $dest_dir/$extracted_dir
-      fi
-
-    # tar xf $lfs_download_dir$download_file_name -C $dest_dir
-    fi
-  else
-    lfs_log "directory $dest_dir/$extracted_dir already exists"
-  fi
+  exit 1 # donloaded file must be moved to tarred directory
+  lfs_untar TODO TODO
+# use lfs_untar()  if [ ${download_file_name: -4} == '.zip' ]; then
+# use lfs_untar()    local isZip=yes
+# use lfs_untar()    local extracted_dir=$(basename $download_file_name .zip)
+# use lfs_untar()    lfs_log "isZip, extracted_dir = $extracted_dir"
+# use lfs_untar()  else
+# use lfs_untar()    local isZip=no
+# use lfs_untar()
+# use lfs_untar()    local extracted_dir=$(basename $download_file_name .gz ) 
+# use lfs_untar()          extracted_dir=$(basename $extracted_dir      .xz ) 
+# use lfs_untar()          extracted_dir=$(basename $extracted_dir      .bz2) 
+# use lfs_untar()          extracted_dir=$(basename $extracted_dir      .tar) 
+# use lfs_untar()          extracted_dir=$(basename $extracted_dir      .tgz) 
+# use lfs_untar()  fi
+# use lfs_untar()
+# use lfs_untar()  #
+# use lfs_untar()  #  Extract the file, if necessary
+# use lfs_untar()  #
+# use lfs_untar()# lfs_log "Going to check whether extract dir $dest_dir/$extracted_dir exists"
+# use lfs_untar()  if [ ! -d $dest_dir/$extracted_dir ]; then
+# use lfs_untar()    lfs_log "Extraction directory $dest_dir/$extracted_dir does not exist"
+# use lfs_untar()    if [ $isZip == yes ]; then
+# use lfs_untar()    # TODO 2018-03-02: because of Noto-hinted.zip
+# use lfs_untar()      lfs_log "unzip $lfs_download_dir$download_file_name to $dest_dir/$extracted_dir"
+# use lfs_untar()      unzip  $lfs_download_dir$download_file_name -d $dest_dir/$extracted_dir > /dev/null
+# use lfs_untar()    else
+# use lfs_untar()    #
+# use lfs_untar()    # Extract the downloaded file into an empty tmp directory first, so that
+# use lfs_untar()    # we can make sure that the entire content of the tar file goes under
+# use lfs_untar()    # $extracted_dir
+# use lfs_untar()    #
+# use lfs_untar()      rm -rf /tmp/lfs_extract_dir
+# use lfs_untar()      mkdir  /tmp/lfs_extract_dir
+# use lfs_untar()      if ! tar xf $lfs_download_dir$download_file_name -C /tmp/lfs_extract_dir; then
+# use lfs_untar()        lfs_log "$lfs_download_dir$download_file_name does not seem to be a tar file"
+# use lfs_untar()        echo "?"
+# use lfs_untar()        return 1
+# use lfs_untar()      fi
+# use lfs_untar()      
+# use lfs_untar()      lfs_log "mkdir $dest_dir/$extracted_dir"
+# use lfs_untar()      mkdir $dest_dir/$extracted_dir
+# use lfs_untar()
+# use lfs_untar()      if [ $(ls /tmp/lfs_extract_dir | wc -l) == 1 ]; then
+# use lfs_untar()        lfs_log "$download_file_name contains a directory"
+# use lfs_untar()      # Subshell so that the effect of shopt -s dotglob is undone.
+# use lfs_untar()      # shopt -s dotglob also matches dot files (but not . and .. )
+# use lfs_untar()      ( shopt -s dotglob; mv /tmp/lfs_extract_dir/*/* $dest_dir/$extracted_dir )
+# use lfs_untar()      # mv /tmp/lfs_extract_dir/*/.[!.]* $dest_dir/$extracted_dir
+# use lfs_untar()      # mv /tmp/lfs_extract_dir/*/*  $dest_dir/$extracted_dir
+# use lfs_untar()      # mv /tmp/lfs_extract_dir/*/.* $dest_dir/$extracted_dir
+# use lfs_untar()      # pushd /tmp/lfs_extract_dir/*
+# use lfs_untar()      #   mv *         $dest_dir/$extracted_dir
+# use lfs_untar()      # #       .[!.]* -> https://askubuntu.com/a/259386/242303
+# use lfs_untar()      #   mv -f .[!.]* $dest_dir/$extracted_dir
+# use lfs_untar()      # popd
+# use lfs_untar()      else
+# use lfs_untar()        lfs_log "$download_file_name contains multiple files"
+# use lfs_untar()        mv /tmp/lfs_extract_dir/* $dest_dir/$extracted_dir
+# use lfs_untar()      fi
+# use lfs_untar()
+# use lfs_untar()    # tar xf $lfs_download_dir$download_file_name -C $dest_dir
+# use lfs_untar()    fi
+# use lfs_untar()  else
+# use lfs_untar()    lfs_log "directory $dest_dir/$extracted_dir already exists"
+# use lfs_untar()  fi
 
 #
 # This echo is necessary because this function is called

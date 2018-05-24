@@ -3,11 +3,16 @@
 #
 # http://www.linuxfromscratch.org/lfs/view/stable/chapter06/adjusting.html
 
-lfs_trap_err
+lfs_start_step
 
-pushd /lfs
+# V.2 pushd /lfs
 
 lfs_log "adjusting toolchain, PWD=$PWD"
+
+# V.2 / in adjust-toolchain-backup-tools: mv -v /tools/bin/{ld,ld-old}
+# V.2 / in adjust-toolchain-backup-tools: mv -v /tools/$(uname -m)-pc-linux-gnu/bin/{ld,ld-old}
+# V.2 / in adjust-toolchain-backup-tools: mv -v /tools/bin/{ld-new,ld}
+# V.2 / in adjust-toolchain-backup-tools: ln -sv /tools/bin/ld /tools/$(uname -m)-pc-linux-gnu/bin/ld
 
 
 
@@ -90,4 +95,4 @@ fi
 
 rm -v dummy.c a.out dummy.log
 
-exit 0
+lfs_end_step

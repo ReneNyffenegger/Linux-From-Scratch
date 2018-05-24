@@ -6,8 +6,7 @@
 
 lfs_trap_err
 
-cd /sources/untarred/bc-*
-
+lfs_untar_and_cd bc-
 
 #
 # The file bc/fix-libmath_h already exists, but contains an 'ed' command.
@@ -43,3 +42,5 @@ echo "quit" | ./bc/bc -l Test/checklib.b > test_checklib.out
 cat test_checklib.out
 
 make install
+
+lfs_end_step

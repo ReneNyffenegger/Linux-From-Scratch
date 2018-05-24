@@ -8,6 +8,11 @@ if [[ -z "$LFS" ]]; then
   . lfs-env
 fi
 
+if [[ ! -d $LFS/dev ]]; then
+  echo "$LFS/dev does not exist, is LFS mounted?"
+  exit 1
+fi
+
 sudo mount -v --bind    /dev $LFS/dev
 sudo mount -vt devpts devpts $LFS/dev/pts -o gid=5,mode=620
 sudo mount -vt proc   proc   $LFS/proc

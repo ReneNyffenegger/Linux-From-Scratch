@@ -1,14 +1,14 @@
 #
 # vim: ft=sh
 
-lfs_trap_err
+lfs_start_step
 
-# pushd /sources/untarred/glibc-*
-lfs_cd_untarred glibc
+lfs_cd_untarred glibc-
+
+cd build
 
 touch /etc/ld.so.conf
 
-cd build
 
 #
 #  Substitue '$(PERL)' with 'echo not running' in line matching 'test-installation':
@@ -47,4 +47,4 @@ localedef -i zh_CN      -f GB18030 zh_CN.GB18030
 lfs_log "TODO install locale for own country, language and character set"
 lfs_log "TODO or, alternatively, make localedata/install-locales"
 
-exit 0
+lfs_end_step

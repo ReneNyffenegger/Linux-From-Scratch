@@ -181,15 +181,80 @@ lfs_trap_err() { #_{
 export -f lfs_trap_err
 #_}
 
+lfs_untar() { #_{
+  local file=$1
+
+  lfs_log_ $script_name "  lfs_untar: file=$file"
+
+  if [ ${file: -4} == '.zip' ]; then
+    local isZip=yes
+    local extracted_dir=$(basename $file .zip)
+    lfs_log "isZip, extracted_dir = $extracted_dir"
+  else
+    lfs_log "not isZip, extracted_dir = $extracted_dir"
+    local isZip=no
+
+    local extracted_dir=$(basename $file          .gz ) 
+          extracted_dir=$(basename $extracted_dir .xz ) 
+          extracted_dir=$(basename $extracted_dir .bz2) 
+          extracted_dir=$(basename $extracted_dir .tar) 
+          extracted_dir=$(basename $extracted_dir .tgz) 
+  fi
+
+  #
+  #  Extract the file, if necessary
+  #
+# lfs_log "Going to check whether extract dir $lfs_root/sources/untarred/$extracted_dir exists"
+  if [ ! -d $lfs_root/sources/untarred/$extracted_dir ]; then
+    lfs_log "Extraction directory $lfs_root/sources/untarred/$extracted_dir does not exist"
+    if [ $isZip == yes ]; then
+    # TODO 2018-03-02: because of Noto-hinted.zip
+      lfs_log "unzip $lfs_root/sources/tarred/$file to $lfs_root/sources/untarred/$extracted_dir"
+      unzip  $lfs_root/sources/tarred/$file -d $lfs_root/sources/untarred/$extracted_dir > /dev/null
+    else
+    #
+    # Extract the downloaded file into an empty tmp directory first, so that
+    # we can make sure that the entire content of the tar file goes under
+    # $extracted_dir
+    #
+      rm -rf /tmp/lfs_extract_dir
+      mkdir  /tmp/lfs_extract_dir
+      if ! tar xf $lfs_root/sources/tarred/$file -C /tmp/lfs_extract_dir; then
+        lfs_log "$lfs_root/sources/tarred/$file does not seem to be a tar file"
+        echo "?"
+        return 1
+      fi
+      
+      lfs_log "mkdir $lfs_root/sources/untarred/$extracted_dir"
+      mkdir $lfs_root/sources/untarred/$extracted_dir
+
+      if [ $(ls /tmp/lfs_extract_dir | wc -l) == 1 ]; then
+        lfs_log "$file contains a directory"
+      ( shopt -s dotglob; mv /tmp/lfs_extract_dir/*/* $lfs_root/sources/untarred/$extracted_dir )
+      else
+        lfs_log "$file contains multiple files"
+        mv /tmp/lfs_extract_dir/* $lfs_root/sources/untarred/$extracted_dir
+      fi
+
+    # tar xf $lfs_root/sources/tarred/$file -C $lfs_root/sources/untarred
+    fi
+  else
+    lfs_log "directory $lfs_root/sources/untarred/$extracted_dir already exists"
+  fi
+
+}
+export -f lfs_untar
+#_}
+
 lfs_untar_and_cd() { #_{
   local tar_pattern=$1
   local script_name=${BASH_SOURCE[1]}
-  lfs_log_ $script_name "  lfs_untar_and_cd, tar_pattern=$tar_pattern"
 
 # V.2  cd $lfs_source_dir
   cd $lfs_root/sources
 
-  lfs_log_ $script_name "  I am in PWD=$PWD"
+  local tar_file=$(basename $(echo tarred/$tar_pattern*))
+  lfs_log_ $script_name "  lfs_untar_and_cd, tar_pattern=$tar_pattern tar_file=$tar_file, calling lfs_untar()"
 
   if [ -d untarred/$tar_pattern* ]; then
     lfs_log_ $script_name "  lfs_untar_and_cd, untarred/$tar_pattern exists, removing it. PWD=$PWD"
@@ -198,12 +263,17 @@ lfs_untar_and_cd() { #_{
     lfs_log_ $script_name "  lfs_untar_and_cd, untarred/$tar_pattern does not exist. PWD=$PWD"
   fi
 
-  lfs_log "ls -l tarred/$tar_pattern*.tar.*: $(ls -l $tar_pattern-*.tar.* 2>/dev/null), PWD=$PWD"
-  lfs_log "untarring $tar_pattern*, PWD=$PWD"
-  if ! tar xf tarred/$tar_pattern*.tar.* -C untarred ; then
-    lfs_log "tar returned $?"
-    return 1
-  fi
+  lfs_untar $tar_file
+
+  # use lfs_untar()  lfs_log_ $script_name "  I am in PWD=$PWD"
+  # use lfs_untar()
+  # use lfs_untar()
+  # use lfs_untar()  lfs_log "ls -l tarred/$tar_pattern*.tar.*: $(ls -l tarred/$tar_pattern-*.tar.* 2>/dev/null), PWD=$PWD"
+  # use lfs_untar()  lfs_log "untarring $tar_pattern*, PWD=$PWD"
+  # use lfs_untar()  if ! tar xf tarred/$tar_pattern*.tar.* -C untarred ; then
+  # use lfs_untar()    lfs_log "tar returned $?"
+  # use lfs_untar()    return 1
+  # use lfs_untar()  fi
 
 
 # V.2.  lfs_log "cd to untarred/$tar_pattern-*, PWD=$PWD"

@@ -4,13 +4,13 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/bzip2.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-# cd /sources/untarred/bzip2-*
-lfs_untar_and_cd bzip2
+lfs_untar_and_cd bzip2-
 
 lfs_log "applying patch"
-patch -Np1 -i ../../bzip2-1.0.6-install_docs-1.patch
+# V.2 patch -Np1 -i ../../bzip2-1.0.6-install_docs-1.patch
+lfs_patch bzip2-1.0.6-install_docs-1.patch
 
 sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
 
@@ -30,3 +30,4 @@ rm -v /usr/bin/{bunzip2,bzcat,bzip2}
 ln -sv bzip2 /bin/bunzip2
 ln -sv bzip2 /bin/bzcat
 
+lfs_end_step

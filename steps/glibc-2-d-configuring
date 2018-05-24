@@ -1,13 +1,16 @@
 # vi: ft=sh
 #
 
-. /lfs/lfs-functions
+# V.2 . /lfs/lfs-functions
 
-lfs_trap_err
+lfs_start_step
+
 
 lfs_log "Creating /etc/nsswitch.conf.conf"
 cat > /etc/nsswitch.conf << "EOF"
 # Begin /etc/nsswitch.conf
+#
+# Created by LFS, steps/glibc-2-d-configuring
 
 passwd: files
 group: files
@@ -31,9 +34,9 @@ lfs_log "Adding time zone data"
 #
 # TODO: cannot use lfs_cd_untarred because tzdata does not end in -
 #
-pushd /sources/untarred/tzdata
-
-tar -xf ../../tzdata2017b.tar.gz
+# V.2 pushd /sources/untarred/tzdata
+# V.2 tar -xf ../../tzdata2017b.tar.gz
+lfs_untar_and_cd tzdata2018c
 
 ZONEINFO=/usr/share/zoneinfo
 mkdir -pv $ZONEINFO/{posix,right}
@@ -50,8 +53,6 @@ cp -v zone.tab zone1970.tab iso3166.tab $ZONEINFO
 zic -d $ZONEINFO -p America/New_York
 unset ZONEINFO
 
-
-
 # TODO Could this also be a sym link?
 cp -v /usr/share/zoneinfo/Europe/Zurich /etc/localtime
 
@@ -60,6 +61,9 @@ lfs_log "Configuring the dynamic loader"
 # TODO is LFS dependent on /etc/ld.so.conf?
 cat > /etc/ld.so.conf << "EOF"
 # Begin /etc/ld.so.conf
+#
+# Created by LFS, steps/glibc-2-d-configuring
+
 /usr/local/lib
 /opt/lib
 
@@ -68,3 +72,5 @@ cat > /etc/ld.so.conf << "EOF"
 EOF
 
 # mkdir -pv /etc/ld.so.conf.d
+
+lfs_end_step
