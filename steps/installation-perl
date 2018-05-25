@@ -4,10 +4,9 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/perl.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-# cd /sources/untarred/perl-*
-lfs_untar_and_cd perl
+lfs_untar_and_cd perl-
 
 echo "127.0.0.1 localhost $(hostname)" > /etc/hosts
 
@@ -25,17 +24,19 @@ sh Configure -des -Dprefix=/usr                 \
                   -Dman3dir=/usr/share/man/man3 \
                   -Dpager="/usr/bin/less -isR"  \
                   -Duseshrplib                  \
-                  -Dusethreads    &> /lfs/logs/perl.configure
+                  -Dusethreads    &> /usr/lfs/logs/perl.configure
 
 lfs_log "make"
-make           &> /lfs/logs/perl.make
+make           &> /usr/lfs/logs/perl.make
 
 # TODO, skipping for once
 #
 # lfs_log "make test"
-# make -k test   &> /lfs/logs/perl.make-test
+# make -k test   &> /usr/lfs/logs/perl.make-test
 
 lfs_log "make install"
-make install   &> /lfs/logs/perl.make-install
+make install   &> /usr/lfs/logs/perl.make-install
 
 unset BUILD_ZLIB BUILD_BZIP2
+
+lfs_end_step

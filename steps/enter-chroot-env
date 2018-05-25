@@ -16,6 +16,6 @@
 #     PS1='\u:\w\$ '                                        \
 #     PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin         \
 #     lfs_root=/lfs                                         \
-#     /tools/bin/bash --login +h -c /lfs/40.in-chroot-env
+#     /tools/bin/bash --login +h -c /usr/lfs/40.in-chroot-env
 # 
 # exit 0

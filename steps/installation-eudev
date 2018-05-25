@@ -30,24 +30,24 @@ EOF
             --with-rootlibdir=/lib  \
             --enable-manpages       \
             --disable-static        \
-            --config-cache               &> /lfs/logs/eudev.configure
+            --config-cache               &> /usr/lfs/logs/eudev.configure
 
-LIBRARY_PATH=/tools/lib make             &> /lfs/logs/eudev.make
+LIBRARY_PATH=/tools/lib make             &> /usr/lfs/logs/eudev.make
 
 mkdir -pv /lib/udev/rules.d
 mkdir -pv /etc/udev/rules.d
 
 # TODO: temporarily untrapping errors
 trap - ERR
-make LD_LIBRARY_PATH=/tools/lib check    &> /lfs/logs/eudev.make-check
+make LD_LIBRARY_PATH=/tools/lib check    &> /usr/lfs/logs/eudev.make-check
 lfs_trap_err
 
-make LD_LIBRARY_PATH=/tools/lib install  &> /lfs/logs/eudev.make-install
+make LD_LIBRARY_PATH=/tools/lib install  &> /usr/lfs/logs/eudev.make-install
 
 #
 # Install some custom rules and support files useful in an LFS environment: 
 #
 tar -xvf ../../udev-lfs-20140408.tar.bz2
-make -f udev-lfs-20140408/Makefile.lfs install  &> /lfs/logs/eudev.make-install-lfs
+make -f udev-lfs-20140408/Makefile.lfs install  &> /usr/lfs/logs/eudev.make-install-lfs
 
 LD_LIBRARY_PATH=/tools/lib udevadm hwdb --update

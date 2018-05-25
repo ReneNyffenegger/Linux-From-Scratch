@@ -4,9 +4,9 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/expat.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-cd /sources/untarred/expat-*
+lfs_untar_and_cd expat-*
 
 sed -i 's|usr/bin/env |bin/|' run.sh.in
 
@@ -19,3 +19,4 @@ make install
 install -v -dm755 /usr/share/doc/expat-2.2.3
 install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-2.2.3
 
+lfs_end_step

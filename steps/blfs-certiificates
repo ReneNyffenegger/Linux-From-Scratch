@@ -5,8 +5,11 @@
 
 lfs_trap_err
 
-mkdir /lfs/certificates.temp
-cd    /lfs/certificates.temp
+#
+#  TODO: is this directory correct?
+#
+mkdir /usr/lfs/certificates.temp
+cd    /usr/lfs/certificates.temp
 
 install -vdm755 /etc/ssl/local
 

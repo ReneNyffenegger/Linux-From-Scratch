@@ -58,7 +58,6 @@ lfs_run_step installation-bzip2
 lfs_run_step installation-pkg-config
 lfs_run_step installation-ncurses
 lfs_run_step installation-attr
-exit 1
 lfs_run_step installation-acl
 lfs_run_step installation-libcap
 lfs_run_step installation-sed
@@ -80,10 +79,11 @@ lfs_run_step installation-intltool
 lfs_run_step installation-autoconf
 lfs_run_step installation-automake
 lfs_run_step installation-xz
-# using lfs_untar_and_cd or lfs_cd_untarred
 lfs_run_step installation-kmod
 lfs_run_step installation-gettext
 lfs_run_step installation-procps-ng
+lfs_run_step installation-libelf
+exit 1
 lfs_run_step installation-e2fsprogs
 lfs_run_step installation-coreutils
 lfs_run_step installation-diffutils

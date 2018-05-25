@@ -4,21 +4,22 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/automake.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-# cd /sources/untarred/automake-*
-lfs_cd_untarred automake
+lfs_untar_and_cd automake-
 
-./configure --prefix=/usr --docdir=/usr/share/doc/automake-1.15.1 &> /lfs/logs/automake.configure
+./configure --prefix=/usr --docdir=/usr/share/doc/automake-1.15.1 &> /usr/lfs/logs/automake.configure
 
-make &> /lfs/logs/automake.make
+make &> /usr/lfs/logs/automake.make
 
 sed -i "s:./configure:LEXLIB=/usr/lib/libfl.a &:" t/lex-{clean,depend}-cxx.sh
 #
 # TODO: skipped for now
 #
-# make -j4 check  &> /lfs/logs/automake.make-check
+# make -j4 check  &> /usr/lfs/logs/automake.make-check
 #
 # Output of check would be in test-suite.log
 
-make install &> /lfs/logs/automake.make-install
+make install &> /usr/lfs/logs/automake.make-install
+
+lfs_end_step

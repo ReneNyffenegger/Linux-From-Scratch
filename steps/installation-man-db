@@ -18,13 +18,13 @@ lfs_cd_untarred man-db
             --with-browser=/usr/bin/lynx         \
             --with-vgrind=/usr/bin/vgrind        \
             --with-grap=/usr/bin/grap            \
-            --with-systemdtmpfilesdir=               &> /lfs/logs/man-db.configure
+            --with-systemdtmpfilesdir=               &> /usr/lfs/logs/man-db.configure
 
-make           &> /lfs/logs/man-db.make
+make           &> /usr/lfs/logs/man-db.make
 
 # TODO: temporarily untrapping errors
 trap - ERR
-make check     &> /lfs/logs.man-db.check
+make check     &> /usr/lfs/logs.man-db.check
 lfs_trap_err
 
-make install   &> /lfs/logs.man-db.install
+make install   &> /usr/lfs/logs.man-db.install

@@ -14,6 +14,6 @@ make
 
 make install
 
-pushd /lfs/bootscripts
+pushd /usr/lfs/bootscripts
 make install-service-dhcpcd
 popd

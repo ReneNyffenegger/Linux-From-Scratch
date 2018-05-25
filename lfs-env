@@ -12,7 +12,7 @@
 #
 export lfs_partition_device=sdb
 
-lfs_root_partition_nr=1  # TODO: currently needed to determine free space (see lfs-functions / lfs_run_step
+export lfs_root_partition_nr=1  # TODO: currently needed to determine free space (see lfs-functions / lfs_run_step and to mount LFS partition (./02.mount-lfs-partition)
 # V.2 export lfs_boot_partition_nr=2
 # V.2 export lfs_swap_partition_nr=3
 # V.2 export lfs_root_partition_size_gib=20

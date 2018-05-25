@@ -54,7 +54,7 @@ lfs_log "configure finished"
 # V.2 trap - ERR # Temporarily untrapping because ../configure will complain about missing bison
 
 lfs_log "calling make"
-make tooldir=/usr || true &> /lfs/logs/binutils.make
+make tooldir=/usr || true &> /usr/lfs/logs/binutils.make
 lfs_log "made"
 
 # V.2 lfs_trap_err
@@ -62,7 +62,7 @@ lfs_log "made"
 if [[ "yes" == "no" ]]; then
   trap - ERR # Temporarily untrapping because debug_msg.sh fails
   lfs_log "calling make -k check"
-  make -k check &> /lfs/logs/binutils.make-check
+  make -k check &> /usr/lfs/logs/binutils.make-check
   lfs_trap_err
 else
   lfs_log "TODO: Not calling make -k check"
@@ -70,7 +70,7 @@ fi
 
 # V.2 trap - ERR # Temporarily untrapping because bison is not found, but is apparently not so terrible
 lfs_log "calling make install"
-make tooldir=/usr install || true &> /lfs/logs/binutils.make-install
+make tooldir=/usr install || true &> /usr/lfs/logs/binutils.make-install
 # V.2 lfs_trap_err
 
 for executable in $executables_check; do

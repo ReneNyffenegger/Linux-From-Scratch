@@ -4,9 +4,9 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/gettext.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-lfs_cd_untarred gettext
+lfs_untar_and_cd gettext-
 
 lfs_untar_and_cd gettext
 sed -i '/^TESTS =/d' gettext-runtime/tests/Makefile.in &&
@@ -15,18 +15,20 @@ sed -i 's/test-lock..EXEEXT.//' gettext-tools/gnulib-tests/Makefile.in
 lfs_log "call configure"
 ./configure --prefix=/usr    \
             --disable-static \
-            --docdir=/usr/share/doc/gettext-0.19.8.1 &> /lfs/logs/gettext.configure
+            --docdir=/usr/share/doc/gettext-0.19.8.1 &> /usr/lfs/logs/gettext.configure
 
 lfs_log "call make"
-make           &> /lfs/logs/gettext.make
+make           &> /usr/lfs/logs/gettext.make
 
 # TODO: temporarily untrapping errors
 trap - ERR
 lfs_log "call make check"
-make check  &> /lfs/logs/gettext.make-check
+make check  &> /usr/lfs/logs/gettext.make-check
 lfs_trap_err
 
 lfs_log "call make install"
-make install &> /lfs/logs/gettext.make-install
+make install &> /usr/lfs/logs/gettext.make-install
 
 chmod -v 0755 /usr/lib/preloadable_libintl.so
+
+lfs_end_step

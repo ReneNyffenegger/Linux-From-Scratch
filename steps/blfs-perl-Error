@@ -5,8 +5,11 @@
 
 lfs_trap_err
 
-mkdir /lfs/perl-Error.temp
-cd    /lfs/perl-Error.temp
+#
+#  TODO: Is this directory correct
+#
+mkdir /usr/lfs/perl-Error.temp
+cd    /usr/lfs/perl-Error.temp
 
 wget https://www.cpan.org/authors/id/S/SH/SHLOMIF/Error-0.17025.tar.gz
 

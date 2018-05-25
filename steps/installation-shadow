@@ -4,9 +4,9 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/shadow.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-cd /sources/untarred/shadow-*
+lfs_untar_and_cd shadow-
 
 sed -i 's/groups$(EXEEXT) //' src/Makefile.in
 find man -name Makefile.in -exec sed -i 's/groups\.1 / /'   {} \;
@@ -15,8 +15,6 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;
 
 sed -i -e 's@#ENCRYPT_METHOD DES@ENCRYPT_METHOD SHA512@' \
        -e 's@/var/spool/mail@/var/mail@' etc/login.defs
-
-
 
 # If you chose to build Shadow with Cracklib support, run the following: 
 sed -i 's@DICTPATH.*@DICTPATH\t/lib/cracklib/pw_dict@' etc/login.defs
@@ -36,5 +34,7 @@ grpconv
 
 # TODO
 #   root_password should be configured somewhere
-root_password=el-fsR00t
+root_password=pw # el-fsR00t
 echo root:$root_password | chpasswd
+
+lfs_end_step

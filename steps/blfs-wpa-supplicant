@@ -83,7 +83,10 @@ read -p "Interface: " WIFI_INTERFACE
 
 wpa_passphrase $WIFI_SSID $WIFI_PASSWORD > /etc/sysconfig/wpa_supplicant-wifi0.conf
 
-pushd /lfs/bootscripts
+#
+#  TODO: Is this directory correct?
+#
+pushd /usr/lfs/bootscripts
 make install-service-wpa
 popd
 

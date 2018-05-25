@@ -10,14 +10,14 @@ lfs_trap_err
 
 lfs_cd_untarred libpipeline
 
-PKG_CONFIG_PATH=/tools/lib/pkgconfig ./configure --prefix=/usr &> /lfs/logs/libpipeline.configure
+PKG_CONFIG_PATH=/tools/lib/pkgconfig ./configure --prefix=/usr &> /usr/lfs/logs/libpipeline.configure
 
-make            &> /lfs/logs/libpipeline.make
+make            &> /usr/lfs/logs/libpipeline.make
 
 
 # TODO: temporarily untrapping errors
 trap - ERR
-make check      &> /lfs/logs/libpipeline.make-check
+make check      &> /usr/lfs/logs/libpipeline.make-check
 lfs_trap_err
 
-make install    &> /lfs/logs/libpipeline.make-install
+make install    &> /usr/lfs/logs/libpipeline.make-install

@@ -19,7 +19,7 @@ make defconfig
 # TODO
 grep -e CONFIG_EFI_STUB -e CONFIG_DEVTMPFS .config
 
-sort .config -o /lfs/linux.config.sorted
+sort .config -o /usr/lfs/linux.config.sorted
 
 # TODO...
 #
@@ -28,10 +28,10 @@ sort .config -o /lfs/linux.config.sorted
 # TODO: temporarily untrapping errors
 #trap - ERR
   make
-# make &> /lfs/logs/linux.make
+# make &> /usr/lfs/logs/linux.make
 #lfs_trap_err
 
-make modules_install &> /lfs/logs/linux.make-install
+make modules_install &> /usr/lfs/logs/linux.make-install
 
 cp -v arch/x86/boot/bzImage /boot/vmlinuz-4.12.7-lfs-8.1
 cp -v System.map /boot/System.map-4.12.7

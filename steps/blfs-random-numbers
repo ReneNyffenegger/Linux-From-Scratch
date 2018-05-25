@@ -5,6 +5,9 @@
 
 # lfs_trap_err
 
-cd /lfs/bootscripts
+#
+#  TODO: Is this directory correct?
+#
+cd /usr/lfs/bootscripts
 
 make install-random

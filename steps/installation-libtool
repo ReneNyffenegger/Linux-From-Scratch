@@ -4,9 +4,9 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/libtool.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-cd /sources/untarred/libtool-*
+lfs_untar_and_cd libtool-
 
 ./configure --prefix=/usr
 
@@ -17,3 +17,5 @@ make
 # make check
 
 make install
+
+lfs_end_step

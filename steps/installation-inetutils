@@ -4,10 +4,9 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/inetutils.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-lfs_cd_untarred inetutils
-# cd /sources/untarred/inetutils-*
+lfs_untar_and_cd inetutils-
 
 
 ./configure --prefix=/usr        \
@@ -18,16 +17,18 @@ lfs_cd_untarred inetutils
             --disable-rexec      \
             --disable-rlogin     \
             --disable-rsh        \
-            --disable-servers       &> /lfs/logs/inetutils.configue
+            --disable-servers       &> /usr/lfs/logs/inetutils.configue
 
-make   &> /lfs/logs/inetutils.make
+make   &> /usr/lfs/logs/inetutils.make
 
 # TODO: temporarily untrapping errors
-trap - ERR
-make check  &> /lfs/logs/inetutils.make-check
-lfs_trap_err
+# V.2 trap - ERR
+make check  || true &> /usr/lfs/logs/inetutils.make-check
+# V.2 lfs_trap_err
 
-make install &> /lfs/logs/install.make-install
+make install &> /usr/lfs/logs/install.make-install
 
 mv -v /usr/bin/{hostname,ping,ping6,traceroute} /bin
 mv -v /usr/bin/ifconfig /sbin
+
+lfs_end_step

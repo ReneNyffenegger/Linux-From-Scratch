@@ -21,16 +21,16 @@ FORCE_UNSAFE_CONFIGURE=1 ./configure \
             --prefix=/usr            \
             --enable-no-install-program=kill,uptime
 
-FORCE_UNSAFE_CONFIGURE=1 make &> /lfs/logs/coreutils.make
+FORCE_UNSAFE_CONFIGURE=1 make &> /usr/lfs/logs/coreutils.make
 
 lfs_log "TODO: temporarily(?) untrapping for make check check-root"
 trap - ERR
-make NON_ROOT_USERNAME=nobody check-root &> /lfs/logs/coreutils.make-check-root
+make NON_ROOT_USERNAME=nobody check-root &> /usr/lfs/logs/coreutils.make-check-root
 lfs_trap_err
 
 echo "dummy:x:1000:nobody" >> /etc/group
 
-chown -Rv nobody .  &> /lfs/logs/coreutils.chown
+chown -Rv nobody .  &> /usr/lfs/logs/coreutils.chown
 
 # TODO skipping, for once
 #
@@ -39,7 +39,7 @@ chown -Rv nobody .  &> /lfs/logs/coreutils.chown
 
 sed -i '/dummy/d' /etc/group
 
-make install &> /lfs/logs/coreutils.make-install
+make install &> /usr/lfs/logs/coreutils.make-install
 
 mv -v /usr/bin/{cat,chgrp,chmod,chown,cp,date,dd,df,echo} /bin
 

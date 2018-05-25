@@ -9,11 +9,11 @@ lfs_trap_err
 lfs_untar_and_cd  gawk
 # lfs_cd_untarred
 
-./configure --prefix=/usr   &> /lfs/logs/gawk.configure
+./configure --prefix=/usr   &> /usr/lfs/logs/gawk.configure
 
-make                        &> /lfs/logs/gawk.make
-make check                  &> /lfs/logs/gawk.make-check
-make install                &> /lfs/logs/gawk.make-install
+make                        &> /usr/lfs/logs/gawk.make
+make check                  &> /usr/lfs/logs/gawk.make-check
+make install                &> /usr/lfs/logs/gawk.make-install
 
 # TODO: If desired, install docu
 #

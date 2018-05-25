@@ -13,11 +13,11 @@ lfs_untar_and_cd diffutils
 
 ./configure --prefix=/usr
 
-make           &> /lfs/logs/diffutils.make
+make           &> /usr/lfs/logs/diffutils.make
 
 # TODO temporarily untrapped
 trap - ERR
-make check     &> /lfs/logs/diffutils.make-check
+make check     &> /usr/lfs/logs/diffutils.make-check
 lfs_trap_err
 
-make install   &> /lfs/logs/diffutils.make-install
+make install   &> /usr/lfs/logs/diffutils.make-install

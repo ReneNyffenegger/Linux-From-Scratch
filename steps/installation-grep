@@ -4,18 +4,18 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/grep.html
 #
 
-lfs_trap_err
+Ra
 
-# cd /sources/untarred/grep-*
 lfs_untar_and_cd grep
 
-./configure --prefix=/usr --bindir=/bin  &> /lfs/logs/grep.configure
+./configure --prefix=/usr --bindir=/bin  &> /usr/lfs/logs/grep.configure
 
-make           &> /lfs/logs/grep.make
+make           &> /usr/lfs/logs/grep.make
 
 # TODO: temporarily untrapping errors
-trap - ERR
-make check     &> /lfs/logs/grep.make-check
-lfs_trap_err
+make check     || true &> /usr/lfs/logs/grep.make-check
+# V.2 lfs_trap_err
 
-make install   &> /lfs/logs/grep.make-install
+make install   &> /usr/lfs/logs/grep.make-install
+
+lfs_end_step

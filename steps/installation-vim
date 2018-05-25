@@ -26,13 +26,13 @@ make
 
 # TODO: temporarily untrapping errors
 trap - ERR
-make -j1 test &> /lfs/logs/vim.make-test
+make -j1 test &> /usr/lfs/logs/vim.make-test
 # However, this test suite outputs a lot of binary data to the screen, which can cause issues with the settings of the current terminal. This can be resolved by redirecting the output to a log file. A successful test will result in the words "ALL DONE" at completion.
 lfs_trap_err
 
 
 # Install the package:
-make install       &> /lfs/logs/vim.make-intall
+make install       &> /usr/lfs/logs/vim.make-intall
 
 # Many users are used to using vi instead of vim. To allow execution of vim when users habitually enter vi, create a symlink for both the binary and the man page in the provided languages:
 

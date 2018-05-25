@@ -9,16 +9,16 @@ lfs_trap_err
 lfs_untar_and_cd  findutils
 
 sed -i 's/test-lock..EXEEXT.//' tests/Makefile.in
-./configure --prefix=/usr --localstatedir=/var/lib/locate     &> /lfs/logs/findutils.configure
+./configure --prefix=/usr --localstatedir=/var/lib/locate     &> /usr/lfs/logs/findutils.configure
 
-make           &> /lfs/logs/findutils.make
+make           &> /usr/lfs/logs/findutils.make
 
 # TODO: temporarily untrapping errors
 trap - ERR
-make check     &> /lfs/logs/findutils.make-check
+make check     &> /usr/lfs/logs/findutils.make-check
 lfs_trap_err
 
-make install   &> /lfs/logs/findutils.make-install
+make install   &> /usr/lfs/logs/findutils.make-install
 
 mv -v /usr/bin/find /bin
 sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb

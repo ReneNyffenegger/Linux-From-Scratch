@@ -4,31 +4,32 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/sed.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-# cd /sources/untarred/sed-*
-lfs_untar_and_cd sed
+lfs_untar_and_cd sed-
 
 
 sed -i 's/usr/tools/'                 build-aux/help2man
 sed -i 's/testsuite.panic-tests.sh//' Makefile.in
 
 
-./configure --prefix=/usr --bindir=/bin &> /lfs/logs/sed.configure
+./configure --prefix=/usr --bindir=/bin &> /usr/lfs/logs/sed.configure
 
 
-make          &> /lfs/logs/sed.make
-# make html     &> /lfs/logs/sed.make-html
+make          &> /usr/lfs/logs/sed.make
+# make html     &> /usr/lfs/logs/sed.make-html
 
 
 # TODO: temporarily untrapping errors
-trap - ERR
-make check    &> /lfs/logs/sed.make-check
-lfs_trap_err
+# V.2 trap - ERR
+make check  || true  &> /usr/lfs/logs/sed.make-check
+# V.2 lfs_trap_err
 
 
-make install  &> /lfs/logs/sed.make-install
+make install  &> /usr/lfs/logs/sed.make-install
 
 install -d -m755           /usr/share/doc/sed-4.4
 
 # install -m644 doc/sed.html /usr/share/doc/sed-4.4
+
+lfs_end_step

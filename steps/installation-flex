@@ -4,9 +4,9 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/flex.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-cd /sources/untarred/flex-*
+lfs_untar_and_cd flex-
 
 sed -i "/math.h/a #include <malloc.h>" src/flexdef.h
 
@@ -20,3 +20,4 @@ make install
 
 ln -sv flex /usr/bin/lex
 
+lfs_end_step

@@ -3,9 +3,9 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/psmisc.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-cd /sources/untarred/psmisc-*
+lfs_untar_and_cd psmisc-
 
 ./configure --prefix=/usr
 
@@ -14,3 +14,5 @@ make install
 
 mv -v /usr/bin/fuser   /bin
 mv -v /usr/bin/killall /bin
+
+lfs_end_step

@@ -1,0 +1,17 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/libelf.html
+#
+
+lfs_start_step
+
+lfs_untar_and_cd elfutils-
+
+./configure --prefix=/usr
+make
+
+make -C libelf install
+install -vm644 config/libelf.pc /usr/lib/pkgconfig
+
+lfs_end_step

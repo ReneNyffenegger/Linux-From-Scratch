@@ -4,22 +4,23 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/autoconf.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-# cd /sources/untarred/autoconf-*
-lfs_cd_untarred autoconf
+lfs_untar_and_cd autoconf-
 
-./configure --prefix=/usr &> /lfs/logs/autoconf.configure
+./configure --prefix=/usr &> /usr/lfs/logs/autoconf.configure
 
 lfs_log "make make"
-make                      &> /lfs/logs/autoconf.make
+make                      &> /usr/lfs/logs/autoconf.make
 
 # TODO: Skipping, for once
 #
 # lfs_log "make check"
-# make check                &> /lfs/logs/autoconf.make-check
+# make check                &> /usr/lfs/logs/autoconf.make-check
 #
 # TODO: append TESTSUITEFLAGS=-j<N> might reduce the time significantly
 
 lfs_log "make install"
-make install              &> /lfs/logs/autoconf.make-install
+make install              &> /usr/lfs/logs/autoconf.make-install
+
+lfs_end_step
