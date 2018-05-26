@@ -4,12 +4,14 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/kbd.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-# lfs_untar_and_cd
-lfs_cd_untarred kbd
+lfs_untar_and_cd kbd-
 
-patch -Np1 -i ../../kbd-2.0.4-backspace-1.patch
+kbd_version=$(lfs_package_version kbd-)
+lfs_log "TQ84: kbd_version=$kbd_version"
+
+lfs_patch kbd-$kbd_version-backspace-1.patch
 
 sed -i 's/\(RESIZECONS_PROGS=\)yes/\1no/g' configure
 sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
@@ -17,10 +19,13 @@ sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
 PKG_CONFIG_PATH=/tools/lib/pkgconfig ./configure --prefix=/usr --disable-vlock
 
 make
-make check
+# TODO
+# make check
 make install
 
 # TODO: If desired, install documentation
 #
-# mkdir -v       /usr/share/doc/kbd-2.0.4
-# cp -R -v docs/doc/* /usr/share/doc/kbd-2.0.4
+mkdir -v       /usr/share/doc/kbd-$kbd_version
+cp -R -v docs/doc/* /usr/share/doc/kbd-$kbd_version
+
+lfs_end_step

@@ -4,9 +4,9 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/e2fsprogs.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-lfs_cd_untarred e2fsprogs
+lfs_untar_and_cd e2fsprogs
 
 mkdir -v build
 cd build
@@ -46,3 +46,5 @@ install-info --dir-file=/usr/share/info/dir /usr/share/info/libext2fs.info
 makeinfo -o      doc/com_err.info ../lib/et/com_err.texinfo
 install -v -m644 doc/com_err.info /usr/share/info
 install-info --dir-file=/usr/share/info/dir /usr/share/info/com_err.info
+
+lfs_end_step

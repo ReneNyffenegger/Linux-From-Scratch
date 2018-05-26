@@ -4,11 +4,17 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/sysvinit.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-# lfs_untar_and_cd
-lfs_cd_untarred sysvinit
+lfs_untar_and_cd sysvinit-
 
-patch -Np1 -i ../../sysvinit-2.88dsf-consolidated-1.patch
+sysvinit_version=$(lfs_package_version sysvinit-)
+lfs_log "TQ84 sysvinit_version=$sysvinit_version"
+
+# patch -Np1 -i ../../sysvinit-2.88dsf-consolidated-1.patch
+lfs_patch sysvinit-$sysvinit_version-consolidated-1.patch
+
 make -C src
 make -C src install
+
+lfs_end_step

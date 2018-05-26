@@ -4,9 +4,9 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/findutils.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-lfs_untar_and_cd  findutils
+lfs_untar_and_cd  findutils-
 
 sed -i 's/test-lock..EXEEXT.//' tests/Makefile.in
 ./configure --prefix=/usr --localstatedir=/var/lib/locate     &> /usr/lfs/logs/findutils.configure
@@ -14,11 +14,11 @@ sed -i 's/test-lock..EXEEXT.//' tests/Makefile.in
 make           &> /usr/lfs/logs/findutils.make
 
 # TODO: temporarily untrapping errors
-trap - ERR
-make check     &> /usr/lfs/logs/findutils.make-check
-lfs_trap_err
+# make check     &> /usr/lfs/logs/findutils.make-check
 
 make install   &> /usr/lfs/logs/findutils.make-install
 
 mv -v /usr/bin/find /bin
 sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb
+
+lfs_end_step

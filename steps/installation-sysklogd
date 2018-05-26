@@ -4,10 +4,9 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/sysklogd.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-# lfs_untar_and_cd
-lfs_cd_untarred sysklogd
+lfs_untar_and_cd sysklogd-
 
 sed -i '/Error loading kernel symbols/{n;n;d}' ksym_mod.c
 sed -i 's/union wait/int/' syslogd.c
@@ -18,6 +17,8 @@ make BINDIR=/sbin install
 
 cat > /etc/syslog.conf << "EOF"
 # Begin /etc/syslog.conf
+#
+# Created by steps/installation-sysklogd
 
 auth,authpriv.* -/var/log/auth.log
 *.*;auth,authpriv.none -/var/log/sys.log

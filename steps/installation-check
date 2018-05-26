@@ -1,0 +1,17 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/check.html
+#
+
+lfs_start_step
+lfs_untar_and_cd check-
+
+./configure --prefix=/usr
+make
+
+# TODO make check
+
+make install
+
+lfs_end_step

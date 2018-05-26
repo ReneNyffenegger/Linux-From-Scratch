@@ -4,15 +4,13 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/eudev.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-# lfs_untar_and_cd eudev
-
-lfs_cd_untarred eudev
+lfs_untar_and_cd eudev-
 
 sed -r -i 's|/usr(/bin/test)|\1|' test/udev-test.pl
 
-sed -i '/keyboard_lookup_key/d' src/udev/udev-builtin-keyboard.c
+# V.2 sed -i '/keyboard_lookup_key/d' src/udev/udev-builtin-keyboard.c
 
 cat > config.cache << "EOF"
 HAVE_BLKID=1
@@ -47,7 +45,9 @@ make LD_LIBRARY_PATH=/tools/lib install  &> /usr/lfs/logs/eudev.make-install
 #
 # Install some custom rules and support files useful in an LFS environment: 
 #
-tar -xvf ../../udev-lfs-20140408.tar.bz2
-make -f udev-lfs-20140408/Makefile.lfs install  &> /usr/lfs/logs/eudev.make-install-lfs
+tar -xvf $lfs_root/sources/tarred/udev-lfs-20171102.tar.bz2
+make -f udev-lfs-20171102/Makefile.lfs install  &> /usr/lfs/logs/eudev.make-install-lfs
 
 LD_LIBRARY_PATH=/tools/lib udevadm hwdb --update
+
+lfs_end_step

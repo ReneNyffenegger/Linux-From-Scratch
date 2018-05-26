@@ -8,7 +8,7 @@ lfs_log "PATH=$PATH"
 unset BASH_ENV
 
 
-lfs_untar_and_cd linux
+lfs_untar_and_cd linux-
 
 lfs_log "make mrproper"
 make mrproper
@@ -18,8 +18,9 @@ make mrproper
 # trap - ERR
 
 lfs_log "make INSTALL_HDR_PATH …"
-   make INSTALL_HDR_PATH=dest               headers_install || true # ORIG
-   lfs_log "TQ84 after make INSTALL_HDR_PATH … \$?=$?"
+# make INSTALL_HDR_PATH=dest headers_install || true
+make INSTALL_HDR_PATH=dest headers_install
+lfs_log "TQ84 after make INSTALL_HDR_PATH … \$?=$?"
 
 # lfs_trap_err
 #  make INSTALL_HDR_PATH=dest SHELL='sh -x' headers_install # &> make.tq84.out # TQ84
@@ -33,8 +34,10 @@ find dest/include \( -name .install -o -name ..install.cmd \) -delete
 
 lfs_log "TQ84 cp dest/include/* to /usr/include, umask=$(umask)"
 umask 0022
-lfs_log "TQ84 BEFORE copying: ls -l /usr/include/{asm,asm-generic,drm,mtd,misc,linux,rdma,video,sound,xen}"
+lfs_log "TQ84 BEFORE copying: ls -ld /usr/include/{asm,asm-generic,drm,mtd,misc,linux,rdma,video,sound,xen}: $(ls -ld /usr/include/{asm,asm-generic,drm,mtd,misc,linux,rdma,video,sound,xen})"
 cp -rv dest/include/* /usr/include
-lfs_log "TQ84 AFTER copying: ls -l /usr/include/{asm,asm-generic,drm,mtd,misc,linux,rdma,video,sound,xen}"
+lfs_log "TQ84 AFTER copying: ls -ld /usr/include/{asm,asm-generic,drm,mtd,misc,linux,rdma,video,sound,xen}: $(ls -ld /usr/include/{asm,asm-generic,drm,mtd,misc,linux,rdma,video,sound,xen})"
+
+
 
 lfs_end_step

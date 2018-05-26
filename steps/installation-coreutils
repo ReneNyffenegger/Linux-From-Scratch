@@ -4,16 +4,14 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/coreutils.html
 #
 
-lfs_trap_err
+lfs_start_step
+lfs_untar_and_cd coreutils-
 
-lfs_log "TQ84 \$-=$-, SHELLOPTS=$SHELLOPTS"
-
-lfs_untar_and_cd coreutils
-# cd /sources/untarred/coreutils-*
-# lfs_cd_untarred coreutils
+# V.2 lfs_log "TQ84 \$-=$-, SHELLOPTS=$SHELLOPTS"
 
 
-patch -Np1 -i ../../coreutils-8.27-i18n-1.patch
+# V.2 patch -Np1 -i ../../coreutils-8.27-i18n-1.patch
+lfs_patch coreutils-8.29-i18n-1.patch
 
 sed -i '/test.lock/s/^/#/' gnulib-tests/gnulib.mk
 
@@ -24,9 +22,10 @@ FORCE_UNSAFE_CONFIGURE=1 ./configure \
 FORCE_UNSAFE_CONFIGURE=1 make &> /usr/lfs/logs/coreutils.make
 
 lfs_log "TODO: temporarily(?) untrapping for make check check-root"
-trap - ERR
-make NON_ROOT_USERNAME=nobody check-root &> /usr/lfs/logs/coreutils.make-check-root
-lfs_trap_err
+# trap - ERR
+# 
+# TODO make NON_ROOT_USERNAME=nobody check-root &> /usr/lfs/logs/coreutils.make-check-root
+# lfs_trap_err
 
 echo "dummy:x:1000:nobody" >> /etc/group
 
@@ -49,7 +48,11 @@ lfs_log "TQ84: type mv (AFTER  moving /usr/bin/mv to /bin): $(type mv)"
 
 mv -v /usr/bin/{rmdir,stty,sync,true,uname} /bin
 mv -v /usr/bin/chroot /usr/sbin
-mv -v /usr/share/man/man1/chroot.1 /usr/share/man/man8/chroot.8
-mv -v /usr/bin/{head,sleep,nice,test,[} /bin
 
+mv -v /usr/share/man/man1/chroot.1 /usr/share/man/man8/chroot.8
 sed -i s/\"1\"/\"8\"/1 /usr/share/man/man8/chroot.8
+
+# V.2 mv -v /usr/bin/{head,sleep,nice,test,[} /bin
+mv -v /usr/bin/{head,sleep,nice,test} /bin
+
+lfs_end_step

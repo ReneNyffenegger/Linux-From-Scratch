@@ -6,7 +6,7 @@
 
 lfs_start_step
 
-lfs_cd_untarred kmod-
+lfs_untar_and_cd kmod-
 
 
 lfs_log "calling configure"

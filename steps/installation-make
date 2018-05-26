@@ -6,11 +6,14 @@
 
 lfs_trap_err
 
-lfs_untar_and_cd  make
-# lfs_cd_untarred
+lfs_untar_and_cd  make-
+
+sed -i '211,217 d; 219,229 d; 232 d' glob/glob.c
 
 ./configure --prefix=/usr
 
 make
 make PERL5LIB=$PWD/tests/ check
 make install
+
+lfs_end_step

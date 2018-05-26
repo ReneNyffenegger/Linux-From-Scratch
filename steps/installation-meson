@@ -1,0 +1,14 @@
+# vi: ft=sh
+#
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter06/meson.html
+#
+
+
+lfs_start_step
+
+lfs_untar_and_cd meson-
+
+python3 setup.py build
+python3 setup.py install
+
+lfs_end_step

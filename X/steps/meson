@@ -3,6 +3,8 @@
 # http://www.linuxfromscratch.org/lfs/view/development/chapter06/meson.html
 #
 
+# TODO: already installed in LFS
+
 lfs_start_step
 
 # Found package via http://www.linuxfromscratch.org/lfs/view/development/chapter03/packages.html

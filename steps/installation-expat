@@ -6,17 +6,22 @@
 
 lfs_start_step
 
-lfs_untar_and_cd expat-*
+lfs_untar_and_cd expat-
+expat_version=$(lfs_package_version expat-)
+lfs_log "expat_version = $expat_version"
 
 sed -i 's|usr/bin/env |bin/|' run.sh.in
 
 ./configure --prefix=/usr --disable-static
 
 make
-make check
+
+# TODO
+# make check
+
 make install
 
-install -v -dm755 /usr/share/doc/expat-2.2.3
-install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-2.2.3
+install -v -dm755 /usr/share/doc/expat-$expat_version
+install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-$expat_version
 
 lfs_end_step

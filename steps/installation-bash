@@ -27,7 +27,8 @@ chown -Rv nobody . &> /usr/lfs/logs/bash.chown
 # TODO: This /bin/bash does apparently not exist here
 lfs_log "TQ84 does /bin/bash exist here? Apparently, it should point to /tools/bin/bash. ls -l /bin/bash: $(ls -l /bin/bash)"
 
-su nobody -s /bin/bash -c "PATH=$PATH make tests"  > /usr/lfs/logs/bash.make.tests
+# TODO .... does this command hang?
+# su nobody -s /bin/bash -c "PATH=$PATH make tests"  > /usr/lfs/logs/bash.make.tests
 
 make install
 

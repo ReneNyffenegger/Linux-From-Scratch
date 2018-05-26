@@ -3,6 +3,8 @@
 # http://www.linuxfromscratch.org/blfs/view/8.1/general/python3.html
 #
 
+# TODO: already installed in LFS
+
 lfs_start_step
 
 lfs_download_extract_and_pushd https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tar.xz

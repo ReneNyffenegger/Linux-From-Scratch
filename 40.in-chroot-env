@@ -81,11 +81,16 @@ lfs_run_step installation-automake
 lfs_run_step installation-xz
 lfs_run_step installation-kmod
 lfs_run_step installation-gettext
-lfs_run_step installation-procps-ng
 lfs_run_step installation-libelf
-exit 1
+lfs_run_step installation-libffi
+lfs_run_step blfs-open-ssl
+lfs_run_step installation-python-3
+lfs_run_step installation-ninja
+lfs_run_step installation-meson
+lfs_run_step installation-procps-ng
 lfs_run_step installation-e2fsprogs
 lfs_run_step installation-coreutils
+lfs_run_step installation-check
 lfs_run_step installation-diffutils
 lfs_run_step installation-gawk
 lfs_run_step installation-findutils
@@ -101,6 +106,7 @@ lfs_run_step installation-patch
 lfs_run_step installation-sysklogd
 lfs_run_step installation-sysvinit
 lfs_run_step installation-eudev
+exit 1
 lfs_run_step installation-util-linux
 lfs_run_step installation-man-db
 lfs_run_step installation-tar
@@ -159,7 +165,6 @@ lfs_run_step blfs-dhcpcd
 lfs_run_step blfs-libusb
 lfs_run_step blfs-pciutils
 lfs_run_step blfs-usbutils
-lfs_run_step blfs-open-ssl
 
 lfs_run_step blfs-libnl
 lfs_run_step blfs-wpa-supplicant
@@ -178,9 +183,8 @@ lfs_run_step blfs-w3m
 lfs_run_step blfs-curl
 lfs_run_step blfs-perl-Error
 
-lfs_run_step blfs-libffi
 
-lfs_run_step blfs-python-2
+# ??? lfs_run_step blfs-python-2
 
 lfs_run_step blfs-git
 

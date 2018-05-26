@@ -6,10 +6,9 @@
 #
 # Note: This is open ssl, there is also open ssl libraries
 
-lfs_trap_err
+lfs_start_step
 
-# lfs_cd_untarred
-lfs_untar_and_cd openssl
+lfs_untar_and_cd openssl-
 
 
 ./config --prefix=/usr         \
@@ -20,11 +19,16 @@ lfs_untar_and_cd openssl
 
 make
 
-# disable static libraries
-sed -i 's# libcrypto.a##;s# libssl.a##;/INSTALL_LIBS/s#libcrypto.a##' Makefile
+# TODO
+# make test
+
+sed -i '/INSTALL_LIBS/s/libcrypto.a libssl.a//' Makefile
 
 make MANSUFFIX=ssl install
 
-mv -v /usr/share/doc/openssl{,-1.1.0f}
+mv -v         /usr/share/doc/openssl        /usr/share/doc/openssl-1.1.0g
+cp -vfr doc/* /usr/share/doc/openssl-1.1.0g
 
-cp -vfr doc/* /usr/share/doc/openssl-1.1.0f
+lfs_end_step
+# mv -v /usr/share/doc/openssl /usr/share/doc/openssl-1.1.0g
+# cp -vfr doc/* /usr/share/doc/openssl-1.1.0g

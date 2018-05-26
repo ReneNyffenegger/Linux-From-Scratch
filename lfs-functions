@@ -42,6 +42,10 @@ lfs_take_fs_snapshot() { #_{
          -path "$LFS/sources"                 -prune -o \
          -path "$LFS/dev"                     -prune -o \
          -path "$LFS/lfs"                     -prune -o \
+         -path "$LFS/done"                    -prune -o \
+         -path "$LFS/sources"                 -prune -o \
+         -path "$LFS/steps"                   -prune -o \
+         -path "$LFS/fs_snapshots"            -prune -o \
          -path "$LFS/sys"                     -prune -o \
          -path "$LFS/usr/include"             -prune -o \
          -path "$LFS/usr/lib/*"               -prune -o \
@@ -246,14 +250,62 @@ lfs_untar() { #_{
 export -f lfs_untar
 #_}
 
+lfs_tar_file_from_pattern() { #_{
+  local tar_pattern=$1
+
+  lfs_log_ lfs_tar_file_from_pattern "  tar_pattern=$tar_pattern"
+
+  pushd $lfs_root/sources > /dev/null
+
+# q? local cnt=$(ls -1 tarred/$tar_pattern*.tar.* | wc -l)
+# q? lfs_log_ lfs_tar_file_from_pattern "  cnt of patterns matching $tar_pattern is: $cnt"
+# q? if [[ $cnt -gt 1 ]]; then
+# q?   return -1
+# q? fi
+# q? if [[ $cnt -eq 0 ]]; then
+# q?   return -1
+# q? fi
+
+ 
+  local cnt=$(ls -1 tarred/$tar_pattern*.tar.* | wc -l)
+  lfs_log_ lfs_tar_file_from_pattern "cnt of patterns matching $tar_pattern is: $cnt"
+  if [[ $cnt -gt 1 ]]; then
+    lfs_log_ lfs_tar_file_from_pattern "cnt of patterns matching $tar_pattern is: $cnt"
+    exit -1
+  fi
+  if [[ $cnt -eq 0 ]]; then
+    lfs_log_ lfs_tar_file_from_pattern "cnt of patterns matching $tar_pattern is: $cnt"
+    exit -1
+  fi
+
+  local tar_file=$(basename $(echo tarred/$tar_pattern*.tar.*))
+  popd > /dev/null
+
+  lfs_log_ lfs_tar_file_from_pattern "  tar_file=$tar_file <"
+  echo $tar_file
+
+}
+export -f lfs_tar_file_from_pattern
+#_}
+
 lfs_untar_and_cd() { #_{
   local tar_pattern=$1
   local script_name=${BASH_SOURCE[1]}
 
-# V.2  cd $lfs_source_dir
-  cd $lfs_root/sources
+# q_loc cd $lfs_root/sources
 
-  local tar_file=$(basename $(echo tarred/$tar_pattern*))
+# q_loc local cnt=$(ls -1 tarred/$tar_pattern*.tar.* | wc -l)
+# q_loc lfs_log_ $script_name "  cnt of patterns matching $tar_pattern is: $cnt"
+# q_loc if [[ $cnt -gt 1 ]]; then
+# q_loc   return -1
+# q_loc fi
+# q_loc if [[ $cnt -eq 0 ]]; then
+# q_loc   return -1
+# q_loc fi
+# q_loc local tar_file=$(basename $(echo tarred/$tar_pattern*.tar.*))
+  local tar_file=$(lfs_tar_file_from_pattern $tar_pattern)
+
+  cd $lfs_root/sources
   lfs_log_ $script_name "  lfs_untar_and_cd, tar_pattern=$tar_pattern tar_file=$tar_file, calling lfs_untar()"
 
   if [ -d untarred/$tar_pattern* ]; then
@@ -295,6 +347,20 @@ lfs_cd_untarred() { #_{
   lfs_log_ $script_name "  I am in PWD=$PWD"
 }
 export -f lfs_cd_untarred
+#_}
+
+lfs_package_version() { #_{
+  local tar_pattern=$1
+
+  local tar_file=$(lfs_tar_file_from_pattern $tar_pattern)
+  lfs_log_ lfs_package_version "  tar_file=$tar_file<"
+  local step_1=${tar_file#$tar_pattern}
+  lfs_log_ lfs_package_version "  step_1=$step_1<"
+  local version=${step_1%.tar.*}
+  lfs_log_ lfs_package_version "  version=$version"
+  echo $version
+}
+export -f lfs_package_version
 #_}
 
 lfs_patch() { #_{

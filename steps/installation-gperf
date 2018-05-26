@@ -6,11 +6,15 @@
 
 lfs_start_step
 
-lfs_cd_untarred gperf-
+lfs_untar_and_cd gperf-
 
 ./configure --prefix=/usr --docdir=/usr/share/doc/gperf-3.1
 
-make -j1 check
+make
+
+# TODO
+# make -j1 check
+
 make install
 
 lfs_end_step

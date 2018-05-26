@@ -4,10 +4,9 @@
 #
 #  libffi is apparently recommended for python
 
-lfs_trap_err
+lfs_start_step
 
-# lfs_cd_untarred
-lfs_untar_and_cd libffi
+lfs_untar_and_cd libffi-
 
 sed -e '/^includesdir/ s/$(libdir).*$/$(includedir)/' \
     -i include/Makefile.in
@@ -20,3 +19,5 @@ sed -e '/^includedir/ s/=.*$/=@includedir@/' \
 make
 
 make install
+
+lfs_end_step
