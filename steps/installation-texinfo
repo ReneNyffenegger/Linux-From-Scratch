@@ -4,10 +4,9 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/texinfo.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-lfs_untar_and_cd texinfo
-# lfs_cd_untarred  texinfo
+lfs_untar_and_cd texinfo-
 
 ./configure --prefix=/usr --disable-static  &> /usr/lfs/logs/texinfo.configure
 
@@ -15,9 +14,7 @@ make          &> /usr/lfs/logs/texinfo.make
 
 if [[ "yes" == "no" ]]; then
   # TODO: temporarily untrapping errors
-  trap - ERR
   make check    &> /usr/lfs/logs/texinfo.make-check
-  lfs_trap_err
 else
   lfs_log "TODO: Skipped make check"
 fi
@@ -31,3 +28,5 @@ rm -v dir
 for f in *
   do install-info $f dir 2>/dev/null
 done
+
+lfs_end_step

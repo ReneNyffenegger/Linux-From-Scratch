@@ -4,11 +4,14 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/vim.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-# TODO: Can't use lfs_cd_untarred because vim does not have a hyphen.
+# vim does not have a hyphen.
 #
-cd /sources/untarred/vim*
+lfs_untar_and_cd vim
+
+vim_version=$(lfs_package_version vim)
+lfs_log "TQ84: vim_version=$vim_version"
 
 #  First, change the default location of the vimrc configuration file to /etc:
 echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
@@ -25,10 +28,8 @@ make
 # To test the results, issue:
 
 # TODO: temporarily untrapping errors
-trap - ERR
-make -j1 test &> /usr/lfs/logs/vim.make-test
+# make -j1 test &> /usr/lfs/logs/vim.make-test
 # However, this test suite outputs a lot of binary data to the screen, which can cause issues with the settings of the current terminal. This can be resolved by redirecting the output to a log file. A successful test will result in the words "ALL DONE" at completion.
-lfs_trap_err
 
 
 # Install the package:
@@ -46,7 +47,7 @@ done
 
 # By default, Vim's documentation is installed in /usr/share/vim. The following symlink allows the documentation to be accessed via /usr/share/doc/vim-8.0.586, making it consistent with the location of documentation for other packages:
 
-ln -sv ../vim/vim80/doc /usr/share/doc/vim-8.0.586
+ln -sv ../vim/vim80/doc /usr/share/doc/vim-$vim_version
 
 # If an X Window System is going to be installed on the LFS system, it may be necessary to recompile Vim after installing X. Vim comes with a GUI version of the editor that requires X and some additional libraries to be installed.
 # For more information on this process, refer to the Vim documentation and the Vim installation page in the BLFS book at http://www.linuxfromscratch.org/blfs/view/8.1/postlfs/vim.html. 
@@ -70,3 +71,5 @@ EOF
 
 # Creating an empty ~/.vimrc prevents vim from overriding settings in /etc/vimrc by using /usr/share/vim/vim80/defaults.vim. 
 touch ~/.vimrc
+
+lfs_end_step

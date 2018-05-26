@@ -25,10 +25,11 @@ chmod -v 755 /usr/lib/libpython3.6m.so
 chmod -v 755 /usr/lib/libpython3.so
 
 install -v -dm755 /usr/share/doc/python-3$python_version/html 
+
 tar --strip-components=1  \
     --no-same-owner       \
     --no-same-permissions \
     -C /usr/share/doc/python-3$python_version/html \
-    -xvf ../python-3$python_version-docs-html.tar.bz2
+    -xvf /usr/lfs/sources/tarred/python-3$python_version-docs-html.tar.bz2
 
 lfs_end_step

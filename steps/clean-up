@@ -4,13 +4,13 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/revisedchroot.html
 #
 
-lfs_trap_err
+lfs_start_step
 
 rm -rf /tmp/*
 
 # TODO
 #
-rm -rf /source/untarred
+# rm -rf /usr/lfs/source/untarred
 
 # TODO
 #   Removing /tools will also remove the temporary copies of Tcl, Expect, and DejaGNU which were used for running the toolchain tests. If you need these programs later on, they will need to be recompiled and re-installed.
@@ -32,3 +32,7 @@ rm -f /usr/lib/libltdl.a
 rm -f /usr/lib/libfl.a
 rm -f /usr/lib/libfl_pic.a
 rm -f /usr/lib/libz.a
+
+find /usr/lib -name \*.la -delete
+
+lfs_end_step

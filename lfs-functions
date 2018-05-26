@@ -268,9 +268,9 @@ lfs_tar_file_from_pattern() { #_{
 
  
   local cnt=$(ls -1 tarred/$tar_pattern*.tar.* | wc -l)
-  lfs_log_ lfs_tar_file_from_pattern "cnt of patterns matching $tar_pattern is: $cnt"
+  lfs_log_ lfs_tar_file_from_pattern "  cnt of patterns matching $tar_pattern is: $cnt"
   if [[ $cnt -gt 1 ]]; then
-    lfs_log_ lfs_tar_file_from_pattern "cnt of patterns matching $tar_pattern is: $cnt"
+    lfs_log_ lfs_tar_file_from_pattern "  cnt of patterns matching $tar_pattern is: $cnt"
     exit -1
   fi
   if [[ $cnt -eq 0 ]]; then

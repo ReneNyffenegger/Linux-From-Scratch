@@ -6,8 +6,10 @@
 #    http://www.linuxfromscratch.org/blfs/view/stable/introduction/bootscripts.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-lfs_cd_untarred lfs-bootscripts
+lfs_untar_and_cd lfs-bootscripts-
 
 make install
+
+lfs_end_step

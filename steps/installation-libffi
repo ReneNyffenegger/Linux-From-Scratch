@@ -1,6 +1,6 @@
 # vi: ft=sh
 #
-#  http://www.linuxfromscratch.org/blfs/view/stable/general/libffi.html
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/libffi.html
 #
 #  libffi is apparently recommended for python
 
@@ -8,16 +8,39 @@ lfs_start_step
 
 lfs_untar_and_cd libffi-
 
+lfs_log "sed 1"
 sed -e '/^includesdir/ s/$(libdir).*$/$(includedir)/' \
     -i include/Makefile.in
 
+lfs_log "sed 2"
 sed -e '/^includedir/ s/=.*$/=@includedir@/' \
     -e 's/^Cflags: -I${includedir}/Cflags:/' \
     -i libffi.pc.in
 
-./configure --prefix=/usr --disable-static
+#
+#   Bug in libffs:
+#     http://lists.linuxfromscratch.org/pipermail/lfs-support/2018-May/052030.html
+#     http://lists.linuxfromscratch.org/pipermail/lfs-support/2018-May/052008.html
+#     http://lists.linuxfromscratch.org/pipermail/lfs-support/2018-May/052018.html
+#     
+#
+export CFLAGS="-march=corei7-avx -mno-avx -mno-aes"
+
+lfs_log "configure"
+#
+# as per book:
+#   ./configure --prefix=/usr --disable-static
+# as per "fix"
+    ./configure --prefix=/usr --disable-static --with-gcc-arch=corei7-avx
+ 
+
+lfs_log "make"
 make
 
+lfs_log "make check"
+make check
+
+lfs_log "make install"
 make install
 
 lfs_end_step

@@ -11,14 +11,20 @@ lfs_log "TQ84: iproute2_version=$iproute2_version"
 
 lfs_untar_and_cd iproute2-
 
+lfs_log "sed -i /ARPD/..."
 sed -i /ARPD/d Makefile
 # V.2 sed -i 's/arpd.8//' man/man8/Makefile
-rm -v doc/arpd.sgml
 
+lfs_log "rm -fv man/man8/arpd.8"
+rm -fv man/man8/arpd.8
+
+lfs_log "sed -i 's/m..'"
 sed -i 's/m_ipt.o//' tc/Makefile
 
+lfs_log "make"
 make
 
+lfs_log "make DOCDIR=..."
 make DOCDIR=/usr/share/doc/iproute2-$iproute2_version install
 
 lfs_end_step

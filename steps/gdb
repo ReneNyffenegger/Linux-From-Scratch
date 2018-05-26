@@ -1,0 +1,42 @@
+#
+# vi: ft=sh
+#
+#  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/gdbm.html
+#
+
+lfs_start_step
+
+#
+#  TODO: use lfs_download_extract_and_pushd or something
+#
+
+lfs_untar_and_cd gdb-
+
+lfs_log "calling ./configure"
+./configure --prefix=/usr --with-system-readline --without-guile
+
+lfs_log "calling make"
+make
+
+lfs_log "calling make -C gdb/doc doxy"
+make -C gdb/doc doxy
+
+# TODO: tests 
+# pushd gdb/testsuite &&
+# make  site.exp      &&
+# echo  "set gdb_test_timeout 120" >> site.exp &&
+# runtest TRANSCRIPT=y
+# popd
+
+lfs_log "calling make -C gdb install"
+make -C gdb install
+
+
+lfs_log "calling install -d ...."
+install -d /usr/share/doc/gdb-8.1
+rm -rf gdb/doc/doxy/xml
+
+lfs_log "calling cp -Rv gdb..."
+cp -Rv gdb/doc/doxy /usr/share/doc/gdb-8.1
+
+lfs_end_step

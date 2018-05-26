@@ -84,6 +84,11 @@ lfs_run_step installation-gettext
 lfs_run_step installation-libelf
 lfs_run_step installation-libffi
 lfs_run_step blfs-open-ssl
+#
+#  TODO: temporary step, because of problems with python
+#
+# q lfs_run_step gdb
+# q exit -1
 lfs_run_step installation-python-3
 lfs_run_step installation-ninja
 lfs_run_step installation-meson
@@ -106,7 +111,6 @@ lfs_run_step installation-patch
 lfs_run_step installation-sysklogd
 lfs_run_step installation-sysvinit
 lfs_run_step installation-eudev
-exit 1
 lfs_run_step installation-util-linux
 lfs_run_step installation-man-db
 lfs_run_step installation-tar
@@ -123,6 +127,7 @@ lfs_run_step clean-up
 
 lfs_run_step cfg-lfs-bootscripts
 lfs_run_step cfg-device-handling
+exit 1
 lfs_run_step cfg-cdroms
 lfs_run_step cfg-network-devices
 lfs_run_step cfg-duplicate-devices

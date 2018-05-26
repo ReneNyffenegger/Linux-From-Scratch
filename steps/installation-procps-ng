@@ -1,18 +1,18 @@
 #
 # vi: ft=sh
 #
-#  TODO
+# http://www.linuxfromscratch.org/lfs/view/stable/chapter06/procps-ng.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-# lfs_untar_and_cd
-lfs_cd_untarred procps-ng
+lfs_untar_and_cd procps-ng-
+procps_ng_version=$(lfs_package_version procps-ng-)
 
 ./configure --prefix=/usr                            \
             --exec-prefix=                           \
             --libdir=/usr/lib                        \
-            --docdir=/usr/share/doc/procps-ng-3.3.12 \
+            --docdir=/usr/share/doc/procps-ng-$procps_ng_version \
             --disable-static                         \
             --disable-kill
 
@@ -27,3 +27,5 @@ make install
 
 mv -v /usr/lib/libprocps.so.* /lib
 ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so
+
+lfs_end_step

@@ -4,11 +4,12 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter06/tar.html
 #
 
-lfs_trap_err
+lfs_start_step
 
-lfs_untar_and_cd   tar
+lfs_untar_and_cd   tar-
 
-# lfs_cd_untarred tar
+tar_version=$(lfs_package_version tar-)
+lfs_log "tar_version=$tar_version"
 
 FORCE_UNSAFE_CONFIGURE=1  \
 ./configure --prefix=/usr \
@@ -17,10 +18,10 @@ FORCE_UNSAFE_CONFIGURE=1  \
 make            &> /usr/lfs/logs/tar.make
 
 # TODO: temporarily untrapping errors
-trap - ERR
-make check      &> /usr/lfs/logs/tar.make
-lfs_trap_err
+# make check      &> /usr/lfs/logs/tar.make
 
 make install    &> /usr/lfs/logs/tar.make
 
-make -C doc install-html docdir=/usr/share/doc/tar-1.29
+make -C doc install-html docdir=/usr/share/doc/tar-$tar_version
+
+lfs_end_step

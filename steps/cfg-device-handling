@@ -4,8 +4,9 @@
 #  http://www.linuxfromscratch.org/lfs/view/stable/chapter07/udev.html
 #
 
-lfs_trap_err
+lfs_start_step
 
 #  TODO echo softdep snd-pcm post: snd-pcm-oss > /etc/modprobe.d/<filename>.conf 
 #  TODO echo blacklist forte                   > /etc/modprobe.d/blacklist.conf 
 
+lfs_untar_and_cd
